@@ -1,0 +1,92 @@
+import { useEffect, useRef, useState } from 'react';
+import { Mail } from 'lucide-react';
+
+const contacts = [
+  {
+    name: 'Maxwell Briggs',
+    email: 'maxwell@briggsdavis.com',
+  },
+  {
+    name: 'Nathaniel Davis',
+    email: 'nathaniel@briggsdavis.com',
+  },
+];
+
+const Footer = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <footer
+      id="contact"
+      ref={sectionRef}
+      className="py-20 px-6 border-t border-border/30"
+    >
+      <div className="max-w-6xl mx-auto">
+        {/* Contact Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+          {contacts.map((contact, index) => (
+            <div
+              key={contact.name}
+              className={`group p-6 rounded-2xl bg-card border border-border/50 hover:border-border transition-all duration-500 opacity-0 ${
+                isVisible ? 'animate-fade-in-up' : ''
+              }`}
+              style={{
+                animationDelay: `${100 + index * 100}ms`,
+                animationFillMode: 'forwards',
+              }}
+            >
+              <h3 className="text-lg font-semibold text-foreground mb-2">
+                {contact.name}
+              </h3>
+              <a
+                href={`mailto:${contact.email}`}
+                className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors duration-300"
+              >
+                <Mail className="w-4 h-4" />
+                {contact.email}
+              </a>
+            </div>
+          ))}
+        </div>
+
+        {/* Footer Bottom */}
+        <div
+          className={`flex flex-col md:flex-row items-center justify-between gap-4 pt-8 border-t border-border/30 opacity-0 ${
+            isVisible ? 'animate-fade-in-up' : ''
+          }`}
+          style={{ animationDelay: '300ms', animationFillMode: 'forwards' }}
+        >
+          <div className="flex items-center gap-1">
+            <span className="font-bold tracking-tight text-foreground">BRIGGS</span>
+            <span className="font-light tracking-tight text-muted-foreground">DAVIS</span>
+          </div>
+          <p className="text-sm text-muted-foreground">
+            © {new Date().getFullYear()} Briggs Davis. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
+  );
+};
+
+export default Footer;
