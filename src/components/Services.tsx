@@ -92,11 +92,11 @@ const Services = () => {
         </div>
 
         {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
           {services.map((service, index) => (
             <div
               key={service.title}
-              className={`group p-8 rounded-2xl bg-card border border-border/50 hover:border-border hover:bg-secondary/50 transition-all duration-500 cursor-pointer opacity-0 ${
+              className={`group p-4 rounded-xl bg-card border border-border/50 hover:border-border hover:bg-secondary/50 transition-all duration-500 cursor-pointer opacity-0 hover:scale-110 hover:z-10 hover:shadow-xl hover:shadow-black/20 ${
                 isVisible ? 'animate-fade-in-up' : ''
               }`}
               style={{
@@ -104,10 +104,10 @@ const Services = () => {
                 animationFillMode: 'forwards',
               }}
             >
-              <h3 className="text-sm font-semibold text-foreground tracking-wide mb-4 group-hover:text-foreground transition-colors duration-300">
+              <h3 className="text-xs font-semibold text-foreground tracking-wide mb-2 group-hover:text-foreground transition-colors duration-300">
                 {service.title}
               </h3>
-              <p className="text-sm text-muted-foreground leading-relaxed group-hover:text-muted-foreground/80 transition-colors duration-300">
+              <p className="text-xs text-muted-foreground leading-relaxed group-hover:text-muted-foreground/80 transition-colors duration-300">
                 {service.description}
               </p>
             </div>
