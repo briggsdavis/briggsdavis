@@ -176,6 +176,49 @@
     box-shadow: 0 0 40px hsl(var(--primary) / 0.1);
   }
   
+  /* Glass effect */
+  .glass {
+    background: hsl(var(--card) / 0.6);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid hsl(var(--border) / 0.3);
+  }
+  
+  /* Button glint effect */
+  @keyframes glint {
+    0% {
+      transform: translateX(-100%) skewX(-15deg);
+    }
+    100% {
+      transform: translateX(200%) skewX(-15deg);
+    }
+  }
+  
+  .btn-glint {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .btn-glint::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      hsl(var(--foreground) / 0.15),
+      transparent
+    );
+    transform: translateX(-100%) skewX(-15deg);
+  }
+  
+  .btn-glint:hover::before {
+    animation: glint 0.6s ease-in-out;
+  }
+  
   /* Text gradient */
   .text-gradient {
     background: linear-gradient(135deg, hsl(var(--foreground)) 0%, hsl(var(--muted-foreground)) 100%);

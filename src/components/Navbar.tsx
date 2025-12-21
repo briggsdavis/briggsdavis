@@ -49,10 +49,10 @@ const Navbar = () => {
       }`}
     >
       <div
-        className={`flex items-center gap-2 px-4 py-2 rounded-full border transition-all duration-500 ${
+        className={`flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-500 glass ${
           scrolled
-            ? 'bg-card/95 backdrop-blur-md border-border shadow-lg shadow-black/20'
-            : 'bg-card/80 backdrop-blur-sm border-border/50'
+            ? 'shadow-lg shadow-black/20'
+            : ''
         }`}
       >
         {/* Logo */}
