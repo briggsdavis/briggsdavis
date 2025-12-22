@@ -15,6 +15,7 @@ const processSteps = [
     description:
       "We come to you in our meeting with a product ready to go and then find out your specific pain points, desires and needs for your website solution so we can fully understand your context.",
     image: '/images/process-2.jpg',
+    video: '/videos/step-2.mp4',
   },
   {
     number: '03',
@@ -29,6 +30,7 @@ const processSteps = [
     description:
       'We check in with you with the finished product to see if we have satisfied your requirements and get any last minute feedback from you to be able to perfect the website completely.',
     image: '/images/process-4.jpg',
+    video: '/videos/step-4.mp4',
   },
 ];
 

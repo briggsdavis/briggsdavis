@@ -7,6 +7,7 @@ interface ProcessStepProps {
     number: string;
     title: string;
     description: string;
+    video?: string;
     image: string;
   };
   index: number;
@@ -50,16 +51,28 @@ const ProcessStep = ({ step, index, isLast, nextStepId }: ProcessStepProps) => {
       ref={sectionRef}
       className="relative min-h-screen flex flex-col"
     >
-      {/* Background Image */}
+      {/* Background Video/Image */}
       <div className="absolute inset-0 z-0">
-        <div
-          className="absolute inset-0 bg-cover bg-center transition-opacity duration-700"
-          style={{
-            backgroundImage: `url(${step.image})`,
-            filter: 'grayscale(100%)',
-          }}
-        />
-        <div className="absolute inset-0 bg-background/80" />
+        {step.video ? (
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover"
+          >
+            <source src={step.video} type="video/mp4" />
+          </video>
+        ) : (
+          <div
+            className="absolute inset-0 bg-cover bg-center transition-opacity duration-700"
+            style={{
+              backgroundImage: `url(${step.image})`,
+              filter: 'grayscale(100%)',
+            }}
+          />
+        )}
+        <div className="absolute inset-0 bg-background/70" />
       </div>
 
       {/* Content */}
