@@ -17,10 +17,24 @@ const Hero = () => {
   };
 
   return (
-    <section className="min-h-screen flex flex-col items-center justify-center px-6 pt-24">
+    <section className="relative min-h-screen flex flex-col items-center justify-center px-6 pt-24 overflow-hidden">
+      {/* Video Background */}
+      <div className="absolute inset-0 z-0">
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+        >
+          <source src="/videos/hero.mp4" type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-background/60" />
+      </div>
+
       {/* Badge */}
       <div
-        className={`mb-8 opacity-0 ${isVisible ? 'animate-fade-in-up' : ''}`}
+        className={`relative z-10 mb-8 opacity-0 ${isVisible ? 'animate-fade-in-up' : ''}`}
         style={{ animationDelay: '100ms', animationFillMode: 'forwards' }}
       >
         <span className="inline-block px-6 py-2 text-xs font-medium tracking-[0.3em] text-muted-foreground border border-border rounded-full uppercase">
@@ -30,7 +44,7 @@ const Hero = () => {
 
       {/* Headline */}
       <h1
-        className={`text-center mb-6 opacity-0 ${isVisible ? 'animate-fade-in-up' : ''}`}
+        className={`relative z-10 text-center mb-6 opacity-0 ${isVisible ? 'animate-fade-in-up' : ''}`}
         style={{ animationDelay: '200ms', animationFillMode: 'forwards' }}
       >
         <span className="block text-5xl md:text-7xl lg:text-8xl font-semibold text-foreground tracking-tight">
@@ -43,7 +57,7 @@ const Hero = () => {
 
       {/* Subheadline */}
       <p
-        className={`text-center text-muted-foreground text-lg md:text-xl max-w-xl mx-auto mb-12 opacity-0 ${
+        className={`relative z-10 text-center text-muted-foreground text-lg md:text-xl max-w-xl mx-auto mb-12 opacity-0 ${
           isVisible ? 'animate-fade-in-up' : ''
         }`}
         style={{ animationDelay: '300ms', animationFillMode: 'forwards' }}
@@ -55,7 +69,7 @@ const Hero = () => {
 
       {/* CTAs */}
       <div
-        className={`flex flex-col sm:flex-row items-center gap-4 opacity-0 ${
+        className={`relative z-10 flex flex-col sm:flex-row items-center gap-4 opacity-0 ${
           isVisible ? 'animate-fade-in-up' : ''
         }`}
         style={{ animationDelay: '400ms', animationFillMode: 'forwards' }}
