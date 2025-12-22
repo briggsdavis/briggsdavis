@@ -8,6 +8,7 @@ const processSteps = [
     description:
       'We build a prototype based on your business profile and current online presence to give you a concrete vision of the possibilities.',
     image: '/images/process-1.jpg',
+    video: '/videos/step-1.mp4',
   },
   {
     number: '02',
@@ -23,6 +24,7 @@ const processSteps = [
     description:
       'We implement the changes, revisions or complete redesign of the initial prototype according to the information you provide in the meeting.',
     image: '/images/process-3.jpg',
+    video: '/videos/step-3.mp4',
   },
   {
     number: '04',
