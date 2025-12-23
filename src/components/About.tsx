@@ -106,7 +106,7 @@ const About = () => {
               }}
             >
               {/* Avatar */}
-              <div className="w-16 h-16 rounded-full overflow-hidden mb-6 grayscale group-hover:grayscale-0 transition-all duration-500">
+              <div className="w-16 h-16 rounded-full overflow-hidden mb-6 transition-all duration-500">
                 <img
                   src={founder.avatar}
                   alt={founder.name}
