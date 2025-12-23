@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import nateAvatar from '@/assets/nathaniel-davis.jpg';
 
 const founders = [
   {
@@ -16,7 +17,7 @@ const founders = [
   {
     name: 'Nathaniel Davis',
     title: 'TECHNICAL ARCHITECT',
-    avatar: '/images/avatar-2.jpg',
+    avatar: nateAvatar,
     skills: [
       '10+ years of development experience',
       'Expert in TypeScript, Rust, and Python',
