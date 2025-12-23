@@ -1,14 +1,16 @@
 import { useEffect, useRef, useState } from 'react';
-import { Mail } from 'lucide-react';
+import { Mail, MessageCircle } from 'lucide-react';
 
 const contacts = [
   {
     name: 'Maxwell Briggs',
-    email: 'maxwell@briggsdavis.com',
+    email: 'maxwell.alexander.briggs@gmail.com',
+    whatsapp: '+251 94 482 5058',
   },
   {
     name: 'Nathaniel Davis',
-    email: 'nathaniel@briggsdavis.com',
+    email: 'nate@qstreet.org',
+    whatsapp: '+1 202 494 9466',
   },
 ];
 
@@ -55,16 +57,27 @@ const Footer = () => {
                 animationFillMode: 'forwards',
               }}
             >
-              <h3 className="text-lg font-semibold text-foreground mb-2">
+              <h3 className="text-lg font-semibold text-foreground mb-4">
                 {contact.name}
               </h3>
-              <a
-                href={`mailto:${contact.email}`}
-                className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors duration-300"
-              >
-                <Mail className="w-4 h-4" />
-                {contact.email}
-              </a>
+              <div className="space-y-3">
+                <a
+                  href={`mailto:${contact.email}`}
+                  className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors duration-300"
+                >
+                  <Mail className="w-4 h-4" />
+                  {contact.email}
+                </a>
+                <a
+                  href={`https://wa.me/${contact.whatsapp.replace(/\s+/g, '')}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors duration-300"
+                >
+                  <MessageCircle className="w-4 h-4" />
+                  {contact.whatsapp}
+                </a>
+              </div>
             </div>
           ))}
         </div>
@@ -76,7 +89,8 @@ const Footer = () => {
           }`}
           style={{ animationDelay: '300ms', animationFillMode: 'forwards' }}
         >
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-2">
+            <img src="/images/logo.png" alt="Briggs Davis Logo" className="w-8 h-8 object-contain" />
             <span className="font-bold tracking-tight text-foreground">BRIGGS</span>
             <span className="font-light tracking-tight text-muted-foreground">DAVIS</span>
           </div>

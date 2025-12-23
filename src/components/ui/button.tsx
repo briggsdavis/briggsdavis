@@ -18,7 +18,7 @@ const buttonVariants = cva(
         // Custom variants for the site - with glass effect
         nav: "glass text-foreground hover:bg-secondary/50 rounded-full font-medium tracking-wide uppercase text-xs",
         hero: "glass text-foreground hover:bg-secondary/50 rounded-full font-medium tracking-widest uppercase text-xs",
-        heroPrimary: "glass bg-foreground/90 text-background hover:bg-foreground rounded-full font-medium tracking-widest uppercase text-xs",
+        heroPrimary: "bg-white text-background hover:bg-white/90 rounded-full font-medium tracking-widest uppercase text-xs",
         process: "glass text-foreground hover:bg-secondary/50 rounded-full font-medium tracking-widest uppercase text-xs",
         cta: "glass bg-foreground/90 text-background hover:bg-foreground rounded-full font-medium tracking-widest uppercase text-sm",
       },

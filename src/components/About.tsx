@@ -6,11 +6,11 @@ const founders = [
     title: 'PRINCIPAL STRATEGIST',
     avatar: '/images/avatar-1.jpg',
     skills: [
-      'Marketing architecture and KPI optimization',
-      'Certified Business Value Consultant',
-      'Multi-channel scaling specialist',
-      'Organizational communication lead',
-      'Search engine algorithm analyst',
+      'Marketing expert with proven KPI achievement',
+      'Certified in Business Value Creation and SEO',
+      'Scaled ventures across marketing channels',
+      'Facilitated organizational communication',
+      'Strategic website optimization expert',
     ],
   },
   {
@@ -18,11 +18,11 @@ const founders = [
     title: 'TECHNICAL ARCHITECT',
     avatar: '/images/avatar-2.jpg',
     skills: [
-      'Full-stack systems engineer',
-      'Systems specialist: TypeScript, Rust, Python',
-      'Infrastructure for 30,000+ concurrent users',
-      'U.S. Embassy software advisory',
-      'Clean-code and performance enthusiast',
+      '10+ years of development experience',
+      'Expert in TypeScript, Rust, and Python',
+      'Built applications serving 30,000+ users',
+      'Software developer for the U.S. Embassy',
+      'Extensive freelance development portfolio',
     ],
   },
 ];

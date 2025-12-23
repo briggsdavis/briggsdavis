@@ -58,12 +58,13 @@ const Navbar = () => {
         {/* Logo */}
         <a
           href="#"
-          className="flex items-center gap-1 px-4 py-2 text-foreground hover:opacity-80 transition-opacity duration-300"
+          className="flex items-center gap-2 px-4 py-2 text-foreground hover:opacity-80 transition-opacity duration-300"
           onClick={(e) => {
             e.preventDefault();
             window.scrollTo({ top: 0, behavior: 'smooth' });
           }}
         >
+          <img src="/images/logo.png" alt="Briggs Davis Logo" className="w-6 h-6 object-contain" />
           <span className="font-bold tracking-tight">BRIGGS</span>
           <span className="font-light tracking-tight text-muted-foreground">DAVIS</span>
         </a>
