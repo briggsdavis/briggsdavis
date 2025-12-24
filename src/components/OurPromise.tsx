@@ -1,8 +1,20 @@
 import { useRef, useEffect, useState, useCallback } from 'react';
-import WordWheel from './WordWheel';
+
+const words = [
+  "Scalable", "Creative", "Dynamic", "Reliable", "Intuitive",
+  "Seamless", "Adaptive", "Strategic", "Polished", "Efficient"
+];
+
+interface WordElement {
+  container: HTMLDivElement;
+  wordEl: HTMLDivElement;
+  baseAngle: number;
+}
 
 const OurPromise = () => {
   const sectionRef = useRef<HTMLElement>(null);
+  const wheelRef = useRef<HTMLDivElement>(null);
+  const wordElementsRef = useRef<WordElement[]>([]);
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -22,74 +34,16 @@ const OurPromise = () => {
     return () => observer.disconnect();
   }, []);
 
-  return (
-    <section
-      ref={sectionRef}
-      id="promise"
-      className="relative w-full bg-background"
-      style={{ height: '300vh' }}
-    >
-      {/* Sticky content container */}
-      <div className="sticky top-0 left-0 w-full h-screen flex items-center overflow-hidden">
-        <div className="container mx-auto px-6 lg:px-12">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Left side - Text content */}
-            <div
-              className={`space-y-6 transition-all duration-1000 ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-              }`}
-            >
-              <span className="text-sm uppercase tracking-[0.2em] text-muted-foreground font-medium">
-                Our Promise
-              </span>
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-foreground leading-tight">
-                Excellence in Every Detail
-              </h2>
-              <p className="text-lg md:text-xl text-muted-foreground max-w-lg leading-relaxed">
-                We are committed to delivering exceptional digital experiences that exceed expectations. 
-                Every project we undertake is crafted with precision, passion, and an unwavering dedication to quality.
-              </p>
-            </div>
-
-            {/* Right side - Word Wheel */}
-            <div
-              className="relative h-[60vh] lg:h-[80vh] flex items-center justify-center"
-              style={{ perspective: '2000px' }}
-            >
-              <WordWheelInline />
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-};
-
-// Inline word wheel that syncs with parent section scroll
-const words = [
-  "Scalable", "Creative", "Dynamic", "Reliable", "Intuitive",
-  "Seamless", "Adaptive", "Strategic", "Polished", "Efficient"
-];
-
-interface WordElement {
-  container: HTMLDivElement;
-  wordEl: HTMLDivElement;
-  baseAngle: number;
-}
-
-const WordWheelInline = () => {
-  const wheelRef = useRef<HTMLDivElement>(null);
-  const wordElementsRef = useRef<WordElement[]>([]);
-
   const getRadius = useCallback(() => {
-    if (typeof window === 'undefined') return 200;
-    if (window.innerWidth <= 640) return 120;
-    if (window.innerWidth <= 768) return 150;
-    return 200;
+    if (typeof window === 'undefined') return 180;
+    if (window.innerWidth <= 640) return 100;
+    if (window.innerWidth <= 768) return 130;
+    if (window.innerWidth <= 1024) return 150;
+    return 180;
   }, []);
 
   const updateWheel = useCallback(() => {
-    const section = document.getElementById('promise');
+    const section = sectionRef.current;
     if (!section) return;
 
     const rect = section.getBoundingClientRect();
@@ -99,7 +53,8 @@ const WordWheelInline = () => {
     let progress = -rect.top / (sectionHeight - window.innerHeight);
     progress = Math.max(0, Math.min(1, progress));
 
-    const globalRotation = progress * Math.PI * 10;
+    // One full rotation (2 * PI)
+    const globalRotation = progress * Math.PI * 2;
 
     wordElementsRef.current.forEach((item) => {
       const currentAngle = item.baseAngle + globalRotation;
@@ -153,16 +108,17 @@ const WordWheelInline = () => {
 
       const wordEl = document.createElement('div');
       wordEl.style.cssText = `
-        font-size: clamp(1.2rem, 3vw, 2.5rem);
-        font-weight: 800;
+        font-size: clamp(1rem, 2.5vw, 1.75rem);
+        font-weight: 600;
         text-transform: uppercase;
-        letter-spacing: 0.15em;
+        letter-spacing: 0.2em;
         white-space: nowrap;
         backface-visibility: visible;
         transition: color 0.3s ease, filter 0.3s ease;
         text-align: center;
         will-change: transform, opacity;
         color: hsl(var(--foreground));
+        font-family: inherit;
       `;
       wordEl.textContent = word;
 
@@ -190,11 +146,72 @@ const WordWheelInline = () => {
   }, [init, updateWheel]);
 
   return (
-    <div
-      ref={wheelRef}
-      className="relative w-full h-full flex items-center justify-center"
-      style={{ transformStyle: 'preserve-3d', willChange: 'transform' }}
-    />
+    <section
+      ref={sectionRef}
+      id="promise"
+      className="relative w-full bg-background"
+      style={{ height: '200vh' }}
+    >
+      {/* Sticky content container */}
+      <div className="sticky top-0 left-0 w-full h-screen flex items-center">
+        <div className="max-w-6xl mx-auto px-6 w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            {/* Left side - Text content */}
+            <div className="space-y-6">
+              <span
+                className={`block text-xs font-medium tracking-[0.3em] text-muted-foreground uppercase mb-4 opacity-0 ${
+                  isVisible ? 'animate-fade-in-up' : ''
+                }`}
+                style={{ animationDelay: '100ms', animationFillMode: 'forwards' }}
+              >
+                Our Promise
+              </span>
+              <h2
+                className={`text-4xl md:text-5xl font-semibold text-foreground mb-6 opacity-0 ${
+                  isVisible ? 'animate-fade-in-up' : ''
+                }`}
+                style={{ animationDelay: '200ms', animationFillMode: 'forwards' }}
+              >
+                Excellence in Every Detail
+              </h2>
+              <div
+                className={`w-12 h-0.5 bg-muted-foreground mb-6 opacity-0 ${
+                  isVisible ? 'animate-fade-in-up' : ''
+                }`}
+                style={{ animationDelay: '300ms', animationFillMode: 'forwards' }}
+              />
+              <p
+                className={`text-muted-foreground max-w-md opacity-0 ${
+                  isVisible ? 'animate-fade-in-up' : ''
+                }`}
+                style={{ animationDelay: '400ms', animationFillMode: 'forwards' }}
+              >
+                We are committed to delivering exceptional digital experiences that exceed expectations. 
+                Every project we undertake is crafted with precision, passion, and an unwavering dedication to quality.
+              </p>
+            </div>
+
+            {/* Right side - Word Wheel */}
+            <div
+              className={`relative h-[50vh] lg:h-[60vh] flex items-center justify-center opacity-0 ${
+                isVisible ? 'animate-fade-in-up' : ''
+              }`}
+              style={{ 
+                perspective: '2000px',
+                animationDelay: '500ms', 
+                animationFillMode: 'forwards' 
+              }}
+            >
+              <div
+                ref={wheelRef}
+                className="relative w-full h-full flex items-center justify-center"
+                style={{ transformStyle: 'preserve-3d', willChange: 'transform' }}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 };
 
