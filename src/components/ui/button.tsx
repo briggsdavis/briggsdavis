@@ -20,7 +20,7 @@ const buttonVariants = cva(
         hero: "glass text-foreground hover:bg-secondary/50 rounded-full font-medium tracking-widest uppercase text-xs",
         heroPrimary: "bg-white text-background hover:bg-white/90 rounded-full font-medium tracking-widest uppercase text-xs",
         process: "glass text-foreground hover:bg-secondary/50 rounded-full font-medium tracking-widest uppercase text-xs",
-        cta: "glass bg-foreground/90 text-background hover:bg-foreground rounded-full font-medium tracking-widest uppercase text-sm",
+        cta: "bg-white text-black hover:bg-white/90 rounded-full font-medium tracking-widest uppercase text-sm",
       },
       size: {
         default: "h-10 px-4 py-2",

@@ -44,38 +44,36 @@ const Footer = () => {
       className="py-20 px-6 border-t border-border/30"
     >
       <div className="max-w-6xl mx-auto">
-        {/* Contact Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+        {/* Contact Cards - Side by Side */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
           {contacts.map((contact, index) => (
             <div
               key={contact.name}
-              className={`group p-6 rounded-2xl bg-card border border-border/50 hover:border-border transition-all duration-500 opacity-0 ${
-                isVisible ? 'animate-fade-in-up' : ''
-              }`}
+              className={`opacity-0 ${isVisible ? 'animate-fade-in-up' : ''}`}
               style={{
-                animationDelay: `${100 + index * 100}ms`,
+                animationDelay: `${100 + index * 150}ms`,
                 animationFillMode: 'forwards',
               }}
             >
-              <h3 className="text-lg font-semibold text-foreground mb-4">
+              <h3 className="text-2xl md:text-3xl font-semibold text-foreground mb-6">
                 {contact.name}
               </h3>
               <div className="space-y-3">
                 <a
                   href={`mailto:${contact.email}`}
-                  className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors duration-300"
+                  className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors duration-300"
                 >
-                  <Mail className="w-4 h-4" />
-                  {contact.email}
+                  <Mail className="w-5 h-5" />
+                  <span className="text-sm md:text-base">{contact.email}</span>
                 </a>
                 <a
                   href={`https://wa.me/${contact.whatsapp.replace(/\s+/g, '')}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors duration-300"
+                  className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors duration-300"
                 >
-                  <MessageCircle className="w-4 h-4" />
-                  {contact.whatsapp}
+                  <MessageCircle className="w-5 h-5" />
+                  <span className="text-sm md:text-base">{contact.whatsapp}</span>
                 </a>
               </div>
             </div>
@@ -87,7 +85,7 @@ const Footer = () => {
           className={`flex flex-col md:flex-row items-center justify-between gap-4 pt-8 border-t border-border/30 opacity-0 ${
             isVisible ? 'animate-fade-in-up' : ''
           }`}
-          style={{ animationDelay: '300ms', animationFillMode: 'forwards' }}
+          style={{ animationDelay: '400ms', animationFillMode: 'forwards' }}
         >
           <div className="flex items-center gap-2">
             <img src="/images/logo.png" alt="Briggs Davis Logo" className="w-8 h-8 object-contain" />
