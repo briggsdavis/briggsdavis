@@ -4,7 +4,7 @@ import { ExternalLink } from 'lucide-react';
 const portfolioItems = [
   {
     id: 1,
-    image: '/images/portfolio-1.jpg',
+    image: '/images/portfolio-oderum.png',
     name: 'Oderum',
     description: 'A minimalist fragrance platform featuring intuitive visual design and innovative rating methodologies for discerning scent enthusiasts.',
     link: 'https://oderum.com',
@@ -25,7 +25,7 @@ const portfolioItems = [
   },
   {
     id: 4,
-    image: '/images/portfolio-4.jpg',
+    image: '/images/portfolio-annesilver.png',
     name: 'Anne Silver',
     description: 'A bespoke jewelry e-commerce platform featuring custom craft capabilities, curated collections, and an integrated CMS for seamless content management.',
     link: 'https://annesilver.com',
@@ -39,7 +39,7 @@ const portfolioItems = [
   },
   {
     id: 6,
-    image: '/images/portfolio-6.jpg',
+    image: '/images/portfolio-aga.png',
     name: 'Africa Growth Axis',
     description: 'A strategic advisory platform for international companies and investors entering African markets, featuring a comprehensive admin-managed content system.',
     link: 'https://africagrowthaxis.com',
