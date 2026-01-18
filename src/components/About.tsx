@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import nateAvatar from '@/assets/nathaniel-davis.jpg';
+import maxAvatar from '@/assets/maxwell-briggs.png';
 
 const founders = [
   {
     name: 'Maxwell Briggs',
     title: 'PRINCIPAL STRATEGIST',
-    avatar: '/images/avatar-1.jpg',
+    avatar: maxAvatar,
     skills: [
       'Marketing expert with proven KPI achievement',
       'Certified in Business Value Creation and SEO',
