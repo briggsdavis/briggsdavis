@@ -1,12 +1,49 @@
 import { useEffect, useRef, useState } from 'react';
+import { ExternalLink } from 'lucide-react';
 
 const portfolioItems = [
-  { id: 1, image: '/images/portfolio-1.jpg', alt: 'Traditional architecture' },
-  { id: 2, image: '/images/portfolio-2.jpg', alt: 'Modern building' },
-  { id: 3, image: '/images/portfolio-3.jpg', alt: 'Beach pier' },
-  { id: 4, image: '/images/portfolio-4.jpg', alt: 'Classic cars' },
-  { id: 5, image: '/images/portfolio-5.jpg', alt: 'Countryside' },
-  { id: 6, image: '/images/portfolio-6.jpg', alt: 'Industrial architecture' },
+  {
+    id: 1,
+    image: '/images/portfolio-1.jpg',
+    name: 'Oderum',
+    description: 'A minimalist fragrance platform featuring intuitive visual design and innovative rating methodologies for discerning scent enthusiasts.',
+    link: 'https://oderum.com',
+  },
+  {
+    id: 2,
+    image: '/images/portfolio-2.jpg',
+    name: 'Hormone Vitality Coaching',
+    description: 'A wellness platform for a health coach, showcasing specialized services and expertise while expressing her unique personality through thoughtful visual design.',
+    link: 'https://hormonevitalitycoaching.com',
+  },
+  {
+    id: 3,
+    image: '/images/portfolio-3.jpg',
+    name: 'EASE Engineering',
+    description: 'A professional showcase for a specialized engineering firm, highlighting services, capabilities, and portfolio across East African operations.',
+    link: 'https://ease-int.com',
+  },
+  {
+    id: 4,
+    image: '/images/portfolio-4.jpg',
+    name: 'Anne Silver',
+    description: 'A bespoke jewelry e-commerce platform featuring custom craft capabilities, curated collections, and an integrated CMS for seamless content management.',
+    link: 'https://annesilver.com',
+  },
+  {
+    id: 5,
+    image: '/images/portfolio-5.jpg',
+    name: 'Nordic Seafood',
+    description: 'A specialized salmon delivery e-commerce platform for Addis Ababa, featuring customer and admin dashboards with order tracking and quality certification.',
+    link: null,
+  },
+  {
+    id: 6,
+    image: '/images/portfolio-6.jpg',
+    name: 'Africa Growth Axis',
+    description: 'A strategic advisory platform for international companies and investors entering African markets, featuring a comprehensive admin-managed content system.',
+    link: 'https://africagrowthaxis.com',
+  },
 ];
 
 const Portfolio = () => {
@@ -31,6 +68,12 @@ const Portfolio = () => {
 
     return () => observer.disconnect();
   }, []);
+
+  const handleClick = (link: string | null) => {
+    if (link) {
+      window.open(link, '_blank', 'noopener,noreferrer');
+    }
+  };
 
   return (
     <section
@@ -78,9 +121,10 @@ const Portfolio = () => {
           {portfolioItems.map((item, index) => (
             <div
               key={item.id}
-              className={`group relative aspect-[4/3] rounded-2xl overflow-hidden cursor-pointer opacity-0 ${
+              onClick={() => handleClick(item.link)}
+              className={`group relative aspect-[4/3] rounded-2xl overflow-hidden opacity-0 ${
                 isVisible ? 'animate-fade-in-up' : ''
-              }`}
+              } ${item.link ? 'cursor-pointer' : 'cursor-default'}`}
               style={{
                 animationDelay: `${500 + index * 100}ms`,
                 animationFillMode: 'forwards',
@@ -88,10 +132,24 @@ const Portfolio = () => {
             >
               <img
                 src={item.image}
-                alt={item.alt}
-                className="w-full h-full object-cover grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105"
+                alt={item.name}
+                className="w-full h-full object-cover object-top transition-all duration-700 group-hover:scale-[2] group-hover:object-center"
               />
-              <div className="absolute inset-0 bg-background/20 group-hover:bg-transparent transition-colors duration-500" />
+              {/* Overlay - appears on hover */}
+              <div className="absolute inset-0 bg-background/90 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-center items-center p-6 text-center">
+                <h3 className="text-xl font-semibold text-foreground mb-3">
+                  {item.name}
+                </h3>
+                <p className="text-sm text-muted-foreground leading-relaxed mb-4">
+                  {item.description}
+                </p>
+                {item.link && (
+                  <div className="flex items-center gap-2 text-xs font-medium tracking-wider uppercase text-foreground">
+                    <span>View Project</span>
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </div>
+                )}
+              </div>
             </div>
           ))}
         </div>
