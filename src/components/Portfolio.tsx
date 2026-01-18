@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { ExternalLink } from 'lucide-react';
+import { Button } from './ui/button';
 
 const portfolioItems = [
   {
@@ -49,6 +50,7 @@ const portfolioItems = [
 const Portfolio = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [hoveredId, setHoveredId] = useState<number | null>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -74,6 +76,12 @@ const Portfolio = () => {
       window.open(link, '_blank', 'noopener,noreferrer');
     }
   };
+
+  // Split items into rows of 2
+  const rows: typeof portfolioItems[] = [];
+  for (let i = 0; i < portfolioItems.length; i += 2) {
+    rows.push(portfolioItems.slice(i, i + 2));
+  }
 
   return (
     <section
@@ -116,40 +124,65 @@ const Portfolio = () => {
           </p>
         </div>
 
-        {/* Portfolio Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {portfolioItems.map((item, index) => (
-            <div
-              key={item.id}
-              onClick={() => handleClick(item.link)}
-              className={`group relative aspect-[4/3] rounded-2xl overflow-hidden opacity-0 ${
-                isVisible ? 'animate-fade-in-up' : ''
-              } ${item.link ? 'cursor-pointer' : 'cursor-default'}`}
-              style={{
-                animationDelay: `${500 + index * 100}ms`,
-                animationFillMode: 'forwards',
-              }}
-            >
-              <img
-                src={item.image}
-                alt={item.name}
-                className="w-full h-full object-cover object-top transition-all duration-700 group-hover:scale-[2] group-hover:object-center"
-              />
-              {/* Overlay - appears on hover */}
-              <div className="absolute inset-0 bg-background/90 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-center items-center p-6 text-center">
-                <h3 className="text-xl font-semibold text-foreground mb-3">
-                  {item.name}
-                </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-                  {item.description}
-                </p>
-                {item.link && (
-                  <div className="flex items-center gap-2 text-xs font-medium tracking-wider uppercase text-foreground">
-                    <span>View Project</span>
-                    <ExternalLink className="w-3.5 h-3.5" />
+        {/* Portfolio Grid - 2 columns per row */}
+        <div className="flex flex-col gap-4">
+          {rows.map((row, rowIndex) => (
+            <div key={rowIndex} className="flex gap-4">
+              {row.map((item, colIndex) => {
+                const isLeft = colIndex === 0;
+                const isHovered = hoveredId === item.id;
+                const siblingHovered = hoveredId !== null && hoveredId !== item.id && row.some(r => r.id === hoveredId);
+                
+                return (
+                  <div
+                    key={item.id}
+                    onMouseEnter={() => setHoveredId(item.id)}
+                    onMouseLeave={() => setHoveredId(null)}
+                    onClick={() => handleClick(item.link)}
+                    className={`group relative aspect-[4/3] rounded-2xl overflow-hidden opacity-0 transition-all duration-500 ease-out ${
+                      isVisible ? 'animate-fade-in-up' : ''
+                    } ${item.link ? 'cursor-pointer' : 'cursor-default'}`}
+                    style={{
+                      animationDelay: `${500 + (rowIndex * 2 + colIndex) * 100}ms`,
+                      animationFillMode: 'forwards',
+                      flex: isHovered ? '1.8' : siblingHovered ? '0.6' : '1',
+                    }}
+                  >
+                    <img
+                      src={item.image}
+                      alt={item.name}
+                      className="w-full h-full object-cover object-top transition-transform duration-500"
+                    />
+                    {/* Overlay - appears on hover */}
+                    <div 
+                      className={`absolute inset-0 bg-background/90 transition-opacity duration-500 flex flex-col justify-center p-8 ${
+                        isHovered ? 'opacity-100' : 'opacity-0'
+                      } ${isLeft ? 'items-start text-left' : 'items-end text-right'}`}
+                    >
+                      <h3 className="text-xl font-semibold text-foreground mb-3">
+                        {item.name}
+                      </h3>
+                      <p className={`text-sm text-muted-foreground leading-relaxed mb-6 max-w-sm ${isLeft ? '' : 'ml-auto'}`}>
+                        {item.description}
+                      </p>
+                      {item.link && (
+                        <Button
+                          variant="nav"
+                          size="sm"
+                          className="glass glint"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleClick(item.link);
+                          }}
+                        >
+                          <span>View Project</span>
+                          <ExternalLink className="w-3.5 h-3.5 ml-2" />
+                        </Button>
+                      )}
+                    </div>
                   </div>
-                )}
-              </div>
+                );
+              })}
             </div>
           ))}
         </div>
