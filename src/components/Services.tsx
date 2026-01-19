@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 
 const services = [
   {
-    title: 'RESPONSIVE DESIGN',
+    title: 'MOBILE FRIENDLY DESIGN',
     description: 'Websites that look perfect on every device, from desktop to mobile.',
   },
   {
@@ -11,7 +11,7 @@ const services = [
   },
   {
     title: 'RAPID DEVELOPMENT',
-    description: 'Fast turnaround times without compromising quality.',
+    description: 'Launch your website in as fast as one week without compromising quality.',
   },
   {
     title: 'CONTENT MANAGEMENT SYSTEMS',
@@ -24,6 +24,18 @@ const services = [
   {
     title: 'MULTI-LANGUAGE SUPPORT',
     description: 'Reach global audiences with professionally translated websites.',
+  },
+  {
+    title: 'FACILITATE ONLINE PAYMENTS',
+    description: 'Build secure e-commerce solutions that accept payments seamlessly.',
+  },
+  {
+    title: 'UNIQUE SOLUTIONS',
+    description: 'Every website is tailored to fit your business, marketing, and operational needs.',
+  },
+  {
+    title: 'FLAWLESS PERFORMANCE',
+    description: 'Lightning-fast loading times powered by high-quality, modern technology.',
   },
 ];
 
