@@ -37,6 +37,10 @@ const services = [
     title: 'FLAWLESS PERFORMANCE',
     description: 'Lightning-fast loading times powered by high-quality, modern technology.',
   },
+  {
+    title: 'CLIENT INPUT',
+    description: 'Your voice matters—regular meetings and feedback sessions keep you involved at every stage.',
+  },
 ];
 
 const Services = () => {
@@ -103,9 +107,9 @@ const Services = () => {
           </p>
         </div>
 
-        {/* Services Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
-          {services.map((service, index) => (
+        {/* Services Grid - First Row */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 mb-3">
+          {services.slice(0, 5).map((service, index) => (
             <div
               key={service.title}
               className={`group p-4 rounded-xl bg-card border border-border/50 hover:border-border hover:bg-secondary/50 transition-all duration-500 cursor-pointer opacity-0 hover:scale-110 hover:z-10 hover:shadow-xl hover:shadow-black/20 ${
@@ -124,6 +128,31 @@ const Services = () => {
               </p>
             </div>
           ))}
+        </div>
+        
+        {/* Services Grid - Second Row (Centered) */}
+        <div className="flex justify-center">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
+            {services.slice(5).map((service, index) => (
+              <div
+                key={service.title}
+                className={`group p-4 rounded-xl bg-card border border-border/50 hover:border-border hover:bg-secondary/50 transition-all duration-500 cursor-pointer opacity-0 hover:scale-110 hover:z-10 hover:shadow-xl hover:shadow-black/20 ${
+                  isVisible ? 'animate-fade-in-up' : ''
+                }`}
+                style={{
+                  animationDelay: `${500 + (index + 5) * 100}ms`,
+                  animationFillMode: 'forwards',
+                }}
+              >
+                <h3 className="text-xs font-semibold text-foreground tracking-wide mb-2 group-hover:text-foreground transition-colors duration-300">
+                  {service.title}
+                </h3>
+                <p className="text-xs text-muted-foreground leading-relaxed group-hover:text-muted-foreground/80 transition-colors duration-300">
+                  {service.description}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
