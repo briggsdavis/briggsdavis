@@ -1,6 +1,4 @@
 import { useEffect, useRef, useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { ArrowRight } from 'lucide-react';
 
 const CTA = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -25,12 +23,6 @@ const CTA = () => {
     return () => observer.disconnect();
   }, []);
 
-  const scrollToContact = () => {
-    const element = document.querySelector('#contact');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
 
   return (
     <section
@@ -60,20 +52,16 @@ const CTA = () => {
             >
               Initiate a strategic partnership today. Let's build the digital future of your enterprise.
             </p>
-            <div
-              className={`opacity-0 ${isVisible ? 'animate-fade-in-up' : ''}`}
+            <p
+              className={`text-white font-semibold text-xl tracking-wide opacity-0 ${
+                isVisible ? 'animate-fade-in-up' : ''
+              }`}
               style={{ animationDelay: '300ms', animationFillMode: 'forwards' }}
             >
-              <Button
-                variant="cta"
-                size="xl"
-                className="group"
-                onClick={scrollToContact}
-              >
-                Contact Us
-                <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-              </Button>
-            </div>
+              <span className="bg-gradient-to-r from-white to-white/80 bg-clip-text">
+                briggsdavis.info@gmail.com
+              </span>
+            </p>
           </div>
         </div>
       </div>
