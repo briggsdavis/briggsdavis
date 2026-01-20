@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { ArrowRight } from 'lucide-react';
 
 const CTA = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -52,14 +54,21 @@ const CTA = () => {
             >
               Initiate a strategic partnership today. Let's build the digital future of your enterprise.
             </p>
-            <p
-              className={`text-white font-bold text-2xl tracking-wide opacity-0 ${
-                isVisible ? 'animate-fade-in-up' : ''
-              }`}
+            <div
+              className={`opacity-0 ${isVisible ? 'animate-fade-in-up' : ''}`}
               style={{ animationDelay: '300ms', animationFillMode: 'forwards' }}
             >
-              Contact Us
-            </p>
+              <a href="https://wa.me/251944825058" target="_blank" rel="noopener noreferrer">
+                <Button
+                  variant="cta"
+                  size="xl"
+                  className="group"
+                >
+                  Contact Us
+                  <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+                </Button>
+              </a>
+            </div>
           </div>
         </div>
       </div>
