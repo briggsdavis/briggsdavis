@@ -53,14 +53,12 @@ const CTA = () => {
               Initiate a strategic partnership today. Let's build the digital future of your enterprise.
             </p>
             <p
-              className={`text-white font-semibold text-xl tracking-wide opacity-0 ${
+              className={`text-white font-bold text-2xl tracking-wide opacity-0 ${
                 isVisible ? 'animate-fade-in-up' : ''
               }`}
               style={{ animationDelay: '300ms', animationFillMode: 'forwards' }}
             >
-              <span className="bg-gradient-to-r from-white to-white/80 bg-clip-text">
-                briggsdavis.info@gmail.com
-              </span>
+              Contact Us
             </p>
           </div>
         </div>
