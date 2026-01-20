@@ -1,10 +1,17 @@
 import { useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const CTA = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const isMobile = useIsMobile();
+
+  // Use universal link for mobile/tablet, web link for desktop
+  const whatsappLink = isMobile
+    ? 'https://wa.me/251944825058'
+    : 'https://web.whatsapp.com/send?phone=251944825058';
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -24,7 +31,6 @@ const CTA = () => {
 
     return () => observer.disconnect();
   }, []);
-
 
   return (
     <section
@@ -58,16 +64,17 @@ const CTA = () => {
               className={`opacity-0 ${isVisible ? 'animate-fade-in-up' : ''}`}
               style={{ animationDelay: '300ms', animationFillMode: 'forwards' }}
             >
-              <a href="https://wa.me/251944825058" target="_blank" rel="noopener noreferrer">
-                <Button
-                  variant="cta"
-                  size="xl"
-                  className="group"
-                >
+              <Button
+                variant="cta"
+                size="xl"
+                className="group"
+                asChild
+              >
+                <a href={whatsappLink} target="_blank" rel="noopener noreferrer">
                   Contact Us
                   <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-                </Button>
-              </a>
+                </a>
+              </Button>
             </div>
           </div>
         </div>
