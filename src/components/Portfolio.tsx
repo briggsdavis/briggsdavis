@@ -43,7 +43,7 @@ const portfolioItems = [
     image: '/images/portfolio-aga.png',
     name: 'Africa Growth Axis',
     description: 'A strategic advisory platform for international companies and investors entering African markets, featuring a comprehensive admin-managed content system.',
-    link: 'https://africagrowthaxis.com',
+    link: 'https://aga-advisory.com/',
   },
 ];
 
