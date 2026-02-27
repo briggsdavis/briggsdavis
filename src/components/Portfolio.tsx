@@ -1,51 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
-import { ExternalLink } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { Button } from './ui/button';
+import { Link } from 'react-router-dom';
+import { projects } from '@/data/projects';
 
-const portfolioItems = [
-  {
-    id: 1,
-    image: '/images/portfolio-oderum.png',
-    name: 'Oderum',
-    description: 'A minimalist fragrance platform featuring intuitive visual design and innovative rating methodologies for discerning scent enthusiasts.',
-    link: 'https://oderum.com',
-  },
-  {
-    id: 2,
-    image: '/images/portfolio-2.jpg',
-    name: 'Hormone Vitality Coaching',
-    description: 'A wellness platform for a health coach, showcasing specialized services and expertise while expressing her unique personality through thoughtful visual design.',
-    link: 'https://hormonevitalitycoaching.com',
-  },
-  {
-    id: 3,
-    image: '/images/portfolio-3.jpg',
-    name: 'EASE Engineering',
-    description: 'A professional showcase for a specialized engineering firm, highlighting services, capabilities, and portfolio across East African operations.',
-    link: 'https://ease-int.com',
-  },
-  {
-    id: 4,
-    image: '/images/portfolio-annesilver.png',
-    name: 'Anne Silver',
-    description: 'A bespoke jewelry e-commerce platform featuring custom craft capabilities, curated collections, and an integrated CMS for seamless content management.',
-    link: 'https://annesilver.com',
-  },
-  {
-    id: 5,
-    image: '/images/portfolio-5.jpg',
-    name: 'Nordic Seafood',
-    description: 'A specialized salmon delivery e-commerce platform for Addis Ababa, featuring customer and admin dashboards with order tracking and quality certification.',
-    link: null,
-  },
-  {
-    id: 6,
-    image: '/images/portfolio-aga.png',
-    name: 'Africa Growth Axis',
-    description: 'A strategic advisory platform for international companies and investors entering African markets, featuring a comprehensive admin-managed content system.',
-    link: 'https://aga-advisory.com/',
-  },
-];
+const portfolioItems = projects;
 
 const Portfolio = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -165,20 +124,18 @@ const Portfolio = () => {
                       <p className={`text-sm text-muted-foreground leading-relaxed mb-6 max-w-sm ${isLeft ? '' : 'ml-auto'}`}>
                         {item.description}
                       </p>
-                      {item.link && (
-                        <Button
-                          variant="nav"
-                          size="sm"
-                          className="glass glint"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            handleClick(item.link);
-                          }}
-                        >
-                          <span>View Project</span>
-                          <ExternalLink className="w-3.5 h-3.5 ml-2" />
-                        </Button>
-                      )}
+                      <Button
+                        variant="nav"
+                        size="sm"
+                        className="glass glint"
+                        asChild
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <Link to={`/project/${item.id}`}>
+                          <span>Project Details</span>
+                          <ArrowRight className="w-3.5 h-3.5 ml-2" />
+                        </Link>
+                      </Button>
                     </div>
                   </div>
                 );
