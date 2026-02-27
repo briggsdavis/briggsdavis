@@ -30,11 +30,6 @@ const Portfolio = () => {
     return () => observer.disconnect();
   }, []);
 
-  const handleClick = (link: string | null) => {
-    if (link) {
-      window.open(link, '_blank', 'noopener,noreferrer');
-    }
-  };
 
   // Split items into rows of 2
   const rows: typeof portfolioItems[] = [];
