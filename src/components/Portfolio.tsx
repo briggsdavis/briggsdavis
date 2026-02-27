@@ -92,10 +92,9 @@ const Portfolio = () => {
                     key={item.id}
                     onMouseEnter={() => setHoveredId(item.id)}
                     onMouseLeave={() => setHoveredId(null)}
-                    onClick={() => handleClick(item.link)}
-                    className={`group relative aspect-[4/3] rounded-2xl overflow-hidden opacity-0 transition-all duration-500 ease-out ${
+                    className={`group relative rounded-2xl overflow-hidden opacity-0 transition-all duration-500 ease-out ${
                       isVisible ? 'animate-fade-in-up' : ''
-                    } ${item.link ? 'cursor-pointer' : 'cursor-default'}`}
+                    }`}
                     style={{
                       animationDelay: `${500 + (rowIndex * 2 + colIndex) * 100}ms`,
                       animationFillMode: 'forwards',
