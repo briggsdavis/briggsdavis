@@ -11,6 +11,7 @@ const projectVideos: Record<string, string> = {
   'ease-engineering': '/videos/ease-engineering.mp4',
   'africa-growth-axis': '/videos/africa-growth-axis.mp4',
   'hormone-vitality-coaching': '/videos/hormone-vitality-coaching.mp4',
+  refenti: '/videos/refent.mp4',
 };
 
 const ProjectDetail = () => {
