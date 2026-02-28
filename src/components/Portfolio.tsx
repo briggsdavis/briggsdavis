@@ -1,15 +1,17 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { Button } from './ui/button';
 import { Link } from 'react-router-dom';
 import { projects } from '@/data/projects';
 
-const portfolioItems = projects;
+const featuredIds = ['refenti', 'africa-growth-axis', 'hormone-vitality-coaching', 'nordic-seafood'];
+const featuredProjects = featuredIds.map(id => projects.find(p => p.id === id)!).filter(Boolean);
 
 const Portfolio = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
-  const [hoveredId, setHoveredId] = useState<string | null>(null);
+  const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [scales, setScales] = useState<number[]>(featuredProjects.map(() => 0.85));
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -30,12 +32,27 @@ const Portfolio = () => {
     return () => observer.disconnect();
   }, []);
 
+  const handleScroll = useCallback(() => {
+    const newScales = itemRefs.current.map((ref) => {
+      if (!ref) return 0.85;
+      const rect = ref.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      const center = rect.top + rect.height / 2;
+      const screenCenter = windowHeight / 2;
+      const distance = Math.abs(center - screenCenter);
+      const maxDistance = windowHeight / 2;
+      const progress = 1 - Math.min(distance / maxDistance, 1);
+      // Scale from 0.85 to 1.0
+      return 0.85 + progress * 0.15;
+    });
+    setScales(newScales);
+  }, []);
 
-  // Split items into rows of 2
-  const rows: typeof portfolioItems[] = [];
-  for (let i = 0; i < portfolioItems.length; i += 2) {
-    rows.push(portfolioItems.slice(i, i + 2));
-  }
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [handleScroll]);
 
   return (
     <section
@@ -43,7 +60,7 @@ const Portfolio = () => {
       ref={sectionRef}
       className="py-32 px-6"
     >
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-5xl mx-auto">
         {/* Section Header */}
         <div className="mb-16">
           <span
@@ -78,64 +95,66 @@ const Portfolio = () => {
           </p>
         </div>
 
-        {/* Portfolio Grid - 2 columns per row */}
-        <div className="flex flex-col gap-4">
-          {rows.map((row, rowIndex) => (
-            <div key={rowIndex} className="flex gap-4">
-              {row.map((item, colIndex) => {
-                const isLeft = colIndex === 0;
-                const isHovered = hoveredId === item.id;
-                const siblingHovered = hoveredId !== null && hoveredId !== item.id && row.some(r => r.id === hoveredId);
-                
-                return (
-                  <div
-                    key={item.id}
-                    onMouseEnter={() => setHoveredId(item.id)}
-                    onMouseLeave={() => setHoveredId(null)}
-                    className={`group relative rounded-2xl overflow-hidden opacity-0 transition-all duration-500 ease-out ${
-                      isVisible ? 'animate-fade-in-up' : ''
-                    }`}
-                    style={{
-                      animationDelay: `${500 + (rowIndex * 2 + colIndex) * 100}ms`,
-                      animationFillMode: 'forwards',
-                      flex: isHovered ? '1.8' : siblingHovered ? '0.6' : '1',
-                    }}
+        {/* Featured Projects - Stacked */}
+        <div className="flex flex-col gap-8">
+          {featuredProjects.map((item, index) => (
+            <Link
+              key={item.id}
+              to={`/project/${item.id}`}
+              className="block"
+            >
+              <div
+                ref={(el) => { itemRefs.current[index] = el; }}
+                className={`group relative rounded-2xl overflow-hidden opacity-0 cursor-pointer transition-transform duration-100 ease-out ${
+                  isVisible ? 'animate-fade-in-up' : ''
+                }`}
+                style={{
+                  animationDelay: `${500 + index * 150}ms`,
+                  animationFillMode: 'forwards',
+                  transform: `scale(${scales[index]})`,
+                }}
+              >
+                <img
+                  src={item.image}
+                  alt={item.name}
+                  className="w-full aspect-[16/9] object-cover object-top"
+                />
+                {/* Overlay */}
+                <div className="absolute inset-0 bg-background/0 group-hover:bg-background/80 transition-all duration-500 flex flex-col justify-center items-center text-center p-8 opacity-0 group-hover:opacity-100">
+                  <h3 className="text-2xl font-semibold text-foreground mb-3">
+                    {item.name}
+                  </h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed mb-6 max-w-md">
+                    {item.description}
+                  </p>
+                  <Button
+                    variant="nav"
+                    size="sm"
+                    className="glass glint"
+                    onClick={(e) => e.stopPropagation()}
                   >
-                    <img
-                      src={item.image}
-                      alt={item.name}
-                      className="w-full h-full object-cover object-top transition-transform duration-500"
-                    />
-                    {/* Overlay - appears on hover */}
-                    <div 
-                      className={`absolute inset-0 bg-background/90 transition-opacity duration-500 flex flex-col justify-center p-8 ${
-                        isHovered ? 'opacity-100' : 'opacity-0'
-                      } ${isLeft ? 'items-start text-left' : 'items-end text-right'}`}
-                    >
-                      <h3 className="text-xl font-semibold text-foreground mb-3">
-                        {item.name}
-                      </h3>
-                      <p className={`text-sm text-muted-foreground leading-relaxed mb-6 max-w-sm ${isLeft ? '' : 'ml-auto'}`}>
-                        {item.description}
-                      </p>
-                      <Button
-                        variant="nav"
-                        size="sm"
-                        className="glass glint"
-                        asChild
-                        onClick={(e) => e.stopPropagation()}
-                      >
-                        <Link to={`/project/${item.id}`}>
-                          <span>Project Details</span>
-                          <ArrowRight className="w-3.5 h-3.5 ml-2" />
-                        </Link>
-                      </Button>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
+                    <span>Project Details</span>
+                    <ArrowRight className="w-3.5 h-3.5 ml-2" />
+                  </Button>
+                </div>
+              </div>
+            </Link>
           ))}
+        </div>
+
+        {/* See Full Portfolio Button */}
+        <div
+          className={`mt-16 flex justify-center opacity-0 ${
+            isVisible ? 'animate-fade-in-up' : ''
+          }`}
+          style={{ animationDelay: '1100ms', animationFillMode: 'forwards' }}
+        >
+          <Button variant="nav" size="lg" className="glass glint" asChild>
+            <Link to="/projects">
+              <span>See Full Portfolio</span>
+              <ArrowRight className="w-4 h-4 ml-2" />
+            </Link>
+          </Button>
         </div>
       </div>
     </section>
