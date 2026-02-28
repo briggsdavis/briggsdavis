@@ -10,6 +10,7 @@ const projectVideos: Record<string, string> = {
   'anne-silver': '/videos/anne-silver.mp4',
   'ease-engineering': '/videos/ease-engineering.mp4',
   'africa-growth-axis': '/videos/africa-growth-axis.mp4',
+  'hormone-vitality-coaching': '/videos/hormone-vitality-coaching.mp4',
 };
 
 const ProjectDetail = () => {
