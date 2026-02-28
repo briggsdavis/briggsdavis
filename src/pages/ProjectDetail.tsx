@@ -49,16 +49,15 @@ const ProjectDetail = () => {
       <div className="max-w-5xl mx-auto px-6 py-16">
         {/* Hero media */}
         <div className="rounded-2xl overflow-hidden mb-12 border border-border/30 opacity-0 animate-fade-in-up" style={{ animationDelay: '200ms', animationFillMode: 'forwards' }}>
-          {isOderum ? (
+          {videoSrc ? (
             <video
               ref={videoRef}
-              src="/videos/oderum.mp4"
+              src={videoSrc}
               className="w-full object-cover object-top"
               autoPlay
               muted
               playsInline
               onEnded={() => {
-                // Freeze on last frame by pausing
                 if (videoRef.current) {
                   videoRef.current.pause();
                 }
