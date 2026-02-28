@@ -1,14 +1,23 @@
 import { useParams, Link } from 'react-router-dom';
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import { ArrowLeft, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { projects } from '@/data/projects';
 import Footer from '@/components/Footer';
 
+const projectVideos: Record<string, string> = {
+  oderum: '/videos/oderum.mp4',
+  'anne-silver': '/videos/anne-silver.mp4',
+};
+
 const ProjectDetail = () => {
   const { projectId } = useParams<{ projectId: string }>();
   const project = projects.find((p) => p.id === projectId);
   const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [projectId]);
 
   if (!project) {
     return (
@@ -23,7 +32,7 @@ const ProjectDetail = () => {
     );
   }
 
-  const isOderum = project.id === 'oderum';
+  const videoSrc = projectVideos[project.id];
 
   return (
     <div className="min-h-screen bg-background">
