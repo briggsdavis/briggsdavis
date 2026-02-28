@@ -86,4 +86,17 @@ export const projects: Project[] = [
       'Admin panel for content updates',
     ],
   },
+  {
+    id: 'refenti',
+    name: 'Refenti',
+    image: '/images/portfolio-refenti.jpg',
+    description: 'An institutional website for a premier real estate development group in Addis Ababa, Ethiopia — designed with precision to communicate elegance and high quality.',
+    link: null,
+    features: [
+      'Fully editable CMS for content management',
+      'Inquiry forms for prospective clients',
+      'News and events publishing system',
+      'Elegant, precision-crafted visual design',
+    ],
+  },
 ];
