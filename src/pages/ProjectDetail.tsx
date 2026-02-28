@@ -8,6 +8,8 @@ import Footer from '@/components/Footer';
 const projectVideos: Record<string, string> = {
   oderum: '/videos/oderum.mp4',
   'anne-silver': '/videos/anne-silver.mp4',
+  'ease-engineering': '/videos/ease-engineering.mp4',
+  'africa-growth-axis': '/videos/africa-growth-axis.mp4',
 };
 
 const ProjectDetail = () => {
