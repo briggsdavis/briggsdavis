@@ -32,20 +32,27 @@ const Portfolio = () => {
     return () => observer.disconnect();
   }, []);
 
+  const rafRef = useRef<number>(0);
+
   const handleScroll = useCallback(() => {
-    const newScales = itemRefs.current.map((ref) => {
-      if (!ref) return 0.85;
-      const rect = ref.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-      const center = rect.top + rect.height / 2;
-      const screenCenter = windowHeight / 2;
-      const distance = Math.abs(center - screenCenter);
-      const maxDistance = windowHeight / 2;
-      const progress = 1 - Math.min(distance / maxDistance, 1);
-      // Scale from 0.85 to 1.0
-      return 0.85 + progress * 0.15;
+    cancelAnimationFrame(rafRef.current);
+    rafRef.current = requestAnimationFrame(() => {
+      const newScales = itemRefs.current.map((ref) => {
+        if (!ref) return 0.88;
+        const rect = ref.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        const center = rect.top + rect.height / 2;
+        const screenCenter = windowHeight / 2;
+        const distance = Math.abs(center - screenCenter);
+        const maxDistance = windowHeight * 0.6;
+        // Smooth easing curve
+        const raw = 1 - Math.min(distance / maxDistance, 1);
+        const progress = raw * raw; // quadratic ease for snappier center focus
+        // Scale from 0.88 to 1.05 — slight overshoot for magnifying feel
+        return 0.88 + progress * 0.17;
+      });
+      setScales(newScales);
     });
-    setScales(newScales);
   }, []);
 
   useEffect(() => {
