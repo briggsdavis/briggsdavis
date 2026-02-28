@@ -8,6 +8,7 @@ import Footer from '@/components/Footer';
 const ProjectDetail = () => {
   const { projectId } = useParams<{ projectId: string }>();
   const project = projects.find((p) => p.id === projectId);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   if (!project) {
     return (
@@ -22,6 +23,8 @@ const ProjectDetail = () => {
     );
   }
 
+  const isOderum = project.id === 'oderum';
+
   return (
     <div className="min-h-screen bg-background">
       {/* Back button */}
@@ -35,13 +38,30 @@ const ProjectDetail = () => {
       </div>
 
       <div className="max-w-5xl mx-auto px-6 py-16">
-        {/* Hero image */}
+        {/* Hero media */}
         <div className="rounded-2xl overflow-hidden mb-12 border border-border/30 opacity-0 animate-fade-in-up" style={{ animationDelay: '200ms', animationFillMode: 'forwards' }}>
-          <img
-            src={project.image}
-            alt={project.name}
-            className="w-full object-cover object-top"
-          />
+          {isOderum ? (
+            <video
+              ref={videoRef}
+              src="/videos/oderum.mp4"
+              className="w-full object-cover object-top"
+              autoPlay
+              muted
+              playsInline
+              onEnded={() => {
+                // Freeze on last frame by pausing
+                if (videoRef.current) {
+                  videoRef.current.pause();
+                }
+              }}
+            />
+          ) : (
+            <img
+              src={project.image}
+              alt={project.name}
+              className="w-full object-cover object-top"
+            />
+          )}
         </div>
 
         {/* Content */}
@@ -86,6 +106,8 @@ const ProjectDetail = () => {
           </div>
         </div>
       </div>
+
+      <Footer />
     </div>
   );
 };
