@@ -1,7 +1,9 @@
 import { useParams, Link } from 'react-router-dom';
+import { useRef } from 'react';
 import { ArrowLeft, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { projects } from '@/data/projects';
+import Footer from '@/components/Footer';
 
 const ProjectDetail = () => {
   const { projectId } = useParams<{ projectId: string }>();
