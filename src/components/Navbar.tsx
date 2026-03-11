@@ -1,44 +1,40 @@
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Menu, X } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
 
 const navItems = [
-  { label: 'SERVICES', href: '#services' },
-  { label: 'PROCESS', href: '#process' },
-  { label: 'PORTFOLIO', href: '#portfolio' },
-  { label: 'ABOUT', href: '#about' },
+  { label: 'SERVICES', href: '/services' },
+  { label: 'PROCESS', href: '/process' },
+  { label: 'PORTFOLIO', href: '/projects' },
 ];
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState('');
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
-      
-      // Determine active section
-      const sections = navItems.map(item => item.href.slice(1));
-      for (const section of sections.reverse()) {
-        const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          if (rect.top <= 200) {
-            setActiveSection(section);
-            break;
-          }
-        }
-      }
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [location.pathname]);
+
+  const scrollToContact = () => {
+    if (location.pathname === '/') {
+      const element = document.querySelector('#contact');
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      window.location.href = '/#contact';
     }
   };
 
@@ -56,36 +52,32 @@ const Navbar = () => {
         }`}
       >
         {/* Logo */}
-        <a
-          href="#"
+        <Link
+          to="/"
           className="flex items-center gap-2 px-4 py-2 text-foreground hover:opacity-80 transition-opacity duration-300"
-          onClick={(e) => {
-            e.preventDefault();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          }}
         >
           <img src="/images/logo.png" alt="Briggs Davis Logo" className="w-6 h-6 object-contain" />
           <span className="font-bold tracking-tight">BRIGGS</span>
           <span className="font-light tracking-tight text-muted-foreground">DAVIS</span>
-        </a>
+        </Link>
 
         {/* Nav Links */}
         <div className="hidden md:flex items-center gap-1 ml-8">
           {navItems.map((item) => (
-            <button
+            <Link
               key={item.label}
-              onClick={() => scrollToSection(item.href)}
+              to={item.href}
               className={`px-4 py-2 text-xs font-medium tracking-widest transition-all duration-300 relative ${
-                activeSection === item.href.slice(1)
+                location.pathname === item.href
                   ? 'text-foreground'
                   : 'text-muted-foreground hover:text-foreground'
               }`}
             >
               {item.label}
-              {activeSection === item.href.slice(1) && (
+              {location.pathname === item.href && (
                 <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-foreground rounded-full" />
               )}
-            </button>
+            </Link>
           ))}
         </div>
 
@@ -93,13 +85,46 @@ const Navbar = () => {
         <Button
           variant="nav"
           size="nav"
-          className="ml-4 group"
-          onClick={() => scrollToSection('#contact')}
+          className="ml-4 group hidden md:flex"
+          onClick={scrollToContact}
         >
           CONTACT
           <ArrowRight className="w-3 h-3 transition-transform duration-300 group-hover:translate-x-1" />
         </Button>
+
+        {/* Mobile Menu Toggle */}
+        <button
+          className="md:hidden ml-4 p-2 text-foreground"
+          onClick={() => setMobileOpen(!mobileOpen)}
+        >
+          {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+        </button>
       </div>
+
+      {/* Mobile Menu */}
+      {mobileOpen && (
+        <div className="md:hidden mt-2 rounded-2xl glass p-4 flex flex-col gap-2 animate-fade-in">
+          {navItems.map((item) => (
+            <Link
+              key={item.label}
+              to={item.href}
+              className={`px-4 py-3 text-xs font-medium tracking-widest rounded-lg transition-all duration-300 ${
+                location.pathname === item.href
+                  ? 'text-foreground bg-secondary'
+                  : 'text-muted-foreground hover:text-foreground hover:bg-secondary/50'
+              }`}
+            >
+              {item.label}
+            </Link>
+          ))}
+          <button
+            onClick={scrollToContact}
+            className="px-4 py-3 text-xs font-medium tracking-widest text-muted-foreground hover:text-foreground rounded-lg hover:bg-secondary/50 transition-all duration-300 text-left"
+          >
+            CONTACT
+          </button>
+        </div>
+      )}
     </nav>
   );
 };
