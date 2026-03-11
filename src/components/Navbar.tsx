@@ -108,12 +108,12 @@ const Navbar = () => {
               {item.label}
             </Link>
           ))}
-          <button
-            onClick={scrollToContact}
+          <Link
+            to="/contact"
             className="px-4 py-3 text-xs font-medium tracking-widest text-muted-foreground hover:text-foreground rounded-lg hover:bg-secondary/50 transition-all duration-300 text-left"
           >
             CONTACT
-          </button>
+          </Link>
         </div>
       )}
     </nav>
