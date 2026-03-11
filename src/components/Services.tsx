@@ -1,4 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
+import { ArrowRight } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
 
 const services = [
   {
@@ -153,6 +156,21 @@ const Services = () => {
               </div>
             ))}
           </div>
+        </div>
+
+        {/* Explore Services Button */}
+        <div
+          className={`mt-16 flex justify-center opacity-0 ${
+            isVisible ? 'animate-fade-in-up' : ''
+          }`}
+          style={{ animationDelay: '1100ms', animationFillMode: 'forwards' }}
+        >
+          <Button variant="nav" size="lg" className="glass glint" asChild>
+            <Link to="/services">
+              <span>Explore All Services</span>
+              <ArrowRight className="w-4 h-4 ml-2" />
+            </Link>
+          </Button>
         </div>
       </div>
     </section>
