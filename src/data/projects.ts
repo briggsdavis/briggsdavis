@@ -90,7 +90,7 @@ export const projects: Project[] = [
     id: 'refenti',
     name: 'Refenti',
     image: '/images/portfolio-refenti.jpg',
-    description: 'An institutional website for a premier real estate development group in Addis Ababa, Ethiopia — designed with precision to communicate elegance and high quality.',
+    description: 'An institutional website for a premier real estate development group in Addis Ababa, Ethiopia, designed with precision to communicate elegance and high quality.',
     link: null,
     features: [
       'Fully editable CMS for content management',

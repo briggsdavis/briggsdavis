@@ -64,7 +64,7 @@ const Hero = () => {
       >
         We transform complex problems into minimal digital artifacts.
         <br />
-        High-fidelity development for modern enterprise.
+        High-fidelity development for clients across three continents.
       </p>
 
       {/* CTAs */}

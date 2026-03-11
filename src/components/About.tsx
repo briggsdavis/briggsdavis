@@ -130,7 +130,7 @@ const About = () => {
                     key={skill}
                     className="flex items-start gap-3 text-sm text-muted-foreground"
                   >
-                    <span className="text-muted-foreground/50 mt-0.5">—</span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-muted-foreground/50 mt-1.5 shrink-0" />
                     {skill}
                   </li>
                 ))}

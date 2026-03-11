@@ -42,7 +42,7 @@ const services = [
   },
   {
     title: 'CLIENT INPUT',
-    description: 'Your voice matters—regular meetings and feedback sessions keep you involved at every stage.',
+    description: 'Continuous development through rapid response times and dedicated consultation rounds.',
   },
 ];
 
