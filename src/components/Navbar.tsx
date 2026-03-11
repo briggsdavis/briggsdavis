@@ -72,15 +72,16 @@ const Navbar = () => {
         </div>
 
         {/* Contact Button */}
-        <Button
-          variant="nav"
-          size="nav"
-          className="ml-4 group hidden md:flex"
-          onClick={scrollToContact}
-        >
-          CONTACT
-          <ArrowRight className="w-3 h-3 transition-transform duration-300 group-hover:translate-x-1" />
-        </Button>
+        <Link to="/contact">
+          <Button
+            variant="nav"
+            size="nav"
+            className="ml-4 group hidden md:flex"
+          >
+            CONTACT
+            <ArrowRight className="w-3 h-3 transition-transform duration-300 group-hover:translate-x-1" />
+          </Button>
+        </Link>
 
         {/* Mobile Menu Toggle */}
         <button
