@@ -1,8 +1,9 @@
 import { useParams, Link } from 'react-router-dom';
 import { useRef, useEffect } from 'react';
-import { ArrowLeft, ExternalLink } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { projects } from '@/data/projects';
+import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
 const projectVideos: Record<string, string> = {
