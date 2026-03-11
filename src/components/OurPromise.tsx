@@ -186,8 +186,8 @@ const OurPromise = () => {
                 }`}
                 style={{ animationDelay: '400ms', animationFillMode: 'forwards' }}
               >
-                We are committed to delivering exceptional digital experiences that exceed expectations. 
-                Every project we undertake is crafted with precision, passion, and an unwavering dedication to quality.
+                From SMEs to multimillion-dollar enterprises across Europe, Africa, and the Americas, 
+                every project we undertake is crafted with precision, passion, and an unwavering dedication to quality.
               </p>
             </div>
 

@@ -44,7 +44,7 @@ const services = [
   {
     number: '06',
     title: 'Multi-Language Support',
-    tagline: 'Speak every market\'s language.',
+    tagline: "Speak every market's language.",
     description: 'Reach global audiences with professionally translated websites. We implement robust internationalization frameworks that make managing multiple languages seamless.',
     features: ['i18n frameworks', 'RTL support', 'Locale-aware formatting', 'Translation management'],
   },
@@ -53,13 +53,13 @@ const services = [
     title: 'Facilitate Online Payments',
     tagline: 'Seamless transactions, built-in trust.',
     description: 'Build secure e-commerce solutions that accept payments seamlessly. From Stripe to local payment gateways, we integrate trusted payment processors with bulletproof security.',
-    features: ['Payment gateway integration', 'PCI compliance', 'Subscription billing', 'Invoice generation'],
+    features: ['Payment gateway integration', 'Multi-currency support', 'Subscription billing', 'Invoice generation'],
   },
   {
     number: '08',
     title: 'Unique Solutions',
     tagline: 'Tailored to your vision.',
-    description: 'Every website is tailored to fit your business, marketing, and operational needs. No templates — we architect custom solutions that solve your specific challenges.',
+    description: 'Every website is tailored to fit your business, marketing, and operational needs. No templates. We architect custom solutions that solve your specific challenges.',
     features: ['Custom architecture', 'Business-aligned design', 'Scalable solutions', 'API integrations'],
   },
   {
@@ -73,8 +73,22 @@ const services = [
     number: '10',
     title: 'Client Input',
     tagline: 'Your voice shapes every decision.',
-    description: 'Your voice matters — regular meetings and feedback sessions keep you involved at every stage. We believe the best digital products are built through genuine collaboration.',
-    features: ['Weekly check-ins', 'Feedback workshops', 'Prototype reviews', 'Transparent process'],
+    description: 'Continuous development with rapid response times and dedicated consultation rounds. We keep you in the loop at every stage so the final product reflects your vision precisely.',
+    features: ['Rapid response times', 'Consultation rounds', 'Continuous development', 'Transparent process'],
+  },
+  {
+    number: '11',
+    title: 'Generative Engine Optimization',
+    tagline: 'Future-proof your discoverability.',
+    description: 'Optimize your digital presence for AI-powered search and generative engines. As discovery shifts beyond traditional search, we ensure your brand surfaces accurately across AI assistants, chatbots, and next-generation platforms.',
+    features: ['AI search optimization', 'Structured content strategy', 'Entity-based markup', 'LLM-friendly architecture'],
+  },
+  {
+    number: '12',
+    title: 'Global Client Experience',
+    tagline: 'Trusted across continents.',
+    description: 'We bring proven experience working with clients ranging from SMEs to multimillion-dollar enterprises across Europe, Africa, and the Americas. Our international perspective ensures solutions that resonate in any market.',
+    features: ['Cross-continental delivery', 'Enterprise-grade solutions', 'SME to large-scale projects', 'Culturally informed design'],
   },
 ];
 
@@ -106,7 +120,6 @@ const ServicesPage = () => {
       <section className="relative min-h-[70vh] flex flex-col items-center justify-center px-6 pt-24 overflow-hidden">
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-b from-secondary/30 via-background to-background" />
-          {/* Abstract grid pattern */}
           <div className="absolute inset-0 opacity-[0.03]" style={{
             backgroundImage: 'linear-gradient(hsl(var(--foreground)) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--foreground)) 1px, transparent 1px)',
             backgroundSize: '60px 60px',
@@ -130,7 +143,7 @@ const ServicesPage = () => {
             className={`text-lg text-muted-foreground max-w-xl mx-auto opacity-0 ${isVisible ? 'animate-fade-in-up' : ''}`}
             style={{ animationDelay: '350ms', animationFillMode: 'forwards' }}
           >
-            High-end digital implementations crafted for stability, performance, and visual impact.
+            High-end digital solutions shaped by international experience across Europe, Africa, and the Americas.
           </p>
         </div>
       </section>
@@ -164,7 +177,6 @@ const ServicesPage = () => {
                   </div>
                 </button>
 
-                {/* Expanded Content */}
                 <div
                   className={`overflow-hidden transition-all duration-500 ease-out ${isExpanded ? 'max-h-96 opacity-100 pb-8' : 'max-h-0 opacity-0'}`}
                 >
@@ -185,7 +197,6 @@ const ServicesPage = () => {
               </div>
             );
           })}
-          {/* Bottom border */}
           <div className="border-t border-border/30" />
         </div>
       </section>

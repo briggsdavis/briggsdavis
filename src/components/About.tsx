@@ -23,7 +23,7 @@ const founders = [
       '10+ years of development experience',
       'Expert in TypeScript, Rust, and Python',
       'Built applications serving 30,000+ users',
-      'Software developer for the U.S. Embassy',
+      'Software developer for the U.S. Department of State',
       'Extensive freelance development portfolio',
     ],
   },
@@ -130,7 +130,7 @@ const About = () => {
                     key={skill}
                     className="flex items-start gap-3 text-sm text-muted-foreground"
                   >
-                    <span className="text-muted-foreground/50 mt-0.5">—</span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-muted-foreground/50 mt-1.5 shrink-0" />
                     {skill}
                   </li>
                 ))}
