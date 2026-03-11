@@ -67,10 +67,10 @@ export const projects: Project[] = [
     description: 'Nordic Seafood is a direct-to-consumer platform that brings premium Norwegian Atlantic salmon to Ethiopia, serving restaurants, hotels, and individual buyers who want sushi-grade fish with verified sourcing. It solves the trust and logistics gap in importing high-quality seafood by guiding users from browsing cuts to bank transfer checkout to live shipment tracking. The site carries a clean, arctic-premium aesthetic with deep blues and elegant typography, built for a seafood importer positioning itself as the definitive source for Norwegian salmon in Addis Ababa.',
     link: null,
     features: [
-      'Customer dashboard with order tracking',
-      'Admin dashboard for inventory management',
-      'Quality certification display',
-      'Delivery scheduling and logistics',
+      'Farm-to-table Norwegian salmon sourcing',
+      'Real-time shipment tracking experience',
+      'Verified bank transfer checkout flow',
+      'Flexible cut and sizing selection',
     ],
   },
   {
