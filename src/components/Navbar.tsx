@@ -27,16 +27,6 @@ const Navbar = () => {
     setMobileOpen(false);
   }, [location.pathname]);
 
-  const scrollToContact = () => {
-    if (location.pathname === '/') {
-      const element = document.querySelector('#contact');
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
-    } else {
-      window.location.href = '/#contact';
-    }
-  };
 
   return (
     <nav
