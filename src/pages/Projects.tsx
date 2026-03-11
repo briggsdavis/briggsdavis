@@ -130,7 +130,7 @@ const Projects = () => {
                           {item.name}
                         </h3>
                         <p className={`text-sm text-muted-foreground leading-relaxed mb-6 max-w-sm ${isLeft ? '' : 'ml-auto'}`}>
-                          {item.description}
+                          {item.description.length > 250 ? item.description.slice(0, 250) + '...' : item.description}
                         </p>
                         <Button
                           variant="nav"
