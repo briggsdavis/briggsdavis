@@ -23,7 +23,7 @@ const founders = [
       '10+ years of development experience',
       'Expert in TypeScript, Rust, and Python',
       'Built applications serving 30,000+ users',
-      'Software developer for the U.S. Embassy',
+      'Software developer for the U.S. Department of State',
       'Extensive freelance development portfolio',
     ],
   },
