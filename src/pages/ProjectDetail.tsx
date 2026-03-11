@@ -41,17 +41,9 @@ const ProjectDetail = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Back button */}
-      <div className="max-w-5xl mx-auto px-6 pt-10 opacity-0 animate-fade-in-up" style={{ animationDelay: '100ms', animationFillMode: 'forwards' }}>
-        <Link to="/#portfolio">
-          <Button variant="ghost" className="group text-muted-foreground hover:text-foreground">
-            <ArrowLeft className="w-4 h-4 mr-2 transition-transform duration-300 group-hover:-translate-x-1" />
-            Back to Portfolio
-          </Button>
-        </Link>
-      </div>
+      <Navbar />
 
-      <div className="max-w-5xl mx-auto px-6 py-16">
+      <div className="max-w-5xl mx-auto px-6 py-16 pt-32">
         {/* Hero media */}
         <div className="rounded-2xl overflow-hidden mb-12 border border-border/30 opacity-0 animate-fade-in-up" style={{ animationDelay: '200ms', animationFillMode: 'forwards' }}>
           {videoSrc ? (
