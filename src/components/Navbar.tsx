@@ -27,16 +27,6 @@ const Navbar = () => {
     setMobileOpen(false);
   }, [location.pathname]);
 
-  const scrollToContact = () => {
-    if (location.pathname === '/') {
-      const element = document.querySelector('#contact');
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
-    } else {
-      window.location.href = '/#contact';
-    }
-  };
 
   return (
     <nav
@@ -82,15 +72,16 @@ const Navbar = () => {
         </div>
 
         {/* Contact Button */}
-        <Button
-          variant="nav"
-          size="nav"
-          className="ml-4 group hidden md:flex"
-          onClick={scrollToContact}
-        >
-          CONTACT
-          <ArrowRight className="w-3 h-3 transition-transform duration-300 group-hover:translate-x-1" />
-        </Button>
+        <Link to="/contact">
+          <Button
+            variant="nav"
+            size="nav"
+            className="ml-4 group hidden md:flex"
+          >
+            CONTACT
+            <ArrowRight className="w-3 h-3 transition-transform duration-300 group-hover:translate-x-1" />
+          </Button>
+        </Link>
 
         {/* Mobile Menu Toggle */}
         <button
@@ -117,12 +108,12 @@ const Navbar = () => {
               {item.label}
             </Link>
           ))}
-          <button
-            onClick={scrollToContact}
+          <Link
+            to="/contact"
             className="px-4 py-3 text-xs font-medium tracking-widest text-muted-foreground hover:text-foreground rounded-lg hover:bg-secondary/50 transition-all duration-300 text-left"
           >
             CONTACT
-          </button>
+          </Link>
         </div>
       )}
     </nav>
