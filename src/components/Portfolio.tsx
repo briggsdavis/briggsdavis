@@ -98,7 +98,7 @@ const Portfolio = () => {
             }`}
             style={{ animationDelay: '400ms', animationFillMode: 'forwards' }}
           >
-            Excellence across industries, focused on performance and aesthetics.
+            Real businesses that used a stronger online presence to elevate their brand and grow.
           </p>
         </div>
 

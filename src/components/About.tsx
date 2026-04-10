@@ -89,7 +89,7 @@ const About = () => {
             }`}
             style={{ animationDelay: '400ms', animationFillMode: 'forwards' }}
           >
-            The intersection of business strategy and technical execution.
+            Business strategy and technical execution — so your website does more than look good. It works.
           </p>
         </div>
 

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Plus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
@@ -246,7 +246,7 @@ const ServicesPage = () => {
               Capabilities
             </span>
             <h2 className="text-3xl md:text-4xl font-semibold text-foreground">
-              Our Services
+              We make sites that are
             </h2>
           </div>
 
@@ -276,13 +276,11 @@ const ServicesPage = () => {
                       isExpanded ? 'rotate-45 bg-foreground' : 'group-hover:border-foreground'
                     }`}
                   >
-                    <span
-                      className={`text-lg leading-none transition-colors duration-300 ${
+                    <Plus
+                      className={`w-4 h-4 transition-colors duration-300 ${
                         isExpanded ? 'text-background' : 'text-foreground'
                       }`}
-                    >
-                      +
-                    </span>
+                    />
                   </div>
                 </button>
 

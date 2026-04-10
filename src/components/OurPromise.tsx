@@ -172,7 +172,7 @@ const OurPromise = () => {
                 }`}
                 style={{ animationDelay: '200ms', animationFillMode: 'forwards' }}
               >
-                Excellence in Every Detail
+                Your Website. A Business Asset.
               </h2>
               <div
                 className={`w-12 h-0.5 bg-muted-foreground mb-6 opacity-0 ${
@@ -186,8 +186,9 @@ const OurPromise = () => {
                 }`}
                 style={{ animationDelay: '400ms', animationFillMode: 'forwards' }}
               >
-                From SMEs to multimillion-dollar enterprises across Europe, Africa, and the Americas, 
-                every project we undertake is crafted with precision, passion, and an unwavering dedication to quality.
+                From SMEs to multimillion-dollar enterprises across Europe, Africa, and the Americas —
+                we build websites that do more than impress. They establish authority, justify premium
+                pricing, and turn your online presence into a tool that actively grows your business.
               </p>
             </div>
 

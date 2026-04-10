@@ -106,7 +106,7 @@ const Services = () => {
             }`}
             style={{ animationDelay: '400ms', animationFillMode: 'forwards' }}
           >
-            High-end digital implementations crafted for stability and visual impact.
+            Websites built to grow your business — crafted to attract clients, communicate your value, and convert.
           </p>
         </div>
 

@@ -76,9 +76,9 @@ const Hero = () => {
         }`}
         style={{ animationDelay: '300ms', animationFillMode: 'forwards' }}
       >
-        We transform complex problems into minimal digital artifacts.
+        We build precision websites that elevate your brand, justify your pricing,
         <br />
-        High-fidelity development for clients across three continents.
+        and bring in more business — for clients across three continents.
       </p>
 
       {/* CTAs */}
