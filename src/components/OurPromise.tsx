@@ -186,9 +186,8 @@ const OurPromise = () => {
                 }`}
                 style={{ animationDelay: '400ms', animationFillMode: 'forwards' }}
               >
-                From SMEs to multimillion-dollar enterprises across Europe, Africa, and the Americas.
-                We build websites that do more than impress. They establish authority, justify premium
-                pricing, and turn your online presence into a tool that actively grows your business.
+                We build websites that establish authority, justify your prices, and actively grow
+                your business. Trusted by clients from SMEs to global enterprises across three continents.
               </p>
             </div>
 

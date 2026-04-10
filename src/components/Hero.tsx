@@ -76,9 +76,9 @@ const Hero = () => {
         }`}
         style={{ animationDelay: '300ms', animationFillMode: 'forwards' }}
       >
-        We build precision websites that elevate your brand, justify your pricing,
+        Precision websites that elevate your brand, justify your prices,
         <br />
-        and bring in more business. Clients across three continents.
+        and grow your business.
       </p>
 
       {/* CTAs */}
