@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Plus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
@@ -92,13 +92,29 @@ const services = [
   },
 ];
 
+const outcomes = [
+  { label: 'Stronger Brand Perception', note: 'Sites that signal credibility and quality.' },
+  { label: 'Increased Business', note: 'Built to attract, convert, and retain.' },
+  { label: 'Marketing & Ops Fit', note: 'Tools that work as hard as you do.' },
+  { label: 'Global Reach', note: 'Designed for diverse contexts and audiences.' },
+];
+
+const contexts = [
+  'Africa', 'Europe', 'Americas', 'E-Commerce', 'Real Estate',
+  'Professional Services', 'Healthcare', 'Engineering', 'Advisory',
+  'SMEs', 'Enterprise', 'Hospitality', 'Finance',
+];
+
 const ServicesPage = () => {
+  const [introVisible, setIntroVisible] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    const timer = setTimeout(() => setIntroVisible(true), 60);
+    return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
@@ -116,48 +132,131 @@ const ServicesPage = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
 
-      {/* Hero Banner */}
-      <section className="relative min-h-[70vh] flex flex-col items-center justify-center px-6 pt-24 overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-gradient-to-b from-secondary/30 via-background to-background" />
-          <div className="absolute inset-0 opacity-[0.03]" style={{
-            backgroundImage: 'linear-gradient(hsl(var(--foreground)) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--foreground)) 1px, transparent 1px)',
-            backgroundSize: '60px 60px',
-          }} />
+      {/* ── Dynamic Intro Section ── */}
+      <section className="pt-32 pb-0 px-6 overflow-hidden">
+        <div className="max-w-6xl mx-auto">
+
+          {/* Overline */}
+          <span
+            className={`block text-xs font-medium tracking-[0.3em] text-muted-foreground uppercase mb-16 opacity-0 ${introVisible ? 'animate-fade-in-up' : ''}`}
+            style={{ animationFillMode: 'forwards' }}
+          >
+            What We Build
+          </span>
+
+          {/* Editorial headline - two staggered lines */}
+          <div className="mb-20">
+            <div
+              className={`opacity-0 ${introVisible ? 'animate-fade-in-up' : ''}`}
+              style={{ animationDelay: '80ms', animationFillMode: 'forwards' }}
+            >
+              <p className="text-[clamp(2.8rem,8vw,6.5rem)] font-semibold text-foreground leading-[0.95] tracking-tight">
+                Unique solutions
+              </p>
+            </div>
+            <div
+              className={`opacity-0 ${introVisible ? 'animate-fade-in-up' : ''}`}
+              style={{ animationDelay: '180ms', animationFillMode: 'forwards' }}
+            >
+              <p className="text-[clamp(2.8rem,8vw,6.5rem)] font-display italic text-muted-foreground leading-[0.95] tracking-tight pl-[8%] md:pl-[18%]">
+                built to perform.
+              </p>
+            </div>
+          </div>
+
+          {/* Thin rule with side caption */}
+          <div
+            className={`flex items-center gap-6 mb-20 opacity-0 ${introVisible ? 'animate-fade-in-up' : ''}`}
+            style={{ animationDelay: '280ms', animationFillMode: 'forwards' }}
+          >
+            <div className="flex-1 h-px bg-border" />
+            <span className="text-xs font-mono tracking-[0.22em] text-muted-foreground uppercase shrink-0">
+              Every market. Every context.
+            </span>
+          </div>
+
+          {/* Two-column body */}
+          <div className="grid md:grid-cols-[1fr_300px] gap-12 md:gap-20 items-start">
+
+            {/* Left: copy */}
+            <div
+              className={`opacity-0 ${introVisible ? 'animate-fade-in-up' : ''}`}
+              style={{ animationDelay: '380ms', animationFillMode: 'forwards' }}
+            >
+              <p className="text-2xl text-foreground leading-relaxed font-light mb-6">
+                We craft digital experiences that function as{' '}
+                <span className="font-display italic">marketing engines</span> and operational
+                tools, not just websites.
+              </p>
+              <p className="text-base text-muted-foreground leading-relaxed">
+                Whether you're a professional services firm, a direct-to-consumer operator, or a
+                growth-stage enterprise entering new markets, we build for your specific context:
+                your customer, your industry, your business environment. No templates.
+                No guesswork. Precision from brief to launch.
+              </p>
+            </div>
+
+            {/* Right: outcomes */}
+            <div
+              className={`opacity-0 ${introVisible ? 'animate-fade-in-up' : ''}`}
+              style={{ animationDelay: '480ms', animationFillMode: 'forwards' }}
+            >
+              <p className="text-xs tracking-[0.22em] text-muted-foreground uppercase mb-5">
+                What You Get
+              </p>
+              <div className="divide-y divide-border/50">
+                {outcomes.map((item) => (
+                  <div key={item.label} className="py-4 first:pt-0">
+                    <p className="text-sm font-semibold text-foreground">{item.label}</p>
+                    <p className="text-sm text-muted-foreground mt-0.5">{item.note}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div className="relative z-10 text-center max-w-3xl mx-auto">
-          <span
-            className={`block text-xs font-medium tracking-[0.3em] text-muted-foreground uppercase mb-6 opacity-0 ${isVisible ? 'animate-fade-in-up' : ''}`}
-            style={{ animationDelay: '100ms', animationFillMode: 'forwards' }}
-          >
-            What We Do
-          </span>
-          <h1
-            className={`text-5xl md:text-7xl font-semibold text-foreground mb-6 opacity-0 ${isVisible ? 'animate-fade-in-up' : ''}`}
-            style={{ animationDelay: '200ms', animationFillMode: 'forwards' }}
-          >
-            Our <span className="font-display italic text-muted-foreground">Services</span>
-          </h1>
-          <p
-            className={`text-lg text-muted-foreground max-w-xl mx-auto opacity-0 ${isVisible ? 'animate-fade-in-up' : ''}`}
-            style={{ animationDelay: '350ms', animationFillMode: 'forwards' }}
-          >
-            High-end digital solutions shaped by international experience across Europe, Africa, and the Americas.
-          </p>
+        {/* Marquee - full-bleed */}
+        <div
+          className={`mt-24 overflow-hidden border-t border-b border-border/40 py-4 opacity-0 ${introVisible ? 'animate-fade-in-up' : ''}`}
+          style={{ animationDelay: '580ms', animationFillMode: 'forwards' }}
+        >
+          <div className="animate-marquee">
+            {[...contexts, ...contexts].map((ctx, i) => (
+              <span
+                key={i}
+                className="text-xs font-mono tracking-[0.22em] text-muted-foreground uppercase shrink-0 px-6"
+              >
+                {ctx}
+                <span className="ml-6 text-border">·</span>
+              </span>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* Services List */}
-      <section ref={sectionRef} className="py-16 px-6">
+      {/* ── Services List ── */}
+      <section ref={sectionRef} className="py-24 px-6">
         <div className="max-w-4xl mx-auto">
+          <div
+            className={`mb-12 opacity-0 ${isVisible ? 'animate-fade-in-up' : ''}`}
+            style={{ animationFillMode: 'forwards' }}
+          >
+            <span className="block text-xs font-medium tracking-[0.3em] text-muted-foreground uppercase mb-4">
+              Capabilities
+            </span>
+            <h2 className="text-3xl md:text-4xl font-semibold text-foreground">
+              We make sites that are
+            </h2>
+          </div>
+
           {services.map((service, index) => {
             const isExpanded = expandedIndex === index;
             return (
               <div
                 key={service.number}
                 className={`border-t border-border/30 opacity-0 ${isVisible ? 'animate-fade-in-up' : ''}`}
-                style={{ animationDelay: `${400 + index * 80}ms`, animationFillMode: 'forwards' }}
+                style={{ animationDelay: `${200 + index * 60}ms`, animationFillMode: 'forwards' }}
               >
                 <button
                   onClick={() => setExpandedIndex(isExpanded ? null : index)}
@@ -167,18 +266,28 @@ const ServicesPage = () => {
                     {service.number}
                   </span>
                   <div className="flex-1 min-w-0">
-                    <h3 className="text-xl md:text-2xl font-semibold text-foreground group-hover:text-foreground transition-colors duration-300">
+                    <h3 className="text-xl md:text-2xl font-semibold text-foreground transition-colors duration-300">
                       {service.title}
                     </h3>
                     <p className="text-sm text-muted-foreground mt-1">{service.tagline}</p>
                   </div>
-                  <div className={`w-8 h-8 rounded-full border border-border/50 flex items-center justify-center shrink-0 transition-all duration-300 ${isExpanded ? 'rotate-45 bg-foreground' : 'group-hover:border-foreground'}`}>
-                    <span className={`text-lg leading-none transition-colors duration-300 ${isExpanded ? 'text-background' : 'text-foreground'}`}>+</span>
+                  <div
+                    className={`w-8 h-8 rounded-full border border-border/50 flex items-center justify-center shrink-0 transition-all duration-300 ${
+                      isExpanded ? 'rotate-45 bg-foreground' : 'group-hover:border-foreground'
+                    }`}
+                  >
+                    <Plus
+                      className={`w-4 h-4 transition-colors duration-300 ${
+                        isExpanded ? 'text-background' : 'text-foreground'
+                      }`}
+                    />
                   </div>
                 </button>
 
                 <div
-                  className={`overflow-hidden transition-all duration-500 ease-out ${isExpanded ? 'max-h-96 opacity-100 pb-8' : 'max-h-0 opacity-0'}`}
+                  className={`overflow-hidden transition-all duration-500 ease-out ${
+                    isExpanded ? 'max-h-96 opacity-100 pb-8' : 'max-h-0 opacity-0'
+                  }`}
                 >
                   <div className="pl-14 pr-8">
                     <p className="text-muted-foreground leading-relaxed mb-6">
@@ -201,7 +310,7 @@ const ServicesPage = () => {
         </div>
       </section>
 
-      {/* CTA */}
+      {/* ── CTA ── */}
       <section className="py-24 px-6">
         <div className="max-w-4xl mx-auto text-center">
           <h2
@@ -224,9 +333,7 @@ const ServicesPage = () => {
               </Link>
             </Button>
             <Button variant="hero" size="hero" asChild>
-              <Link to="/projects">
-                View Portfolio
-              </Link>
+              <Link to="/projects">View Portfolio</Link>
             </Button>
           </div>
         </div>

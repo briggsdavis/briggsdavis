@@ -58,7 +58,8 @@ const CTA = () => {
               }`}
               style={{ animationDelay: '200ms', animationFillMode: 'forwards' }}
             >
-              Initiate a strategic partnership today. Let's build the digital future of your enterprise.
+              Let's build a website that works as hard as you do. One that elevates your brand,
+              justifies your prices, and brings in more business.
             </p>
             <div
               className={`opacity-0 ${isVisible ? 'animate-fade-in-up' : ''}`}

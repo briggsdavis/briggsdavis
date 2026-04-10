@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 interface ProcessStepProps {
   step: {
@@ -154,15 +155,19 @@ const ProcessStep = ({ step, index, isLast, nextStepId }: ProcessStepProps) => {
               className={`opacity-0 ${isVisible ? 'animate-fade-in-up' : ''}`}
               style={{ animationDelay: index === 0 ? '800ms' : '400ms', animationFillMode: 'forwards' }}
             >
-              <Button
-                variant="process"
-                size="hero"
-                className="group"
-                onClick={scrollToNext}
-              >
-                {isLast ? 'Get Started' : 'Go to Next Step'}
-                <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-              </Button>
+              {isLast ? (
+                <Button variant="process" size="hero" className="group" asChild>
+                  <Link to="/contact">
+                    Get Started
+                    <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+                  </Link>
+                </Button>
+              ) : (
+                <Button variant="process" size="hero" className="group" onClick={scrollToNext}>
+                  Go to Next Step
+                  <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+                </Button>
+              )}
             </div>
           </div>
 

@@ -5,6 +5,8 @@ export interface Project {
   description: string;
   link: string | null;
   features: string[];
+  tags: string[];
+  year: number;
 }
 
 export const projects: Project[] = [
@@ -20,6 +22,8 @@ export const projects: Project[] = [
       'Responsive mobile-first experience',
       'Curated scent discovery journey',
     ],
+    tags: ['Fragrance', 'E-Commerce', 'UI Design'],
+    year: 2024,
   },
   {
     id: 'hormone-vitality-coaching',
@@ -33,6 +37,8 @@ export const projects: Project[] = [
       'Testimonials and social proof sections',
       'SEO-optimized content structure',
     ],
+    tags: ['Health & Wellness', 'Branding', 'Web Design'],
+    year: 2024,
   },
   {
     id: 'ease-engineering',
@@ -46,6 +52,8 @@ export const projects: Project[] = [
       'Regional operations overview',
       'Professional team and capability highlights',
     ],
+    tags: ['Engineering', 'Portfolio', 'Web Design'],
+    year: 2023,
   },
   {
     id: 'anne-silver',
@@ -59,19 +67,23 @@ export const projects: Project[] = [
       'Integrated CMS for content management',
       'Curated collection browsing experience',
     ],
+    tags: ['Jewelry', 'E-Commerce', 'CMS'],
+    year: 2023,
   },
   {
     id: 'nordic-seafood',
     name: 'Nordic Seafood',
     image: '/images/portfolio-5.jpg',
     description: 'Nordic Seafood is a direct-to-consumer platform that brings premium Norwegian Atlantic salmon to Ethiopia, serving restaurants, hotels, and individual buyers who want sushi-grade fish with verified sourcing. It solves the trust and logistics gap in importing high-quality seafood by guiding users from browsing cuts to bank transfer checkout to live shipment tracking. The site carries a clean, arctic-premium aesthetic with deep blues and elegant typography, built for a seafood importer positioning itself as the definitive source for Norwegian salmon in Addis Ababa.',
-    link: null,
+    link: 'https://nordicseafoods.org',
     features: [
       'Farm-to-table Norwegian salmon sourcing',
       'Real-time shipment tracking experience',
       'Verified bank transfer checkout flow',
       'Flexible cut and sizing selection',
     ],
+    tags: ['Food & Beverage', 'E-Commerce', 'Logistics'],
+    year: 2024,
   },
   {
     id: 'africa-growth-axis',
@@ -85,6 +97,23 @@ export const projects: Project[] = [
       'Advisory service showcases',
       'Admin panel for content updates',
     ],
+    tags: ['Advisory', 'CMS', 'Web Design'],
+    year: 2023,
+  },
+  {
+    id: 'brac-stone-house',
+    name: 'Brac Stone House',
+    image: '/images/portfolio-brac.jpg',
+    description: 'A property sales experience for a historic stone house on the island of Brac, Croatia. The site is built not to list a property but to sell a vision: the sun-drenched possibility of what this house could become after renovation, set against the romance of the Dalmatian coast and the unhurried rhythms of Mediterranean life. Through immersive sound design, cinematic visuals, and evocative storytelling, it draws the buyer into a world of olive groves, limestone walls, and azure water. The goal is to make them feel the life they could have here before they ever speak to an agent.',
+    link: 'https://bracstonehouse.com',
+    features: [
+      'Immersive sound and visual storytelling',
+      'Renovation vision and possibility showcase',
+      'Mediterranean lifestyle and location narrative',
+      'Cinematic property experience to drive sales',
+    ],
+    tags: ['Real Estate', 'Immersive', 'Property'],
+    year: 2025,
   },
   {
     id: 'refenti',
@@ -98,5 +127,7 @@ export const projects: Project[] = [
       'News and events publishing system',
       'Elegant, precision-crafted visual design',
     ],
+    tags: ['Real Estate', 'CMS', 'Branding'],
+    year: 2023,
   },
 ];

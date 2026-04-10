@@ -4,33 +4,33 @@ import ProcessStep from './ProcessStep';
 const processSteps = [
   {
     number: '01',
-    title: 'Prototype',
+    title: 'Initial Consultation',
     description:
-      'We build a prototype based on your business profile and current online presence to give you a concrete vision of the possibilities.',
+      'We start by understanding your business — your goals, your customers, your competitive landscape, and what you need your website to do for you. No assumptions, no templates. Just a focused conversation so we can build something that actually fits.',
     image: '/images/process-1.jpg',
     video: '/videos/step-1.mp4',
   },
   {
     number: '02',
-    title: 'Initial Meeting',
+    title: 'Prototype',
     description:
-      "We come to you in our meeting with a product ready to go and then find out your specific pain points, desires and needs for your website solution so we can fully understand your context.",
+      'We build a fully working version of your site based on everything we learned. You get something real to look at, click through, and react to — not wireframes or mockups. A live prototype that shows exactly what your website can be.',
     image: '/images/process-2.jpg',
     video: '/videos/step-2.mp4',
   },
   {
     number: '03',
-    title: 'Implement',
+    title: 'Refinement',
     description:
-      'We implement the changes, revisions or complete redesign of the initial prototype according to the information you provide in the meeting.',
+      'We walk through the prototype together, gather your feedback, and shape the site around your specific needs. You have a direct say in every decision — copy, layout, features, tone. We keep iterating until it feels exactly right.',
     image: '/images/process-3.jpg',
     video: '/videos/step-3.mp4',
   },
   {
     number: '04',
-    title: 'Final Consultation',
+    title: 'Launch',
     description:
-      'We check in with you with the finished product to see if we have satisfied your requirements and get any last minute feedback from you to be able to perfect the website completely.',
+      'Final review, final sign-off. We make any last adjustments, confirm the site meets your business needs completely, and then we launch. We stay with you through go-live and remain available for anything you need going forward.',
     image: '/images/process-4.jpg',
     video: '/videos/step-4.mp4',
   },
