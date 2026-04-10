@@ -14,7 +14,7 @@ export const projects: Project[] = [
     id: 'oderum',
     name: 'Oderum',
     image: '/images/portfolio-oderum.png',
-    description: 'A minimalist fragrance platform featuring intuitive visual design and innovative rating methodologies for discerning scent enthusiasts.',
+    description: 'Fragrance discovery online was dominated by text-heavy, visually uninspiring interfaces that failed to capture the sensory nature of the category. We designed a minimalist, visually-driven platform with an innovative rating system that transforms how enthusiasts discover and evaluate fragrances.',
     link: 'https://oderum.com',
     features: [
       'Minimalist, visually-driven UI design',
@@ -29,7 +29,7 @@ export const projects: Project[] = [
     id: 'hormone-vitality-coaching',
     name: 'Hormone Vitality Coaching',
     image: '/images/portfolio-2.jpg',
-    description: 'A wellness platform for a health coach, showcasing specialized services and expertise while expressing her unique personality through thoughtful visual design.',
+    description: 'Without a compelling online presence, a specialist health coach had no effective way to communicate her expertise or convert visitors into clients in a crowded wellness market. We built a branded platform that showcases her services, builds trust through social proof, and drives bookings through a clear, personality-forward experience.',
     link: 'https://hormonevitalitycoaching.com',
     features: [
       'Custom brand identity and visual language',
@@ -44,7 +44,7 @@ export const projects: Project[] = [
     id: 'ease-engineering',
     name: 'EASE Engineering',
     image: '/images/portfolio-3.jpg',
-    description: 'A professional showcase for a specialized engineering firm, highlighting services, capabilities, and portfolio across East African operations.',
+    description: 'A specialized engineering firm operating across East Africa was losing credibility with potential clients because their web presence failed to reflect the true scope and quality of their capabilities. We built a professional platform that clearly communicates their services, project portfolio, and regional expertise.',
     link: 'https://ease-int.com',
     features: [
       'Multi-service portfolio presentation',
@@ -59,7 +59,7 @@ export const projects: Project[] = [
     id: 'anne-silver',
     name: 'Anne Silver',
     image: '/images/portfolio-annesilver.png',
-    description: 'A bespoke jewelry e-commerce platform featuring custom craft capabilities, curated collections, and an integrated CMS for seamless content management.',
+    description: 'A bespoke jewelry designer had no online presence, no sales channel, and no way to manage products without developer support. We built a full e-commerce platform with custom order capabilities and an integrated CMS that gave her complete control over her collections and customer experience.',
     link: 'https://annesilver.com',
     features: [
       'Full e-commerce with cart and checkout',
@@ -74,7 +74,7 @@ export const projects: Project[] = [
     id: 'nordic-seafood',
     name: 'Nordic Seafood',
     image: '/images/portfolio-5.jpg',
-    description: 'Nordic Seafood is a direct-to-consumer platform that brings premium Norwegian Atlantic salmon to Ethiopia, serving restaurants, hotels, and individual buyers who want sushi-grade fish with verified sourcing. It solves the trust and logistics gap in importing high-quality seafood by guiding users from browsing cuts to bank transfer checkout to live shipment tracking. The site carries a clean, arctic-premium aesthetic with deep blues and elegant typography, built for a seafood importer positioning itself as the definitive source for Norwegian salmon in Addis Ababa.',
+    description: 'Ethiopian restaurants, hotels, and individual buyers had no reliable supplier for verified Norwegian salmon and no trusted way to source, order, and track sushi-grade fish. We built a direct-to-consumer platform connecting buyers directly to Norwegian Atlantic salmon, complete with real-time shipment tracking and a streamlined checkout flow.',
     link: 'https://nordicseafoods.org',
     features: [
       'Farm-to-table Norwegian salmon sourcing',
@@ -89,7 +89,7 @@ export const projects: Project[] = [
     id: 'africa-growth-axis',
     name: 'Africa Growth Axis',
     image: '/images/portfolio-aga.png',
-    description: 'A strategic advisory platform for international companies and investors entering African markets, featuring a comprehensive admin-managed content system.',
+    description: 'International companies and investors navigating African market entry had no credible digital touchpoint for AGA\'s advisory services — the firm had no web presence at all. We built a strategic platform that positions AGA as a trusted authority, with a dynamic CMS giving the team full control to publish market insights and update content independently.',
     link: 'https://aga-advisory.com/',
     features: [
       'Dynamic content management system',
@@ -104,7 +104,7 @@ export const projects: Project[] = [
     id: 'brac-stone-house',
     name: 'Brac Stone House',
     image: '/images/brac',
-    description: 'A property sales experience for a historic stone house on the island of Brac, Croatia. The site is built not to list a property but to sell a vision: the sun-drenched possibility of what this house could become after renovation, set against the romance of the Dalmatian coast and the unhurried rhythms of Mediterranean life. Through immersive sound design, cinematic visuals, and evocative storytelling, it draws the buyer into a world of olive groves, limestone walls, and azure water. The goal is to make them feel the life they could have here before they ever speak to an agent.',
+    description: 'Selling a historic stone property requiring renovation demanded more than a listing — the right buyer needed to see the investment potential and feel the Mediterranean lifestyle before ever speaking to an agent. We built a single-property immersive experience with cinematic visuals and sound design that makes the vision tangible, crafted to attract a discerning buyer who sees it as both a sound investment and a forever project.',
     link: 'https://bracstonehouse.com',
     features: [
       'Immersive sound and visual storytelling',
@@ -119,7 +119,7 @@ export const projects: Project[] = [
     id: 'refenti',
     name: 'Refenti',
     image: '/images/portfolio-refenti.jpg',
-    description: 'An institutional website for a premier real estate development group in Addis Ababa, Ethiopia, designed with precision to communicate elegance and high quality.',
+    description: 'A premier real estate developer in Addis Ababa had no digital presence, making it impossible to establish the premium positioning needed to compete for high-end clients and development partners. We built an institutional-grade platform with precision visual design, a CMS for news and events, and inquiry forms that convert interest into leads.',
     link: 'https://refenti.com',
     features: [
       'Fully editable CMS for content management',
