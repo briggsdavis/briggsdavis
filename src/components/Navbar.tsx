@@ -33,7 +33,7 @@ const Navbar = () => {
 
   return (
     <>
-    {/* Scroll progress — thin line at top of viewport */}
+    {/* Scroll progress bar - thin line at top of viewport */}
     <div
       className="fixed top-0 left-0 z-[60] h-px bg-foreground/30"
       style={{ width: `${scrollProgress * 100}%`, transition: 'none' }}

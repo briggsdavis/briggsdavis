@@ -89,7 +89,7 @@ const About = () => {
             }`}
             style={{ animationDelay: '400ms', animationFillMode: 'forwards' }}
           >
-            Business strategy and technical execution — so your website does more than look good. It works.
+            Business strategy and technical execution. Your website does more than look good. It works.
           </p>
         </div>
 

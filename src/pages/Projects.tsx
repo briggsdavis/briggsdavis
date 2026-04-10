@@ -38,7 +38,7 @@ const ProjectRow = ({ project }: { project: Project }) => {
     return () => window.removeEventListener('scroll', updateProgress);
   }, []);
 
-  // Image: unravel left-to-right — right inset shrinks from 80% → 0%
+  // Image: unravel left-to-right - right inset shrinks from 80% to 0%
   const clipRight = (1 - progress) * 80;
 
   // Text: blur 12px → 0px, opacity 0 → 1
@@ -51,7 +51,7 @@ const ProjectRow = ({ project }: { project: Project }) => {
         ref={rowRef}
         className="flex flex-col md:flex-row items-center min-h-[540px] border-b border-border py-16 gap-10 md:gap-16"
       >
-        {/* Left: text — blur/opacity driven by scroll */}
+        {/* Left: text - blur/opacity driven by scroll */}
         <div
           className="w-full md:flex-1 flex flex-col justify-between min-h-[320px] md:min-h-[400px]"
           style={{
@@ -61,7 +61,7 @@ const ProjectRow = ({ project }: { project: Project }) => {
           }}
         >
           <div>
-            {/* Tags — white */}
+            {/* Tags - white */}
             <div className="flex flex-wrap gap-x-4 gap-y-1 mb-8">
               {project.tags.map((tag, i) => (
                 <span
@@ -92,7 +92,7 @@ const ProjectRow = ({ project }: { project: Project }) => {
           </div>
         </div>
 
-        {/* Right: image — horizontal unravel left-to-right via clip-path */}
+        {/* Right: image - horizontal unravel left-to-right via clip-path */}
         <div className="w-full md:w-[48%] shrink-0">
           <div
             className="overflow-hidden rounded-2xl"

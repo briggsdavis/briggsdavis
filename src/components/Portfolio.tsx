@@ -48,7 +48,7 @@ const Portfolio = () => {
         // Smooth easing curve
         const raw = 1 - Math.min(distance / maxDistance, 1);
         const progress = raw * raw; // quadratic ease for snappier center focus
-        // Scale from 0.88 to 1.05 — slight overshoot for magnifying feel
+        // Scale from 0.88 to 1.05 - slight overshoot for magnifying feel
         return 0.88 + progress * 0.17;
       });
       setScales(newScales);

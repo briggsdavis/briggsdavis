@@ -144,7 +144,7 @@ const ServicesPage = () => {
             What We Build
           </span>
 
-          {/* Editorial headline — two staggered lines */}
+          {/* Editorial headline - two staggered lines */}
           <div className="mb-20">
             <div
               className={`opacity-0 ${introVisible ? 'animate-fade-in-up' : ''}`}
@@ -186,11 +186,11 @@ const ServicesPage = () => {
               <p className="text-2xl text-foreground leading-relaxed font-light mb-6">
                 We craft digital experiences that function as{' '}
                 <span className="font-display italic">marketing engines</span> and operational
-                tools — not just websites.
+                tools, not just websites.
               </p>
               <p className="text-base text-muted-foreground leading-relaxed">
                 Whether you're a professional services firm, a direct-to-consumer operator, or a
-                growth-stage enterprise entering new markets, we build for your specific context —
+                growth-stage enterprise entering new markets, we build for your specific context:
                 your customer, your industry, your business environment. No templates.
                 No guesswork. Precision from brief to launch.
               </p>
@@ -216,7 +216,7 @@ const ServicesPage = () => {
           </div>
         </div>
 
-        {/* Marquee — full-bleed */}
+        {/* Marquee - full-bleed */}
         <div
           className={`mt-24 overflow-hidden border-t border-b border-border/40 py-4 opacity-0 ${introVisible ? 'animate-fade-in-up' : ''}`}
           style={{ animationDelay: '580ms', animationFillMode: 'forwards' }}

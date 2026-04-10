@@ -25,7 +25,7 @@ const Hero = () => {
 
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center px-6 pt-24 overflow-hidden">
-      {/* Video Background — oversized vertically to allow parallax without gaps */}
+      {/* Video Background - oversized vertically to allow parallax without gaps */}
       <div
         className="absolute z-0 w-full will-change-transform"
         style={{
@@ -78,7 +78,7 @@ const Hero = () => {
       >
         We build precision websites that elevate your brand, justify your pricing,
         <br />
-        and bring in more business — for clients across three continents.
+        and bring in more business. Clients across three continents.
       </p>
 
       {/* CTAs */}

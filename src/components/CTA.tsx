@@ -58,7 +58,7 @@ const CTA = () => {
               }`}
               style={{ animationDelay: '200ms', animationFillMode: 'forwards' }}
             >
-              Let's build a website that works as hard as you do — one that elevates your brand,
+              Let's build a website that works as hard as you do. One that elevates your brand,
               justifies your prices, and brings in more business.
             </p>
             <div

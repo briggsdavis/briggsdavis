@@ -106,7 +106,7 @@ const Services = () => {
             }`}
             style={{ animationDelay: '400ms', animationFillMode: 'forwards' }}
           >
-            Websites built to grow your business — crafted to attract clients, communicate your value, and convert.
+            Websites built to grow your business, crafted to attract clients, communicate your value, and convert.
           </p>
         </div>
 
