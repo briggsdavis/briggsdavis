@@ -74,7 +74,7 @@ const ProjectRow = ({ project }: { project: Project }) => {
             </div>
 
             {/* Project name */}
-            <h2 className="text-5xl md:text-6xl lg:text-7xl font-semibold text-foreground leading-tight group-hover:text-muted-foreground transition-colors duration-500">
+            <h2 className="text-5xl md:text-6xl lg:text-7xl font-semibold text-foreground leading-tight">
               {project.name}
             </h2>
           </div>
@@ -97,7 +97,7 @@ const ProjectRow = ({ project }: { project: Project }) => {
           <div
             className="overflow-hidden rounded-2xl"
             style={{
-              clipPath: `inset(0 ${clipRight.toFixed(2)}% 0 0)`,
+              clipPath: `inset(0 ${clipRight.toFixed(2)}% 0 0 round 1.25rem)`,
               willChange: 'clip-path',
             }}
           >

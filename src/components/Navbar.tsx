@@ -11,15 +11,18 @@ const navItems = [
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      setScrollProgress(docHeight > 0 ? window.scrollY / docHeight : 0);
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -29,6 +32,12 @@ const Navbar = () => {
 
 
   return (
+    <>
+    {/* Scroll progress — thin line at top of viewport */}
+    <div
+      className="fixed top-0 left-0 z-[60] h-px bg-foreground/30"
+      style={{ width: `${scrollProgress * 100}%`, transition: 'none' }}
+    />
     <nav
       className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 transition-all duration-500 ${
         scrolled ? 'top-4' : 'top-6'
@@ -117,6 +126,7 @@ const Navbar = () => {
         </div>
       )}
     </nav>
+    </>
   );
 };
 
