@@ -4,9 +4,16 @@ import { useEffect, useState } from 'react';
 
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
     setIsVisible(true);
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const scrollToSection = (href: string) => {
@@ -18,8 +25,15 @@ const Hero = () => {
 
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center px-6 pt-24 overflow-hidden">
-      {/* Video Background */}
-      <div className="absolute inset-0 z-0">
+      {/* Video Background — oversized vertically to allow parallax without gaps */}
+      <div
+        className="absolute z-0 w-full will-change-transform"
+        style={{
+          top: '-15%',
+          height: '130%',
+          transform: `translateY(${scrollY * 0.35}px)`,
+        }}
+      >
         <video
           autoPlay
           muted

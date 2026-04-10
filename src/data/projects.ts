@@ -5,6 +5,8 @@ export interface Project {
   description: string;
   link: string | null;
   features: string[];
+  tags: string[];
+  year: number;
 }
 
 export const projects: Project[] = [
@@ -20,6 +22,8 @@ export const projects: Project[] = [
       'Responsive mobile-first experience',
       'Curated scent discovery journey',
     ],
+    tags: ['Fragrance', 'E-Commerce', 'UI Design'],
+    year: 2024,
   },
   {
     id: 'hormone-vitality-coaching',
@@ -33,6 +37,8 @@ export const projects: Project[] = [
       'Testimonials and social proof sections',
       'SEO-optimized content structure',
     ],
+    tags: ['Health & Wellness', 'Branding', 'Web Design'],
+    year: 2024,
   },
   {
     id: 'ease-engineering',
@@ -46,6 +52,8 @@ export const projects: Project[] = [
       'Regional operations overview',
       'Professional team and capability highlights',
     ],
+    tags: ['Engineering', 'Portfolio', 'Web Design'],
+    year: 2023,
   },
   {
     id: 'anne-silver',
@@ -59,6 +67,8 @@ export const projects: Project[] = [
       'Integrated CMS for content management',
       'Curated collection browsing experience',
     ],
+    tags: ['Jewelry', 'E-Commerce', 'CMS'],
+    year: 2023,
   },
   {
     id: 'nordic-seafood',
@@ -72,6 +82,8 @@ export const projects: Project[] = [
       'Verified bank transfer checkout flow',
       'Flexible cut and sizing selection',
     ],
+    tags: ['Food & Beverage', 'E-Commerce', 'Logistics'],
+    year: 2024,
   },
   {
     id: 'africa-growth-axis',
@@ -85,6 +97,8 @@ export const projects: Project[] = [
       'Advisory service showcases',
       'Admin panel for content updates',
     ],
+    tags: ['Advisory', 'CMS', 'Web Design'],
+    year: 2023,
   },
   {
     id: 'refenti',
@@ -98,5 +112,7 @@ export const projects: Project[] = [
       'News and events publishing system',
       'Elegant, precision-crafted visual design',
     ],
+    tags: ['Real Estate', 'CMS', 'Branding'],
+    year: 2023,
   },
 ];
