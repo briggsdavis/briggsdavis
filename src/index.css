@@ -254,6 +254,18 @@
     width: 100%;
   }
   
+  /* Marquee */
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  .animate-marquee {
+    animation: marquee 28s linear infinite;
+    display: flex;
+    width: max-content;
+  }
+
   /* Custom scrollbar */
   ::-webkit-scrollbar {
     width: 8px;
