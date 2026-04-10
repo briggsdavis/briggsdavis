@@ -103,7 +103,7 @@ export const projects: Project[] = [
   {
     id: 'brac-stone-house',
     name: 'Brac Stone House',
-    image: '/images/portfolio-brac.jpg',
+    image: '/images/brac',
     description: 'A property sales experience for a historic stone house on the island of Brac, Croatia. The site is built not to list a property but to sell a vision: the sun-drenched possibility of what this house could become after renovation, set against the romance of the Dalmatian coast and the unhurried rhythms of Mediterranean life. Through immersive sound design, cinematic visuals, and evocative storytelling, it draws the buyer into a world of olive groves, limestone walls, and azure water. The goal is to make them feel the life they could have here before they ever speak to an agent.',
     link: 'https://bracstonehouse.com',
     features: [
