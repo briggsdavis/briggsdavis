@@ -38,8 +38,9 @@ const Layout = () => {
       // Hard-stop gradient: transparent left portion grows right, blurred side shrinks from right
       // At t=0: pos=0% → everything is white (blurred)
       // At t=1: pos=100% → everything is transparent (clear)
-      const pos = `${eased * 100}%`;
-      const mask = `linear-gradient(to right, transparent ${pos}, white ${pos})`;
+      const p = eased * 100;
+      const feather = 28;
+      const mask = `linear-gradient(to right, transparent 0%, transparent ${p}%, white ${p + feather}%)`;
       overlay.style.maskImage = mask;
       overlay.style.webkitMaskImage = mask;
 
