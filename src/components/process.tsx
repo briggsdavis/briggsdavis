@@ -1,4 +1,3 @@
-import { useRef, useEffect, useState } from "react"
 import ProcessStep from "./process-step"
 
 const processSteps = [
