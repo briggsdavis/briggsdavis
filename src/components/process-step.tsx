@@ -1,7 +1,6 @@
+import { ArrowRight } from "lucide-react"
 import { useState, useEffect, useRef } from "react"
 import { Button } from "@/components/ui/button"
-import { ArrowRight } from "lucide-react"
-import { Link } from "react-router-dom"
 
 interface ProcessStepProps {
   step: {
@@ -14,6 +13,14 @@ interface ProcessStepProps {
   index: number
   isLast: boolean
   nextStepId: string
+}
+
+const scrollToStep = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const stepIndex = event.currentTarget.dataset.step
+  const element = document.querySelector(`#process-step-${stepIndex}`)
+  if (element) {
+    element.scrollIntoView({ behavior: "smooth" })
+  }
 }
 
 const ProcessStep = ({ step, index, isLast, nextStepId }: ProcessStepProps) => {
@@ -66,11 +73,8 @@ const ProcessStep = ({ step, index, isLast, nextStepId }: ProcessStepProps) => {
           </video>
         ) : (
           <div
-            className="absolute inset-0 bg-cover bg-center transition-opacity duration-700"
-            style={{
-              backgroundImage: `url(${step.image})`,
-              filter: "grayscale(100%)",
-            }}
+            className="absolute inset-0 bg-cover bg-center grayscale transition-opacity duration-700"
+            style={{ backgroundImage: `url(${step.image})` }}
           />
         )}
         <div className="absolute inset-0 bg-background/70" />
@@ -83,32 +87,28 @@ const ProcessStep = ({ step, index, isLast, nextStepId }: ProcessStepProps) => {
           {index === 0 && (
             <div className="mb-24">
               <span
-                className={`mb-4 block text-xs font-medium tracking-[0.3em] text-muted-foreground uppercase opacity-0 ${
+                className={`mb-4 block text-xs font-medium tracking-[0.3em] text-muted-foreground uppercase opacity-0 delay-100 ${
                   isVisible ? "animate-fade-in-up" : ""
                 }`}
-                style={{ animationDelay: "100ms", animationFillMode: "forwards" }}
               >
                 Methodology
               </span>
               <h2
-                className={`mb-6 text-4xl font-semibold text-foreground opacity-0 md:text-5xl ${
+                className={`mb-6 text-4xl font-semibold text-foreground opacity-0 delay-200 md:text-5xl ${
                   isVisible ? "animate-fade-in-up" : ""
                 }`}
-                style={{ animationDelay: "200ms", animationFillMode: "forwards" }}
               >
                 The Evolution
               </h2>
               <div
-                className={`mb-6 h-0.5 w-12 bg-muted-foreground opacity-0 ${
+                className={`mb-6 h-0.5 w-12 bg-muted-foreground opacity-0 delay-300 ${
                   isVisible ? "animate-fade-in-up" : ""
                 }`}
-                style={{ animationDelay: "300ms", animationFillMode: "forwards" }}
               />
               <p
-                className={`text-muted-foreground opacity-0 ${
+                className={`text-muted-foreground opacity-0 delay-400 ${
                   isVisible ? "animate-fade-in-up" : ""
                 }`}
-                style={{ animationDelay: "400ms", animationFillMode: "forwards" }}
               >
                 Our rigorous four-step development lifecycle.
               </p>
@@ -120,12 +120,8 @@ const ProcessStep = ({ step, index, isLast, nextStepId }: ProcessStepProps) => {
             {/* Step Number */}
             <div
               className={`mb-6 flex items-center gap-4 opacity-0 ${
-                isVisible ? "animate-fade-in" : ""
-              }`}
-              style={{
-                animationDelay: index === 0 ? "500ms" : "100ms",
-                animationFillMode: "forwards",
-              }}
+                index === 0 ? "delay-500" : "delay-100"
+              } ${isVisible ? "animate-fade-in" : ""}`}
             >
               <span className="text-5xl font-light text-muted-foreground/30 md:text-6xl">
                 {step.number}
@@ -136,12 +132,8 @@ const ProcessStep = ({ step, index, isLast, nextStepId }: ProcessStepProps) => {
             {/* Step Title */}
             <h3
               className={`mb-6 text-4xl font-semibold text-foreground opacity-0 md:text-5xl lg:text-6xl ${
-                isVisible ? "animate-fade-in-up" : ""
-              }`}
-              style={{
-                animationDelay: index === 0 ? "600ms" : "200ms",
-                animationFillMode: "forwards",
-              }}
+                index === 0 ? "delay-600" : "delay-200"
+              } ${isVisible ? "animate-fade-in-up" : ""}`}
             >
               {step.title}
             </h3>
@@ -149,30 +141,28 @@ const ProcessStep = ({ step, index, isLast, nextStepId }: ProcessStepProps) => {
             {/* Step Description */}
             <p
               className={`mb-10 max-w-xl text-lg text-muted-foreground opacity-0 ${
-                isVisible ? "animate-fade-in-up" : ""
-              }`}
-              style={{
-                animationDelay: index === 0 ? "700ms" : "300ms",
-                animationFillMode: "forwards",
-              }}
+                index === 0 ? "[animation-delay:700ms]" : "delay-300"
+              } ${isVisible ? "animate-fade-in-up" : ""}`}
             >
               {step.description}
             </p>
 
             {/* Navigation Button */}
             <div
-              className={`opacity-0 ${isVisible ? "animate-fade-in-up" : ""}`}
-              style={{
-                animationDelay: index === 0 ? "800ms" : "400ms",
-                animationFillMode: "forwards",
-              }}
+              className={`opacity-0 ${index === 0 ? "[animation-delay:800ms]" : "delay-400"} ${
+                isVisible ? "animate-fade-in-up" : ""
+              }`}
             >
               {isLast ? (
                 <Button variant="process" size="hero" className="group" asChild>
-                  <Link to="/contact">
+                  <a
+                    href="https://calendly.com/ntedvs/website"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     Get Started
                     <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-                  </Link>
+                  </a>
                 </Button>
               ) : (
                 <Button variant="process" size="hero" className="group" onClick={scrollToNext}>
@@ -188,12 +178,8 @@ const ProcessStep = ({ step, index, isLast, nextStepId }: ProcessStepProps) => {
             {[0, 1, 2, 3].map((stepIndex) => (
               <button
                 key={stepIndex}
-                onClick={() => {
-                  const element = document.querySelector(`#process-step-${stepIndex}`)
-                  if (element) {
-                    element.scrollIntoView({ behavior: "smooth" })
-                  }
-                }}
+                data-step={stepIndex}
+                onClick={scrollToStep}
                 className={`h-2 w-2 rounded-full transition-all duration-300 ${
                   stepIndex === index
                     ? "w-8 bg-foreground"

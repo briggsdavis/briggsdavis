@@ -154,12 +154,7 @@ const OurPromise = () => {
   }, [init, updateWheel])
 
   return (
-    <section
-      ref={sectionRef}
-      id="promise"
-      className="relative w-full bg-background"
-      style={{ height: "200vh" }}
-    >
+    <section ref={sectionRef} id="promise" className="relative h-[200vh] w-full bg-background">
       {/* Sticky content container */}
       <div className="sticky top-0 left-0 flex h-screen w-full items-center">
         <div className="mx-auto w-full max-w-6xl px-6">
@@ -167,32 +162,28 @@ const OurPromise = () => {
             {/* Left side - Text content */}
             <div className="space-y-6">
               <span
-                className={`mb-4 block text-xs font-medium tracking-[0.3em] text-muted-foreground uppercase opacity-0 ${
+                className={`mb-4 block text-xs font-medium tracking-[0.3em] text-muted-foreground uppercase opacity-0 delay-100 ${
                   isVisible ? "animate-fade-in-up" : ""
                 }`}
-                style={{ animationDelay: "100ms", animationFillMode: "forwards" }}
               >
                 Our Promise
               </span>
               <h2
-                className={`mb-6 text-4xl font-semibold text-foreground opacity-0 md:text-5xl ${
+                className={`mb-6 text-4xl font-semibold text-foreground opacity-0 delay-200 md:text-5xl ${
                   isVisible ? "animate-fade-in-up" : ""
                 }`}
-                style={{ animationDelay: "200ms", animationFillMode: "forwards" }}
               >
                 Your Website. A Business Asset.
               </h2>
               <div
-                className={`mb-6 h-0.5 w-12 bg-muted-foreground opacity-0 ${
+                className={`mb-6 h-0.5 w-12 bg-muted-foreground opacity-0 delay-300 ${
                   isVisible ? "animate-fade-in-up" : ""
                 }`}
-                style={{ animationDelay: "300ms", animationFillMode: "forwards" }}
               />
               <p
-                className={`max-w-md text-muted-foreground opacity-0 ${
+                className={`max-w-md text-muted-foreground opacity-0 delay-400 ${
                   isVisible ? "animate-fade-in-up" : ""
                 }`}
-                style={{ animationDelay: "400ms", animationFillMode: "forwards" }}
               >
                 We build websites that establish authority, justify your prices, and actively grow
                 your business. Trusted by clients from SMEs to global enterprises across three
@@ -202,19 +193,13 @@ const OurPromise = () => {
 
             {/* Right side - Word Wheel */}
             <div
-              className={`relative flex h-[50vh] items-center justify-center opacity-0 lg:h-[60vh] ${
+              className={`relative flex h-[50vh] items-center justify-center opacity-0 delay-500 [perspective:2000px] lg:h-[60vh] ${
                 isVisible ? "animate-fade-in-up" : ""
               }`}
-              style={{
-                perspective: "2000px",
-                animationDelay: "500ms",
-                animationFillMode: "forwards",
-              }}
             >
               <div
                 ref={wheelRef}
-                className="relative flex h-full w-full items-center justify-center"
-                style={{ transformStyle: "preserve-3d", willChange: "transform" }}
+                className="relative flex h-full w-full items-center justify-center will-change-transform [transform-style:preserve-3d]"
               />
             </div>
           </div>

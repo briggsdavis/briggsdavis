@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from "react"
 import { Mail, MessageCircle } from "lucide-react"
+import { useEffect, useRef, useState } from "react"
 
 const contacts = [
   {
@@ -45,11 +45,7 @@ const Footer = () => {
           {contacts.map((contact, index) => (
             <div
               key={contact.name}
-              className={`opacity-0 ${isVisible ? "animate-fade-in-up" : ""}`}
-              style={{
-                animationDelay: `${100 + index * 150}ms`,
-                animationFillMode: "forwards",
-              }}
+              className={`opacity-0 ${index === 0 ? "delay-100" : "[animation-delay:250ms]"} ${isVisible ? "animate-fade-in-up" : ""}`}
             >
               <h3 className="mb-6 text-2xl font-semibold text-foreground md:text-3xl">
                 {contact.name}
@@ -78,10 +74,9 @@ const Footer = () => {
 
         {/* Footer Bottom */}
         <div
-          className={`flex flex-col items-center justify-between gap-4 border-t border-border/30 pt-8 opacity-0 md:flex-row ${
+          className={`flex flex-col items-center justify-between gap-4 border-t border-border/30 pt-8 opacity-0 delay-400 md:flex-row ${
             isVisible ? "animate-fade-in-up" : ""
           }`}
-          style={{ animationDelay: "400ms", animationFillMode: "forwards" }}
         >
           <div className="flex items-center gap-2">
             <img

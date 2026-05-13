@@ -1,10 +1,10 @@
-import { useParams, Link } from "react-router-dom"
-import { useRef, useEffect } from "react"
 import { ExternalLink } from "lucide-react"
+import { useRef, useEffect } from "react"
+import { useParams, Link } from "react-router-dom"
+import Footer from "@/components/footer"
+import Navbar from "@/components/navbar"
 import { Button } from "@/components/ui/button"
 import { projects } from "@/data/projects"
-import Navbar from "@/components/navbar"
-import Footer from "@/components/footer"
 
 const projectVideos: Record<string, string> = {
   oderum: "/videos/oderum.mp4",
@@ -23,6 +23,12 @@ const ProjectDetail = () => {
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [projectId])
+
+  const handleVideoEnded = () => {
+    if (videoRef.current) {
+      videoRef.current.pause()
+    }
+  }
 
   if (!project) {
     return (
@@ -45,10 +51,7 @@ const ProjectDetail = () => {
 
       <div className="mx-auto max-w-5xl px-6 py-16 pt-32">
         {/* Hero media */}
-        <div
-          className="mb-12 animate-fade-in-up overflow-hidden rounded-2xl border border-border/30 opacity-0"
-          style={{ animationDelay: "200ms", animationFillMode: "forwards" }}
-        >
+        <div className="mb-12 animate-fade-in-up overflow-hidden rounded-2xl border border-border/30 opacity-0 delay-200">
           {videoSrc ? (
             <video
               ref={videoRef}
@@ -57,11 +60,7 @@ const ProjectDetail = () => {
               autoPlay
               muted
               playsInline
-              onEnded={() => {
-                if (videoRef.current) {
-                  videoRef.current.pause()
-                }
-              }}
+              onEnded={handleVideoEnded}
             />
           ) : (
             <img
@@ -75,24 +74,15 @@ const ProjectDetail = () => {
         {/* Content */}
         <div className="grid gap-12 md:grid-cols-3">
           <div className="md:col-span-2">
-            <h1
-              className="mb-6 animate-fade-in-up text-4xl font-semibold text-foreground opacity-0 md:text-5xl"
-              style={{ animationDelay: "300ms", animationFillMode: "forwards" }}
-            >
+            <h1 className="mb-6 animate-fade-in-up text-4xl font-semibold text-foreground opacity-0 delay-300 md:text-5xl">
               {project.name}
             </h1>
-            <p
-              className="mb-8 animate-fade-in-up text-lg leading-relaxed text-muted-foreground opacity-0"
-              style={{ animationDelay: "400ms", animationFillMode: "forwards" }}
-            >
+            <p className="mb-8 animate-fade-in-up text-lg leading-relaxed text-muted-foreground opacity-0 delay-400">
               {project.description}
             </p>
 
             {project.link && (
-              <div
-                className="animate-fade-in-up opacity-0"
-                style={{ animationDelay: "500ms", animationFillMode: "forwards" }}
-              >
+              <div className="animate-fade-in-up opacity-0 delay-500">
                 <Button variant="nav" size="lg" className="glass glint" asChild>
                   <a href={project.link} target="_blank" rel="noopener noreferrer">
                     Visit Website
@@ -105,18 +95,15 @@ const ProjectDetail = () => {
 
           {/* Features */}
           <div>
-            <h3
-              className="mb-6 animate-fade-in-up text-xs font-medium tracking-[0.3em] text-muted-foreground uppercase opacity-0"
-              style={{ animationDelay: "400ms", animationFillMode: "forwards" }}
-            >
+            <h3 className="mb-6 animate-fade-in-up text-xs font-medium tracking-[0.3em] text-muted-foreground uppercase opacity-0 delay-400">
               Key Features
             </h3>
             <ul className="space-y-4">
               {project.features.map((feature, i) => (
                 <li
-                  key={i}
+                  key={feature}
                   className="flex animate-fade-in-up items-start gap-3 text-sm text-foreground/80 opacity-0"
-                  style={{ animationDelay: `${500 + i * 100}ms`, animationFillMode: "forwards" }}
+                  style={{ animationDelay: `${500 + i * 100}ms` }}
                 >
                   <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-muted-foreground" />
                   {feature}

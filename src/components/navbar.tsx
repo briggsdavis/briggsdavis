@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react"
-import { Button } from "@/components/ui/button"
 import { ArrowRight, Menu, X } from "lucide-react"
+import { useState, useEffect } from "react"
 import { Link, useLocation } from "react-router-dom"
+import { Button } from "@/components/ui/button"
 
 const navItems = [
   { label: "SERVICES", href: "/services" },
@@ -34,8 +34,8 @@ const Navbar = () => {
     <>
       {/* Scroll progress bar - thin line at top of viewport */}
       <div
-        className="fixed top-0 left-0 z-[60] h-px bg-foreground/30"
-        style={{ width: `${scrollProgress * 100}%`, transition: "none" }}
+        className="fixed top-0 left-0 z-[60] h-px bg-foreground/30 transition-none"
+        style={{ width: `${scrollProgress * 100}%` }}
       />
       <nav
         className={`fixed top-4 left-1/2 z-50 -translate-x-1/2 transition-all duration-500 ${

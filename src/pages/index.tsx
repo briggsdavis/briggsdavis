@@ -1,11 +1,11 @@
-import Navbar from "@/components/navbar"
-import Hero from "@/components/hero"
-import Services from "@/components/services"
-import OurPromise from "@/components/our-promise"
-import Portfolio from "@/components/portfolio"
 import About from "@/components/about"
 import CTA from "@/components/cta"
 import Footer from "@/components/footer"
+import Hero from "@/components/hero"
+import Navbar from "@/components/navbar"
+import OurPromise from "@/components/our-promise"
+import Portfolio from "@/components/portfolio"
+import Services from "@/components/services"
 
 const Index = () => {
   return (

@@ -1,9 +1,9 @@
-import { useEffect, useRef, useState } from "react"
 import { ArrowRight, Plus } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { useEffect, useRef, useState } from "react"
 import { Link } from "react-router-dom"
-import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
+import Navbar from "@/components/navbar"
+import { Button } from "@/components/ui/button"
 
 const services = [
   {
@@ -215,7 +215,6 @@ const ServicesPage = () => {
           {/* Overline */}
           <span
             className={`mb-16 block text-xs font-medium tracking-[0.3em] text-muted-foreground uppercase opacity-0 ${introVisible ? "animate-fade-in-up" : ""}`}
-            style={{ animationFillMode: "forwards" }}
           >
             What We Build
           </span>
@@ -223,16 +222,14 @@ const ServicesPage = () => {
           {/* Editorial headline - two staggered lines */}
           <div className="mb-20">
             <div
-              className={`opacity-0 ${introVisible ? "animate-fade-in-up" : ""}`}
-              style={{ animationDelay: "80ms", animationFillMode: "forwards" }}
+              className={`opacity-0 [animation-delay:80ms] ${introVisible ? "animate-fade-in-up" : ""}`}
             >
               <p className="text-[clamp(2.8rem,8vw,6.5rem)] leading-[0.95] font-semibold tracking-tight text-foreground">
                 Unique solutions
               </p>
             </div>
             <div
-              className={`opacity-0 ${introVisible ? "animate-fade-in-up" : ""}`}
-              style={{ animationDelay: "180ms", animationFillMode: "forwards" }}
+              className={`opacity-0 [animation-delay:180ms] ${introVisible ? "animate-fade-in-up" : ""}`}
             >
               <p className="pl-[8%] font-display text-[clamp(2.8rem,8vw,6.5rem)] leading-[0.95] tracking-tight text-muted-foreground italic md:pl-[18%]">
                 built to perform.
@@ -242,8 +239,7 @@ const ServicesPage = () => {
 
           {/* Thin rule with side caption */}
           <div
-            className={`mb-20 flex items-center gap-6 opacity-0 ${introVisible ? "animate-fade-in-up" : ""}`}
-            style={{ animationDelay: "280ms", animationFillMode: "forwards" }}
+            className={`mb-20 flex items-center gap-6 opacity-0 [animation-delay:280ms] ${introVisible ? "animate-fade-in-up" : ""}`}
           >
             <div className="h-px flex-1 bg-border" />
             <span className="shrink-0 font-mono text-xs tracking-[0.22em] text-muted-foreground uppercase">
@@ -255,8 +251,7 @@ const ServicesPage = () => {
           <div className="grid items-start gap-12 md:grid-cols-[1fr_300px] md:gap-20">
             {/* Left: copy */}
             <div
-              className={`opacity-0 ${introVisible ? "animate-fade-in-up" : ""}`}
-              style={{ animationDelay: "380ms", animationFillMode: "forwards" }}
+              className={`opacity-0 [animation-delay:380ms] ${introVisible ? "animate-fade-in-up" : ""}`}
             >
               <p className="mb-6 text-2xl leading-relaxed font-light text-foreground">
                 We craft digital experiences that function as{" "}
@@ -273,8 +268,7 @@ const ServicesPage = () => {
 
             {/* Right: outcomes */}
             <div
-              className={`opacity-0 ${introVisible ? "animate-fade-in-up" : ""}`}
-              style={{ animationDelay: "480ms", animationFillMode: "forwards" }}
+              className={`opacity-0 [animation-delay:480ms] ${introVisible ? "animate-fade-in-up" : ""}`}
             >
               <p className="mb-5 text-xs tracking-[0.22em] text-muted-foreground uppercase">
                 What You Get
@@ -293,13 +287,15 @@ const ServicesPage = () => {
 
         {/* Marquee - full-bleed */}
         <div
-          className={`mt-24 overflow-hidden border-t border-b border-border/40 py-4 opacity-0 ${introVisible ? "animate-fade-in-up" : ""}`}
-          style={{ animationDelay: "580ms", animationFillMode: "forwards" }}
+          className={`mt-24 overflow-hidden border-t border-b border-border/40 py-4 opacity-0 [animation-delay:580ms] ${introVisible ? "animate-fade-in-up" : ""}`}
         >
           <div className="animate-marquee">
-            {[...contexts, ...contexts].map((ctx, i) => (
+            {[
+              ...contexts.map((ctx) => ({ ctx, copy: "a" })),
+              ...contexts.map((ctx) => ({ ctx, copy: "b" })),
+            ].map(({ ctx, copy }) => (
               <span
-                key={i}
+                key={`${copy}-${ctx}`}
                 className="shrink-0 px-6 font-mono text-xs tracking-[0.22em] text-muted-foreground uppercase"
               >
                 {ctx}
@@ -313,10 +309,7 @@ const ServicesPage = () => {
       {/* ── Services List ── */}
       <section ref={sectionRef} className="px-6 py-24">
         <div className="mx-auto max-w-4xl">
-          <div
-            className={`mb-12 opacity-0 ${isVisible ? "animate-fade-in-up" : ""}`}
-            style={{ animationFillMode: "forwards" }}
-          >
+          <div className={`mb-12 opacity-0 ${isVisible ? "animate-fade-in-up" : ""}`}>
             <span className="mb-4 block text-xs font-medium tracking-[0.3em] text-muted-foreground uppercase">
               Capabilities
             </span>
@@ -327,14 +320,15 @@ const ServicesPage = () => {
 
           {services.map((service, index) => {
             const isExpanded = expandedIndex === index
+            const handleToggle = () => setExpandedIndex(isExpanded ? null : index)
             return (
               <div
                 key={service.number}
                 className={`border-t border-border/30 opacity-0 ${isVisible ? "animate-fade-in-up" : ""}`}
-                style={{ animationDelay: `${200 + index * 60}ms`, animationFillMode: "forwards" }}
+                style={{ animationDelay: `${200 + index * 60}ms` }}
               >
                 <button
-                  onClick={() => setExpandedIndex(isExpanded ? null : index)}
+                  onClick={handleToggle}
                   className="group flex w-full items-center gap-6 py-8 text-left transition-all duration-300 hover:pl-2"
                 >
                   <span className="w-8 shrink-0 text-sm font-light text-muted-foreground/40 tabular-nums">
@@ -392,14 +386,12 @@ const ServicesPage = () => {
       <section className="px-6 py-24">
         <div className="mx-auto max-w-4xl text-center">
           <h2
-            className={`mb-6 text-3xl font-semibold text-foreground opacity-0 md:text-4xl ${isVisible ? "animate-fade-in-up" : ""}`}
-            style={{ animationDelay: "200ms", animationFillMode: "forwards" }}
+            className={`mb-6 text-3xl font-semibold text-foreground opacity-0 delay-200 md:text-4xl ${isVisible ? "animate-fade-in-up" : ""}`}
           >
             Ready to get started?
           </h2>
           <p
-            className={`mb-10 text-muted-foreground opacity-0 ${isVisible ? "animate-fade-in-up" : ""}`}
-            style={{ animationDelay: "300ms", animationFillMode: "forwards" }}
+            className={`mb-10 text-muted-foreground opacity-0 delay-300 ${isVisible ? "animate-fade-in-up" : ""}`}
           >
             See how we bring these services to life through our proven process.
           </p>

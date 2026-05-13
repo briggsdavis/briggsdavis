@@ -1,5 +1,5 @@
-import { useEffect } from "react"
 import Lenis from "lenis"
+import { useEffect } from "react"
 import { registerLenis, unregisterLenis } from "@/lib/lenis-store"
 
 const SmoothScroll = ({ children }: { children: React.ReactNode }) => {

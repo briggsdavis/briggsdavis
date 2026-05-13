@@ -1,7 +1,20 @@
-import { useEffect, useRef, useState } from "react"
 import { ArrowRight } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { useEffect, useRef, useState } from "react"
 import { Link } from "react-router-dom"
+import { Button } from "@/components/ui/button"
+
+const serviceDelayClasses = [
+  "[animation-delay:500ms]",
+  "[animation-delay:600ms]",
+  "[animation-delay:700ms]",
+  "[animation-delay:800ms]",
+  "[animation-delay:900ms]",
+  "[animation-delay:1000ms]",
+  "[animation-delay:1100ms]",
+  "[animation-delay:1200ms]",
+  "[animation-delay:1300ms]",
+  "[animation-delay:1400ms]",
+]
 
 const services = [
   {
@@ -77,32 +90,28 @@ const Services = () => {
         {/* Section Header */}
         <div className="mb-16">
           <span
-            className={`mb-4 block text-xs font-medium tracking-[0.3em] text-muted-foreground uppercase opacity-0 ${
+            className={`mb-4 block text-xs font-medium tracking-[0.3em] text-muted-foreground uppercase opacity-0 delay-100 ${
               isVisible ? "animate-fade-in-up" : ""
             }`}
-            style={{ animationDelay: "100ms", animationFillMode: "forwards" }}
           >
             Expertise
           </span>
           <h2
-            className={`mb-6 text-4xl font-semibold text-foreground opacity-0 md:text-5xl ${
+            className={`mb-6 text-4xl font-semibold text-foreground opacity-0 delay-200 md:text-5xl ${
               isVisible ? "animate-fade-in-up" : ""
             }`}
-            style={{ animationDelay: "200ms", animationFillMode: "forwards" }}
           >
             Our Services
           </h2>
           <div
-            className={`mb-6 h-0.5 w-12 bg-muted-foreground opacity-0 ${
+            className={`mb-6 h-0.5 w-12 bg-muted-foreground opacity-0 delay-300 ${
               isVisible ? "animate-fade-in-up" : ""
             }`}
-            style={{ animationDelay: "300ms", animationFillMode: "forwards" }}
           />
           <p
-            className={`max-w-md text-muted-foreground opacity-0 ${
+            className={`max-w-md text-muted-foreground opacity-0 delay-400 ${
               isVisible ? "animate-fade-in-up" : ""
             }`}
-            style={{ animationDelay: "400ms", animationFillMode: "forwards" }}
           >
             Websites built to grow your business, crafted to attract clients, communicate your
             value, and convert.
@@ -114,13 +123,9 @@ const Services = () => {
           {services.slice(0, 5).map((service, index) => (
             <div
               key={service.title}
-              className={`group cursor-pointer rounded-xl border border-border/50 bg-card p-4 opacity-0 transition-all duration-500 hover:z-10 hover:scale-110 hover:border-border hover:bg-secondary/50 hover:shadow-xl hover:shadow-black/20 ${
+              className={`group cursor-pointer rounded-xl border border-border/50 bg-card p-4 opacity-0 transition-all duration-500 hover:z-10 hover:scale-110 hover:border-border hover:bg-secondary/50 hover:shadow-xl hover:shadow-black/20 ${serviceDelayClasses[index]} ${
                 isVisible ? "animate-fade-in-up" : ""
               }`}
-              style={{
-                animationDelay: `${500 + index * 100}ms`,
-                animationFillMode: "forwards",
-              }}
             >
               <h3 className="mb-2 text-xs font-semibold tracking-wide text-foreground transition-colors duration-300 group-hover:text-foreground">
                 {service.title}
@@ -138,13 +143,9 @@ const Services = () => {
             {services.slice(5).map((service, index) => (
               <div
                 key={service.title}
-                className={`group cursor-pointer rounded-xl border border-border/50 bg-card p-4 opacity-0 transition-all duration-500 hover:z-10 hover:scale-110 hover:border-border hover:bg-secondary/50 hover:shadow-xl hover:shadow-black/20 ${
+                className={`group cursor-pointer rounded-xl border border-border/50 bg-card p-4 opacity-0 transition-all duration-500 hover:z-10 hover:scale-110 hover:border-border hover:bg-secondary/50 hover:shadow-xl hover:shadow-black/20 ${serviceDelayClasses[index + 5]} ${
                   isVisible ? "animate-fade-in-up" : ""
                 }`}
-                style={{
-                  animationDelay: `${500 + (index + 5) * 100}ms`,
-                  animationFillMode: "forwards",
-                }}
               >
                 <h3 className="mb-2 text-xs font-semibold tracking-wide text-foreground transition-colors duration-300 group-hover:text-foreground">
                   {service.title}
@@ -159,8 +160,7 @@ const Services = () => {
 
         {/* Explore Services Button */}
         <div
-          className={`mt-16 flex justify-center opacity-0 ${isVisible ? "animate-fade-in-up" : ""}`}
-          style={{ animationDelay: "1100ms", animationFillMode: "forwards" }}
+          className={`mt-16 flex justify-center opacity-0 [animation-delay:1500ms] ${isVisible ? "animate-fade-in-up" : ""}`}
         >
           <Button variant="nav" size="lg" className="glass glint" asChild>
             <Link to="/services">

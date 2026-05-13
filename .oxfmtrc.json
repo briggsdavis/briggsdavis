@@ -1,4 +1,5 @@
 {
   "semi": false,
+  "sortImports": { "newlinesBetween": false },
   "sortTailwindcss": { "stylesheet": "src/index.css" }
 }

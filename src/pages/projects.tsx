@@ -1,10 +1,10 @@
-import { useEffect, useRef, useState } from "react"
 import { ArrowLeft } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { useEffect, useRef, useState } from "react"
 import { Link } from "react-router-dom"
-import { projects, Project } from "@/data/projects"
 import Footer from "@/components/footer"
 import Navbar from "@/components/navbar"
+import { Button } from "@/components/ui/button"
+import { projects, Project } from "@/data/projects"
 
 const ProjectRow = ({ project }: { project: Project }) => {
   const rowRef = useRef<HTMLDivElement>(null)
@@ -53,12 +53,8 @@ const ProjectRow = ({ project }: { project: Project }) => {
       >
         {/* Left: text - blur/opacity driven by scroll */}
         <div
-          className="flex min-h-[320px] w-full flex-col justify-between md:min-h-[400px] md:flex-1"
-          style={{
-            filter: `blur(${textBlur.toFixed(2)}px)`,
-            opacity: textOpacity,
-            willChange: "filter, opacity",
-          }}
+          className="flex min-h-[320px] w-full flex-col justify-between [will-change:filter,opacity] md:min-h-[400px] md:flex-1"
+          style={{ filter: `blur(${textBlur.toFixed(2)}px)`, opacity: textOpacity }}
         >
           <div>
             {/* Tags - white */}
@@ -92,11 +88,8 @@ const ProjectRow = ({ project }: { project: Project }) => {
         {/* Right: image - horizontal unravel left-to-right via clip-path */}
         <div className="w-full shrink-0 md:w-[48%]">
           <div
-            className="overflow-hidden rounded-2xl"
-            style={{
-              clipPath: `inset(0 ${clipRight.toFixed(2)}% 0 0 round 1.25rem)`,
-              willChange: "clip-path",
-            }}
+            className="overflow-hidden rounded-2xl [will-change:clip-path]"
+            style={{ clipPath: `inset(0 ${clipRight.toFixed(2)}% 0 0 round 1.25rem)` }}
           >
             <img
               src={project.image}
@@ -121,10 +114,7 @@ const Projects = () => {
       <section className="px-6 py-32">
         <div className="mx-auto max-w-6xl">
           {/* Back */}
-          <div
-            className="mb-8 animate-fade-in-up opacity-0"
-            style={{ animationFillMode: "forwards" }}
-          >
+          <div className="mb-8 animate-fade-in-up opacity-0">
             <Link to="/#portfolio">
               <Button variant="ghost" className="group text-muted-foreground hover:text-foreground">
                 <ArrowLeft className="mr-2 h-4 w-4 transition-transform duration-300 group-hover:-translate-x-1" />
@@ -135,22 +125,13 @@ const Projects = () => {
 
           {/* Header */}
           <div className="mb-20">
-            <span
-              className="mb-4 block animate-fade-in-up text-xs font-medium tracking-[0.3em] text-muted-foreground uppercase opacity-0"
-              style={{ animationDelay: "100ms", animationFillMode: "forwards" }}
-            >
+            <span className="mb-4 block animate-fade-in-up text-xs font-medium tracking-[0.3em] text-muted-foreground uppercase opacity-0 delay-100">
               Case Studies
             </span>
-            <h1
-              className="mb-6 animate-fade-in-up text-4xl font-semibold text-foreground opacity-0 md:text-5xl"
-              style={{ animationDelay: "200ms", animationFillMode: "forwards" }}
-            >
+            <h1 className="mb-6 animate-fade-in-up text-4xl font-semibold text-foreground opacity-0 delay-200 md:text-5xl">
               Full Portfolio
             </h1>
-            <div
-              className="h-0.5 w-12 animate-fade-in-up bg-muted-foreground opacity-0"
-              style={{ animationDelay: "300ms", animationFillMode: "forwards" }}
-            />
+            <div className="h-0.5 w-12 animate-fade-in-up bg-muted-foreground opacity-0 delay-300" />
           </div>
 
           {/* Rows */}

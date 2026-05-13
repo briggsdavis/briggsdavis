@@ -1,11 +1,17 @@
-import { useEffect, useRef, useState, useCallback } from "react"
 import { ArrowRight } from "lucide-react"
-import { Button } from "./ui/button"
+import { useEffect, useRef, useState, useCallback } from "react"
 import { Link } from "react-router-dom"
 import { projects } from "@/data/projects"
+import { Button } from "./ui/button"
 
 const featuredIds = ["refenti", "africa-growth-axis", "hormone-vitality-coaching", "nordic-seafood"]
 const featuredProjects = featuredIds.map((id) => projects.find((p) => p.id === id)!).filter(Boolean)
+const featuredDelayClasses = [
+  "[animation-delay:500ms]",
+  "[animation-delay:650ms]",
+  "[animation-delay:800ms]",
+  "[animation-delay:950ms]",
+]
 
 const Portfolio = () => {
   const sectionRef = useRef<HTMLElement>(null)
@@ -67,32 +73,28 @@ const Portfolio = () => {
         {/* Section Header */}
         <div className="mb-16">
           <span
-            className={`mb-4 block text-xs font-medium tracking-[0.3em] text-muted-foreground uppercase opacity-0 ${
+            className={`mb-4 block text-xs font-medium tracking-[0.3em] text-muted-foreground uppercase opacity-0 delay-100 ${
               isVisible ? "animate-fade-in-up" : ""
             }`}
-            style={{ animationDelay: "100ms", animationFillMode: "forwards" }}
           >
             Case Studies
           </span>
           <h2
-            className={`mb-6 text-4xl font-semibold text-foreground opacity-0 md:text-5xl ${
+            className={`mb-6 text-4xl font-semibold text-foreground opacity-0 delay-200 md:text-5xl ${
               isVisible ? "animate-fade-in-up" : ""
             }`}
-            style={{ animationDelay: "200ms", animationFillMode: "forwards" }}
           >
             Selected Work
           </h2>
           <div
-            className={`mb-6 h-0.5 w-12 bg-muted-foreground opacity-0 ${
+            className={`mb-6 h-0.5 w-12 bg-muted-foreground opacity-0 delay-300 ${
               isVisible ? "animate-fade-in-up" : ""
             }`}
-            style={{ animationDelay: "300ms", animationFillMode: "forwards" }}
           />
           <p
-            className={`max-w-md text-muted-foreground opacity-0 ${
+            className={`max-w-md text-muted-foreground opacity-0 delay-400 ${
               isVisible ? "animate-fade-in-up" : ""
             }`}
-            style={{ animationDelay: "400ms", animationFillMode: "forwards" }}
           >
             Real businesses that used a stronger online presence to elevate their brand and grow.
           </p>
@@ -103,22 +105,15 @@ const Portfolio = () => {
           {featuredProjects.map((item, index) => (
             <div
               key={item.id}
-              className={`opacity-0 ${isVisible ? "animate-fade-in-up" : ""}`}
-              style={{
-                animationDelay: `${500 + index * 150}ms`,
-                animationFillMode: "forwards",
-              }}
+              className={`opacity-0 ${featuredDelayClasses[index]} ${isVisible ? "animate-fade-in-up" : ""}`}
             >
               <Link to={`/project/${item.id}`} className="block">
                 <div
                   ref={(el) => {
                     itemRefs.current[index] = el
                   }}
-                  className="group relative cursor-pointer overflow-hidden rounded-2xl will-change-transform"
-                  style={{
-                    transform: `scale(${scales[index]})`,
-                    transition: "transform 0.15s ease-out",
-                  }}
+                  className="group relative cursor-pointer overflow-hidden rounded-2xl transition-transform duration-150 ease-out will-change-transform"
+                  style={{ transform: `scale(${scales[index]})` }}
                 >
                   <img
                     src={item.image}
@@ -144,8 +139,7 @@ const Portfolio = () => {
 
         {/* See Full Portfolio Button */}
         <div
-          className={`mt-16 flex justify-center opacity-0 ${isVisible ? "animate-fade-in-up" : ""}`}
-          style={{ animationDelay: "1100ms", animationFillMode: "forwards" }}
+          className={`mt-16 flex justify-center opacity-0 [animation-delay:1100ms] ${isVisible ? "animate-fade-in-up" : ""}`}
         >
           <Button variant="nav" size="lg" className="glass glint" asChild>
             <Link to="/projects">

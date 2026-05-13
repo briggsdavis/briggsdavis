@@ -1,9 +1,9 @@
-import { useEffect } from "react"
-import Navbar from "@/components/navbar"
-import Footer from "@/components/footer"
 import { Mail, MessageCircle } from "lucide-react"
-import maxwellImg from "@/assets/maxwell-briggs.png"
+import { useEffect } from "react"
+import maxwellImg from "@/assets/maxwell-briggs.webp"
 import nathanielImg from "@/assets/nathaniel-davis.jpg"
+import Footer from "@/components/footer"
+import Navbar from "@/components/navbar"
 
 const team = [
   {

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react"
+import maxAvatar from "@/assets/maxwell-briggs.webp"
 import nateAvatar from "@/assets/nathaniel-davis.jpg"
-import maxAvatar from "@/assets/maxwell-briggs.png"
 
 const founders = [
   {
@@ -58,32 +58,28 @@ const About = () => {
         {/* Section Header */}
         <div className="mb-16">
           <span
-            className={`mb-4 block text-xs font-medium tracking-[0.3em] text-muted-foreground uppercase opacity-0 ${
+            className={`mb-4 block text-xs font-medium tracking-[0.3em] text-muted-foreground uppercase opacity-0 delay-100 ${
               isVisible ? "animate-fade-in-up" : ""
             }`}
-            style={{ animationDelay: "100ms", animationFillMode: "forwards" }}
           >
             Founders
           </span>
           <h2
-            className={`mb-6 text-4xl font-semibold text-foreground opacity-0 md:text-5xl ${
+            className={`mb-6 text-4xl font-semibold text-foreground opacity-0 delay-200 md:text-5xl ${
               isVisible ? "animate-fade-in-up" : ""
             }`}
-            style={{ animationDelay: "200ms", animationFillMode: "forwards" }}
           >
             Our Identity
           </h2>
           <div
-            className={`mb-6 h-0.5 w-12 bg-muted-foreground opacity-0 ${
+            className={`mb-6 h-0.5 w-12 bg-muted-foreground opacity-0 delay-300 ${
               isVisible ? "animate-fade-in-up" : ""
             }`}
-            style={{ animationDelay: "300ms", animationFillMode: "forwards" }}
           />
           <p
-            className={`max-w-md text-muted-foreground opacity-0 ${
+            className={`max-w-md text-muted-foreground opacity-0 delay-400 ${
               isVisible ? "animate-fade-in-up" : ""
             }`}
-            style={{ animationDelay: "400ms", animationFillMode: "forwards" }}
           >
             Business strategy and technical execution. Your website does more than look good. It
             works.
@@ -96,12 +92,8 @@ const About = () => {
             <div
               key={founder.name}
               className={`group rounded-2xl border border-border/50 bg-card p-8 opacity-0 transition-all duration-500 hover:border-border ${
-                isVisible ? "animate-fade-in-up" : ""
-              }`}
-              style={{
-                animationDelay: `${500 + index * 150}ms`,
-                animationFillMode: "forwards",
-              }}
+                index === 0 ? "[animation-delay:500ms]" : "[animation-delay:650ms]"
+              } ${isVisible ? "animate-fade-in-up" : ""}`}
             >
               {/* Avatar */}
               <div className="mb-6 h-16 w-16 overflow-hidden rounded-full transition-all duration-500">
