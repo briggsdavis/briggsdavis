@@ -13,7 +13,9 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false)
   const [scrollProgress, setScrollProgress] = useState(0)
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [expanded, setExpanded] = useState(false)
   const location = useLocation()
+  const isHome = location.pathname === "/"
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,7 +23,6 @@ const Navbar = () => {
       const docHeight = document.documentElement.scrollHeight - window.innerHeight
       setScrollProgress(docHeight > 0 ? window.scrollY / docHeight : 0)
     }
-
     window.addEventListener("scroll", handleScroll, { passive: true })
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
@@ -30,9 +31,20 @@ const Navbar = () => {
     setMobileOpen(false)
   }, [location.pathname])
 
+  // Intro animation: only on home page — expand after hero text has settled
+  useEffect(() => {
+    if (!isHome) {
+      setExpanded(true)
+      return
+    }
+    setExpanded(false)
+    const t = setTimeout(() => setExpanded(true), 1500)
+    return () => clearTimeout(t)
+  }, [isHome])
+
   return (
     <>
-      {/* Scroll progress bar - thin line at top of viewport */}
+      {/* Scroll progress bar */}
       <div
         className="fixed top-0 left-0 z-[60] h-px bg-foreground/30 transition-none"
         style={{ width: `${scrollProgress * 100}%` }}
@@ -43,9 +55,17 @@ const Navbar = () => {
         }`}
       >
         <div
-          className={`glass flex items-center gap-2 rounded-full px-4 py-2 transition-all duration-500 ${
+          className={`glass flex items-center gap-2 rounded-full px-4 py-2 transition-shadow duration-500 ${
             scrolled ? "shadow-lg shadow-black/20" : ""
           }`}
+          style={{
+            clipPath: expanded
+              ? "inset(0 0% 0 0% round 999px)"
+              : "inset(0 50% 0 50% round 999px)",
+            transition: expanded
+              ? "clip-path 0.9s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.5s"
+              : "none",
+          }}
         >
           {/* Logo */}
           <Link
@@ -67,7 +87,7 @@ const Navbar = () => {
               <Link
                 key={item.label}
                 to={item.href}
-                className={`relative px-4 py-2 text-xs font-medium tracking-widest transition-all duration-300 ${
+                className={`relative whitespace-nowrap px-4 py-2 text-xs font-medium tracking-widest transition-all duration-300 ${
                   location.pathname === item.href
                     ? "text-foreground"
                     : "text-muted-foreground hover:text-foreground"
