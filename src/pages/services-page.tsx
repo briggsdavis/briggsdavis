@@ -9,6 +9,19 @@ import { Button } from "@/components/ui/button"
 const services = [
   {
     number: "01",
+    title: "Global Client Experience",
+    tagline: "Trusted across continents.",
+    description:
+      "We bring proven experience working with clients ranging from SMEs to multimillion-dollar enterprises across Europe, Africa, and the Americas. Our international perspective ensures solutions that resonate in any market.",
+    features: [
+      "Cross-continental delivery",
+      "Enterprise-grade solutions",
+      "SME to large-scale projects",
+      "Culturally informed design",
+    ],
+  },
+  {
+    number: "02",
     title: "Mobile Friendly Design",
     tagline: "Every pixel, every device.",
     description:
@@ -21,7 +34,7 @@ const services = [
     ],
   },
   {
-    number: "02",
+    number: "03",
     title: "Search Engine Optimization",
     tagline: "Visibility that drives growth.",
     description:
@@ -34,7 +47,7 @@ const services = [
     ],
   },
   {
-    number: "03",
+    number: "04",
     title: "Rapid Development",
     tagline: "Launch in days, not months.",
     description:
@@ -47,28 +60,7 @@ const services = [
     ],
   },
   {
-    number: "04",
-    title: "Content Management Systems",
-    tagline: "Your content, your control.",
-    description:
-      "Easy-to-use systems that let you manage your own content. We build intuitive admin interfaces so your team can update text, images, and pages without touching a line of code.",
-    features: [
-      "Intuitive admin panels",
-      "Role-based access",
-      "Media management",
-      "Version history",
-    ],
-  },
-  {
     number: "05",
-    title: "Ongoing Maintenance",
-    tagline: "Always running, always secure.",
-    description:
-      "Keep your website secure, updated, and running smoothly. We provide continuous monitoring, security patches, and performance tuning to keep your digital presence in peak condition.",
-    features: ["24/7 monitoring", "Security updates", "Performance tuning", "Regular backups"],
-  },
-  {
-    number: "06",
     title: "Multi-Language Support",
     tagline: "Speak every market's language.",
     description:
@@ -81,7 +73,7 @@ const services = [
     ],
   },
   {
-    number: "07",
+    number: "06",
     title: "Facilitate Online Payments",
     tagline: "Seamless transactions, built-in trust.",
     description:
@@ -94,7 +86,28 @@ const services = [
     ],
   },
   {
+    number: "07",
+    title: "Content Management Systems",
+    tagline: "Your content, your control.",
+    description:
+      "Easy-to-use systems that let you manage your own content. We build intuitive admin interfaces so your team can update text, images, and pages without touching a line of code.",
+    features: [
+      "Intuitive admin panels",
+      "Role-based access",
+      "Media management",
+      "Version history",
+    ],
+  },
+  {
     number: "08",
+    title: "Ongoing Maintenance",
+    tagline: "Always running, always secure.",
+    description:
+      "Keep your website secure, updated, and running smoothly. We provide continuous monitoring, security patches, and performance tuning to keep your digital presence in peak condition.",
+    features: ["24/7 monitoring", "Security updates", "Performance tuning", "Regular backups"],
+  },
+  {
+    number: "09",
     title: "Unique Solutions",
     tagline: "Tailored to your vision.",
     description:
@@ -107,7 +120,7 @@ const services = [
     ],
   },
   {
-    number: "09",
+    number: "10",
     title: "Flawless Performance",
     tagline: "Speed is a feature.",
     description:
@@ -120,7 +133,7 @@ const services = [
     ],
   },
   {
-    number: "10",
+    number: "11",
     title: "Client Input",
     tagline: "Your voice shapes every decision.",
     description:
@@ -133,7 +146,7 @@ const services = [
     ],
   },
   {
-    number: "11",
+    number: "12",
     title: "Generative Engine Optimization",
     tagline: "Future-proof your discoverability.",
     description:
@@ -143,19 +156,6 @@ const services = [
       "Structured content strategy",
       "Entity-based markup",
       "LLM-friendly architecture",
-    ],
-  },
-  {
-    number: "12",
-    title: "Global Client Experience",
-    tagline: "Trusted across continents.",
-    description:
-      "We bring proven experience working with clients ranging from SMEs to multimillion-dollar enterprises across Europe, Africa, and the Americas. Our international perspective ensures solutions that resonate in any market.",
-    features: [
-      "Cross-continental delivery",
-      "Enterprise-grade solutions",
-      "SME to large-scale projects",
-      "Culturally informed design",
     ],
   },
 ]

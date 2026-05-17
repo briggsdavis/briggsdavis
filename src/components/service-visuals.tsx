@@ -693,18 +693,18 @@ export const ServiceVisual = ({
   isActive: boolean
 }) => {
   switch (serviceNumber) {
-    case "01": return <MobileVisual isActive={isActive} />
-    case "02": return <SEOVisual isActive={isActive} />
-    case "03": return <RapidDevVisual isActive={isActive} />
-    case "04": return <CMSVisual isActive={isActive} />
-    case "05": return <MaintenanceVisual isActive={isActive} />
-    case "06": return <LanguageVisual isActive={isActive} />
-    case "07": return <PaymentsVisual isActive={isActive} />
-    case "08": return <UniqueVisual isActive={isActive} />
-    case "09": return <PerformanceVisual isActive={isActive} />
-    case "10": return <ClientInputVisual isActive={isActive} />
-    case "11": return <GEOVisual isActive={isActive} />
-    case "12": return <GlobeVisual isActive={isActive} />
+    case "01": return <GlobeVisual isActive={isActive} />
+    case "02": return <MobileVisual isActive={isActive} />
+    case "03": return <SEOVisual isActive={isActive} />
+    case "04": return <RapidDevVisual isActive={isActive} />
+    case "05": return <LanguageVisual isActive={isActive} />
+    case "06": return <PaymentsVisual isActive={isActive} />
+    case "07": return <CMSVisual isActive={isActive} />
+    case "08": return <MaintenanceVisual isActive={isActive} />
+    case "09": return <UniqueVisual isActive={isActive} />
+    case "10": return <PerformanceVisual isActive={isActive} />
+    case "11": return <ClientInputVisual isActive={isActive} />
+    case "12": return <GEOVisual isActive={isActive} />
     default:   return null
   }
 }
