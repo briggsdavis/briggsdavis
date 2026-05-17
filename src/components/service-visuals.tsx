@@ -6,7 +6,7 @@ export const MobileVisual = memo(({ isActive }: { isActive: boolean }) => (
     {/* iPhone shell */}
     <div
       className="relative overflow-hidden rounded-[22px] border border-white/20 bg-black/30"
-      style={{ width: 86, height: 168 }}
+      style={{ width: 104, height: 202 }}
     >
       {/* Notch */}
       <div className="absolute top-0 left-1/2 z-10 h-4 w-14 -translate-x-1/2 rounded-b-2xl bg-black/60" />
@@ -87,12 +87,12 @@ export const SEOVisual = memo(({ isActive }: { isActive: boolean }) => {
         Search Position
       </p>
       <p
-        className="text-5xl font-semibold tabular-nums transition-all duration-300"
+        className="text-6xl font-semibold tabular-nums transition-all duration-300"
         style={{ color: rank === 1 ? "rgba(255,255,255,0.9)" : "rgba(255,255,255,0.4)" }}
       >
         #{rank}
       </p>
-      <div className="relative h-px w-36 rounded bg-white/10">
+      <div className="relative h-px w-44 rounded bg-white/10">
         <div
           className="absolute inset-y-0 left-0 rounded bg-white/60 transition-all duration-300"
           style={{ width: `${pct}%` }}
@@ -137,7 +137,7 @@ export const RapidDevVisual = memo(({ isActive }: { isActive: boolean }) => {
     <div className="flex h-full items-center justify-center">
       <div
         className="overflow-hidden rounded-lg border border-white/10 bg-black/60 p-3 font-mono"
-        style={{ width: 204, height: 144 }}
+        style={{ width: 245, height: 173 }}
       >
         <div className="mb-2.5 flex gap-1.5">
           {["bg-white/15", "bg-white/15", "bg-white/15"].map((c, i) => (
@@ -148,7 +148,7 @@ export const RapidDevVisual = memo(({ isActive }: { isActive: boolean }) => {
           {CODE_LINES.map((line, i) => (
             <p
               key={i}
-              className="text-[10px] transition-opacity duration-300"
+              className="text-xs transition-opacity duration-300"
               style={{
                 opacity: i < visible ? 1 : 0,
                 color: line.color,
@@ -187,7 +187,7 @@ export const CMSVisual = memo(({ isActive }: { isActive: boolean }) => {
     <div className="flex h-full items-center justify-center">
       <div
         className="overflow-hidden rounded-lg border border-white/10 bg-black/40"
-        style={{ width: 204, height: 144 }}
+        style={{ width: 245, height: 173 }}
       >
         {/* Toolbar */}
         <div className="flex items-center gap-2 border-b border-white/10 px-3 py-2">
@@ -233,7 +233,7 @@ export const MaintenanceVisual = memo(({ isActive }: { isActive: boolean }) => (
   <div className="flex h-full items-center justify-center">
     <div
       className="relative overflow-hidden rounded-lg border border-white/10 bg-black/40"
-      style={{ width: 204, height: 120 }}
+      style={{ width: 245, height: 144 }}
     >
       <div className="absolute left-3 top-2.5 flex items-center gap-1.5">
         <div
@@ -308,7 +308,7 @@ export const LanguageVisual = memo(({ isActive }: { isActive: boolean }) => {
     <div className="flex h-full items-center justify-center">
       <div className="text-center">
         <p
-          className="text-4xl font-light text-white transition-all duration-300"
+          className="text-5xl font-light text-white transition-all duration-300"
           style={{ opacity: show ? 1 : 0, transform: show ? "translateY(0)" : "translateY(7px)" }}
         >
           {LANGS[idx].word}
@@ -331,8 +331,8 @@ export const PaymentsVisual = memo(({ isActive }: { isActive: boolean }) => (
     <div
       className="relative rounded-xl border border-white/20 bg-gradient-to-br from-white/12 to-white/4 px-4 py-3"
       style={{
-        width: 148,
-        height: 90,
+        width: 178,
+        height: 108,
         transformStyle: "preserve-3d",
         animation: isActive ? "svc-card-flip 5.5s ease-in-out infinite" : "none",
       }}
@@ -367,8 +367,8 @@ export const UniqueVisual = memo(({ isActive }: { isActive: boolean }) => (
     <div
       className="border border-white/25 bg-white/5"
       style={{
-        width: 76,
-        height: 76,
+        width: 92,
+        height: 92,
         boxShadow: isActive ? "0 0 28px rgba(255,255,255,0.08)" : "none",
         animation: isActive ? "svc-morph 7s ease-in-out infinite" : "none",
         transition: "box-shadow 0.6s ease",
@@ -416,7 +416,7 @@ export const PerformanceVisual = memo(({ isActive }: { isActive: boolean }) => {
   return (
     <div className="flex h-full items-center justify-center">
       <div className="relative">
-        <svg width="140" height="140" viewBox="0 0 120 120">
+        <svg width="168" height="168" viewBox="0 0 120 120">
           {/* Track */}
           <circle
             cx="60" cy="60" r={R}
@@ -483,7 +483,7 @@ export const ClientInputVisual = memo(({ isActive }: { isActive: boolean }) => {
 
   return (
     <div className="flex h-full items-center justify-center">
-      <div className="w-52 space-y-2">
+      <div className="w-64 space-y-2">
         {CHAT.map((msg, i) => (
           <div
             key={i}
@@ -496,7 +496,7 @@ export const ClientInputVisual = memo(({ isActive }: { isActive: boolean }) => {
             }}
           >
             <div
-              className={`max-w-[72%] rounded-xl px-3 py-1.5 text-[10px] ${
+              className={`max-w-[72%] rounded-xl px-3 py-1.5 text-xs ${
                 msg.side === "right"
                   ? "rounded-tr-sm bg-white/15 text-white/80"
                   : "rounded-tl-sm border border-white/10 bg-white/5 text-white/50"
@@ -536,7 +536,7 @@ export const GEOVisual = memo(({ isActive }: { isActive: boolean }) => {
 
   return (
     <div className="flex h-full items-center justify-center">
-      <svg width="204" height="188" viewBox="0 0 204 188">
+      <svg width="245" height="226" viewBox="0 0 204 188">
         {GEO_EDGES.map(([a, b], i) => {
           const na = GEO_NODES[a], nb = GEO_NODES[b]
           const isLit = i === activeEdge
@@ -620,7 +620,7 @@ export const GlobeVisual = memo(({ isActive }: { isActive: boolean }) => {
           transition: "transform 0.9s ease",
         }}
       >
-        <svg width="156" height="156" viewBox="0 0 160 160">
+        <svg width="188" height="188" viewBox="0 0 160 160">
           {/* Globe outline */}
           <circle cx="80" cy="80" r="66" fill="none" stroke="white" strokeWidth="0.5" strokeOpacity="0.35" />
           {/* Latitude lines */}

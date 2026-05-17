@@ -379,7 +379,7 @@ const ServicesPage = () => {
                         </div>
                       </div>
                       {/* Visual — half the dropdown width */}
-                      <div className="hidden h-56 md:block">
+                      <div className="hidden h-64 md:block">
                         <ServiceVisual serviceNumber={service.number} isActive={isExpanded} />
                       </div>
                     </div>
