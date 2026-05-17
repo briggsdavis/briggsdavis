@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 import { projects } from "@/data/projects"
 import { Button } from "./ui/button"
 
-const featuredIds = ["refenti", "africa-growth-axis", "hormone-vitality-coaching", "nordic-seafood"]
+const featuredIds = ["hargarten", "refenti", "africa-growth-axis", "hormone-vitality-coaching"]
 const featuredProjects = featuredIds.map((id) => projects.find((p) => p.id === id)!).filter(Boolean)
 const featuredDelayClasses = [
   "[animation-delay:500ms]",
