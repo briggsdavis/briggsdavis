@@ -69,9 +69,9 @@ const Hero = () => {
           isVisible ? "animate-fade-in-up" : ""
         }`}
       >
-        Precision websites that elevate your brand, justify your prices,
+        Precision websites that elevate your brand,
         <br />
-        and grow your business.
+        justify your prices, and grow your business.
       </p>
 
       {/* CTAs */}
