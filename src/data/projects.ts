@@ -177,7 +177,7 @@ export const projects: Project[] = [
     name: "Hargarten",
     image: "/images/portfolio-hargarten.png",
     shortDescription:
-      "A luxury real estate firm that needed a premium digital presence to attract high-level clients — so we built a brand, a website, and a full CMS from the ground up.",
+      "A luxury real estate firm that needed a premium digital presence to attract high-level clients, so we built a brand, a website, and a full CMS from the ground up.",
     description:
       "A premium digital platform for a luxury real estate firm, built to communicate high status, establish credibility, and attract discerning clients through a refined brand and seamless backend.",
     problem:
