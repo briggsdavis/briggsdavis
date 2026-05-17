@@ -141,7 +141,7 @@ const OurPromise = () => {
   useEffect(() => {
     init()
 
-    const handleScroll = () => requestAnimationFrame(updateWheel)
+    const handleScroll = () => updateWheel()
     const handleResize = () => init()
 
     window.addEventListener("scroll", handleScroll, { passive: true })

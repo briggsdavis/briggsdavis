@@ -68,7 +68,7 @@ const Portfolio = () => {
   }, [handleScroll])
 
   return (
-    <section id="portfolio" ref={sectionRef} className="px-6 py-32">
+    <section id="portfolio" ref={sectionRef} className="px-6 pt-16 pb-32">
       <div className="mx-auto max-w-5xl">
         {/* Section Header */}
         <div className="mb-16">
