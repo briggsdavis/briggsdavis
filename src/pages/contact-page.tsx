@@ -1,9 +1,10 @@
-import { Mail, MessageCircle } from "lucide-react"
+import { ArrowRight, Mail, MessageCircle } from "lucide-react"
 import { useEffect } from "react"
 import maxwellImg from "@/assets/maxwell-briggs.webp"
 import nathanielImg from "@/assets/nathaniel-davis.jpg"
 import Footer from "@/components/footer"
 import Navbar from "@/components/navbar"
+import { Button } from "@/components/ui/button"
 
 const team = [
   {
@@ -48,9 +49,15 @@ const ContactPage = () => {
       {/* Hero */}
       <section className="px-6 pt-32 pb-16 text-center">
         <h1 className="mb-4 text-4xl font-bold tracking-tight md:text-6xl">Get in Touch</h1>
-        <p className="mx-auto max-w-xl text-lg text-muted-foreground">
+        <p className="mx-auto mb-8 max-w-xl text-lg text-muted-foreground">
           Ready to start your next project? Reach out to either of us directly.
         </p>
+        <Button variant="heroPrimary" size="hero" className="group" asChild>
+          <a href="https://calendly.com/ntedvs/website" target="_blank" rel="noopener noreferrer">
+            Book a Call
+            <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+          </a>
+        </Button>
       </section>
 
       {/* Contact Cards */}

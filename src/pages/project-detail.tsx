@@ -15,6 +15,12 @@ const projectVideos: Record<string, string> = {
   refenti: "/videos/refent.mp4",
 }
 
+const SectionLabel = ({ children }: { children: React.ReactNode }) => (
+  <span className="mb-3 block text-xs font-medium tracking-[0.3em] text-muted-foreground uppercase">
+    {children}
+  </span>
+)
+
 const ProjectDetail = () => {
   const { projectId } = useParams<{ projectId: string }>()
   const project = projects.find((p) => p.id === projectId)
@@ -49,9 +55,9 @@ const ProjectDetail = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
 
-      <div className="mx-auto max-w-5xl px-6 py-16 pt-32">
+      <div className="mx-auto max-w-5xl px-6 pb-24 pt-32">
         {/* Hero media */}
-        <div className="mb-12 animate-fade-in-up overflow-hidden rounded-2xl border border-border/30 opacity-0 delay-200">
+        <div className="mb-16 animate-fade-in-up overflow-hidden rounded-2xl border border-border/30 opacity-0 delay-200">
           {videoSrc ? (
             <video
               ref={videoRef}
@@ -71,39 +77,50 @@ const ProjectDetail = () => {
           )}
         </div>
 
-        {/* Content */}
-        <div className="grid gap-12 md:grid-cols-3">
-          <div className="md:col-span-2">
-            <h1 className="mb-6 animate-fade-in-up text-4xl font-semibold text-foreground opacity-0 delay-300 md:text-5xl">
-              {project.name}
-            </h1>
-            <p className="mb-8 animate-fade-in-up text-lg leading-relaxed text-muted-foreground opacity-0 delay-400">
-              {project.description}
-            </p>
+        {/* Title + description */}
+        <div className="mb-16 animate-fade-in-up opacity-0 delay-300">
+          <h1 className="mb-6 text-4xl font-semibold text-foreground md:text-5xl">
+            {project.name}
+          </h1>
+          <p className="max-w-2xl text-lg leading-relaxed text-muted-foreground">
+            {project.description}
+          </p>
+        </div>
 
-            {project.link && (
+        {/* Problem / Solution / Business Value */}
+        {(project.problem || project.solution || project.businessValue) && (
+          <div className="mb-16 grid gap-8 border-t border-border/40 pt-16 md:grid-cols-3">
+            {project.problem && (
+              <div className="animate-fade-in-up opacity-0 delay-400">
+                <SectionLabel>Problem</SectionLabel>
+                <p className="text-sm leading-relaxed text-foreground/80">{project.problem}</p>
+              </div>
+            )}
+            {project.solution && (
               <div className="animate-fade-in-up opacity-0 delay-500">
-                <Button variant="nav" size="lg" className="glass glint" asChild>
-                  <a href={project.link} target="_blank" rel="noopener noreferrer">
-                    Visit Website
-                    <ExternalLink className="ml-2 h-4 w-4" />
-                  </a>
-                </Button>
+                <SectionLabel>Solution</SectionLabel>
+                <p className="text-sm leading-relaxed text-foreground/80">{project.solution}</p>
+              </div>
+            )}
+            {project.businessValue && (
+              <div className="animate-fade-in-up opacity-0 delay-[600ms]">
+                <SectionLabel>Business Value</SectionLabel>
+                <p className="text-sm leading-relaxed text-foreground/80">{project.businessValue}</p>
               </div>
             )}
           </div>
+        )}
 
-          {/* Features */}
-          <div>
-            <h3 className="mb-6 animate-fade-in-up text-xs font-medium tracking-[0.3em] text-muted-foreground uppercase opacity-0 delay-400">
-              Key Features
-            </h3>
+        {/* Key Features + Visit link */}
+        <div className="grid gap-12 border-t border-border/40 pt-16 md:grid-cols-3">
+          <div className="md:col-span-2">
+            <SectionLabel>Key Features</SectionLabel>
             <ul className="space-y-4">
               {project.features.map((feature, i) => (
                 <li
                   key={feature}
                   className="flex animate-fade-in-up items-start gap-3 text-sm text-foreground/80 opacity-0"
-                  style={{ animationDelay: `${500 + i * 100}ms` }}
+                  style={{ animationDelay: `${700 + i * 80}ms` }}
                 >
                   <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-muted-foreground" />
                   {feature}
@@ -111,6 +128,17 @@ const ProjectDetail = () => {
               ))}
             </ul>
           </div>
+
+          {project.link && (
+            <div className="flex items-start animate-fade-in-up opacity-0 delay-[700ms]">
+              <Button variant="nav" size="lg" className="glass glint" asChild>
+                <a href={project.link} target="_blank" rel="noopener noreferrer">
+                  Visit Website
+                  <ExternalLink className="ml-2 h-4 w-4" />
+                </a>
+              </Button>
+            </div>
+          )}
         </div>
       </div>
 
