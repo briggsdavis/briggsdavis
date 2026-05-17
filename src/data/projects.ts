@@ -46,6 +46,8 @@ export const projects: Project[] = [
       "A specialist health coach had no effective way to communicate her expertise or convert visitors into clients without a compelling online presence.",
     solution:
       "We built a branded platform that showcases her services, builds trust through social proof, and drives bookings through a clear, personality-forward experience.",
+    businessValue:
+      "The platform established her credibility online, expanded her visibility in a crowded market, and gave prospective clients a clear path to book her services.",
     link: "https://hormonevitalitycoaching.com",
     features: [
       "Custom brand identity and visual language",
@@ -66,6 +68,8 @@ export const projects: Project[] = [
       "A specialized engineering firm across East Africa was losing credibility with potential clients because their web presence failed to reflect the true scope and quality of their capabilities.",
     solution:
       "We built a professional platform that clearly communicates their services, project portfolio, and regional expertise.",
+    businessValue:
+      "The platform positioned EASE as a credible regional authority, educated potential clients on the full range of their capabilities, and created a foundation for generating new project leads.",
     link: "https://ease-int.com",
     features: [
       "Multi-service portfolio presentation",
@@ -86,6 +90,8 @@ export const projects: Project[] = [
       "A bespoke jewelry designer had no online presence, no sales channel, and no way to manage products without developer support.",
     solution:
       "We built a full e-commerce platform with custom order capabilities and an integrated CMS that gave her complete control over her collections and customer experience.",
+    businessValue:
+      "The store gave Anne Silver an online presence that authentically tells her story, justifies her premium pricing, and drives customers from digital channels directly to her products.",
     link: "https://annesilver.com",
     features: [
       "Full e-commerce with cart and checkout",
@@ -108,6 +114,8 @@ export const projects: Project[] = [
       "Ethiopian restaurants, hotels, and individual buyers had no reliable supplier for verified Norwegian salmon and no trusted way to source, order, and track sushi-grade fish.",
     solution:
       "We built a direct-to-consumer platform connecting buyers directly to Norwegian Atlantic salmon, complete with real-time shipment tracking and a streamlined checkout flow.",
+    businessValue:
+      "The platform built trust with a new buyer base, provided the full infrastructure to facilitate online sales, and equipped the business with a backend CRM and analytics to manage relationships and track growth.",
     link: "https://nordicseafoods.org",
     features: [
       "Farm-to-table Norwegian salmon sourcing",
@@ -130,6 +138,8 @@ export const projects: Project[] = [
       "International companies and investors navigating African market entry had no credible digital touchpoint for AGA's advisory services; the firm had no web presence at all.",
     solution:
       "We built a strategic platform that positions AGA as a trusted authority, with a dynamic CMS giving the team full control to publish market insights and update content independently.",
+    businessValue:
+      "The platform established AGA's institutional credibility online, communicated their expertise to an international audience, and created a professional foundation for driving business development.",
     link: "https://aga-advisory.com/",
     features: [
       "Dynamic content management system",
@@ -150,6 +160,8 @@ export const projects: Project[] = [
       "Selling a historic stone property requiring renovation demanded more than a standard listing; the right buyer needed to feel the investment potential and Mediterranean lifestyle before ever speaking to an agent.",
     solution:
       "We built a single-property immersive experience with cinematic visuals and sound design that makes the vision tangible for a discerning buyer.",
+    businessValue:
+      "The site functions as a targeted marketing tool that educates the right buyer on the property's potential and actively works to bring the sale to close.",
     link: "https://bracstonehouse.com",
     features: [
       "Immersive sound and visual storytelling",
@@ -172,6 +184,8 @@ export const projects: Project[] = [
       "A premier real estate developer in Addis Ababa had no digital presence, making it impossible to establish the premium positioning needed to compete for high-end clients and development partners.",
     solution:
       "We built an institutional-grade platform with precision visual design, a CMS for news and events, and inquiry forms that convert interest into leads.",
+    businessValue:
+      "The platform communicates Refenti's luxury positioning, instills confidence in prospective investors and partners, and provides a direct channel for driving investment and development partnerships.",
     link: "https://refenti.com",
     features: [
       "Fully editable CMS for content management",
