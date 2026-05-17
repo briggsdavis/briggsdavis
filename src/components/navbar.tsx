@@ -4,7 +4,7 @@ import { Link, useLocation } from "react-router-dom"
 import { Button } from "@/components/ui/button"
 
 const navItems = [
-  { label: "SERVICES", href: "/services" },
+  { label: "OUR EXPERTISE", href: "/services" },
   { label: "PROCESS", href: "/process" },
   { label: "PORTFOLIO", href: "/projects" },
 ]
