@@ -124,7 +124,7 @@ const Portfolio = () => {
                   <div className="absolute inset-0 flex flex-col items-center justify-center bg-background/0 p-8 text-center opacity-0 transition-all duration-500 group-hover:bg-background/80 group-hover:opacity-100">
                     <h3 className="mb-3 text-2xl font-semibold text-foreground">{item.name}</h3>
                     <p className="mb-6 max-w-md text-sm leading-relaxed text-muted-foreground">
-                      {item.description}
+                      {item.shortDescription ?? item.description}
                     </p>
                     <Button variant="nav" size="sm" className="glass glint">
                       <span>Project Details</span>

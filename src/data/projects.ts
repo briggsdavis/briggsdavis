@@ -3,6 +3,7 @@ export interface Project {
   name: string
   image: string
   description: string
+  shortDescription?: string
   link: string | null
   features: string[]
   tags: string[]
@@ -30,6 +31,7 @@ export const projects: Project[] = [
     id: "hormone-vitality-coaching",
     name: "Hormone Vitality Coaching",
     image: "/images/portfolio-2.jpg",
+    shortDescription: "A specialist health coach with no digital presence — we built a branded platform that showcases her expertise and drives client bookings.",
     description:
       "Without a compelling online presence, a specialist health coach had no effective way to communicate her expertise or convert visitors into clients in a crowded wellness market. We built a branded platform that showcases her services, builds trust through social proof, and drives bookings through a clear, personality-forward experience.",
     link: "https://hormonevitalitycoaching.com",
@@ -78,6 +80,7 @@ export const projects: Project[] = [
     id: "nordic-seafood",
     name: "Nordic Seafood",
     image: "/images/portfolio-5.jpg",
+    shortDescription: "A Norwegian salmon supplier targeting East African buyers — we built a direct-to-consumer platform with real-time shipment tracking.",
     description:
       "Ethiopian restaurants, hotels, and individual buyers had no reliable supplier for verified Norwegian salmon and no trusted way to source, order, and track sushi-grade fish. We built a direct-to-consumer platform connecting buyers directly to Norwegian Atlantic salmon, complete with real-time shipment tracking and a streamlined checkout flow.",
     link: "https://nordicseafoods.org",
@@ -94,6 +97,7 @@ export const projects: Project[] = [
     id: "africa-growth-axis",
     name: "Africa Growth Axis",
     image: "/images/portfolio-aga.png",
+    shortDescription: "An African market entry advisory firm with no web presence — we built a strategic platform that positions them as a trusted authority.",
     description:
       "International companies and investors navigating African market entry had no credible digital touchpoint for AGA's advisory services — the firm had no web presence at all. We built a strategic platform that positions AGA as a trusted authority, with a dynamic CMS giving the team full control to publish market insights and update content independently.",
     link: "https://aga-advisory.com/",
@@ -126,6 +130,7 @@ export const projects: Project[] = [
     id: "refenti",
     name: "Refenti",
     image: "/images/portfolio-refenti.jpg",
+    shortDescription: "A premier real estate developer in Addis Ababa — we built their institutional-grade digital platform from the ground up.",
     description:
       "A premier real estate developer in Addis Ababa had no digital presence, making it impossible to establish the premium positioning needed to compete for high-end clients and development partners. We built an institutional-grade platform with precision visual design, a CMS for news and events, and inquiry forms that convert interest into leads.",
     link: "https://refenti.com",
