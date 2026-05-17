@@ -19,9 +19,9 @@ const processSteps = [
   },
   {
     number: "03",
-    title: "Refinement",
+    title: "Revision",
     description:
-      "We walk through the prototype together, gather your feedback, and shape the site around your specific needs. You have a direct say in every decision: copy, layout, features, tone. We keep iterating until it feels exactly right.",
+      "Dedicated revision rounds are included in every package to make sure the final product is exactly what you envisioned. We work through your feedback systematically, adjusting copy, layout, features, and tone until the site reflects your vision with precision.",
     image: "/images/process-3.jpg",
     video: "/videos/step-3.mp4",
   },
