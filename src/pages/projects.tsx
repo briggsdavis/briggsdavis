@@ -1,4 +1,4 @@
-import { ArrowRight } from "lucide-react"
+import { ArrowRight, ArrowDown } from "lucide-react"
 import { useEffect, useRef, useState, useCallback } from "react"
 import { Link } from "react-router-dom"
 import Footer from "@/components/footer"
@@ -55,24 +55,70 @@ const Projects = () => {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [handleScroll])
 
+  const scrollToWork = () => {
+    sectionRef.current?.scrollIntoView({ behavior: "smooth" })
+  }
+
   return (
     <div className="bg-background">
       <Navbar />
 
-      {/* Each project occupies 100vh of scroll distance */}
+      {/* ── Hero ── */}
+      <section className="relative flex min-h-screen flex-col items-center justify-center px-6 text-center">
+        <span className="mb-8 animate-fade-in-up text-xs font-medium tracking-[0.3em] text-muted-foreground uppercase opacity-0 delay-100">
+          Case Studies
+        </span>
+
+        <h1 className="animate-fade-in-up opacity-0 delay-200">
+          <span className="block text-6xl font-semibold leading-[0.95] tracking-tight text-foreground md:text-8xl lg:text-9xl">
+            Portfolio
+          </span>
+          <span className="mt-3 block font-display text-5xl italic text-muted-foreground md:text-7xl lg:text-8xl">
+            Our Curated Work
+          </span>
+        </h1>
+
+        <p className="mx-auto mt-10 max-w-lg animate-fade-in-up text-lg text-muted-foreground opacity-0 delay-300">
+          Precision-built digital experiences for businesses across real estate, e-commerce, health, engineering, and advisory sectors, spanning three continents.
+        </p>
+
+        <div className="mt-12 flex animate-fade-in-up flex-col items-center gap-6 opacity-0 delay-400">
+          <div className="flex flex-wrap justify-center gap-3">
+            {["Web Design", "E-Commerce", "Branding", "CMS", "Real Estate", "Advisory"].map((tag) => (
+              <span
+                key={tag}
+                className="rounded-full border border-border/40 px-4 py-1.5 text-xs font-medium tracking-[0.2em] text-muted-foreground/60 uppercase"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* Scroll cue */}
+        <button
+          onClick={scrollToWork}
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-muted-foreground/40 transition-colors duration-300 hover:text-muted-foreground animate-fade-in-up opacity-0 [animation-delay:900ms]"
+        >
+          <span className="font-mono text-[9px] tracking-[0.3em] uppercase">Scroll</span>
+          <ArrowDown className="h-4 w-4" />
+        </button>
+      </section>
+
+      {/* ── Sticky project scroll ── */}
       <div ref={sectionRef} style={{ height: `${projects.length * 100}vh` }}>
         <div className="sticky top-0 h-screen overflow-hidden">
           <div className="relative h-full w-full">
             {projects.map((project, i) => (
               <div
                 key={project.id}
-                className="absolute inset-0 flex items-center px-8 md:px-16 lg:px-24"
+                className="absolute inset-0 flex items-center px-8 md:px-12 lg:px-20"
                 style={{
                   opacity: opacities[i],
                   pointerEvents: opacities[i] > 0.5 ? "auto" : "none",
                 }}
               >
-                <div className="grid w-full items-center gap-12 pt-16 md:grid-cols-2 md:pt-20 lg:gap-24">
+                <div className="grid w-full items-center gap-10 pt-16 md:grid-cols-[2fr_3fr] md:pt-20 lg:gap-16">
                   {/* Left: title, tags, CTA */}
                   <div className="flex flex-col gap-6 md:gap-8">
                     <div className="flex flex-wrap gap-2">
@@ -86,7 +132,7 @@ const Projects = () => {
                       ))}
                     </div>
 
-                    <h2 className="text-4xl font-semibold leading-tight text-foreground md:text-5xl lg:text-6xl xl:text-7xl">
+                    <h2 className="text-3xl font-semibold leading-tight text-foreground md:text-4xl lg:text-5xl xl:text-6xl">
                       {project.name}
                     </h2>
 
@@ -101,12 +147,12 @@ const Projects = () => {
                     </Link>
                   </div>
 
-                  {/* Right: image */}
+                  {/* Right: image — 3fr column makes it ~60% wider than before */}
                   <div className="overflow-hidden rounded-2xl">
                     <img
                       src={project.image}
                       alt={project.name}
-                      className="aspect-[4/3] w-full object-cover object-top"
+                      className="aspect-[16/10] w-full object-cover object-top"
                     />
                   </div>
                 </div>
