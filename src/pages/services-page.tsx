@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react"
 import { Link } from "react-router-dom"
 import Footer from "@/components/footer"
 import Navbar from "@/components/navbar"
+import { ServiceVisual } from "@/components/service-visuals"
 import { Button } from "@/components/ui/button"
 
 const services = [
@@ -355,23 +356,32 @@ const ServicesPage = () => {
 
                 <div
                   className={`overflow-hidden transition-all duration-500 ease-out ${
-                    isExpanded ? "max-h-96 pb-8 opacity-100" : "max-h-0 opacity-0"
+                    isExpanded ? "max-h-[340px] pb-8 opacity-100" : "max-h-0 opacity-0"
                   }`}
                 >
                   <div className="pr-8 pl-14">
-                    <p className="mb-6 leading-relaxed text-muted-foreground">
-                      {service.description}
-                    </p>
-                    <div className="grid grid-cols-2 gap-3">
-                      {service.features.map((feature) => (
-                        <div
-                          key={feature}
-                          className="flex items-center gap-2 text-sm text-muted-foreground"
-                        >
-                          <span className="h-1 w-1 shrink-0 rounded-full bg-foreground" />
-                          {feature}
+                    <div className="flex items-start gap-8">
+                      {/* Text */}
+                      <div className="min-w-0 flex-1">
+                        <p className="mb-6 leading-relaxed text-muted-foreground">
+                          {service.description}
+                        </p>
+                        <div className="grid grid-cols-2 gap-3">
+                          {service.features.map((feature) => (
+                            <div
+                              key={feature}
+                              className="flex items-center gap-2 text-sm text-muted-foreground"
+                            >
+                              <span className="h-1 w-1 shrink-0 rounded-full bg-foreground" />
+                              {feature}
+                            </div>
+                          ))}
                         </div>
-                      ))}
+                      </div>
+                      {/* Visual */}
+                      <div className="hidden h-52 w-56 shrink-0 md:block">
+                        <ServiceVisual serviceNumber={service.number} isActive={isExpanded} />
+                      </div>
                     </div>
                   </div>
                 </div>
