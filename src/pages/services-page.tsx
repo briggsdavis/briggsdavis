@@ -360,9 +360,9 @@ const ServicesPage = () => {
                   }`}
                 >
                   <div className="pr-8 pl-14">
-                    <div className="flex items-start gap-8">
+                    <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
                       {/* Text */}
-                      <div className="min-w-0 flex-1">
+                      <div className="min-w-0">
                         <p className="mb-6 leading-relaxed text-muted-foreground">
                           {service.description}
                         </p>
@@ -378,8 +378,8 @@ const ServicesPage = () => {
                           ))}
                         </div>
                       </div>
-                      {/* Visual */}
-                      <div className="hidden h-52 w-56 shrink-0 md:block">
+                      {/* Visual — half the dropdown width */}
+                      <div className="hidden h-56 md:block">
                         <ServiceVisual serviceNumber={service.number} isActive={isExpanded} />
                       </div>
                     </div>

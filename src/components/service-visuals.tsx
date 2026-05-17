@@ -388,29 +388,35 @@ export const PerformanceVisual = memo(({ isActive }: { isActive: boolean }) => {
     setScore(0)
     const run = () => {
       handleRef.current = setInterval(() => {
-        s = Math.min(s + 3, 99)
+        s += 1
         setScore(s)
-        if (s >= 99) {
+        if (s >= 100) {
           if (handleRef.current) clearInterval(handleRef.current)
-          handleRef.current = setTimeout(run, 2800) as unknown as ReturnType<typeof setInterval>
-          s = 0
-          setScore(0)
+          // pause at 100 (green), then reset and loop
+          handleRef.current = setTimeout(() => {
+            setScore(0)
+            s = 0
+            run()
+          }, 2000) as unknown as ReturnType<typeof setInterval>
         }
-      }, 28)
+      }, 42)
     }
     run()
     return () => { if (handleRef.current) clearInterval(handleRef.current) }
   }, [isActive])
 
+  const complete = score === 100
   const R = 44
   const circumference = 2 * Math.PI * R
   const arc = circumference * 0.76
   const offset = arc - (score / 100) * arc
+  const strokeColor = complete ? "rgb(74,222,128)" : "white"
+  const textColor = complete ? "rgb(74,222,128)" : "white"
 
   return (
     <div className="flex h-full items-center justify-center">
       <div className="relative">
-        <svg width="120" height="120" viewBox="0 0 120 120">
+        <svg width="140" height="140" viewBox="0 0 120 120">
           {/* Track */}
           <circle
             cx="60" cy="60" r={R}
@@ -422,16 +428,24 @@ export const PerformanceVisual = memo(({ isActive }: { isActive: boolean }) => {
           {/* Progress */}
           <circle
             cx="60" cy="60" r={R}
-            fill="none" stroke="white" strokeWidth="3" strokeOpacity="0.7"
+            fill="none"
+            stroke={strokeColor}
+            strokeWidth="3"
+            strokeOpacity={complete ? 1 : 0.7}
             strokeDasharray={`${arc} ${circumference - arc}`}
             strokeDashoffset={offset}
             strokeLinecap="round"
             transform="rotate(122 60 60)"
-            style={{ transition: "stroke-dashoffset 0.025s linear" }}
+            style={{ transition: "stroke-dashoffset 0.04s linear, stroke 0.5s ease" }}
           />
         </svg>
         <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <span className="text-2xl font-semibold text-white tabular-nums">{score}</span>
+          <span
+            className="text-2xl font-semibold tabular-nums transition-colors duration-500"
+            style={{ color: textColor }}
+          >
+            {score}
+          </span>
           <span className="font-mono text-[8px] tracking-widest text-white/25 uppercase">Score</span>
         </div>
       </div>
