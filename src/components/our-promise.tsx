@@ -154,7 +154,7 @@ const OurPromise = () => {
   }, [init, updateWheel])
 
   return (
-    <section ref={sectionRef} id="promise" className="relative h-[200vh] w-full bg-background">
+    <section ref={sectionRef} id="promise" className="relative h-[130vh] w-full bg-background">
       {/* Sticky content container */}
       <div className="sticky top-0 left-0 flex h-screen w-full items-center">
         <div className="mx-auto w-full max-w-6xl px-6">
