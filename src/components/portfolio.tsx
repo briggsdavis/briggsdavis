@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 import { projects } from "@/data/projects"
 import { Button } from "./ui/button"
 
-const featuredIds = ["refenti", "africa-growth-axis", "hormone-vitality-coaching", "nordic-seafood"]
+const featuredIds = ["hargarten", "refenti", "africa-growth-axis", "hormone-vitality-coaching"]
 const featuredProjects = featuredIds.map((id) => projects.find((p) => p.id === id)!).filter(Boolean)
 const featuredDelayClasses = [
   "[animation-delay:500ms]",
@@ -68,7 +68,7 @@ const Portfolio = () => {
   }, [handleScroll])
 
   return (
-    <section id="portfolio" ref={sectionRef} className="px-6 py-32">
+    <section id="portfolio" ref={sectionRef} className="px-6 pt-16 pb-32">
       <div className="mx-auto max-w-5xl">
         {/* Section Header */}
         <div className="mb-16">

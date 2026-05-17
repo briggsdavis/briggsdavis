@@ -173,6 +173,30 @@ export const projects: Project[] = [
     year: 2025,
   },
   {
+    id: "hargarten",
+    name: "Hargarten",
+    image: "/images/portfolio-hargarten.png",
+    shortDescription:
+      "A luxury real estate firm that needed a premium digital presence to attract high-level clients — so we built a brand, a website, and a full CMS from the ground up.",
+    description:
+      "A premium digital platform for a luxury real estate firm, built to communicate high status, establish credibility, and attract discerning clients through a refined brand and seamless backend.",
+    problem:
+      "Hargarten needed to project a premium, high-status image to attract luxury clients, but had no digital presence, no established brand, and no way to manage listings or client inquiries without developer support.",
+    solution:
+      "We created a full brand identity, designed a luxury-feel website that communicates professionalism and exclusivity, and built a complete CMS that allows the admin to independently manage property listings, new content, and client inquiries.",
+    businessValue:
+      "The platform gave Hargarten the credibility and visual authority to compete for high-level clients, with a fully managed backend that lets the team update listings and handle inquiries without any technical support.",
+    link: "https://hargarten.vercel.app/",
+    features: [
+      "Custom luxury brand identity and logo design",
+      "Premium visual design communicating high status",
+      "Full CMS for managing property listings and content",
+      "Inquiry management system for client leads",
+    ],
+    tags: ["Real Estate", "Luxury", "Branding"],
+    year: 2025,
+  },
+  {
     id: "refenti",
     name: "Refenti",
     image: "/images/portfolio-refenti.jpg",
