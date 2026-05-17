@@ -101,7 +101,7 @@ const Services = () => {
               isVisible ? "animate-fade-in-up" : ""
             }`}
           >
-            Our Services
+            Our Expertise
           </h2>
           <div
             className={`mb-6 h-0.5 w-12 bg-muted-foreground opacity-0 delay-300 ${
@@ -164,7 +164,7 @@ const Services = () => {
         >
           <Button variant="nav" size="lg" className="glass glint" asChild>
             <Link to="/services">
-              <span>Explore All Services</span>
+              <span>Explore Our Expertise</span>
               <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
           </Button>

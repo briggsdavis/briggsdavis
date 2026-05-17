@@ -11,10 +11,13 @@ const scrollToPortfolio = () => {
 
 const Hero = () => {
   const [isVisible, setIsVisible] = useState(false)
+  const [videoVisible, setVideoVisible] = useState(false)
   const [scrollY, setScrollY] = useState(0)
 
   useEffect(() => {
     setIsVisible(true)
+    const t = setTimeout(() => setVideoVisible(true), 900)
+    return () => clearTimeout(t)
   }, [])
 
   useEffect(() => {
@@ -25,10 +28,14 @@ const Hero = () => {
 
   return (
     <section className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 pt-24">
-      {/* Video Background - oversized vertically to allow parallax without gaps */}
+      {/* Video Background */}
       <div
         className="absolute top-[-15%] z-0 h-[130%] w-full will-change-transform"
-        style={{ transform: `translateY(${scrollY * 0.35}px)` }}
+        style={{
+          transform: `translateY(${scrollY * 0.35}px)`,
+          opacity: videoVisible ? 1 : 0,
+          transition: "opacity 1.2s ease",
+        }}
       >
         <video
           autoPlay
@@ -69,9 +76,9 @@ const Hero = () => {
           isVisible ? "animate-fade-in-up" : ""
         }`}
       >
-        Precision websites that elevate your brand, justify your prices,
+        Precision websites that elevate your brand,
         <br />
-        and grow your business.
+        justify your prices, and grow your business.
       </p>
 
       {/* CTAs */}

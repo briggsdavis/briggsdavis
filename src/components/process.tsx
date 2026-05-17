@@ -5,7 +5,7 @@ const processSteps = [
     number: "01",
     title: "Initial Consultation",
     description:
-      "We start by understanding your business — your goals, your customers, your competitive landscape, and what you need your website to do for you. No assumptions, no templates. Just a focused conversation so we can build something that actually fits.",
+      "We start by understanding your business: your goals, your customers, your competitive landscape, and what you need your website to do for you. No assumptions, no templates. Just a focused conversation so we can build something that actually fits.",
     image: "/images/process-1.jpg",
     video: "/videos/step-1.mp4",
   },
@@ -13,15 +13,15 @@ const processSteps = [
     number: "02",
     title: "Prototype",
     description:
-      "We build a fully working version of your site based on everything we learned. You get something real to look at, click through, and react to — not wireframes or mockups. A live prototype that shows exactly what your website can be.",
+      "We build a fully working version of your site based on everything we learned. You get something real to look at, click through, and react to, not wireframes or mockups. A live prototype that shows exactly what your website can be.",
     image: "/images/process-2.jpg",
     video: "/videos/step-2.mp4",
   },
   {
     number: "03",
-    title: "Refinement",
+    title: "Revision",
     description:
-      "We walk through the prototype together, gather your feedback, and shape the site around your specific needs. You have a direct say in every decision — copy, layout, features, tone. We keep iterating until it feels exactly right.",
+      "Dedicated revision rounds are included in every package to make sure the final product is exactly what you envisioned. We work through your feedback systematically, adjusting copy, layout, features, and tone until the site reflects your vision with precision.",
     image: "/images/process-3.jpg",
     video: "/videos/step-3.mp4",
   },

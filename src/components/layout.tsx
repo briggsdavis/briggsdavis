@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react"
 import { Outlet, useLocation } from "react-router-dom"
 import { scrollToTop } from "@/lib/lenis-store"
 
-// Duration of the wipe in ms — slower = more dramatic
+// Duration of the wipe in ms; slower = more dramatic
 const DURATION = 1100
 
 // Ease-in-out cubic: slow start (edge approaches), fast mid, slow finish
@@ -46,7 +46,7 @@ const Layout = () => {
       if (t < 1) {
         rafRef.current = requestAnimationFrame(animate)
       } else {
-        // Done — disable backdrop-filter so the compositing layer is released
+        // Done: disable backdrop-filter so the compositing layer is released
         overlay.style.backdropFilter = "none"
         overlay.style.webkitBackdropFilter = "none"
       }
@@ -62,7 +62,7 @@ const Layout = () => {
       {/*
         All styles managed imperatively via the ref so React reconciliation
         never overwrites animation progress mid-frame.
-        z-[45] keeps the overlay below the Navbar (z-50) — Navbar stays sharp.
+        z-[45] keeps the overlay below the Navbar (z-50); Navbar stays sharp.
       */}
       <div ref={overlayRef} className="pointer-events-none fixed inset-0 z-[45]" />
       <Outlet />
