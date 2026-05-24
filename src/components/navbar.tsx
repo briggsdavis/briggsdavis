@@ -59,9 +59,7 @@ const Navbar = () => {
             scrolled ? "shadow-lg shadow-black/20" : ""
           }`}
           style={{
-            clipPath: expanded
-              ? "inset(0 0% 0 0% round 999px)"
-              : "inset(0 50% 0 50% round 999px)",
+            clipPath: expanded ? "inset(0 0% 0 0% round 999px)" : "inset(0 50% 0 50% round 999px)",
             transition: expanded
               ? "clip-path 0.9s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.5s"
               : "none",
@@ -87,7 +85,7 @@ const Navbar = () => {
               <Link
                 key={item.label}
                 to={item.href}
-                className={`relative whitespace-nowrap px-4 py-2 text-xs font-medium tracking-widest transition-all duration-300 ${
+                className={`relative px-4 py-2 text-xs font-medium tracking-widest whitespace-nowrap transition-all duration-300 ${
                   location.pathname === item.href
                     ? "text-foreground"
                     : "text-muted-foreground hover:text-foreground"

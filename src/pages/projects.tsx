@@ -10,9 +10,7 @@ const FADE_ZONE = 0.22
 
 const Projects = () => {
   const sectionRef = useRef<HTMLDivElement>(null)
-  const [opacities, setOpacities] = useState<number[]>(
-    projects.map((_, i) => (i === 0 ? 1 : 0)),
-  )
+  const [opacities, setOpacities] = useState<number[]>(projects.map((_, i) => (i === 0 ? 1 : 0)))
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -70,35 +68,38 @@ const Projects = () => {
         </span>
 
         <h1 className="animate-fade-in-up opacity-0 delay-200">
-          <span className="block text-6xl font-semibold leading-[0.95] tracking-tight text-foreground md:text-8xl lg:text-9xl">
+          <span className="block text-6xl leading-[0.95] font-semibold tracking-tight text-foreground md:text-8xl lg:text-9xl">
             Portfolio
           </span>
-          <span className="mt-3 block font-display text-5xl italic text-muted-foreground md:text-7xl lg:text-8xl">
+          <span className="mt-3 block font-display text-5xl text-muted-foreground italic md:text-7xl lg:text-8xl">
             Our Curated Work
           </span>
         </h1>
 
         <p className="mx-auto mt-10 max-w-lg animate-fade-in-up text-lg text-muted-foreground opacity-0 delay-300">
-          Precision-built digital experiences for businesses across real estate, e-commerce, health, engineering, and advisory sectors, spanning three continents.
+          Precision-built digital experiences for businesses across real estate, e-commerce, health,
+          engineering, and advisory sectors, spanning three continents.
         </p>
 
         <div className="mt-12 flex animate-fade-in-up flex-col items-center gap-6 opacity-0 delay-400">
           <div className="flex flex-wrap justify-center gap-3">
-            {["Web Design", "E-Commerce", "Branding", "CMS", "Real Estate", "Advisory"].map((tag) => (
-              <span
-                key={tag}
-                className="rounded-full border border-border/40 px-4 py-1.5 text-xs font-medium tracking-[0.2em] text-muted-foreground/60 uppercase"
-              >
-                {tag}
-              </span>
-            ))}
+            {["Web Design", "E-Commerce", "Branding", "CMS", "Real Estate", "Advisory"].map(
+              (tag) => (
+                <span
+                  key={tag}
+                  className="rounded-full border border-border/40 px-4 py-1.5 text-xs font-medium tracking-[0.2em] text-muted-foreground/60 uppercase"
+                >
+                  {tag}
+                </span>
+              ),
+            )}
           </div>
         </div>
 
         {/* Scroll cue */}
         <button
           onClick={scrollToWork}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-muted-foreground/40 transition-colors duration-300 hover:text-muted-foreground animate-fade-in-up opacity-0 [animation-delay:900ms]"
+          className="absolute bottom-10 left-1/2 flex -translate-x-1/2 animate-fade-in-up flex-col items-center gap-2 text-muted-foreground/40 opacity-0 transition-colors duration-300 [animation-delay:900ms] hover:text-muted-foreground"
         >
           <span className="font-mono text-[9px] tracking-[0.3em] uppercase">Scroll</span>
           <ArrowDown className="h-4 w-4" />
@@ -132,14 +133,11 @@ const Projects = () => {
                       ))}
                     </div>
 
-                    <h2 className="text-3xl font-semibold leading-tight text-foreground md:text-4xl lg:text-5xl xl:text-6xl">
+                    <h2 className="text-3xl leading-tight font-semibold text-foreground md:text-4xl lg:text-5xl xl:text-6xl">
                       {project.name}
                     </h2>
 
-                    <Link
-                      to={`/project/${project.id}`}
-                      tabIndex={opacities[i] > 0.5 ? 0 : -1}
-                    >
+                    <Link to={`/project/${project.id}`} tabIndex={opacities[i] > 0.5 ? 0 : -1}>
                       <Button variant="nav" size="lg" className="glass glint group w-fit">
                         <span>View Details</span>
                         <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />

@@ -55,7 +55,7 @@ const ProjectDetail = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
 
-      <div className="mx-auto max-w-5xl px-6 pb-24 pt-32">
+      <div className="mx-auto max-w-5xl px-6 pt-32 pb-24">
         {/* Hero media */}
         <div className="mb-16 animate-fade-in-up overflow-hidden rounded-2xl border border-border/30 opacity-0 delay-200">
           {videoSrc ? (
@@ -105,7 +105,9 @@ const ProjectDetail = () => {
             {project.businessValue && (
               <div className="animate-fade-in-up opacity-0 delay-[600ms]">
                 <SectionLabel>Business Value</SectionLabel>
-                <p className="text-sm leading-relaxed text-foreground/80">{project.businessValue}</p>
+                <p className="text-sm leading-relaxed text-foreground/80">
+                  {project.businessValue}
+                </p>
               </div>
             )}
           </div>
@@ -130,7 +132,7 @@ const ProjectDetail = () => {
           </div>
 
           {project.link && (
-            <div className="flex items-start animate-fade-in-up opacity-0 delay-[700ms]">
+            <div className="flex animate-fade-in-up items-start opacity-0 delay-[700ms]">
               <Button variant="nav" size="lg" className="glass glint" asChild>
                 <a href={project.link} target="_blank" rel="noopener noreferrer">
                   Visit Website

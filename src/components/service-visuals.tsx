@@ -71,12 +71,17 @@ export const SEOVisual = memo(({ isActive }: { isActive: boolean }) => {
       } else {
         timerRef.current = setTimeout(() => {
           setRank(7)
-          timerRef.current = setTimeout(() => { r = 7; tick() }, 600)
+          timerRef.current = setTimeout(() => {
+            r = 7
+            tick()
+          }, 600)
         }, 2800)
       }
     }
     timerRef.current = setTimeout(tick, 300)
-    return () => { if (timerRef.current) clearTimeout(timerRef.current) }
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current)
+    }
   }, [isActive])
 
   const pct = Math.round(((8 - rank) / 7) * 100)
@@ -117,7 +122,10 @@ export const RapidDevVisual = memo(({ isActive }: { isActive: boolean }) => {
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   useEffect(() => {
-    if (!isActive) { setVisible(0); return }
+    if (!isActive) {
+      setVisible(0)
+      return
+    }
     const show = (i: number) => {
       setVisible(i + 1)
       if (i < CODE_LINES.length - 1) {
@@ -130,7 +138,9 @@ export const RapidDevVisual = memo(({ isActive }: { isActive: boolean }) => {
       }
     }
     timerRef.current = setTimeout(() => show(0), 200)
-    return () => { if (timerRef.current) clearTimeout(timerRef.current) }
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current)
+    }
   }, [isActive])
 
   return (
@@ -172,7 +182,11 @@ export const CMSVisual = memo(({ isActive }: { isActive: boolean }) => {
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
 
   useEffect(() => {
-    if (!isActive) { setIdx(0); setTyping(false); return }
+    if (!isActive) {
+      setIdx(0)
+      setTyping(false)
+      return
+    }
     timerRef.current = setInterval(() => {
       setTyping(true)
       setTimeout(() => {
@@ -180,7 +194,9 @@ export const CMSVisual = memo(({ isActive }: { isActive: boolean }) => {
         setTyping(false)
       }, 380)
     }, 2000)
-    return () => { if (timerRef.current) clearInterval(timerRef.current) }
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current)
+    }
   }, [isActive])
 
   return (
@@ -235,7 +251,7 @@ export const MaintenanceVisual = memo(({ isActive }: { isActive: boolean }) => (
       className="relative overflow-hidden rounded-lg border border-white/10 bg-black/40"
       style={{ width: 245, height: 144 }}
     >
-      <div className="absolute left-3 top-2.5 flex items-center gap-1.5">
+      <div className="absolute top-2.5 left-3 flex items-center gap-1.5">
         <div
           className="h-1.5 w-1.5 rounded-full bg-green-400"
           style={{ animation: isActive ? "svc-pulse-dot 2s ease-in-out infinite" : "none" }}
@@ -282,12 +298,12 @@ export const MaintenanceVisual = memo(({ isActive }: { isActive: boolean }) => (
 
 // ─── 06 Multi-Language Support ────────────────────────────────────────────
 const LANGS = [
-  { word: "Hello",    code: "EN" },
-  { word: "Bonjour",  code: "FR" },
-  { word: "Hola",     code: "ES" },
-  { word: "مرحبا",    code: "AR" },
+  { word: "Hello", code: "EN" },
+  { word: "Bonjour", code: "FR" },
+  { word: "Hola", code: "ES" },
+  { word: "مرحبا", code: "AR" },
   { word: "こんにちは", code: "JA" },
-  { word: "Ciao",     code: "IT" },
+  { word: "Ciao", code: "IT" },
 ]
 
 export const LanguageVisual = memo(({ isActive }: { isActive: boolean }) => {
@@ -296,12 +312,21 @@ export const LanguageVisual = memo(({ isActive }: { isActive: boolean }) => {
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
 
   useEffect(() => {
-    if (!isActive) { setIdx(0); setShow(true); return }
+    if (!isActive) {
+      setIdx(0)
+      setShow(true)
+      return
+    }
     timerRef.current = setInterval(() => {
       setShow(false)
-      setTimeout(() => { setIdx((i) => (i + 1) % LANGS.length); setShow(true) }, 340)
+      setTimeout(() => {
+        setIdx((i) => (i + 1) % LANGS.length)
+        setShow(true)
+      }, 340)
     }, 1900)
-    return () => { if (timerRef.current) clearInterval(timerRef.current) }
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current)
+    }
   }, [isActive])
 
   return (
@@ -383,7 +408,10 @@ export const PerformanceVisual = memo(({ isActive }: { isActive: boolean }) => {
   const handleRef = useRef<ReturnType<typeof setInterval> | null>(null)
 
   useEffect(() => {
-    if (!isActive) { setScore(0); return }
+    if (!isActive) {
+      setScore(0)
+      return
+    }
     let s = 0
     setScore(0)
     const run = () => {
@@ -402,7 +430,9 @@ export const PerformanceVisual = memo(({ isActive }: { isActive: boolean }) => {
       }, 42)
     }
     run()
-    return () => { if (handleRef.current) clearInterval(handleRef.current) }
+    return () => {
+      if (handleRef.current) clearInterval(handleRef.current)
+    }
   }, [isActive])
 
   const complete = score === 100
@@ -419,15 +449,22 @@ export const PerformanceVisual = memo(({ isActive }: { isActive: boolean }) => {
         <svg width="168" height="168" viewBox="0 0 120 120">
           {/* Track */}
           <circle
-            cx="60" cy="60" r={R}
-            fill="none" stroke="white" strokeWidth="3" strokeOpacity="0.08"
+            cx="60"
+            cy="60"
+            r={R}
+            fill="none"
+            stroke="white"
+            strokeWidth="3"
+            strokeOpacity="0.08"
             strokeDasharray={`${arc} ${circumference - arc}`}
             strokeLinecap="round"
             transform="rotate(122 60 60)"
           />
           {/* Progress */}
           <circle
-            cx="60" cy="60" r={R}
+            cx="60"
+            cy="60"
+            r={R}
             fill="none"
             stroke={strokeColor}
             strokeWidth="3"
@@ -446,7 +483,9 @@ export const PerformanceVisual = memo(({ isActive }: { isActive: boolean }) => {
           >
             {score}
           </span>
-          <span className="font-mono text-[8px] tracking-widest text-white/25 uppercase">Score</span>
+          <span className="font-mono text-[8px] tracking-widest text-white/25 uppercase">
+            Score
+          </span>
         </div>
       </div>
     </div>
@@ -456,7 +495,7 @@ export const PerformanceVisual = memo(({ isActive }: { isActive: boolean }) => {
 // ─── 10 Client Input ──────────────────────────────────────────────────────
 const CHAT = [
   { side: "right", text: "Here's the first concept." },
-  { side: "left",  text: "Love it. Can we go darker?" },
+  { side: "left", text: "Love it. Can we go darker?" },
   { side: "right", text: "Done. Pushed live." },
 ]
 
@@ -465,7 +504,10 @@ export const ClientInputVisual = memo(({ isActive }: { isActive: boolean }) => {
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   useEffect(() => {
-    if (!isActive) { setCount(0); return }
+    if (!isActive) {
+      setCount(0)
+      return
+    }
     const show = (i: number) => {
       setCount(i + 1)
       if (i < CHAT.length - 1) {
@@ -478,7 +520,9 @@ export const ClientInputVisual = memo(({ isActive }: { isActive: boolean }) => {
       }
     }
     timerRef.current = setTimeout(() => show(0), 300)
-    return () => { if (timerRef.current) clearTimeout(timerRef.current) }
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current)
+    }
   }, [isActive])
 
   return (
@@ -513,37 +557,56 @@ export const ClientInputVisual = memo(({ isActive }: { isActive: boolean }) => {
 
 // ─── 11 Generative Engine Optimisation ───────────────────────────────────
 const GEO_NODES = [
-  { x: 102, y: 32,  label: "AI"  },
-  { x: 38,  y: 82,  label: "LLM" },
-  { x: 166, y: 82,  label: "GPT" },
-  { x: 60,  y: 152, label: "SEO" },
+  { x: 102, y: 32, label: "AI" },
+  { x: 38, y: 82, label: "LLM" },
+  { x: 166, y: 82, label: "GPT" },
+  { x: 60, y: 152, label: "SEO" },
   { x: 144, y: 152, label: "SEM" },
   { x: 102, y: 108, label: "You" },
 ]
-const GEO_EDGES = [[0,1],[0,2],[0,5],[1,3],[1,5],[2,4],[2,5],[3,5],[4,5]]
+const GEO_EDGES = [
+  [0, 1],
+  [0, 2],
+  [0, 5],
+  [1, 3],
+  [1, 5],
+  [2, 4],
+  [2, 5],
+  [3, 5],
+  [4, 5],
+]
 
 export const GEOVisual = memo(({ isActive }: { isActive: boolean }) => {
   const [activeEdge, setActiveEdge] = useState(-1)
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
 
   useEffect(() => {
-    if (!isActive) { setActiveEdge(-1); return }
+    if (!isActive) {
+      setActiveEdge(-1)
+      return
+    }
     timerRef.current = setInterval(() => {
       setActiveEdge((e) => (e + 1) % GEO_EDGES.length)
     }, 380)
-    return () => { if (timerRef.current) clearInterval(timerRef.current) }
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current)
+    }
   }, [isActive])
 
   return (
     <div className="flex h-full items-center justify-center">
       <svg width="245" height="226" viewBox="0 0 204 188">
         {GEO_EDGES.map(([a, b], i) => {
-          const na = GEO_NODES[a], nb = GEO_NODES[b]
+          const na = GEO_NODES[a],
+            nb = GEO_NODES[b]
           const isLit = i === activeEdge
           return (
             <line
               key={i}
-              x1={na.x} y1={na.y} x2={nb.x} y2={nb.y}
+              x1={na.x}
+              y1={na.y}
+              x2={nb.x}
+              y2={nb.y}
               stroke="white"
               strokeWidth={isLit ? 1.2 : 0.5}
               strokeOpacity={isLit ? 0.8 : 0.12}
@@ -557,7 +620,8 @@ export const GEOVisual = memo(({ isActive }: { isActive: boolean }) => {
           return (
             <g key={i}>
               <circle
-                cx={node.x} cy={node.y}
+                cx={node.x}
+                cy={node.y}
                 r={isYou ? 13 : 9}
                 fill="none"
                 stroke="white"
@@ -565,16 +629,20 @@ export const GEOVisual = memo(({ isActive }: { isActive: boolean }) => {
                 strokeOpacity={isYou ? 0.55 : 0.25}
               />
               <circle
-                cx={node.x} cy={node.y}
+                cx={node.x}
+                cy={node.y}
                 r={isYou ? 5 : 3}
                 fill="white"
                 fillOpacity={isYou ? 0.85 : 0.4}
               />
               <text
-                x={node.x} y={node.y + (isYou ? 25 : 21)}
+                x={node.x}
+                y={node.y + (isYou ? 25 : 21)}
                 textAnchor="middle"
-                fill="white" fillOpacity="0.35"
-                fontSize="7.5" fontFamily="monospace"
+                fill="white"
+                fillOpacity="0.35"
+                fontSize="7.5"
+                fontFamily="monospace"
               >
                 {node.label}
               </text>
@@ -588,9 +656,9 @@ export const GEOVisual = memo(({ isActive }: { isActive: boolean }) => {
 
 // ─── 12 Global Client Experience ─────────────────────────────────────────
 const GLOBE_DOTS = [
-  { x: 112, y: 46,  label: "EU" },
-  { x: 108, y: 90,  label: "AF" },
-  { x: 36,  y: 64,  label: "AM" },
+  { x: 112, y: 46, label: "EU" },
+  { x: 108, y: 90, label: "AF" },
+  { x: 36, y: 64, label: "AM" },
 ]
 
 export const GlobeVisual = memo(({ isActive }: { isActive: boolean }) => {
@@ -606,7 +674,10 @@ export const GlobeVisual = memo(({ isActive }: { isActive: boolean }) => {
       rafRef.current = requestAnimationFrame(spin)
     }
     rafRef.current = requestAnimationFrame(spin)
-    return () => { cancelAnimationFrame(rafRef.current); lastRef.current = 0 }
+    return () => {
+      cancelAnimationFrame(rafRef.current)
+      lastRef.current = 0
+    }
   }, [isActive])
 
   const toRad = (d: number) => (d * Math.PI) / 180
@@ -622,16 +693,27 @@ export const GlobeVisual = memo(({ isActive }: { isActive: boolean }) => {
       >
         <svg width="188" height="188" viewBox="0 0 160 160">
           {/* Globe outline */}
-          <circle cx="80" cy="80" r="66" fill="none" stroke="white" strokeWidth="0.5" strokeOpacity="0.35" />
+          <circle
+            cx="80"
+            cy="80"
+            r="66"
+            fill="none"
+            stroke="white"
+            strokeWidth="0.5"
+            strokeOpacity="0.35"
+          />
           {/* Latitude lines */}
-          {([-36, -18, 0, 18, 36]).map((off, i) => {
+          {[-36, -18, 0, 18, 36].map((off, i) => {
             const s = Math.cos(toRad(off * 1.8)) * 0.96
             return (
               <ellipse
                 key={i}
-                cx="80" cy={80 + off}
-                rx={66 * s} ry={11 * s}
-                fill="none" stroke="white"
+                cx="80"
+                cy={80 + off}
+                rx={66 * s}
+                ry={11 * s}
+                fill="none"
+                stroke="white"
                 strokeWidth="0.5"
                 strokeOpacity={off === 0 ? 0.22 : 0.1}
               />
@@ -641,9 +723,12 @@ export const GlobeVisual = memo(({ isActive }: { isActive: boolean }) => {
           {[0, 60, 120].map((offset, i) => (
             <ellipse
               key={i}
-              cx="80" cy="80"
-              rx={rx(offset)} ry="66"
-              fill="none" stroke="white"
+              cx="80"
+              cy="80"
+              rx={rx(offset)}
+              ry="66"
+              fill="none"
+              stroke="white"
               strokeWidth="0.5"
               strokeOpacity={0.2 - i * 0.04}
             />
@@ -652,16 +737,22 @@ export const GlobeVisual = memo(({ isActive }: { isActive: boolean }) => {
           {GLOBE_DOTS.map((dot) => (
             <g key={dot.label}>
               <circle
-                cx={dot.x} cy={dot.y} r="6"
-                fill="white" fillOpacity="0.06"
+                cx={dot.x}
+                cy={dot.y}
+                r="6"
+                fill="white"
+                fillOpacity="0.06"
                 style={{ animation: isActive ? "svc-pulse-dot 2.4s ease-in-out infinite" : "none" }}
               />
               <circle cx={dot.x} cy={dot.y} r="2.5" fill="white" fillOpacity="0.75" />
               <text
-                x={dot.x} y={dot.y - 9}
+                x={dot.x}
+                y={dot.y - 9}
                 textAnchor="middle"
-                fill="white" fillOpacity="0.3"
-                fontSize="7" fontFamily="monospace"
+                fill="white"
+                fillOpacity="0.3"
+                fontSize="7"
+                fontFamily="monospace"
               >
                 {dot.label}
               </text>
@@ -672,11 +763,16 @@ export const GlobeVisual = memo(({ isActive }: { isActive: boolean }) => {
             GLOBE_DOTS.slice(i + 1).map((b) => (
               <line
                 key={`${a.label}-${b.label}`}
-                x1={a.x} y1={a.y} x2={b.x} y2={b.y}
-                stroke="white" strokeWidth="0.5" strokeOpacity="0.14"
+                x1={a.x}
+                y1={a.y}
+                x2={b.x}
+                y2={b.y}
+                stroke="white"
+                strokeWidth="0.5"
+                strokeOpacity="0.14"
                 strokeDasharray="3 5"
               />
-            ))
+            )),
           )}
         </svg>
       </div>
@@ -693,18 +789,31 @@ export const ServiceVisual = ({
   isActive: boolean
 }) => {
   switch (serviceNumber) {
-    case "01": return <GlobeVisual isActive={isActive} />
-    case "02": return <MobileVisual isActive={isActive} />
-    case "03": return <SEOVisual isActive={isActive} />
-    case "04": return <RapidDevVisual isActive={isActive} />
-    case "05": return <LanguageVisual isActive={isActive} />
-    case "06": return <PaymentsVisual isActive={isActive} />
-    case "07": return <CMSVisual isActive={isActive} />
-    case "08": return <MaintenanceVisual isActive={isActive} />
-    case "09": return <UniqueVisual isActive={isActive} />
-    case "10": return <PerformanceVisual isActive={isActive} />
-    case "11": return <ClientInputVisual isActive={isActive} />
-    case "12": return <GEOVisual isActive={isActive} />
-    default:   return null
+    case "01":
+      return <GlobeVisual isActive={isActive} />
+    case "02":
+      return <MobileVisual isActive={isActive} />
+    case "03":
+      return <SEOVisual isActive={isActive} />
+    case "04":
+      return <RapidDevVisual isActive={isActive} />
+    case "05":
+      return <LanguageVisual isActive={isActive} />
+    case "06":
+      return <PaymentsVisual isActive={isActive} />
+    case "07":
+      return <CMSVisual isActive={isActive} />
+    case "08":
+      return <MaintenanceVisual isActive={isActive} />
+    case "09":
+      return <UniqueVisual isActive={isActive} />
+    case "10":
+      return <PerformanceVisual isActive={isActive} />
+    case "11":
+      return <ClientInputVisual isActive={isActive} />
+    case "12":
+      return <GEOVisual isActive={isActive} />
+    default:
+      return null
   }
 }
