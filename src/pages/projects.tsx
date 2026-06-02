@@ -1,60 +1,40 @@
 import { ArrowRight, ArrowDown } from "lucide-react"
-import { useEffect, useRef, useState, useCallback } from "react"
+import { useEffect, useRef, useState } from "react"
 import { Link } from "react-router-dom"
 import Footer from "@/components/footer"
 import Navbar from "@/components/navbar"
 import { Button } from "@/components/ui/button"
 import { projects } from "@/data/projects"
 
-const FADE_ZONE = 0.22
-
 const Projects = () => {
-  const sectionRef = useRef<HTMLDivElement>(null)
-  const [opacities, setOpacities] = useState<number[]>(projects.map((_, i) => (i === 0 ? 1 : 0)))
+  const listRef = useRef<HTMLDivElement>(null)
+  const [visibleSet, setVisibleSet] = useState<Set<number>>(new Set())
 
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
 
-  const handleScroll = useCallback(() => {
-    if (!sectionRef.current) return
-    const rect = sectionRef.current.getBoundingClientRect()
-    const scrolled = Math.max(0, -rect.top)
-    const vh = window.innerHeight
-    const maxScroll = (projects.length - 1) * vh
-    const clamped = Math.min(scrolled, maxScroll)
-
-    const rawIndex = clamped / vh
-    const currentSlot = Math.floor(rawIndex)
-    const slotProgress = rawIndex - currentSlot
-
-    const newOpacities = projects.map((_, i) => {
-      if (i === currentSlot) {
-        if (slotProgress > 1 - FADE_ZONE) {
-          return 1 - (slotProgress - (1 - FADE_ZONE)) / FADE_ZONE
-        }
-        return 1
-      }
-      if (i === currentSlot + 1) {
-        if (slotProgress > 1 - FADE_ZONE) {
-          return (slotProgress - (1 - FADE_ZONE)) / FADE_ZONE
-        }
-        return 0
-      }
-      return 0
+  useEffect(() => {
+    const observers: IntersectionObserver[] = []
+    const cards = listRef.current?.querySelectorAll<HTMLElement>("[data-project-card]")
+    cards?.forEach((card, i) => {
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setVisibleSet((prev) => new Set(prev).add(i))
+            observer.disconnect()
+          }
+        },
+        { threshold: 0.1 },
+      )
+      observer.observe(card)
+      observers.push(observer)
     })
-
-    setOpacities(newOpacities)
+    return () => observers.forEach((o) => o.disconnect())
   }, [])
 
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll, { passive: true })
-    handleScroll()
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [handleScroll])
-
   const scrollToWork = () => {
-    sectionRef.current?.scrollIntoView({ behavior: "smooth" })
+    listRef.current?.scrollIntoView({ behavior: "smooth" })
   }
 
   return (
@@ -106,57 +86,63 @@ const Projects = () => {
         </button>
       </section>
 
-      {/* ── Sticky project scroll ── */}
-      <div ref={sectionRef} style={{ height: `${projects.length * 100}vh` }}>
-        <div className="sticky top-0 h-screen overflow-hidden">
-          <div className="relative h-full w-full">
-            {projects.map((project, i) => (
-              <div
-                key={project.id}
-                className="absolute inset-0 flex items-center px-8 md:px-12 lg:px-20"
-                style={{
-                  opacity: opacities[i],
-                  pointerEvents: opacities[i] > 0.5 ? "auto" : "none",
-                }}
-              >
-                <div className="grid w-full items-center gap-10 pt-16 md:grid-cols-[2fr_3fr] md:pt-20 lg:gap-16">
-                  {/* Left: title, tags, CTA */}
-                  <div className="flex flex-col gap-6 md:gap-8">
-                    <div className="flex flex-wrap gap-2">
-                      {project.tags.slice(0, 2).map((tag) => (
-                        <span
-                          key={tag}
-                          className="rounded-full border border-border/60 px-4 py-1.5 text-xs font-medium tracking-[0.25em] text-muted-foreground uppercase"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-
-                    <h2 className="text-3xl leading-tight font-semibold text-foreground md:text-4xl lg:text-5xl xl:text-6xl">
-                      {project.name}
-                    </h2>
-
-                    <Link to={`/project/${project.id}`} tabIndex={opacities[i] > 0.5 ? 0 : -1}>
-                      <Button variant="nav" size="lg" className="glass glint group w-fit">
-                        <span>View Details</span>
-                        <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-                      </Button>
-                    </Link>
+      {/* ── Project list ── */}
+      <div ref={listRef} className="mx-auto max-w-6xl px-6 pb-32 pt-8">
+        <div className="flex flex-col gap-16">
+          {projects.map((project, i) => (
+            <div
+              key={project.id}
+              data-project-card
+              className="opacity-0 transition-all duration-700 ease-out"
+              style={
+                visibleSet.has(i)
+                  ? { opacity: 1, transform: "translateY(0)" }
+                  : { opacity: 0, transform: "translateY(40px)" }
+              }
+            >
+              <div className="grid items-center gap-8 md:grid-cols-[2fr_3fr] md:gap-12">
+                {/* Left: title, tags, CTA */}
+                <div className="flex flex-col gap-5">
+                  <div className="flex flex-wrap gap-2">
+                    {project.tags.slice(0, 2).map((tag) => (
+                      <span
+                        key={tag}
+                        className="rounded-full border border-border/60 px-4 py-1.5 text-xs font-medium tracking-[0.25em] text-muted-foreground uppercase"
+                      >
+                        {tag}
+                      </span>
+                    ))}
                   </div>
 
-                  {/* Right: image — 3fr column makes it ~60% wider than before */}
-                  <div className="overflow-hidden rounded-2xl">
-                    <img
-                      src={project.image}
-                      alt={project.name}
-                      className="aspect-[16/10] w-full object-cover object-top"
-                    />
-                  </div>
+                  <h2 className="text-3xl font-semibold leading-tight text-foreground md:text-4xl">
+                    {project.name}
+                  </h2>
+
+                  <p className="text-sm leading-relaxed text-muted-foreground">
+                    {project.shortDescription ?? project.description}
+                  </p>
+
+                  <Link to={`/project/${project.id}`}>
+                    <Button variant="nav" size="lg" className="glass glint group w-fit">
+                      <span>View Details</span>
+                      <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                    </Button>
+                  </Link>
                 </div>
+
+                {/* Right: image */}
+                <Link to={`/project/${project.id}`} className="block overflow-hidden rounded-2xl">
+                  <img
+                    src={project.image}
+                    alt={project.name}
+                    className="aspect-[16/10] w-full object-cover object-top transition-transform duration-500 hover:scale-105"
+                  />
+                </Link>
               </div>
-            ))}
-          </div>
+
+              {i < projects.length - 1 && <div className="mt-16 h-px bg-border/30" />}
+            </div>
+          ))}
         </div>
       </div>
 
