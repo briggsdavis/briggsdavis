@@ -153,7 +153,7 @@ export const projects: Project[] = [
   {
     id: "brac-stone-house",
     name: "Brac Stone House",
-    image: "/images/brac",
+    image: "/brac.png",
     description:
       "An immersive single-property experience for a historic Mediterranean stone house on the island of Brac, crafted to attract a discerning buyer.",
     problem:
@@ -170,6 +170,31 @@ export const projects: Project[] = [
       "Cinematic property experience to drive sales",
     ],
     tags: ["Real Estate", "Immersive", "Property"],
+    year: 2025,
+  },
+  {
+    id: "butcher-and-the-rye",
+    name: "Butcher and the Rye",
+    image: "/butcher.png",
+    shortDescription:
+      "A Pittsburgh restaurant with serious character, so we built a website that matches it — rustic, moody, and built to fill tables.",
+    description:
+      "A full-featured website for Butcher and the Rye, a celebrated Pittsburgh restaurant, built to reflect the venue's rustic, moody brand identity and drive reservations.",
+    problem:
+      "Butcher and the Rye needed a digital presence as distinctive as the restaurant itself — one that captured its atmosphere, ranked in search, and made it effortless for guests to book a table.",
+    solution:
+      "We designed a website with a rustic, moody visual language that fits the restaurant's brand, integrated a reservations system for seamless bookings, and built in a CMS so the team can manage content independently.",
+    businessValue:
+      "The site converts discovery into reservations, extends the restaurant's identity online, and gives the team full control over menus and content without developer support.",
+    link: "https://butcherandtherye.com",
+    features: [
+      "Rustic, moody design reflecting the restaurant's brand",
+      "Integrated reservations system",
+      "Backend CMS for menus and content management",
+      "SEO-optimized structure for local search visibility",
+      "Fully mobile-friendly across all devices",
+    ],
+    tags: ["Restaurant", "CMS", "Web Design"],
     year: 2025,
   },
   {
