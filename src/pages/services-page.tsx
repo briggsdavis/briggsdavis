@@ -1,5 +1,5 @@
 import { ArrowRight, Plus } from "lucide-react"
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useLayoutEffect, useRef, useState } from "react"
 import { Link } from "react-router-dom"
 import Footer from "@/components/footer"
 import Navbar from "@/components/navbar"
@@ -186,8 +186,11 @@ const contexts = [
 
 const ServicesPage = () => {
   const [introVisible, setIntroVisible] = useState(false)
-  const [expandedIndex, setExpandedIndex] = useState<number | null>(null)
+  // Per-service open amount (0 = collapsed, 1 = fully open), driven by scroll position.
+  const [progresses, setProgresses] = useState<number[]>(() => services.map(() => 0))
   const headerRefs = useRef<(HTMLDivElement | null)[]>([])
+  const contentRefs = useRef<(HTMLDivElement | null)[]>([])
+  const naturalHeights = useRef<number[]>([])
   const rafRef = useRef(0)
 
   useEffect(() => {
@@ -196,25 +199,33 @@ const ServicesPage = () => {
     return () => clearTimeout(timer)
   }, [])
 
-  // Expand whichever service header sits closest to the vertical center of the viewport.
+  // Measure each panel's natural height so we can open it proportionally.
+  useLayoutEffect(() => {
+    const measure = () => {
+      naturalHeights.current = contentRefs.current.map((el) => el?.scrollHeight ?? 0)
+    }
+    measure()
+    window.addEventListener("resize", measure)
+    return () => window.removeEventListener("resize", measure)
+  }, [])
+
+  // Open each service in proportion to how close its header is to the viewport
+  // center, so panels grow and shrink gradually as the user scrolls.
   useEffect(() => {
     const handleScroll = () => {
       cancelAnimationFrame(rafRef.current)
       rafRef.current = requestAnimationFrame(() => {
         const screenCenter = window.innerHeight / 2
-        let closest: number | null = null
-        let minDistance = Infinity
-        headerRefs.current.forEach((el, i) => {
-          if (!el) return
+        const maxDistance = window.innerHeight * 0.45
+        const next = headerRefs.current.map((el) => {
+          if (!el) return 0
           const rect = el.getBoundingClientRect()
           const center = rect.top + rect.height / 2
           const distance = Math.abs(center - screenCenter)
-          if (distance < minDistance) {
-            minDistance = distance
-            closest = i
-          }
+          const raw = 1 - Math.min(distance / maxDistance, 1)
+          return raw * raw // ease so the centered item leads and neighbours stay subtle
         })
-        setExpandedIndex(closest)
+        setProgresses(next)
       })
     }
     window.addEventListener("scroll", handleScroll, { passive: true })
@@ -339,15 +350,16 @@ const ServicesPage = () => {
           </Reveal>
 
           {services.map((service, index) => {
-            const isExpanded = expandedIndex === index
+            const progress = progresses[index] ?? 0
+            const isActive = progress > 0.5
             return (
               <Reveal key={service.number} className="border-t border-border/30">
                 <div
                   ref={(el) => {
                     headerRefs.current[index] = el
                   }}
-                  className={`flex w-full items-center gap-6 py-8 text-left transition-all duration-500 ${
-                    isExpanded ? "pl-2" : ""
+                  className={`flex w-full items-center gap-6 py-8 text-left transition-[padding] duration-500 ease-out ${
+                    isActive ? "pl-2" : ""
                   }`}
                 >
                   <span className="w-8 shrink-0 text-sm font-light text-muted-foreground/40 tabular-nums">
@@ -360,24 +372,26 @@ const ServicesPage = () => {
                     <p className="mt-1 text-sm text-muted-foreground">{service.tagline}</p>
                   </div>
                   <div
-                    className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border transition-all duration-500 ${
-                      isExpanded ? "rotate-45 border-foreground bg-foreground" : "border-border/50"
+                    className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border transition-all duration-500 ease-out ${
+                      isActive ? "rotate-45 border-foreground bg-foreground" : "border-border/50"
                     }`}
                   >
                     <Plus
-                      className={`h-4 w-4 transition-colors duration-300 ${
-                        isExpanded ? "text-background" : "text-foreground"
+                      className={`h-4 w-4 transition-colors duration-500 ${
+                        isActive ? "text-background" : "text-foreground"
                       }`}
                     />
                   </div>
                 </div>
 
                 <div
-                  className={`overflow-hidden transition-all duration-500 ease-out ${
-                    isExpanded ? "max-h-[460px] pb-8 opacity-100" : "max-h-0 opacity-0"
-                  }`}
+                  className="overflow-hidden"
+                  style={{
+                    maxHeight: `${progress * (naturalHeights.current[index] ?? 0)}px`,
+                    opacity: progress,
+                  }}
                 >
-                  <div className="pr-8 pl-14">
+                  <div ref={(el) => { contentRefs.current[index] = el }} className="pr-8 pb-8 pl-14">
                     <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
                       {/* Text */}
                       <div className="min-w-0">
@@ -398,7 +412,7 @@ const ServicesPage = () => {
                       </div>
                       {/* Visual — half the dropdown width */}
                       <div className="hidden h-64 md:block">
-                        <ServiceVisual serviceNumber={service.number} isActive={isExpanded} />
+                        <ServiceVisual serviceNumber={service.number} isActive={progress > 0.05} />
                       </div>
                     </div>
                   </div>
