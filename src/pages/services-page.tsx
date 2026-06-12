@@ -1,5 +1,5 @@
 import { ArrowRight, Plus } from "lucide-react"
-import { useEffect, useLayoutEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { Link } from "react-router-dom"
 import Footer from "@/components/footer"
 import Navbar from "@/components/navbar"
@@ -199,43 +199,39 @@ const ServicesPage = () => {
     return () => clearTimeout(timer)
   }, [])
 
-  // Measure each panel's natural height so we can open it proportionally.
-  useLayoutEffect(() => {
-    const measure = () => {
-      naturalHeights.current = contentRefs.current.map((el) => el?.scrollHeight ?? 0)
-    }
-    measure()
-    window.addEventListener("resize", measure)
-    return () => window.removeEventListener("resize", measure)
-  }, [])
-
-  // Open each service in proportion to how close its header is to the viewport
-  // center, so panels grow and shrink gradually as the user scrolls.
+  // Scroll-linked reveal: each service opens in proportion to how close its
+  // header is to the vertical center of the viewport. A dead zone keeps a panel
+  // fully closed until its header is well inside the center band, so the current
+  // panel finishes collapsing before the next begins to open — one clear focus
+  // with only a slight peek of its neighbour during the hand-off.
   useEffect(() => {
-    const handleScroll = () => {
+    const update = () => {
       cancelAnimationFrame(rafRef.current)
       rafRef.current = requestAnimationFrame(() => {
         const screenCenter = window.innerHeight / 2
-        const maxDistance = window.innerHeight * 0.45
-        // Keep a panel fully closed until its header is well inside the center
-        // band, so only the centered service is open and neighbours don't distract.
-        const buffer = 0.55
-        const next = headerRefs.current.map((el) => {
+        // Headers within this distance of center can be open at all.
+        const openBand = window.innerHeight * 0.18
+        const next = headerRefs.current.map((el, i) => {
+          // Refresh natural height each frame so the px max-height is always exact.
+          const content = contentRefs.current[i]
+          if (content) naturalHeights.current[i] = content.scrollHeight
           if (!el) return 0
           const rect = el.getBoundingClientRect()
           const center = rect.top + rect.height / 2
           const distance = Math.abs(center - screenCenter)
-          const raw = 1 - Math.min(distance / maxDistance, 1)
-          const t = Math.max(0, (raw - buffer) / (1 - buffer))
-          return t * t // ease so the centered item leads and neighbours stay closed
+          const t = Math.max(0, 1 - distance / openBand)
+          // smoothstep — gentle ease in and out, no abrupt edges
+          return t * t * (3 - 2 * t)
         })
         setProgresses(next)
       })
     }
-    window.addEventListener("scroll", handleScroll, { passive: true })
-    handleScroll()
+    window.addEventListener("scroll", update, { passive: true })
+    window.addEventListener("resize", update)
+    update()
     return () => {
-      window.removeEventListener("scroll", handleScroll)
+      window.removeEventListener("scroll", update)
+      window.removeEventListener("resize", update)
       cancelAnimationFrame(rafRef.current)
     }
   }, [])
@@ -389,7 +385,7 @@ const ServicesPage = () => {
                 </div>
 
                 <div
-                  className="overflow-hidden transition-[max-height,opacity] duration-300 ease-out"
+                  className="overflow-hidden"
                   style={{
                     maxHeight: `${progress * (naturalHeights.current[index] ?? 0)}px`,
                     opacity: progress,
