@@ -200,7 +200,13 @@ const ServicesPage = () => {
   const headerRefs = useRef<(HTMLDivElement | null)[]>([])
   const contentRefs = useRef<(HTMLDivElement | null)[]>([])
   const naturalHeights = useRef<number[]>([])
+  // Scroll-derived targets vs. the eased values actually rendered. The displayed
+  // values chase the targets over time so opening AND closing glide instead of
+  // snapping to raw scroll position.
+  const targetsRef = useRef<number[]>(services.map(() => 0))
+  const displayedRef = useRef<number[]>(services.map(() => 0))
   const rafRef = useRef(0)
+  const runningRef = useRef(false)
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -211,46 +217,81 @@ const ServicesPage = () => {
   // Scroll-linked reveal: each service opens in proportion to how close its
   // header is to the vertical center of the viewport. A dead zone keeps a panel
   // fully closed until its header is well inside the center band, so the current
-  // panel finishes collapsing before the next begins to open — one clear focus
-  // with only a slight peek of its neighbour during the hand-off.
+  // panel finishes collapsing before the next begins to open — one clear focus.
+  // The rendered value is eased toward the scroll target each frame so both the
+  // open and the close glide rather than snap.
   useEffect(() => {
-    const update = () => {
-      cancelAnimationFrame(rafRef.current)
-      rafRef.current = requestAnimationFrame(() => {
-        const screenCenter = window.innerHeight / 2
-        // Collapsed header-to-header spacing (stride). The window of scroll in
-        // which a panel can be open is the stride minus the dead zone, split
-        // either side of center, so a real closed buffer sits between items.
-        const headerHeight = headerRefs.current[0]?.offsetHeight ?? 120
-        const stride = headerHeight + ITEM_GAP
-        const influence = Math.max(40, (stride - DEAD_ZONE) / 2)
-        // Hold fully open near center, then ease down over the rest of the window.
-        const hold = influence * HOLD_FRACTION
-        const ramp = influence - hold
-        const next = headerRefs.current.map((el, i) => {
-          // Refresh natural height each frame so the px max-height is always exact.
-          const content = contentRefs.current[i]
-          if (content) naturalHeights.current[i] = content.scrollHeight
-          if (!el) return 0
-          const rect = el.getBoundingClientRect()
-          const center = rect.top + rect.height / 2
-          const distance = Math.abs(center - screenCenter)
-          if (distance <= hold) return 1
-          if (distance >= hold + ramp) return 0
-          const t = 1 - (distance - hold) / ramp
-          // smoothstep — gentle ease in and out, no abrupt edges
-          return t * t * (3 - 2 * t)
-        })
-        setProgresses(next)
+    // Higher = snappier, lower = more gradual glide on open/close.
+    const SMOOTHING = 0.08
+
+    const computeTargets = () => {
+      const screenCenter = window.innerHeight / 2
+      // Collapsed header-to-header spacing (stride). The window of scroll in
+      // which a panel can be open is the stride minus the dead zone, split
+      // either side of center, so a real closed buffer sits between items.
+      const headerHeight = headerRefs.current[0]?.offsetHeight ?? 120
+      const stride = headerHeight + ITEM_GAP
+      const influence = Math.max(40, (stride - DEAD_ZONE) / 2)
+      const hold = influence * HOLD_FRACTION
+      const ramp = influence - hold
+      targetsRef.current = headerRefs.current.map((el, i) => {
+        // Refresh natural height each frame so the px max-height is always exact.
+        const content = contentRefs.current[i]
+        if (content) naturalHeights.current[i] = content.scrollHeight
+        if (!el) return 0
+        const rect = el.getBoundingClientRect()
+        const center = rect.top + rect.height / 2
+        const distance = Math.abs(center - screenCenter)
+        if (distance <= hold) return 1
+        if (distance >= hold + ramp) return 0
+        const t = 1 - (distance - hold) / ramp
+        return t * t * (3 - 2 * t) // smoothstep
       })
     }
-    window.addEventListener("scroll", update, { passive: true })
-    window.addEventListener("resize", update)
-    update()
+
+    const tick = () => {
+      const targets = targetsRef.current
+      const displayed = displayedRef.current
+      let settled = true
+      const nextDisplayed = displayed.map((d, i) => {
+        const target = targets[i] ?? 0
+        const v = d + (target - d) * SMOOTHING
+        if (Math.abs(target - v) > 0.0015) {
+          settled = false
+          return v
+        }
+        return target
+      })
+      displayedRef.current = nextDisplayed
+      setProgresses(nextDisplayed)
+      if (settled) {
+        runningRef.current = false
+      } else {
+        rafRef.current = requestAnimationFrame(tick)
+      }
+    }
+
+    const start = () => {
+      if (!runningRef.current) {
+        runningRef.current = true
+        rafRef.current = requestAnimationFrame(tick)
+      }
+    }
+
+    const onScroll = () => {
+      computeTargets()
+      start()
+    }
+
+    window.addEventListener("scroll", onScroll, { passive: true })
+    window.addEventListener("resize", onScroll)
+    computeTargets()
+    start()
     return () => {
-      window.removeEventListener("scroll", update)
-      window.removeEventListener("resize", update)
+      window.removeEventListener("scroll", onScroll)
+      window.removeEventListener("resize", onScroll)
       cancelAnimationFrame(rafRef.current)
+      runningRef.current = false
     }
   }, [])
 
