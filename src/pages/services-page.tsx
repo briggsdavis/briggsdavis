@@ -1,5 +1,5 @@
 import { ArrowRight, Plus } from "lucide-react"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { Link } from "react-router-dom"
 import Footer from "@/components/footer"
 import Navbar from "@/components/navbar"
@@ -187,11 +187,42 @@ const contexts = [
 const ServicesPage = () => {
   const [introVisible, setIntroVisible] = useState(false)
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null)
+  const headerRefs = useRef<(HTMLDivElement | null)[]>([])
+  const rafRef = useRef(0)
 
   useEffect(() => {
     window.scrollTo(0, 0)
     const timer = setTimeout(() => setIntroVisible(true), 60)
     return () => clearTimeout(timer)
+  }, [])
+
+  // Expand whichever service header sits closest to the vertical center of the viewport.
+  useEffect(() => {
+    const handleScroll = () => {
+      cancelAnimationFrame(rafRef.current)
+      rafRef.current = requestAnimationFrame(() => {
+        const screenCenter = window.innerHeight / 2
+        let closest: number | null = null
+        let minDistance = Infinity
+        headerRefs.current.forEach((el, i) => {
+          if (!el) return
+          const rect = el.getBoundingClientRect()
+          const center = rect.top + rect.height / 2
+          const distance = Math.abs(center - screenCenter)
+          if (distance < minDistance) {
+            minDistance = distance
+            closest = i
+          }
+        })
+        setExpandedIndex(closest)
+      })
+    }
+    window.addEventListener("scroll", handleScroll, { passive: true })
+    handleScroll()
+    return () => {
+      window.removeEventListener("scroll", handleScroll)
+      cancelAnimationFrame(rafRef.current)
+    }
   }, [])
 
   return (
@@ -309,12 +340,15 @@ const ServicesPage = () => {
 
           {services.map((service, index) => {
             const isExpanded = expandedIndex === index
-            const handleToggle = () => setExpandedIndex(isExpanded ? null : index)
             return (
               <Reveal key={service.number} className="border-t border-border/30">
-                <button
-                  onClick={handleToggle}
-                  className="group flex w-full items-center gap-6 py-8 text-left transition-all duration-300 hover:pl-2"
+                <div
+                  ref={(el) => {
+                    headerRefs.current[index] = el
+                  }}
+                  className={`flex w-full items-center gap-6 py-8 text-left transition-all duration-500 ${
+                    isExpanded ? "pl-2" : ""
+                  }`}
                 >
                   <span className="w-8 shrink-0 text-sm font-light text-muted-foreground/40 tabular-nums">
                     {service.number}
@@ -326,8 +360,8 @@ const ServicesPage = () => {
                     <p className="mt-1 text-sm text-muted-foreground">{service.tagline}</p>
                   </div>
                   <div
-                    className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-border/50 transition-all duration-300 ${
-                      isExpanded ? "rotate-45 bg-foreground" : "group-hover:border-foreground"
+                    className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border transition-all duration-500 ${
+                      isExpanded ? "rotate-45 border-foreground bg-foreground" : "border-border/50"
                     }`}
                   >
                     <Plus
@@ -336,7 +370,7 @@ const ServicesPage = () => {
                       }`}
                     />
                   </div>
-                </button>
+                </div>
 
                 <div
                   className={`overflow-hidden transition-all duration-500 ease-out ${
