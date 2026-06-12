@@ -184,6 +184,12 @@ const contexts = [
   "Finance",
 ]
 
+// Vertical gap between expertise items, in px. Must match the `mt-[...]` class
+// on each item below; the scroll math reads it to size the hold/ease/buffer.
+const ITEM_GAP = 144
+// Scroll distance (px) where neither neighbouring panel is open — the buffer.
+const DEAD_ZONE = 70
+
 const ServicesPage = () => {
   const [introVisible, setIntroVisible] = useState(false)
   // Per-service open amount (0 = collapsed, 1 = fully open), driven by scroll position.
@@ -209,10 +215,15 @@ const ServicesPage = () => {
       cancelAnimationFrame(rafRef.current)
       rafRef.current = requestAnimationFrame(() => {
         const screenCenter = window.innerHeight / 2
-        // Headers within this distance of center can be open at all. Sized a
-        // little under the (now padded) header-to-header spacing so the current
-        // panel collapses before the next opens.
-        const openBand = window.innerHeight * 0.2
+        // Collapsed header-to-header spacing (stride). The window of scroll in
+        // which a panel can be open is the stride minus the dead zone, split
+        // either side of center, so a real closed buffer sits between items.
+        const headerHeight = headerRefs.current[0]?.offsetHeight ?? 120
+        const stride = headerHeight + ITEM_GAP
+        const influence = Math.max(40, (stride - DEAD_ZONE) / 2)
+        // Hold fully open near center, then ease down over the rest of the window.
+        const hold = influence * 0.45
+        const ramp = influence - hold
         const next = headerRefs.current.map((el, i) => {
           // Refresh natural height each frame so the px max-height is always exact.
           const content = contentRefs.current[i]
@@ -221,7 +232,9 @@ const ServicesPage = () => {
           const rect = el.getBoundingClientRect()
           const center = rect.top + rect.height / 2
           const distance = Math.abs(center - screenCenter)
-          const t = Math.max(0, 1 - distance / openBand)
+          if (distance <= hold) return 1
+          if (distance >= hold + ramp) return 0
+          const t = 1 - (distance - hold) / ramp
           // smoothstep — gentle ease in and out, no abrupt edges
           return t * t * (3 - 2 * t)
         })
@@ -357,7 +370,7 @@ const ServicesPage = () => {
             return (
               <Reveal
                 key={service.number}
-                className={`border-t border-border/30 ${index === 0 ? "" : "mt-10"}`}
+                className={`border-t border-border/30 ${index === 0 ? "" : "mt-36"}`}
               >
                 <div
                   ref={(el) => {
