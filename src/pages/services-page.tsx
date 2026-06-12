@@ -217,13 +217,17 @@ const ServicesPage = () => {
       rafRef.current = requestAnimationFrame(() => {
         const screenCenter = window.innerHeight / 2
         const maxDistance = window.innerHeight * 0.45
+        // Keep a panel fully closed until its header is well inside the center
+        // band, so only the centered service is open and neighbours don't distract.
+        const buffer = 0.55
         const next = headerRefs.current.map((el) => {
           if (!el) return 0
           const rect = el.getBoundingClientRect()
           const center = rect.top + rect.height / 2
           const distance = Math.abs(center - screenCenter)
           const raw = 1 - Math.min(distance / maxDistance, 1)
-          return raw * raw // ease so the centered item leads and neighbours stay subtle
+          const t = Math.max(0, (raw - buffer) / (1 - buffer))
+          return t * t // ease so the centered item leads and neighbours stay closed
         })
         setProgresses(next)
       })
@@ -385,7 +389,7 @@ const ServicesPage = () => {
                 </div>
 
                 <div
-                  className="overflow-hidden"
+                  className="overflow-hidden transition-[max-height,opacity] duration-300 ease-out"
                   style={{
                     maxHeight: `${progress * (naturalHeights.current[index] ?? 0)}px`,
                     opacity: progress,
