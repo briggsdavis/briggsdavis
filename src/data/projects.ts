@@ -1,3 +1,8 @@
+export interface ProjectFeature {
+  title: string
+  detail: string
+}
+
 export interface Project {
   id: string
   name: string
@@ -8,7 +13,7 @@ export interface Project {
   solution?: string
   businessValue?: string
   link: string | null
-  features: string[]
+  features: ProjectFeature[]
   tags: string[]
   year: number
 }
@@ -26,10 +31,26 @@ export const projects: Project[] = [
       "We designed a minimalist, visually-driven platform with an innovative rating system that transforms how enthusiasts discover and evaluate fragrances.",
     link: "https://oderum.com",
     features: [
-      "Minimalist, visually-driven UI design",
-      "Innovative fragrance rating system",
-      "Responsive mobile-first experience",
-      "Curated scent discovery journey",
+      {
+        title: "Minimalist, visually-driven UI design",
+        detail:
+          "A pared-back, image-led interface that puts the fragrances themselves front and centre, free of the text-heavy clutter that dominates the category.",
+      },
+      {
+        title: "Innovative fragrance rating system",
+        detail:
+          "A multi-attribute scoring system that rates each scent across distinct dimensions — longevity, sillage, projection and value — rather than a single star score.",
+      },
+      {
+        title: "Responsive mobile-first experience",
+        detail:
+          "Designed for the phone first, so the experience stays fast and elegant whether browsing on mobile, tablet or desktop.",
+      },
+      {
+        title: "Curated scent discovery journey",
+        detail:
+          "A guided path that helps enthusiasts move from browsing to finding scents worth their attention, instead of scrolling an undifferentiated list.",
+      },
     ],
     tags: ["Fragrance", "E-Commerce", "UI Design"],
     year: 2024,
@@ -50,10 +71,26 @@ export const projects: Project[] = [
       "The platform established her credibility online, expanded her visibility in a crowded market, and gave prospective clients a clear path to book her services.",
     link: "https://hormonevitalitycoaching.com",
     features: [
-      "Custom brand identity and visual language",
-      "Service showcase with booking integration",
-      "Testimonials and social proof sections",
-      "SEO-optimized content structure",
+      {
+        title: "Custom brand identity and visual language",
+        detail:
+          "A bespoke look and feel — colour, type and imagery — built specifically for her practice so it stands apart in a crowded wellness market.",
+      },
+      {
+        title: "Service showcase with booking integration",
+        detail:
+          "Clear presentation of her coaching services paired with a direct booking flow, turning interested visitors into scheduled clients.",
+      },
+      {
+        title: "Testimonials and social proof sections",
+        detail:
+          "Client stories and credibility markers placed throughout the site to build trust before a prospect ever reaches out.",
+      },
+      {
+        title: "SEO-optimized content structure",
+        detail:
+          "Content organised and tagged so search engines can surface her practice when people search for hormone and vitality coaching.",
+      },
     ],
     tags: ["Health & Wellness", "Branding", "Web Design"],
     year: 2024,
@@ -72,10 +109,26 @@ export const projects: Project[] = [
       "The platform positioned EASE as a credible regional authority, educated potential clients on the full range of their capabilities, and created a foundation for generating new project leads.",
     link: "https://ease-int.com",
     features: [
-      "Multi-service portfolio presentation",
-      "Project gallery with categorized filtering",
-      "Regional operations overview",
-      "Professional team and capability highlights",
+      {
+        title: "Multi-service portfolio presentation",
+        detail:
+          "A structured showcase of the firm's full range of engineering services, so clients grasp the breadth of what they can deliver.",
+      },
+      {
+        title: "Project gallery with categorized filtering",
+        detail:
+          "A browsable gallery of completed work that visitors can filter by category to quickly find relevant projects.",
+      },
+      {
+        title: "Regional operations overview",
+        detail:
+          "A clear picture of where the firm operates across East Africa, reinforcing their regional reach and expertise.",
+      },
+      {
+        title: "Professional team and capability highlights",
+        detail:
+          "Profiles of the team and their core capabilities that establish the firm's credibility and depth of expertise.",
+      },
     ],
     tags: ["Engineering", "Portfolio", "Web Design"],
     year: 2023,
@@ -94,10 +147,26 @@ export const projects: Project[] = [
       "The store gave Anne Silver an online presence that authentically tells her story, justifies her premium pricing, and drives customers from digital channels directly to her products.",
     link: "https://annesilver.com",
     features: [
-      "Full e-commerce with cart and checkout",
-      "Custom jewelry order capabilities",
-      "Integrated CMS for content management",
-      "Curated collection browsing experience",
+      {
+        title: "Full e-commerce with cart and checkout",
+        detail:
+          "A complete online store with cart, secure checkout and order handling, giving her a real sales channel for the first time.",
+      },
+      {
+        title: "Custom jewelry order capabilities",
+        detail:
+          "Tools for customers to request bespoke pieces online, mirroring her made-to-order craft.",
+      },
+      {
+        title: "Integrated CMS for content management",
+        detail:
+          "A content management system that lets her add and edit collections and pages herself, with no developer needed.",
+      },
+      {
+        title: "Curated collection browsing experience",
+        detail:
+          "A thoughtfully arranged way to explore her collections that reflects the premium, considered nature of the work.",
+      },
     ],
     tags: ["Jewelry", "E-Commerce", "CMS"],
     year: 2023,
@@ -118,10 +187,26 @@ export const projects: Project[] = [
       "The platform built trust with a new buyer base, provided the full infrastructure to facilitate online sales, and equipped the business with a backend CRM and analytics to manage relationships and track growth.",
     link: "https://nordicseafoods.org",
     features: [
-      "Farm-to-table Norwegian salmon sourcing",
-      "Real-time shipment tracking experience",
-      "Verified bank transfer checkout flow",
-      "Flexible cut and sizing selection",
+      {
+        title: "Farm-to-table Norwegian salmon sourcing",
+        detail:
+          "A transparent sourcing story connecting buyers directly to verified Norwegian Atlantic salmon, building trust in provenance and quality.",
+      },
+      {
+        title: "Real-time shipment tracking experience",
+        detail:
+          "Live tracking that lets buyers follow their order from dispatch to delivery — essential reassurance for perishable, sushi-grade fish.",
+      },
+      {
+        title: "Verified bank transfer checkout flow",
+        detail:
+          "A checkout built around verified bank-transfer payment, suited to the local market and large wholesale orders.",
+      },
+      {
+        title: "Flexible cut and sizing selection",
+        detail:
+          "Options to choose the cut and portion size at order time, matching what restaurants, hotels and individual buyers each need.",
+      },
     ],
     tags: ["Food & Beverage", "E-Commerce", "Logistics"],
     year: 2024,
@@ -142,10 +227,26 @@ export const projects: Project[] = [
       "The platform established AGA's institutional credibility online, communicated their expertise to an international audience, and created a professional foundation for driving business development.",
     link: "https://aga-advisory.com/",
     features: [
-      "Dynamic content management system",
-      "Market insights and research sections",
-      "Advisory service showcases",
-      "Admin panel for content updates",
+      {
+        title: "Dynamic content management system",
+        detail:
+          "A flexible CMS that lets the team publish and update content independently as their market insights evolve.",
+      },
+      {
+        title: "Market insights and research sections",
+        detail:
+          "Dedicated areas for publishing the firm's research and market intelligence, positioning them as a trusted authority on African market entry.",
+      },
+      {
+        title: "Advisory service showcases",
+        detail:
+          "Clear presentation of their advisory offerings so international clients understand exactly how the firm can help them enter the market.",
+      },
+      {
+        title: "Admin panel for content updates",
+        detail:
+          "A back-office panel giving the team full control to manage the site's content without technical support.",
+      },
     ],
     tags: ["Advisory", "CMS", "Web Design"],
     year: 2023,
@@ -164,10 +265,26 @@ export const projects: Project[] = [
       "The site functions as a targeted marketing tool that educates the right buyer on the property's potential and actively works to bring the sale to close.",
     link: "https://bracstonehouse.com",
     features: [
-      "Immersive sound and visual storytelling",
-      "Renovation vision and possibility showcase",
-      "Mediterranean lifestyle and location narrative",
-      "Cinematic property experience to drive sales",
+      {
+        title: "Immersive sound and visual storytelling",
+        detail:
+          "Cinematic visuals paired with sound design that let prospective buyers feel the property and its setting, not just read about it.",
+      },
+      {
+        title: "Renovation vision and possibility showcase",
+        detail:
+          "A presentation of what the historic stone house could become, making the investment potential tangible to the right buyer.",
+      },
+      {
+        title: "Mediterranean lifestyle and location narrative",
+        detail:
+          "Storytelling around the island setting and Mediterranean lifestyle that sells the experience surrounding the property.",
+      },
+      {
+        title: "Cinematic property experience to drive sales",
+        detail:
+          "A single-property site crafted as a marketing tool, designed to move a discerning buyer toward a sale.",
+      },
     ],
     tags: ["Real Estate", "Immersive", "Property"],
     year: 2025,
@@ -188,11 +305,31 @@ export const projects: Project[] = [
       "The site converts discovery into reservations, extends the restaurant's identity online, and gives the team full control over menus and content without developer support.",
     link: "https://butcherandtherye.com",
     features: [
-      "Rustic, moody design reflecting the restaurant's brand",
-      "Integrated reservations system",
-      "Backend CMS for menus and content management",
-      "SEO-optimized structure for local search visibility",
-      "Fully mobile-friendly across all devices",
+      {
+        title: "Rustic, moody design reflecting the restaurant's brand",
+        detail:
+          "A visual language that mirrors the restaurant's rustic, atmospheric character so the site feels like an extension of the venue.",
+      },
+      {
+        title: "Integrated reservations system",
+        detail:
+          "A built-in booking system that makes it effortless for guests to reserve a table directly from the site.",
+      },
+      {
+        title: "Backend CMS for menus and content management",
+        detail:
+          "A content management system so the team can update menus and content themselves, without developer support.",
+      },
+      {
+        title: "SEO-optimized structure for local search visibility",
+        detail:
+          "A structure tuned for local search, helping the restaurant surface when nearby diners look for somewhere to eat.",
+      },
+      {
+        title: "Fully mobile-friendly across all devices",
+        detail:
+          "A layout that works smoothly on phones and tablets, where most diners discover and book restaurants.",
+      },
     ],
     tags: ["Restaurant", "CMS", "Web Design"],
     year: 2025,
@@ -211,12 +348,28 @@ export const projects: Project[] = [
       "We created a full brand identity, designed a luxury-feel website that communicates professionalism and exclusivity, and built a complete CMS that allows the admin to independently manage property listings, new content, and client inquiries.",
     businessValue:
       "The platform gave Hargarten the credibility and visual authority to compete for high-level clients, with a fully managed backend that lets the team update listings and handle inquiries without any technical support.",
-    link: "https://hargarten.vercel.app/",
+    link: "https://hargarten-properties.lu/",
     features: [
-      "Custom luxury brand identity and logo design",
-      "Premium visual design communicating high status",
-      "Full CMS for managing property listings and content",
-      "Inquiry management system for client leads",
+      {
+        title: "Custom luxury brand identity and logo design",
+        detail:
+          "A bespoke brand and logo built from scratch to project the premium, high-status image the firm needed to attract luxury clients.",
+      },
+      {
+        title: "Premium visual design communicating high status",
+        detail:
+          "A refined, exclusive design language that signals professionalism and prestige to discerning clientele.",
+      },
+      {
+        title: "Full CMS for managing property listings and content",
+        detail:
+          "A complete content management system that lets the team add and update property listings and content independently.",
+      },
+      {
+        title: "Inquiry management system for client leads",
+        detail:
+          "A system for capturing and organising client inquiries, so leads are tracked and nothing slips through the cracks.",
+      },
     ],
     tags: ["Real Estate", "Luxury", "Branding"],
     year: 2025,
@@ -237,10 +390,26 @@ export const projects: Project[] = [
       "The platform communicates Refenti's luxury positioning, instills confidence in prospective investors and partners, and provides a direct channel for driving investment and development partnerships.",
     link: "https://refenti.com",
     features: [
-      "Fully editable CMS for content management",
-      "Inquiry forms for prospective clients",
-      "News and events publishing system",
-      "Elegant, precision-crafted visual design",
+      {
+        title: "Fully editable CMS for content management",
+        detail:
+          "A content management system giving the team full control to edit and publish content without developer involvement.",
+      },
+      {
+        title: "Inquiry forms for prospective clients",
+        detail:
+          "Inquiry forms that turn interest from prospective investors and partners into actionable leads.",
+      },
+      {
+        title: "News and events publishing system",
+        detail:
+          "Tools to publish news and events, keeping investors and partners current on the developer's progress.",
+      },
+      {
+        title: "Elegant, precision-crafted visual design",
+        detail:
+          "A meticulously crafted, elegant design that reflects the developer's institutional-grade, luxury positioning.",
+      },
     ],
     tags: ["Real Estate", "CMS", "Branding"],
     year: 2023,

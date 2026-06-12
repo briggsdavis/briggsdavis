@@ -1,5 +1,5 @@
 import { ArrowRight, ArrowDown } from "lucide-react"
-import { useEffect, useRef, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import { Link } from "react-router-dom"
 import Footer from "@/components/footer"
 import Navbar from "@/components/navbar"
@@ -9,10 +9,43 @@ import { projects } from "@/data/projects"
 const Projects = () => {
   const listRef = useRef<HTMLDivElement>(null)
   const [visibleSet, setVisibleSet] = useState<Set<number>>(new Set())
+  const imageRefs = useRef<(HTMLImageElement | null)[]>([])
+  const [scales, setScales] = useState<number[]>(projects.map(() => 1))
+  const rafRef = useRef<number>(0)
 
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
+
+  const handleScroll = useCallback(() => {
+    cancelAnimationFrame(rafRef.current)
+    rafRef.current = requestAnimationFrame(() => {
+      const windowHeight = window.innerHeight
+      const screenCenter = windowHeight / 2
+      const newScales = imageRefs.current.map((ref) => {
+        if (!ref) return 1
+        const rect = ref.getBoundingClientRect()
+        const center = rect.top + rect.height / 2
+        const distance = Math.abs(center - screenCenter)
+        const maxDistance = windowHeight * 0.6
+        // 1 at viewport center, easing toward 0 at maxDistance
+        const raw = 1 - Math.min(distance / maxDistance, 1)
+        const progress = raw * raw // quadratic ease for a snappier center focus
+        // Scale from 1.0 (edges) to 1.15 (centered) — 15% bigger at peak
+        return 1 + progress * 0.15
+      })
+      setScales(newScales)
+    })
+  }, [])
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll, { passive: true })
+    handleScroll()
+    return () => {
+      window.removeEventListener("scroll", handleScroll)
+      cancelAnimationFrame(rafRef.current)
+    }
+  }, [handleScroll])
 
   useEffect(() => {
     const observers: IntersectionObserver[] = []
@@ -131,8 +164,15 @@ const Projects = () => {
                 </div>
 
                 {/* Right: image */}
-                <Link to={`/project/${project.id}`} className="block overflow-hidden rounded-2xl">
+                <Link
+                  to={`/project/${project.id}`}
+                  className="block overflow-hidden rounded-2xl transition-transform duration-150 ease-out will-change-transform"
+                  style={{ transform: `scale(${scales[i] ?? 1})` }}
+                >
                   <img
+                    ref={(el) => {
+                      imageRefs.current[i] = el
+                    }}
                     src={project.image}
                     alt={project.name}
                     className="aspect-[16/10] w-full object-cover object-top transition-transform duration-500 hover:scale-105"

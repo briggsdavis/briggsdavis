@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react"
 import { Link } from "react-router-dom"
 import Footer from "@/components/footer"
 import Navbar from "@/components/navbar"
+import { Reveal } from "@/components/reveal"
 import { ServiceVisual } from "@/components/service-visuals"
 import { Button } from "@/components/ui/button"
 
@@ -183,11 +184,29 @@ const contexts = [
   "Finance",
 ]
 
+// Vertical gap between expertise items, in px. Must match the `mt-[...]` class
+// on each item below; the scroll math reads it to size the hold/ease/buffer.
+const ITEM_GAP = 224
+// Scroll distance (px) where neither neighbouring panel is open — the buffer.
+const DEAD_ZONE = 70
+// Fraction of the open window spent fully open (hold) before the ease begins.
+// Higher = stays fully expanded longer before it starts closing.
+const HOLD_FRACTION = 0.45
+
 const ServicesPage = () => {
   const [introVisible, setIntroVisible] = useState(false)
-  const [isVisible, setIsVisible] = useState(false)
-  const sectionRef = useRef<HTMLDivElement>(null)
-  const [expandedIndex, setExpandedIndex] = useState<number | null>(null)
+  // Per-service open amount (0 = collapsed, 1 = fully open), driven by scroll position.
+  const [progresses, setProgresses] = useState<number[]>(() => services.map(() => 0))
+  const headerRefs = useRef<(HTMLDivElement | null)[]>([])
+  const contentRefs = useRef<(HTMLDivElement | null)[]>([])
+  const naturalHeights = useRef<number[]>([])
+  // Scroll-derived targets vs. the eased values actually rendered. The displayed
+  // values chase the targets over time so opening AND closing glide instead of
+  // snapping to raw scroll position.
+  const targetsRef = useRef<number[]>(services.map(() => 0))
+  const displayedRef = useRef<number[]>(services.map(() => 0))
+  const rafRef = useRef(0)
+  const runningRef = useRef(false)
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -195,15 +214,85 @@ const ServicesPage = () => {
     return () => clearTimeout(timer)
   }, [])
 
+  // Scroll-linked reveal: each service opens in proportion to how close its
+  // header is to the vertical center of the viewport. A dead zone keeps a panel
+  // fully closed until its header is well inside the center band, so the current
+  // panel finishes collapsing before the next begins to open — one clear focus.
+  // The rendered value is eased toward the scroll target each frame so both the
+  // open and the close glide rather than snap.
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) setIsVisible(true)
-      },
-      { threshold: 0.05 },
-    )
-    if (sectionRef.current) observer.observe(sectionRef.current)
-    return () => observer.disconnect()
+    // Higher = snappier, lower = more gradual glide on open/close.
+    const SMOOTHING = 0.08
+
+    const computeTargets = () => {
+      const screenCenter = window.innerHeight / 2
+      // Collapsed header-to-header spacing (stride). The window of scroll in
+      // which a panel can be open is the stride minus the dead zone, split
+      // either side of center, so a real closed buffer sits between items.
+      const headerHeight = headerRefs.current[0]?.offsetHeight ?? 120
+      const stride = headerHeight + ITEM_GAP
+      const influence = Math.max(40, (stride - DEAD_ZONE) / 2)
+      const hold = influence * HOLD_FRACTION
+      const ramp = influence - hold
+      targetsRef.current = headerRefs.current.map((el, i) => {
+        // Refresh natural height each frame so the px max-height is always exact.
+        const content = contentRefs.current[i]
+        if (content) naturalHeights.current[i] = content.scrollHeight
+        if (!el) return 0
+        const rect = el.getBoundingClientRect()
+        const center = rect.top + rect.height / 2
+        const distance = Math.abs(center - screenCenter)
+        if (distance <= hold) return 1
+        if (distance >= hold + ramp) return 0
+        const t = 1 - (distance - hold) / ramp
+        return t * t * (3 - 2 * t) // smoothstep
+      })
+    }
+
+    const tick = () => {
+      const targets = targetsRef.current
+      const displayed = displayedRef.current
+      let settled = true
+      const nextDisplayed = displayed.map((d, i) => {
+        const target = targets[i] ?? 0
+        const v = d + (target - d) * SMOOTHING
+        if (Math.abs(target - v) > 0.0015) {
+          settled = false
+          return v
+        }
+        return target
+      })
+      displayedRef.current = nextDisplayed
+      setProgresses(nextDisplayed)
+      if (settled) {
+        runningRef.current = false
+      } else {
+        rafRef.current = requestAnimationFrame(tick)
+      }
+    }
+
+    const start = () => {
+      if (!runningRef.current) {
+        runningRef.current = true
+        rafRef.current = requestAnimationFrame(tick)
+      }
+    }
+
+    const onScroll = () => {
+      computeTargets()
+      start()
+    }
+
+    window.addEventListener("scroll", onScroll, { passive: true })
+    window.addEventListener("resize", onScroll)
+    computeTargets()
+    start()
+    return () => {
+      window.removeEventListener("scroll", onScroll)
+      window.removeEventListener("resize", onScroll)
+      cancelAnimationFrame(rafRef.current)
+      runningRef.current = false
+    }
   }, [])
 
   return (
@@ -308,29 +397,32 @@ const ServicesPage = () => {
       </section>
 
       {/* ── Services List ── */}
-      <section ref={sectionRef} className="px-6 py-24">
+      <section className="px-6 py-24">
         <div className="mx-auto max-w-4xl">
-          <div className={`mb-12 opacity-0 ${isVisible ? "animate-fade-in-up" : ""}`}>
+          <Reveal className="mb-12">
             <span className="mb-4 block text-xs font-medium tracking-[0.3em] text-muted-foreground uppercase">
               Capabilities
             </span>
             <h2 className="text-3xl font-semibold text-foreground md:text-4xl">
               We make sites that are
             </h2>
-          </div>
+          </Reveal>
 
           {services.map((service, index) => {
-            const isExpanded = expandedIndex === index
-            const handleToggle = () => setExpandedIndex(isExpanded ? null : index)
+            const progress = progresses[index] ?? 0
+            const isActive = progress > 0.5
             return (
-              <div
+              <Reveal
                 key={service.number}
-                className={`border-t border-border/30 opacity-0 ${isVisible ? "animate-fade-in-up" : ""}`}
-                style={{ animationDelay: `${200 + index * 60}ms` }}
+                className={`border-t border-border/30 ${index === 0 ? "" : "mt-56"}`}
               >
-                <button
-                  onClick={handleToggle}
-                  className="group flex w-full items-center gap-6 py-8 text-left transition-all duration-300 hover:pl-2"
+                <div
+                  ref={(el) => {
+                    headerRefs.current[index] = el
+                  }}
+                  className={`flex w-full items-center gap-6 py-8 text-left transition-[padding] duration-500 ease-out ${
+                    isActive ? "pl-2" : ""
+                  }`}
                 >
                   <span className="w-8 shrink-0 text-sm font-light text-muted-foreground/40 tabular-nums">
                     {service.number}
@@ -342,24 +434,26 @@ const ServicesPage = () => {
                     <p className="mt-1 text-sm text-muted-foreground">{service.tagline}</p>
                   </div>
                   <div
-                    className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-border/50 transition-all duration-300 ${
-                      isExpanded ? "rotate-45 bg-foreground" : "group-hover:border-foreground"
+                    className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border transition-all duration-500 ease-out ${
+                      isActive ? "rotate-45 border-foreground bg-foreground" : "border-border/50"
                     }`}
                   >
                     <Plus
-                      className={`h-4 w-4 transition-colors duration-300 ${
-                        isExpanded ? "text-background" : "text-foreground"
+                      className={`h-4 w-4 transition-colors duration-500 ${
+                        isActive ? "text-background" : "text-foreground"
                       }`}
                     />
                   </div>
-                </button>
+                </div>
 
                 <div
-                  className={`overflow-hidden transition-all duration-500 ease-out ${
-                    isExpanded ? "max-h-[460px] pb-8 opacity-100" : "max-h-0 opacity-0"
-                  }`}
+                  className="overflow-hidden"
+                  style={{
+                    maxHeight: `${progress * (naturalHeights.current[index] ?? 0)}px`,
+                    opacity: progress,
+                  }}
                 >
-                  <div className="pr-8 pl-14">
+                  <div ref={(el) => { contentRefs.current[index] = el }} className="pr-8 pb-8 pl-14">
                     <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
                       {/* Text */}
                       <div className="min-w-0">
@@ -380,12 +474,12 @@ const ServicesPage = () => {
                       </div>
                       {/* Visual — half the dropdown width */}
                       <div className="hidden h-64 md:block">
-                        <ServiceVisual serviceNumber={service.number} isActive={isExpanded} />
+                        <ServiceVisual serviceNumber={service.number} isActive={progress > 0.05} />
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              </Reveal>
             )
           })}
           <div className="border-t border-border/30" />
@@ -395,16 +489,12 @@ const ServicesPage = () => {
       {/* ── CTA ── */}
       <section className="px-6 py-24">
         <div className="mx-auto max-w-4xl text-center">
-          <h2
-            className={`mb-6 text-3xl font-semibold text-foreground opacity-0 delay-200 md:text-4xl ${isVisible ? "animate-fade-in-up" : ""}`}
-          >
+          <Reveal as="h2" className="mb-6 text-3xl font-semibold text-foreground md:text-4xl">
             Ready to get started?
-          </h2>
-          <p
-            className={`mb-10 text-muted-foreground opacity-0 delay-300 ${isVisible ? "animate-fade-in-up" : ""}`}
-          >
+          </Reveal>
+          <Reveal as="p" delay={100} className="mb-10 text-muted-foreground">
             See how we bring these services to life through our proven process.
-          </p>
+          </Reveal>
           <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Button variant="heroPrimary" size="hero" className="group" asChild>
               <Link to="/process">
