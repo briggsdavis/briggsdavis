@@ -31,8 +31,8 @@ const Projects = () => {
         // 1 at viewport center, easing toward 0 at maxDistance
         const raw = 1 - Math.min(distance / maxDistance, 1)
         const progress = raw * raw // quadratic ease for a snappier center focus
-        // Scale from 1.0 (edges) to 1.2 (centered) — 20% bigger at peak
-        return 1 + progress * 0.2
+        // Scale from 1.0 (edges) to 1.15 (centered) — 15% bigger at peak
+        return 1 + progress * 0.15
       })
       setScales(newScales)
     })
