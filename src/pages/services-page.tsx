@@ -186,12 +186,12 @@ const contexts = [
 
 // Vertical gap between expertise items, in px. Must match the `mt-[...]` class
 // on each item below; the scroll math reads it to size the hold/ease/buffer.
-const ITEM_GAP = 176
+const ITEM_GAP = 224
 // Scroll distance (px) where neither neighbouring panel is open — the buffer.
 const DEAD_ZONE = 70
-// Fraction of the open window spent fully open (hold); the rest is the gradual
-// ease in/out. Lower = more gradual reveal.
-const HOLD_FRACTION = 0.22
+// Fraction of the open window spent fully open (hold) before the ease begins.
+// Higher = stays fully expanded longer before it starts closing.
+const HOLD_FRACTION = 0.45
 
 const ServicesPage = () => {
   const [introVisible, setIntroVisible] = useState(false)
@@ -414,7 +414,7 @@ const ServicesPage = () => {
             return (
               <Reveal
                 key={service.number}
-                className={`border-t border-border/30 ${index === 0 ? "" : "mt-44"}`}
+                className={`border-t border-border/30 ${index === 0 ? "" : "mt-56"}`}
               >
                 <div
                   ref={(el) => {
