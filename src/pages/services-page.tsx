@@ -1,8 +1,9 @@
 import { ArrowRight, Plus } from "lucide-react"
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import Footer from "@/components/footer"
 import Navbar from "@/components/navbar"
+import { Reveal } from "@/components/reveal"
 import { ServiceVisual } from "@/components/service-visuals"
 import { Button } from "@/components/ui/button"
 
@@ -185,25 +186,12 @@ const contexts = [
 
 const ServicesPage = () => {
   const [introVisible, setIntroVisible] = useState(false)
-  const [isVisible, setIsVisible] = useState(false)
-  const sectionRef = useRef<HTMLDivElement>(null)
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null)
 
   useEffect(() => {
     window.scrollTo(0, 0)
     const timer = setTimeout(() => setIntroVisible(true), 60)
     return () => clearTimeout(timer)
-  }, [])
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) setIsVisible(true)
-      },
-      { threshold: 0.05 },
-    )
-    if (sectionRef.current) observer.observe(sectionRef.current)
-    return () => observer.disconnect()
   }, [])
 
   return (
@@ -308,26 +296,22 @@ const ServicesPage = () => {
       </section>
 
       {/* ── Services List ── */}
-      <section ref={sectionRef} className="px-6 py-24">
+      <section className="px-6 py-24">
         <div className="mx-auto max-w-4xl">
-          <div className={`mb-12 opacity-0 ${isVisible ? "animate-fade-in-up" : ""}`}>
+          <Reveal className="mb-12">
             <span className="mb-4 block text-xs font-medium tracking-[0.3em] text-muted-foreground uppercase">
               Capabilities
             </span>
             <h2 className="text-3xl font-semibold text-foreground md:text-4xl">
               We make sites that are
             </h2>
-          </div>
+          </Reveal>
 
           {services.map((service, index) => {
             const isExpanded = expandedIndex === index
             const handleToggle = () => setExpandedIndex(isExpanded ? null : index)
             return (
-              <div
-                key={service.number}
-                className={`border-t border-border/30 opacity-0 ${isVisible ? "animate-fade-in-up" : ""}`}
-                style={{ animationDelay: `${200 + index * 60}ms` }}
-              >
+              <Reveal key={service.number} className="border-t border-border/30">
                 <button
                   onClick={handleToggle}
                   className="group flex w-full items-center gap-6 py-8 text-left transition-all duration-300 hover:pl-2"
@@ -385,7 +369,7 @@ const ServicesPage = () => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </Reveal>
             )
           })}
           <div className="border-t border-border/30" />
@@ -395,16 +379,12 @@ const ServicesPage = () => {
       {/* ── CTA ── */}
       <section className="px-6 py-24">
         <div className="mx-auto max-w-4xl text-center">
-          <h2
-            className={`mb-6 text-3xl font-semibold text-foreground opacity-0 delay-200 md:text-4xl ${isVisible ? "animate-fade-in-up" : ""}`}
-          >
+          <Reveal as="h2" className="mb-6 text-3xl font-semibold text-foreground md:text-4xl">
             Ready to get started?
-          </h2>
-          <p
-            className={`mb-10 text-muted-foreground opacity-0 delay-300 ${isVisible ? "animate-fade-in-up" : ""}`}
-          >
+          </Reveal>
+          <Reveal as="p" delay={100} className="mb-10 text-muted-foreground">
             See how we bring these services to life through our proven process.
-          </p>
+          </Reveal>
           <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Button variant="heroPrimary" size="hero" className="group" asChild>
               <Link to="/process">
