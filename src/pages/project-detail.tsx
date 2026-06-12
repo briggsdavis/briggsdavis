@@ -78,13 +78,26 @@ const ProjectDetail = () => {
         </div>
 
         {/* Title + description */}
-        <div className="mb-16 animate-fade-in-up opacity-0 delay-300">
-          <h1 className="mb-6 text-4xl font-semibold text-foreground md:text-5xl">
-            {project.name}
-          </h1>
-          <p className="max-w-2xl text-lg leading-relaxed text-muted-foreground">
-            {project.description}
-          </p>
+        <div className="mb-16 flex animate-fade-in-up flex-col gap-8 opacity-0 delay-300 md:flex-row md:items-start md:justify-between">
+          <div>
+            <h1 className="mb-6 text-4xl font-semibold text-foreground md:text-5xl">
+              {project.name}
+            </h1>
+            <p className="max-w-2xl text-lg leading-relaxed text-muted-foreground">
+              {project.description}
+            </p>
+          </div>
+
+          {project.link && (
+            <div className="shrink-0 md:pt-2">
+              <Button variant="nav" size="lg" className="glass glint" asChild>
+                <a href={project.link} target="_blank" rel="noopener noreferrer">
+                  Visit Website
+                  <ExternalLink className="ml-2 h-4 w-4" />
+                </a>
+              </Button>
+            </div>
+          )}
         </div>
 
         {/* Problem / Solution / Business Value */}
@@ -113,34 +126,31 @@ const ProjectDetail = () => {
           </div>
         )}
 
-        {/* Key Features + Visit link */}
-        <div className="grid gap-12 border-t border-border/40 pt-16 md:grid-cols-3">
-          <div className="md:col-span-2">
-            <SectionLabel>Key Features</SectionLabel>
-            <ul className="space-y-4">
-              {project.features.map((feature, i) => (
-                <li
-                  key={feature}
-                  className="flex animate-fade-in-up items-start gap-3 text-sm text-foreground/80 opacity-0"
-                  style={{ animationDelay: `${700 + i * 80}ms` }}
-                >
-                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-muted-foreground" />
-                  {feature}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {project.link && (
-            <div className="flex animate-fade-in-up items-start opacity-0 delay-[700ms]">
-              <Button variant="nav" size="lg" className="glass glint" asChild>
-                <a href={project.link} target="_blank" rel="noopener noreferrer">
-                  Visit Website
-                  <ExternalLink className="ml-2 h-4 w-4" />
-                </a>
-              </Button>
-            </div>
-          )}
+        {/* Key Features */}
+        <div className="border-t border-border/40 pt-16">
+          <SectionLabel>Key Features</SectionLabel>
+          <ul className="space-y-3">
+            {project.features.map((feature, i) => (
+              <li
+                key={feature.title}
+                tabIndex={0}
+                className="group/feat animate-fade-in-up cursor-default rounded-xl border border-border/40 px-5 py-4 opacity-0 transition-colors duration-300 hover:border-border focus:outline-none focus-visible:border-border"
+                style={{ animationDelay: `${700 + i * 80}ms` }}
+              >
+                <div className="flex items-start gap-3 text-sm font-medium text-foreground/90">
+                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-muted-foreground transition-colors duration-300 group-hover/feat:bg-foreground" />
+                  {feature.title}
+                </div>
+                <div className="grid grid-rows-[0fr] transition-all duration-300 ease-out group-hover/feat:grid-rows-[1fr] group-focus-within/feat:grid-rows-[1fr]">
+                  <div className="overflow-hidden">
+                    <p className="pt-2 pl-[18px] text-sm leading-relaxed text-muted-foreground">
+                      {feature.detail}
+                    </p>
+                  </div>
+                </div>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
 
