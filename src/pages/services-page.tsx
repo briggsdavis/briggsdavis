@@ -186,9 +186,12 @@ const contexts = [
 
 // Vertical gap between expertise items, in px. Must match the `mt-[...]` class
 // on each item below; the scroll math reads it to size the hold/ease/buffer.
-const ITEM_GAP = 144
+const ITEM_GAP = 176
 // Scroll distance (px) where neither neighbouring panel is open — the buffer.
 const DEAD_ZONE = 70
+// Fraction of the open window spent fully open (hold); the rest is the gradual
+// ease in/out. Lower = more gradual reveal.
+const HOLD_FRACTION = 0.22
 
 const ServicesPage = () => {
   const [introVisible, setIntroVisible] = useState(false)
@@ -222,7 +225,7 @@ const ServicesPage = () => {
         const stride = headerHeight + ITEM_GAP
         const influence = Math.max(40, (stride - DEAD_ZONE) / 2)
         // Hold fully open near center, then ease down over the rest of the window.
-        const hold = influence * 0.45
+        const hold = influence * HOLD_FRACTION
         const ramp = influence - hold
         const next = headerRefs.current.map((el, i) => {
           // Refresh natural height each frame so the px max-height is always exact.
@@ -370,7 +373,7 @@ const ServicesPage = () => {
             return (
               <Reveal
                 key={service.number}
-                className={`border-t border-border/30 ${index === 0 ? "" : "mt-36"}`}
+                className={`border-t border-border/30 ${index === 0 ? "" : "mt-44"}`}
               >
                 <div
                   ref={(el) => {
