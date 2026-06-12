@@ -209,8 +209,10 @@ const ServicesPage = () => {
       cancelAnimationFrame(rafRef.current)
       rafRef.current = requestAnimationFrame(() => {
         const screenCenter = window.innerHeight / 2
-        // Headers within this distance of center can be open at all.
-        const openBand = window.innerHeight * 0.18
+        // Headers within this distance of center can be open at all. Sized a
+        // little under the (now padded) header-to-header spacing so the current
+        // panel collapses before the next opens.
+        const openBand = window.innerHeight * 0.2
         const next = headerRefs.current.map((el, i) => {
           // Refresh natural height each frame so the px max-height is always exact.
           const content = contentRefs.current[i]
@@ -353,7 +355,10 @@ const ServicesPage = () => {
             const progress = progresses[index] ?? 0
             const isActive = progress > 0.5
             return (
-              <Reveal key={service.number} className="border-t border-border/30">
+              <Reveal
+                key={service.number}
+                className={`border-t border-border/30 ${index === 0 ? "" : "mt-10"}`}
+              >
                 <div
                   ref={(el) => {
                     headerRefs.current[index] = el
