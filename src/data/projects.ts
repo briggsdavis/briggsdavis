@@ -20,6 +20,46 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    id: "social-satisfaction",
+    name: "Social Satisfaction",
+    image: "/images/Screenshot 2026-07-05 at 13.25.02.jpg",
+    shortDescription:
+      "A digital creative marketing agency whose old site failed to reflect the caliber of their work, so we built a visually dashing platform worthy of their expertise.",
+    description:
+      "A visually striking digital platform for a creative marketing agency, built to reflect the caliber of their work and establish a professional, credible presence that attracts clients and drives business.",
+    problem:
+      "A digital creative marketing agency had an old site that didn't reflect the caliber of their work or expertise. It failed to communicate their creativity to prospective clients or build the credible, professional presence needed to attract new business.",
+    solution:
+      "We built a visually dashing, high-quality platform packed with 3D scroll-triggered animations, SVG-based load-in sequences, and a series of unique layouts and page structures — all backed by a custom-designed CMS that lets the team manage their portfolio and clearly communicate the problems and solutions behind each project.",
+    businessValue:
+      "The platform gives the agency a professional, credible digital presence that matches the quality of their work, showcases their portfolios in a way that resonates with clients, and actively drives new business.",
+    link: "https://socialsatisfaction.agency/",
+    features: [
+      {
+        title: "Custom-designed content management system",
+        detail:
+          "A bespoke CMS built specifically for the agency, giving the team full control to manage their portfolio, case studies, and content without developer support.",
+      },
+      {
+        title: "3D scroll-triggered animations",
+        detail:
+          "Immersive 3D animations that respond to scroll, creating an eye-catching, interactive experience that reflects the agency's creative caliber.",
+      },
+      {
+        title: "Scroll-triggered SVG animations and load-in sequences",
+        detail:
+          "A series of SVG-based animations and carefully choreographed load-in sequences that bring the site to life and keep visitors engaged.",
+      },
+      {
+        title: "Unique layouts and page structures",
+        detail:
+          "A collection of distinctive, custom page structures that work together to communicate each project's problems and solutions as a high-quality communication platform.",
+      },
+    ],
+    tags: ["Marketing Agency", "Creative", "CMS"],
+    year: 2026,
+  },
+  {
     id: "oderum",
     name: "Oderum",
     image: "/images/portfolio-oderum.png",
