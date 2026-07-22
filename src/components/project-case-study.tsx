@@ -68,6 +68,52 @@ const useSequencedScroll = () => {
   return { ref, progress }
 }
 
+const useHorizontalReveal = () => {
+  const ref = useRef<HTMLElement | null>(null)
+  const [progress, setProgress] = useState(0)
+
+  useEffect(() => {
+    const element = ref.current
+    if (!element) return
+
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)")
+    const desktop = window.matchMedia("(min-width: 1024px)")
+    let frame = 0
+
+    const update = () => {
+      if (frame) return
+
+      frame = window.requestAnimationFrame(() => {
+        if (!desktop.matches || reducedMotion.matches) {
+          setProgress(1)
+        } else {
+          const rect = element.getBoundingClientRect()
+          const distanceToCenter = (window.innerHeight + rect.height) / 2
+          setProgress(clamp((window.innerHeight - rect.top) / distanceToCenter))
+        }
+
+        frame = 0
+      })
+    }
+
+    update()
+    window.addEventListener("scroll", update, { passive: true })
+    window.addEventListener("resize", update)
+    desktop.addEventListener("change", update)
+    reducedMotion.addEventListener("change", update)
+
+    return () => {
+      window.cancelAnimationFrame(frame)
+      window.removeEventListener("scroll", update)
+      window.removeEventListener("resize", update)
+      desktop.removeEventListener("change", update)
+      reducedMotion.removeEventListener("change", update)
+    }
+  }, [])
+
+  return { ref, progress }
+}
+
 const ExpandingImage = ({
   src,
   alt,
@@ -114,6 +160,32 @@ const FullWidthScrollImage = ({ src, alt }: { src: string; alt: string }) => {
   )
 }
 
+const HorizontalRevealImage = ({
+  src,
+  alt,
+  direction,
+}: {
+  src: string
+  alt: string
+  direction: "left-to-right" | "right-to-left"
+}) => {
+  const { ref, progress } = useHorizontalReveal()
+  const staggeredProgress = clamp((progress - 0.32) / 0.68)
+  const weightedProgress = staggeredProgress ** 2 * (3 - 2 * staggeredProgress)
+  const concealed = (1 - weightedProgress) * 75
+  const clipPath =
+    direction === "left-to-right" ? `inset(0 ${concealed}% 0 0)` : `inset(0 0 0 ${concealed}%)`
+
+  return (
+    <>
+      <figure ref={ref} className="hidden lg:block">
+        <img src={src} alt={alt} className="w-full" style={{ clipPath, willChange: "clip-path" }} />
+      </figure>
+      <img src={src} alt={alt} className="w-full lg:hidden" />
+    </>
+  )
+}
+
 const StickyStory = ({ project }: { project: Project }) => {
   const { ref, progress } = useSequencedScroll()
   const story = [
@@ -131,7 +203,7 @@ const StickyStory = ({ project }: { project: Project }) => {
         <div className="relative">
           <div className="sticky top-[12vh]">
             <ExpandingImage
-              src={project.caseStudyImages[0]}
+              src={project.caseStudyImages[1]}
               alt={`${project.name} website detail`}
               progress={progress}
             />
@@ -156,7 +228,7 @@ const StickyStory = ({ project }: { project: Project }) => {
 
       <section className="space-y-12 lg:hidden">
         <img
-          src={project.caseStudyImages[0]}
+          src={project.caseStudyImages[1]}
           alt={`${project.name} website detail`}
           className="w-full"
         />
@@ -201,17 +273,39 @@ const FeatureSection = ({ project }: { project: Project }) => {
         <FeatureList project={project} />
         <div className="relative hidden lg:block">
           <ExpandingImage
-            src={project.caseStudyImages[1]}
+            src={project.caseStudyImages[2]}
             alt={`${project.name} website feature`}
             progress={progress}
           />
         </div>
         <img
-          src={project.caseStudyImages[1]}
+          src={project.caseStudyImages[2]}
           alt={`${project.name} website feature`}
           className="w-full lg:hidden"
         />
       </div>
+    </section>
+  )
+}
+
+const PostFeatureGallery = ({ project }: { project: Project }) => {
+  if (!project.postFeatureImages) return null
+
+  return (
+    <section
+      className="mt-24 space-y-24 lg:mt-40 lg:space-y-40"
+      aria-label={`${project.name} additional project views`}
+    >
+      <HorizontalRevealImage
+        src={project.postFeatureImages[0]}
+        alt={`${project.name} additional website view`}
+        direction="left-to-right"
+      />
+      <HorizontalRevealImage
+        src={project.postFeatureImages[1]}
+        alt={`${project.name} additional website view`}
+        direction="right-to-left"
+      />
     </section>
   )
 }
@@ -277,6 +371,8 @@ export const ProjectCaseStudy = ({
       <div className="mt-24 lg:mt-40">
         <FeatureSection project={project} />
       </div>
+
+      <PostFeatureGallery project={project} />
 
       <Reveal className="mt-24 rounded-2xl border border-border/40 px-8 py-16 text-center">
         <SectionLabel>Let's talk</SectionLabel>
