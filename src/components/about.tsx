@@ -76,14 +76,20 @@ const About = () => {
               isVisible ? "animate-fade-in-up" : ""
             }`}
           />
-          <p
+          <div
             className={`max-w-md text-muted-foreground opacity-0 delay-400 ${
               isVisible ? "animate-fade-in-up" : ""
             }`}
           >
-            Business strategy and technical execution. Your website does more than look good. It
-            works.
-          </p>
+            <p>
+              Business strategy and technical execution. Your website does more than look good. It
+              works to drive new business.
+            </p>
+            <p className="mt-3">
+              Maxwell leads positioning, content, and marketing strategy. Nathaniel leads
+              architecture, development, and deployment.
+            </p>
+          </div>
         </div>
 
         {/* Founders Grid */}

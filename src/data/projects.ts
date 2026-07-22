@@ -64,11 +64,13 @@ export const projects: Project[] = [
     name: "Oderum",
     image: "/images/portfolio-oderum.png",
     description:
-      "A minimalist fragrance discovery platform with an innovative rating system, built for enthusiasts who take scent seriously.",
+      "A concept project exploring a minimalist fragrance discovery platform for enthusiasts who take scent seriously.",
     problem:
       "Fragrance discovery online was dominated by text-heavy, visually uninspiring interfaces that failed to capture the sensory nature of the category.",
     solution:
-      "We designed a minimalist, visually-driven platform with an innovative rating system that transforms how enthusiasts discover and evaluate fragrances.",
+      "We designed a minimalist, visually-driven concept that lets users compare fragrances across longevity, sillage, projection, and value.",
+    businessValue:
+      "Created as a concept project, Oderum demonstrates how a focused interface and multi-attribute rating system can make fragrance comparison clearer and more useful.",
     link: "https://oderum.com",
     features: [
       {
@@ -79,7 +81,7 @@ export const projects: Project[] = [
       {
         title: "Innovative fragrance rating system",
         detail:
-          "A multi-attribute scoring system that rates each scent across distinct dimensions — longevity, sillage, projection and value — rather than a single star score.",
+          "A multi-attribute scoring system that lets users compare each scent across longevity, sillage, projection, and value rather than relying on a single star score.",
       },
       {
         title: "Responsive mobile-first experience",
@@ -106,7 +108,7 @@ export const projects: Project[] = [
     problem:
       "A specialist health coach had no effective way to communicate her expertise or convert visitors into clients without a compelling online presence.",
     solution:
-      "We built a branded platform that showcases her services, builds trust through social proof, and drives bookings through a clear, personality-forward experience.",
+      "We built a branded platform that presents her services and testimonials, builds trust through social proof, and provides direct booking paths.",
     businessValue:
       "The platform established her credibility online, expanded her visibility in a crowded market, and gave prospective clients a clear path to book her services.",
     link: "https://hormonevitalitycoaching.com",
@@ -142,7 +144,7 @@ export const projects: Project[] = [
     description:
       "A professional web platform for a specialized engineering firm operating across East Africa, built to accurately reflect the full scope of their capabilities.",
     problem:
-      "A specialized engineering firm across East Africa was losing credibility with potential clients because their web presence failed to reflect the true scope and quality of their capabilities.",
+      "The previous site did not present the firm's full service range, project history, or regional coverage across East Africa.",
     solution:
       "We built a professional platform that clearly communicates their services, project portfolio, and regional expertise.",
     businessValue:
@@ -178,24 +180,24 @@ export const projects: Project[] = [
     name: "Anne Silver",
     image: "/images/portfolio-annesilver.png",
     description:
-      "A full e-commerce platform for a bespoke jewelry designer, with custom order capabilities and a CMS that gives her complete control over her collections.",
+      "An online product showcase for a bespoke jewelry designer, with a CMS for managing collections and presenting her work.",
     problem:
-      "A bespoke jewelry designer had no online presence, no sales channel, and no way to manage products without developer support.",
+      "A bespoke jewelry designer needed an online presence where prospective customers could explore her products and learn about her work.",
     solution:
-      "We built a full e-commerce platform with custom order capabilities and an integrated CMS that gave her complete control over her collections and customer experience.",
+      "We built a product-focused website with detailed collection pages and an integrated CMS that gives her control over the products and content on display.",
     businessValue:
-      "The store gave Anne Silver an online presence that authentically tells her story, justifies her premium pricing, and drives customers from digital channels directly to her products.",
+      "The website gives Anne Silver a central place to present her products, explain her practice, and direct prospective customers to her work.",
     link: "https://annesilver.com",
     features: [
       {
-        title: "Full e-commerce with cart and checkout",
+        title: "Online jewelry catalogue",
         detail:
-          "A complete online store with cart, secure checkout and order handling, giving her a real sales channel for the first time.",
+          "A structured online catalogue that gives prospective customers a clear way to browse her jewelry collections.",
       },
       {
-        title: "Custom jewelry order capabilities",
+        title: "Detailed product presentation",
         detail:
-          "Tools for customers to request bespoke pieces online, mirroring her made-to-order craft.",
+          "Dedicated product pages that present each piece through imagery and supporting information.",
       },
       {
         title: "Integrated CMS for content management",
@@ -205,10 +207,10 @@ export const projects: Project[] = [
       {
         title: "Curated collection browsing experience",
         detail:
-          "A thoughtfully arranged way to explore her collections that reflects the premium, considered nature of the work.",
+          "A clear browsing structure that helps visitors move through products and collections.",
       },
     ],
-    tags: ["Jewelry", "E-Commerce", "CMS"],
+    tags: ["Jewelry", "Product Showcase", "CMS"],
     year: 2023,
   },
   {
@@ -224,7 +226,7 @@ export const projects: Project[] = [
     solution:
       "We built a direct-to-consumer platform connecting buyers directly to Norwegian Atlantic salmon, complete with real-time shipment tracking and a streamlined checkout flow.",
     businessValue:
-      "The platform built trust with a new buyer base, provided the full infrastructure to facilitate online sales, and equipped the business with a backend CRM and analytics to manage relationships and track growth.",
+      "The platform gave buyers sourcing information, order tracking, and checkout, while giving staff customer and order management tools.",
     link: "https://nordicseafoods.org",
     features: [
       {
@@ -256,15 +258,15 @@ export const projects: Project[] = [
     name: "Africa Growth Axis",
     image: "/images/portfolio-aga.png",
     shortDescription:
-      "An African market entry advisory firm with no web presence, so we built a strategic platform that positions them as a trusted authority.",
+      "An African market entry advisory firm with no web presence, so we built a platform that explains its services and supports new inquiries.",
     description:
       "A strategic advisory platform for a firm specializing in African market entry, with a CMS that lets the team publish market insights and update content independently.",
     problem:
       "International companies and investors navigating African market entry had no credible digital touchpoint for AGA's advisory services; the firm had no web presence at all.",
     solution:
-      "We built a strategic platform that positions AGA as a trusted authority, with a dynamic CMS giving the team full control to publish market insights and update content independently.",
+      "We built a platform with a dynamic CMS that gives the team control over its advisory services, market insights, and inquiries.",
     businessValue:
-      "The platform established AGA's institutional credibility online, communicated their expertise to an international audience, and created a professional foundation for driving business development.",
+      "The platform gave the firm a central place to explain advisory services, receive inquiries, and build business credibility.",
     link: "https://aga-advisory.com/",
     features: [
       {
@@ -296,34 +298,33 @@ export const projects: Project[] = [
     name: "Brac Stone House",
     image: "/brac.png",
     description:
-      "An immersive single-property experience for a historic Mediterranean stone house on the island of Brac, crafted to attract a discerning buyer.",
+      "A single-property presentation for a historic stone house on the island of Brac, using video, sound, renovation concepts, and location information.",
     problem:
-      "Selling a historic stone property requiring renovation demanded more than a standard listing; the right buyer needed to feel the investment potential and Mediterranean lifestyle before ever speaking to an agent.",
+      "A standard property listing could not fully present the condition, renovation potential, setting, and history of the stone house.",
     solution:
-      "We built a single-property immersive experience with cinematic visuals and sound design that makes the vision tangible for a discerning buyer.",
+      "We built a dedicated property website using video, sound, renovation concepts, and location information to present the house in context.",
     businessValue:
-      "The site functions as a targeted marketing tool that educates the right buyer on the property's potential and actively works to bring the sale to close.",
+      "The site gives prospective buyers one place to understand the property, its renovation possibilities, and its location before contacting the seller.",
     link: "https://bracstonehouse.com",
     features: [
       {
         title: "Immersive sound and visual storytelling",
         detail:
-          "Cinematic visuals paired with sound design that let prospective buyers feel the property and its setting, not just read about it.",
+          "Video and sound design present the property and its setting beyond what a standard listing can show.",
       },
       {
         title: "Renovation vision and possibility showcase",
         detail:
-          "A presentation of what the historic stone house could become, making the investment potential tangible to the right buyer.",
+          "Renovation concepts help prospective buyers understand what the historic stone house could become.",
       },
       {
         title: "Mediterranean lifestyle and location narrative",
-        detail:
-          "Storytelling around the island setting and Mediterranean lifestyle that sells the experience surrounding the property.",
+        detail: "Location information explains the island setting and the surrounding area.",
       },
       {
-        title: "Cinematic property experience to drive sales",
+        title: "Dedicated single-property presentation",
         detail:
-          "A single-property site crafted as a marketing tool, designed to move a discerning buyer toward a sale.",
+          "A focused website brings the property details, renovation concepts, media, and contact path together.",
       },
     ],
     tags: ["Real Estate", "Immersive", "Property"],
@@ -334,13 +335,13 @@ export const projects: Project[] = [
     name: "Butcher and the Rye",
     image: "/butcher.png",
     shortDescription:
-      "A Pittsburgh restaurant with serious character, so we built a website that matches it — rustic, moody, and built to fill tables.",
+      "A Pittsburgh restaurant website that carries the venue's rustic, moody identity into its menus, reservations, and content.",
     description:
-      "A full-featured website for Butcher and the Rye, a celebrated Pittsburgh restaurant, built to reflect the venue's rustic, moody brand identity and drive reservations.",
+      "A website for Butcher and the Rye that carries the restaurant's visual identity online, publishes menus, supports reservations, and gives staff control over content.",
     problem:
-      "Butcher and the Rye needed a digital presence as distinctive as the restaurant itself — one that captured its atmosphere, ranked in search, and made it effortless for guests to book a table.",
+      "Butcher and the Rye needed a website that presented the restaurant's atmosphere, ranked in local search, and gave guests a direct path to reserve a table.",
     solution:
-      "We designed a website with a rustic, moody visual language that fits the restaurant's brand, integrated a reservations system for seamless bookings, and built in a CMS so the team can manage content independently.",
+      "We carried the restaurant's rustic, moody visual language into the website, integrated reservations, and built a CMS for managing menus and content.",
     businessValue:
       "The site converts discovery into reservations, extends the restaurant's identity online, and gives the team full control over menus and content without developer support.",
     link: "https://butcherandtherye.com",
@@ -352,8 +353,7 @@ export const projects: Project[] = [
       },
       {
         title: "Integrated reservations system",
-        detail:
-          "A built-in booking system that makes it effortless for guests to reserve a table directly from the site.",
+        detail: "A booking system that gives guests a direct way to reserve a table from the site.",
       },
       {
         title: "Backend CMS for menus and content management",
@@ -379,26 +379,25 @@ export const projects: Project[] = [
     name: "Hargarten",
     image: "/images/portfolio-hargarten.png",
     shortDescription:
-      "A luxury real estate firm that needed a premium digital presence to attract high-level clients, so we built a brand, a website, and a full CMS from the ground up.",
+      "A real estate brand, property website, listing CMS, and inquiry workflow built from the ground up.",
     description:
-      "A premium digital platform for a luxury real estate firm, built to communicate high status, establish credibility, and attract discerning clients through a refined brand and seamless backend.",
+      "A brand and property website for a luxury real estate firm, supported by a listing CMS and inquiry-management workflow.",
     problem:
-      "Hargarten needed to project a premium, high-status image to attract luxury clients, but had no digital presence, no established brand, and no way to manage listings or client inquiries without developer support.",
+      "Hargarten had no established brand or website and needed a way to publish property listings and manage client inquiries without developer support.",
     solution:
-      "We created a full brand identity, designed a luxury-feel website that communicates professionalism and exclusivity, and built a complete CMS that allows the admin to independently manage property listings, new content, and client inquiries.",
+      "We developed the brand identity, property website, listing CMS, and inquiry-management workflow from the ground up.",
     businessValue:
-      "The platform gave Hargarten the credibility and visual authority to compete for high-level clients, with a fully managed backend that lets the team update listings and handle inquiries without any technical support.",
+      "The platform gives Hargarten a consistent brand presence and lets the team publish listings and handle inquiries without technical support.",
     link: "https://hargarten-properties.lu/",
     features: [
       {
-        title: "Custom luxury brand identity and logo design",
-        detail:
-          "A bespoke brand and logo built from scratch to project the premium, high-status image the firm needed to attract luxury clients.",
+        title: "Custom brand identity and logo design",
+        detail: "A brand and logo developed from the ground up for the real estate firm.",
       },
       {
-        title: "Premium visual design communicating high status",
+        title: "Brand-aligned property website",
         detail:
-          "A refined, exclusive design language that signals professionalism and prestige to discerning clientele.",
+          "A consistent visual system for presenting the firm, its properties, and its services.",
       },
       {
         title: "Full CMS for managing property listings and content",
@@ -419,15 +418,15 @@ export const projects: Project[] = [
     name: "Refenti",
     image: "/images/portfolio-refenti.jpg",
     shortDescription:
-      "A premier real estate developer in Addis Ababa, for whom we built their institutional-grade digital platform from the ground up.",
+      "A real estate development website for presenting projects, publishing updates, and receiving investor and buyer inquiries.",
     description:
-      "An institutional-grade platform for a premier real estate developer in Addis Ababa, built to establish premium positioning and convert high-end client interest into leads.",
+      "A website for an Addis Ababa real estate developer that presents developments, publishes news and events, and routes investor and buyer inquiries to the team.",
     problem:
       "A premier real estate developer in Addis Ababa had no digital presence, making it impossible to establish the premium positioning needed to compete for high-end clients and development partners.",
     solution:
-      "We built an institutional-grade platform with precision visual design, a CMS for news and events, and inquiry forms that convert interest into leads.",
+      "We built a project-focused website with a CMS for news and events and inquiry forms for prospective buyers, investors, and partners.",
     businessValue:
-      "The platform communicates Refenti's luxury positioning, instills confidence in prospective investors and partners, and provides a direct channel for driving investment and development partnerships.",
+      "The platform gives Refenti a central place to present developments, keep stakeholders informed, and receive buyer, investor, and partner inquiries.",
     link: "https://refenti.com",
     features: [
       {
@@ -446,9 +445,9 @@ export const projects: Project[] = [
           "Tools to publish news and events, keeping investors and partners current on the developer's progress.",
       },
       {
-        title: "Elegant, precision-crafted visual design",
+        title: "Project-focused visual design",
         detail:
-          "A meticulously crafted, elegant design that reflects the developer's institutional-grade, luxury positioning.",
+          "A visual system designed to present the developer, its properties, and current projects clearly.",
       },
     ],
     tags: ["Real Estate", "CMS", "Branding"],

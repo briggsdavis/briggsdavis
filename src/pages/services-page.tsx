@@ -10,6 +10,49 @@ import { Button } from "@/components/ui/button"
 const services = [
   {
     number: "01",
+    visualKey: "geo",
+    title: "Generative Engine Optimization",
+    tagline: "Built for AI-assisted discovery.",
+    description:
+      "Structure content for AI-assisted discovery. We make brand and service information easier for AI systems to identify and cite across assistants, chatbots, and generative search platforms.",
+    features: [
+      "AI search optimization",
+      "Structured content strategy",
+      "Entity-based markup",
+      "LLM-friendly architecture",
+    ],
+  },
+  {
+    number: "02",
+    visualKey: "seo",
+    title: "Search Engine Optimization",
+    tagline: "Visibility that drives growth.",
+    description:
+      "Improve your visibility and rank higher in search results. We implement technical SEO, structured data, and performance optimization to help search engines crawl, understand, and index your site.",
+    features: [
+      "Technical SEO audits",
+      "Structured data markup",
+      "Performance optimization",
+      "Analytics integration",
+    ],
+  },
+  {
+    number: "03",
+    visualKey: "language",
+    title: "Multi-Language Support",
+    tagline: "Support every market's language.",
+    description:
+      "Support multiple languages and regional formats. We implement multilingual infrastructure that makes localized content straightforward to manage.",
+    features: [
+      "i18n frameworks",
+      "RTL support",
+      "Locale-aware formatting",
+      "Translation management",
+    ],
+  },
+  {
+    number: "04",
+    visualKey: "globe",
     title: "Global Client Experience",
     tagline: "Trusted across continents.",
     description:
@@ -22,72 +65,8 @@ const services = [
     ],
   },
   {
-    number: "02",
-    title: "Mobile Friendly Design",
-    tagline: "Every pixel, every device.",
-    description:
-      "Websites that look perfect on every device, from desktop to mobile. We use responsive frameworks and rigorous cross-device testing to ensure your users get a flawless experience regardless of screen size.",
-    features: [
-      "Responsive layouts",
-      "Touch-optimized interactions",
-      "Cross-browser compatibility",
-      "Retina-ready assets",
-    ],
-  },
-  {
-    number: "03",
-    title: "Search Engine Optimization",
-    tagline: "Visibility that drives growth.",
-    description:
-      "Improve your visibility and rank higher in search results. We implement technical SEO best practices, structured data, and performance optimization to ensure search engines love your site as much as your users do.",
-    features: [
-      "Technical SEO audits",
-      "Structured data markup",
-      "Performance optimization",
-      "Analytics integration",
-    ],
-  },
-  {
-    number: "04",
-    title: "Rapid Development",
-    tagline: "Launch in days, not months.",
-    description:
-      "Launch your website in as fast as one week without compromising quality. Our streamlined development process and modern tooling allow us to deliver production-ready websites at unprecedented speed.",
-    features: [
-      "One-week delivery possible",
-      "Agile methodology",
-      "Modern tech stack",
-      "Iterative feedback loops",
-    ],
-  },
-  {
     number: "05",
-    title: "Multi-Language Support",
-    tagline: "Speak every market's language.",
-    description:
-      "Reach global audiences with professionally translated websites. We implement robust internationalization frameworks that make managing multiple languages seamless.",
-    features: [
-      "i18n frameworks",
-      "RTL support",
-      "Locale-aware formatting",
-      "Translation management",
-    ],
-  },
-  {
-    number: "06",
-    title: "Facilitate Online Payments",
-    tagline: "Seamless transactions, built-in trust.",
-    description:
-      "Build secure e-commerce solutions that accept payments seamlessly. From Stripe to local payment gateways, we integrate trusted payment processors with bulletproof security.",
-    features: [
-      "Payment gateway integration",
-      "Multi-currency support",
-      "Subscription billing",
-      "Invoice generation",
-    ],
-  },
-  {
-    number: "07",
+    visualKey: "cms",
     title: "Content Management Systems",
     tagline: "Your content, your control.",
     description:
@@ -100,15 +79,87 @@ const services = [
     ],
   },
   {
-    number: "08",
-    title: "Ongoing Maintenance",
-    tagline: "Always running, always secure.",
+    number: "06",
+    visualKey: "cybersecurity",
+    title: "Cybersecurity",
+    tagline: "Security built into the foundation.",
     description:
-      "Keep your website secure, updated, and running smoothly. We provide continuous monitoring, security patches, and performance tuning to keep your digital presence in peak condition.",
-    features: ["24/7 monitoring", "Security updates", "Performance tuning", "Regular backups"],
+      "We build secure websites using established security practices and provider-supported controls. Security considerations shape architecture, access, data handling, deployment, and ongoing maintenance.",
+    features: [
+      "Secure architecture",
+      "Access controls",
+      "Protected data handling",
+      "Security updates",
+    ],
+  },
+  {
+    number: "07",
+    visualKey: "visual-design",
+    title: "Visually Engaging Design",
+    tagline: "Beautiful, clear, and built for your brand.",
+    description:
+      "We create visually engaging websites with purposeful hierarchy, typography, imagery, and interaction. Every design is tailored to express your brand clearly and hold attention without getting in the way of the user.",
+    features: [
+      "Custom visual systems",
+      "Typography and hierarchy",
+      "Purposeful interaction",
+      "Brand-aligned art direction",
+    ],
+  },
+  {
+    number: "08",
+    visualKey: "mobile",
+    title: "Mobile Friendly Design",
+    tagline: "Responsive across common screen sizes.",
+    description:
+      "Websites that adapt to different screen sizes and are tested across current browsers and devices so users get a consistent experience wherever they visit.",
+    features: [
+      "Responsive layouts",
+      "Touch-optimized interactions",
+      "Cross-browser compatibility",
+      "Retina-ready assets",
+    ],
   },
   {
     number: "09",
+    visualKey: "rapid",
+    title: "Rapid Development",
+    tagline: "Launch in days, not months.",
+    description:
+      "Launch your website in as fast as one week without compromising quality. Our streamlined development process and modern tooling allow us to deliver production-ready websites at unprecedented speed.",
+    features: [
+      "One-week delivery possible",
+      "Agile methodology",
+      "Modern tech stack",
+      "Iterative feedback loops",
+    ],
+  },
+  {
+    number: "10",
+    visualKey: "payments",
+    title: "Facilitate Online Payments",
+    tagline: "Payment flows using established providers.",
+    description:
+      "We build payment flows using established providers, from Stripe to local gateways, with provider-supported security controls.",
+    features: [
+      "Payment gateway integration",
+      "Multi-currency support",
+      "Subscription billing",
+      "Invoice generation",
+    ],
+  },
+  {
+    number: "11",
+    visualKey: "maintenance",
+    title: "Ongoing Maintenance",
+    tagline: "Monitoring, updates, and maintenance.",
+    description:
+      "We address security updates, backups, and performance issues to keep your website current and running smoothly.",
+    features: ["Uptime monitoring", "Security updates", "Performance tuning", "Regular backups"],
+  },
+  {
+    number: "12",
+    visualKey: "unique",
     title: "Unique Solutions",
     tagline: "Tailored to your vision.",
     description:
@@ -121,20 +172,22 @@ const services = [
     ],
   },
   {
-    number: "10",
+    number: "13",
+    visualKey: "performance",
     title: "Flawless Performance",
     tagline: "Speed is a feature.",
     description:
-      "Lightning-fast loading times powered by high-quality, modern technology. We optimize every asset, lazy-load intelligently, and leverage CDNs to deliver sub-second page loads.",
+      "We optimize assets, loading behavior, caching, and delivery to improve website speed and responsiveness.",
     features: [
-      "Sub-second loads",
+      "Performance targets",
       "CDN deployment",
       "Asset optimization",
-      "Core Web Vitals compliance",
+      "Core Web Vitals testing",
     ],
   },
   {
-    number: "11",
+    number: "14",
+    visualKey: "client-input",
     title: "Client Input",
     tagline: "Your voice shapes every decision.",
     description:
@@ -146,25 +199,15 @@ const services = [
       "Transparent process",
     ],
   },
-  {
-    number: "12",
-    title: "Generative Engine Optimization",
-    tagline: "Future-proof your discoverability.",
-    description:
-      "Optimize your digital presence for AI-powered search and generative engines. As discovery shifts beyond traditional search, we ensure your brand surfaces accurately across AI assistants, chatbots, and next-generation platforms.",
-    features: [
-      "AI search optimization",
-      "Structured content strategy",
-      "Entity-based markup",
-      "LLM-friendly architecture",
-    ],
-  },
 ]
 
 const outcomes = [
   { label: "Stronger Brand Perception", note: "Sites that signal credibility and quality." },
   { label: "Increased Business", note: "Built to attract, convert, and retain." },
-  { label: "Marketing & Ops Fit", note: "Tools that work as hard as you do." },
+  {
+    label: "Marketing & Ops Fit",
+    note: "Tools aligned with your marketing and operational workflows.",
+  },
   { label: "Global Reach", note: "Designed for diverse contexts and audiences." },
 ]
 
@@ -453,7 +496,12 @@ const ServicesPage = () => {
                     opacity: progress,
                   }}
                 >
-                  <div ref={(el) => { contentRefs.current[index] = el }} className="pr-8 pb-8 pl-14">
+                  <div
+                    ref={(el) => {
+                      contentRefs.current[index] = el
+                    }}
+                    className="pr-8 pb-8 pl-14"
+                  >
                     <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
                       {/* Text */}
                       <div className="min-w-0">
@@ -474,7 +522,7 @@ const ServicesPage = () => {
                       </div>
                       {/* Visual — half the dropdown width */}
                       <div className="hidden h-64 md:block">
-                        <ServiceVisual serviceNumber={service.number} isActive={progress > 0.05} />
+                        <ServiceVisual visualKey={service.visualKey} isActive={progress > 0.05} />
                       </div>
                     </div>
                   </div>

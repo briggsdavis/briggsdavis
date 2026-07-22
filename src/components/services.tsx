@@ -14,36 +14,62 @@ const serviceDelayClasses = [
   "[animation-delay:1200ms]",
   "[animation-delay:1300ms]",
   "[animation-delay:1400ms]",
+  "[animation-delay:1500ms]",
+  "[animation-delay:1600ms]",
+  "[animation-delay:1700ms]",
+  "[animation-delay:1800ms]",
 ]
 
 const services = [
   {
-    title: "MOBILE FRIENDLY DESIGN",
-    description: "Websites that look perfect on every device, from desktop to mobile.",
+    title: "GENERATIVE ENGINE OPTIMIZATION",
+    description: "Structure content for AI-assisted discovery and accurate brand identification.",
   },
   {
     title: "SEARCH ENGINE OPTIMIZATION",
-    description: "Improve your visibility and rank higher in search results.",
+    description:
+      "Improve your visibility and rank higher by helping search engines crawl, understand, and index your site.",
   },
   {
-    title: "RAPID DEVELOPMENT",
-    description: "Launch your website in as fast as one week without compromising quality.",
+    title: "MULTI-LANGUAGE SUPPORT",
+    description:
+      "Multilingual infrastructure that supports multiple languages and regional formats.",
+  },
+  {
+    title: "GLOBAL CLIENT EXPERIENCE",
+    description:
+      "Experience serving SMEs and multimillion-dollar enterprises across three continents.",
   },
   {
     title: "CONTENT MANAGEMENT SYSTEMS",
     description: "Easy-to-use systems that let you manage your own content.",
   },
   {
-    title: "ONGOING MAINTENANCE",
-    description: "Keep your website secure, updated, and running smoothly.",
+    title: "CYBERSECURITY",
+    description:
+      "Secure websites built with provider-supported controls and established security practices.",
   },
   {
-    title: "MULTI-LANGUAGE SUPPORT",
-    description: "Reach global audiences with professionally translated websites.",
+    title: "VISUAL DESIGN",
+    description: "Visually engaging websites with a polished design tailored to your brand.",
+  },
+  {
+    title: "MOBILE FRIENDLY DESIGN",
+    description: "Responsive across common screen sizes and tested across browsers and devices.",
+  },
+  {
+    title: "RAPID DEVELOPMENT",
+    description: "Launch your website in as fast as one week without compromising quality.",
+  },
+  {
+    title: "ONGOING MAINTENANCE",
+    description:
+      "Monitoring, updates, and maintenance that address security, backups, and performance.",
   },
   {
     title: "FACILITATE ONLINE PAYMENTS",
-    description: "Build secure e-commerce solutions that accept payments seamlessly.",
+    description:
+      "Payment flows using established providers and provider-supported security controls.",
   },
   {
     title: "UNIQUE SOLUTIONS",
@@ -52,7 +78,7 @@ const services = [
   },
   {
     title: "FLAWLESS PERFORMANCE",
-    description: "Lightning-fast loading times powered by high-quality, modern technology.",
+    description: "Optimized assets, loading behavior, caching, and delivery for faster websites.",
   },
   {
     title: "CLIENT INPUT",
@@ -118,12 +144,12 @@ const Services = () => {
           </p>
         </div>
 
-        {/* Services Grid - First Row */}
-        <div className="mb-3 grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-5">
-          {services.slice(0, 5).map((service, index) => (
+        {/* Services Grid */}
+        <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7">
+          {services.map((service, index) => (
             <div
               key={service.title}
-              className={`group cursor-pointer rounded-xl border border-border/50 bg-card p-4 opacity-0 transition-all duration-500 hover:z-10 hover:scale-110 hover:border-border hover:bg-secondary/50 hover:shadow-xl hover:shadow-black/20 ${serviceDelayClasses[index]} ${
+              className={`group min-h-36 cursor-pointer rounded-xl border border-border/50 bg-card p-4 opacity-0 transition-all duration-500 hover:z-10 hover:scale-105 hover:border-border hover:bg-secondary/50 hover:shadow-xl hover:shadow-black/20 ${serviceDelayClasses[index]} ${
                 isVisible ? "animate-fade-in-up" : ""
               }`}
             >
@@ -135,27 +161,6 @@ const Services = () => {
               </p>
             </div>
           ))}
-        </div>
-
-        {/* Services Grid - Second Row (Centered) */}
-        <div className="flex justify-center">
-          <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-5">
-            {services.slice(5).map((service, index) => (
-              <div
-                key={service.title}
-                className={`group cursor-pointer rounded-xl border border-border/50 bg-card p-4 opacity-0 transition-all duration-500 hover:z-10 hover:scale-110 hover:border-border hover:bg-secondary/50 hover:shadow-xl hover:shadow-black/20 ${serviceDelayClasses[index + 5]} ${
-                  isVisible ? "animate-fade-in-up" : ""
-                }`}
-              >
-                <h3 className="mb-2 text-xs font-semibold tracking-wide text-foreground transition-colors duration-300 group-hover:text-foreground">
-                  {service.title}
-                </h3>
-                <p className="text-xs leading-relaxed text-muted-foreground transition-colors duration-300 group-hover:text-muted-foreground/80">
-                  {service.description}
-                </p>
-              </div>
-            ))}
-          </div>
         </div>
 
         {/* Explore Services Button */}

@@ -76,9 +76,8 @@ const Hero = () => {
           isVisible ? "animate-fade-in-up" : ""
         }`}
       >
-        Precision websites that elevate your brand,
-        <br />
-        justify your prices, and grow your business.
+        Custom websites that clarify your offer, support your operations, and make it easier for
+        customers to take action.
       </p>
 
       {/* CTAs */}
@@ -89,7 +88,7 @@ const Hero = () => {
       >
         <Button variant="heroPrimary" size="hero" className="group" asChild>
           <a href="https://calendly.com/ntedvs/website" target="_blank" rel="noopener noreferrer">
-            Start the Journey
+            Book a Discovery Call
             <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
           </a>
         </Button>

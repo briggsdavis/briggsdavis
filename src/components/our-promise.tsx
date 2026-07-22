@@ -173,7 +173,7 @@ const OurPromise = () => {
                   isVisible ? "animate-fade-in-up" : ""
                 }`}
               >
-                Your Website. A Business Asset.
+                A Website Built Around Your Business.
               </h2>
               <div
                 className={`mb-6 h-0.5 w-12 bg-muted-foreground opacity-0 delay-300 ${
@@ -185,9 +185,9 @@ const OurPromise = () => {
                   isVisible ? "animate-fade-in-up" : ""
                 }`}
               >
-                We build websites that establish authority, justify your prices, and actively grow
-                your business. Trusted by clients from SMEs to global enterprises across three
-                continents.
+                We combine business strategy, design, and development to build websites that explain
+                what you do, support customer acquisition, and reduce the work required to manage
+                content.
               </p>
             </div>
 

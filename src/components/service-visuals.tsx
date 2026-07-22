@@ -1,3 +1,4 @@
+import { ShieldCheck } from "lucide-react"
 import { memo, useEffect, useRef, useState } from "react"
 
 // ─── 01 Mobile Friendly Design ────────────────────────────────────────────
@@ -780,39 +781,106 @@ export const GlobeVisual = memo(({ isActive }: { isActive: boolean }) => {
   )
 })
 
+export const CybersecurityVisual = memo(({ isActive }: { isActive: boolean }) => (
+  <div className="flex h-full items-center justify-center">
+    <div className="w-52 rounded-lg border border-white/15 bg-black/30 p-5">
+      <div className="mb-5 flex items-center gap-3">
+        <div
+          className="flex h-12 w-12 items-center justify-center rounded-full border border-white/20 bg-white/5 transition-transform duration-500"
+          style={{ transform: isActive ? "scale(1)" : "scale(0.85)" }}
+        >
+          <ShieldCheck className="h-6 w-6 text-white/75" />
+        </div>
+        <div>
+          <p className="font-mono text-[8px] tracking-[0.25em] text-white/30 uppercase">Status</p>
+          <p className="mt-1 text-sm font-medium text-white/70">Protected</p>
+        </div>
+      </div>
+      <div className="space-y-2.5">
+        {["TLS", "ACCESS", "UPDATES"].map((label, index) => (
+          <div
+            key={label}
+            className="flex items-center justify-between border-t border-white/10 pt-2.5"
+          >
+            <span className="font-mono text-[8px] tracking-[0.2em] text-white/30">{label}</span>
+            <span
+              className="h-1.5 w-1.5 rounded-full bg-green-300/70 transition-opacity duration-500"
+              style={{ opacity: isActive ? 1 : 0.25, transitionDelay: `${index * 100}ms` }}
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+))
+
+export const VisualDesignVisual = memo(({ isActive }: { isActive: boolean }) => (
+  <div className="flex h-full items-center justify-center">
+    <div
+      className="w-56 overflow-hidden rounded-lg border border-white/15 bg-black/30 transition-transform duration-500"
+      style={{ transform: isActive ? "translateY(0)" : "translateY(8px)" }}
+    >
+      <div className="flex items-center gap-1.5 border-b border-white/10 px-3 py-2">
+        <span className="h-1.5 w-1.5 rounded-full bg-white/25" />
+        <span className="h-1.5 w-1.5 rounded-full bg-white/15" />
+        <span className="h-1.5 w-1.5 rounded-full bg-white/10" />
+      </div>
+      <div className="grid grid-cols-[1fr_72px] gap-4 p-4">
+        <div>
+          <span className="font-display text-4xl text-white/75 italic">Aa</span>
+          <div className="mt-3 h-1.5 w-full rounded bg-white/20" />
+          <div className="mt-1.5 h-1.5 w-3/4 rounded bg-white/10" />
+          <div className="mt-5 h-7 w-20 rounded-sm border border-white/20 bg-white/10" />
+        </div>
+        <div className="grid grid-cols-2 gap-2">
+          {["bg-white/70", "bg-emerald-300/50", "bg-amber-200/45", "bg-rose-300/40"].map(
+            (color) => (
+              <span key={color} className={`aspect-square rounded-sm ${color}`} />
+            ),
+          )}
+        </div>
+      </div>
+    </div>
+  </div>
+))
+
 // ─── Router ──────────────────────────────────────────────────────────────
 export const ServiceVisual = ({
-  serviceNumber,
+  visualKey,
   isActive,
 }: {
-  serviceNumber: string
+  visualKey: string
   isActive: boolean
 }) => {
-  switch (serviceNumber) {
-    case "01":
-      return <GlobeVisual isActive={isActive} />
-    case "02":
+  switch (visualKey) {
+    case "mobile":
       return <MobileVisual isActive={isActive} />
-    case "03":
+    case "seo":
       return <SEOVisual isActive={isActive} />
-    case "04":
+    case "rapid":
       return <RapidDevVisual isActive={isActive} />
-    case "05":
+    case "language":
       return <LanguageVisual isActive={isActive} />
-    case "06":
+    case "payments":
       return <PaymentsVisual isActive={isActive} />
-    case "07":
+    case "cms":
       return <CMSVisual isActive={isActive} />
-    case "08":
+    case "maintenance":
       return <MaintenanceVisual isActive={isActive} />
-    case "09":
+    case "unique":
       return <UniqueVisual isActive={isActive} />
-    case "10":
+    case "performance":
       return <PerformanceVisual isActive={isActive} />
-    case "11":
+    case "client-input":
       return <ClientInputVisual isActive={isActive} />
-    case "12":
+    case "geo":
       return <GEOVisual isActive={isActive} />
+    case "globe":
+      return <GlobeVisual isActive={isActive} />
+    case "cybersecurity":
+      return <CybersecurityVisual isActive={isActive} />
+    case "visual-design":
+      return <VisualDesignVisual isActive={isActive} />
     default:
       return null
   }
