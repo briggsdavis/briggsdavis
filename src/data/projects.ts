@@ -7,6 +7,8 @@ export interface Project {
   id: string
   name: string
   image: string
+  overview: string
+  caseStudyImages: [string, string, string]
   description: string
   shortDescription?: string
   problem?: string
@@ -23,14 +25,21 @@ export const projects: Project[] = [
     id: "social-satisfaction",
     name: "Social Satisfaction",
     image: "/images/Screenshot 2026-07-05 at 13.25.02.jpg",
+    overview:
+      "Social Satisfaction is a digital creative marketing agency based in Pittsburgh, Pennsylvania. The agency provides creative direction, branding, social media, motion graphics, and campaign work for brands and creative teams.",
+    caseStudyImages: [
+      "/images/case-studies/social-satisfaction-1.png",
+      "/images/case-studies/social-satisfaction-2.png",
+      "/images/case-studies/social-satisfaction-3.png",
+    ],
     shortDescription:
       "A digital creative marketing agency whose old site failed to reflect the caliber of their work, so we built a visually dashing platform worthy of their expertise.",
     description:
-      "A visually striking digital platform for a creative marketing agency, built to reflect the caliber of their work and establish a professional, credible presence that attracts clients and drives business.",
+      "A portfolio-led website with 3D scroll interactions, custom load sequences, distinctive project layouts, and a CMS for managing case studies and agency content.",
     problem:
       "A digital creative marketing agency had an old site that didn't reflect the caliber of their work or expertise. It failed to communicate their creativity to prospective clients or build the credible, professional presence needed to attract new business.",
     solution:
-      "We built a visually dashing, high-quality platform packed with 3D scroll-triggered animations, SVG-based load-in sequences, and a series of unique layouts and page structures — all backed by a custom-designed CMS that lets the team manage their portfolio and clearly communicate the problems and solutions behind each project.",
+      "We built a visually dashing, high-quality platform packed with 3D scroll-triggered animations, SVG-based load-in sequences, and a series of unique layouts and page structures. A custom-designed CMS lets the team manage its portfolio and clearly communicate the problems and solutions behind each project.",
     businessValue:
       "The platform gives the agency a professional, credible digital presence that matches the quality of their work, showcases their portfolios in a way that resonates with clients, and actively drives new business.",
     link: "https://socialsatisfaction.agency/",
@@ -63,8 +72,15 @@ export const projects: Project[] = [
     id: "oderum",
     name: "Oderum",
     image: "/images/portfolio-oderum.png",
+    overview:
+      "Oderum is a Briggs Davis concept for fragrance enthusiasts. It brings fragrance notes, sillage, projection, performance, and other comparison details into one visually focused experience, supported by AI recommendations.",
+    caseStudyImages: [
+      "/images/case-studies/oderum-1.png",
+      "/images/case-studies/oderum-2.png",
+      "/images/case-studies/oderum-3.png",
+    ],
     description:
-      "A concept project exploring a minimalist fragrance discovery platform for enthusiasts who take scent seriously.",
+      "A minimalist fragrance discovery interface for exploring detailed scent profiles, comparing performance attributes, and receiving AI-assisted recommendations.",
     problem:
       "Fragrance discovery online was dominated by text-heavy, visually uninspiring interfaces that failed to capture the sensory nature of the category.",
     solution:
@@ -101,10 +117,17 @@ export const projects: Project[] = [
     id: "hormone-vitality-coaching",
     name: "Hormone Vitality Coaching",
     image: "/images/portfolio-2.jpg",
+    overview:
+      "Hormone Vitality Coaching is a hybrid health coaching practice operating between Ethiopia and Belgium. It supports women, particularly through post-menopause, with general health and hormonal wellness services delivered remotely and in person.",
+    caseStudyImages: [
+      "/images/case-studies/hormone-vitality-coaching-1.png",
+      "/images/case-studies/hormone-vitality-coaching-2.png",
+      "/images/case-studies/hormone-vitality-coaching-3.png",
+    ],
     shortDescription:
       "A specialist health coach with no digital presence, so we built a branded platform that showcases her expertise and drives client bookings.",
     description:
-      "A branded digital platform for a specialist health coach, built to communicate her expertise and convert visitors into clients in a crowded wellness market.",
+      "A service website that presents the practice, coaching programs, testimonials, and direct booking paths within a consistent branded experience.",
     problem:
       "A specialist health coach had no effective way to communicate her expertise or convert visitors into clients without a compelling online presence.",
     solution:
@@ -116,7 +139,7 @@ export const projects: Project[] = [
       {
         title: "Custom brand identity and visual language",
         detail:
-          "A bespoke look and feel — colour, type and imagery — built specifically for her practice so it stands apart in a crowded wellness market.",
+          "A bespoke look and feel across colour, type, and imagery, built specifically for her practice so it stands apart in a crowded wellness market.",
       },
       {
         title: "Service showcase with booking integration",
@@ -141,8 +164,15 @@ export const projects: Project[] = [
     id: "ease-engineering",
     name: "EASE Engineering",
     image: "/images/portfolio-3.jpg",
+    overview:
+      "EASE Engineering is an Addis Ababa-based structural engineering and construction firm operating in Ethiopia and Djibouti. It provides post-tensioning, engineering, execution, and construction for high-rise buildings, complex residential projects, and specialist subcontracting packages.",
+    caseStudyImages: [
+      "/images/case-studies/ease-engineering-1.png",
+      "/images/case-studies/ease-engineering-2.png",
+      "/images/case-studies/ease-engineering-3.png",
+    ],
     description:
-      "A professional web platform for a specialized engineering firm operating across East Africa, built to accurately reflect the full scope of their capabilities.",
+      "A corporate website that organizes EASE's engineering services, project history, regional operations, and technical capabilities for prospective clients and partners.",
     problem:
       "The previous site did not present the firm's full service range, project history, or regional coverage across East Africa.",
     solution:
@@ -179,8 +209,15 @@ export const projects: Project[] = [
     id: "anne-silver",
     name: "Anne Silver",
     image: "/images/portfolio-annesilver.png",
+    overview:
+      "Anne Silver is an Addis Ababa-based jewelry business creating silver and gold pieces for women and men, including designs with gemstones. It primarily serves individual customers while also selling through selected retail channels and markets.",
+    caseStudyImages: [
+      "/images/case-studies/anne-silver-1.png",
+      "/images/case-studies/anne-silver-2.png",
+      "/images/case-studies/anne-silver-3.png",
+    ],
     description:
-      "An online product showcase for a bespoke jewelry designer, with a CMS for managing collections and presenting her work.",
+      "A product showcase with collection pages, detailed jewelry information, and a CMS for managing the products and content displayed online.",
     problem:
       "A bespoke jewelry designer needed an online presence where prospective customers could explore her products and learn about her work.",
     solution:
@@ -217,6 +254,13 @@ export const projects: Project[] = [
     id: "nordic-seafood",
     name: "Nordic Seafood",
     image: "/images/portfolio-5.jpg",
+    overview:
+      "Nordic Seafood operates between Norway and Ethiopia, working with two Norwegian salmon and seafood partners to import seafood directly into Ethiopia. Through its website, the company supplies individuals, restaurants, and hotels, with delivery integrated into the ordering process.",
+    caseStudyImages: [
+      "/images/nordic-sourcing-sample.jpg",
+      "/images/nordic-logistics-sample.jpg",
+      "/images/nordic-hospitality-sample.jpg",
+    ],
     shortDescription:
       "A Norwegian salmon supplier targeting East African buyers, for whom we built a direct-to-consumer platform with real-time shipment tracking.",
     description:
@@ -237,7 +281,7 @@ export const projects: Project[] = [
       {
         title: "Real-time shipment tracking experience",
         detail:
-          "Live tracking that lets buyers follow their order from dispatch to delivery — essential reassurance for perishable, sushi-grade fish.",
+          "Live tracking that lets buyers follow their order from dispatch to delivery, providing essential reassurance for perishable, sushi-grade fish.",
       },
       {
         title: "Verified bank transfer checkout flow",
@@ -257,10 +301,17 @@ export const projects: Project[] = [
     id: "africa-growth-axis",
     name: "Africa Growth Axis",
     image: "/images/portfolio-aga.png",
+    overview:
+      "Africa Growth Axis is an African market-entry advisory firm based in Addis Ababa, Ethiopia. It supports companies and investors with market entry, institutional engagement, strategic structuring, partnerships, and execution across African markets.",
+    caseStudyImages: [
+      "/images/case-studies/africa-growth-axis-1.png",
+      "/images/case-studies/africa-growth-axis-2.png",
+      "/images/case-studies/africa-growth-axis-3.png",
+    ],
     shortDescription:
       "An African market entry advisory firm with no web presence, so we built a platform that explains its services and supports new inquiries.",
     description:
-      "A strategic advisory platform for a firm specializing in African market entry, with a CMS that lets the team publish market insights and update content independently.",
+      "An advisory website that explains the firm's services, geographic focus, and working approach, with a CMS for publishing insights and updating content independently.",
     problem:
       "International companies and investors navigating African market entry had no credible digital touchpoint for AGA's advisory services; the firm had no web presence at all.",
     solution:
@@ -297,8 +348,15 @@ export const projects: Project[] = [
     id: "brac-stone-house",
     name: "Brac Stone House",
     image: "/brac.png",
+    overview:
+      "Brac Stone House is a property more than 100 years old on the island of Brac, Croatia. It sits inland within an ethno heritage village, combining a protected historic setting with elevated views and renovation potential.",
+    caseStudyImages: [
+      "/images/case-studies/brac-stone-house-1.png",
+      "/images/case-studies/brac-stone-house-2.png",
+      "/images/case-studies/brac-stone-house-3.png",
+    ],
     description:
-      "A single-property presentation for a historic stone house on the island of Brac, using video, sound, renovation concepts, and location information.",
+      "A single-property website combining video, sound, renovation concepts, specifications, and location information to present the house in context.",
     problem:
       "A standard property listing could not fully present the condition, renovation potential, setting, and history of the stone house.",
     solution:
@@ -334,10 +392,17 @@ export const projects: Project[] = [
     id: "butcher-and-the-rye",
     name: "Butcher and the Rye",
     image: "/butcher.png",
+    overview:
+      "Butcher and the Rye is a Pittsburgh restaurant within the Richard DeShantz Restaurant Group. It pairs high-quality seasonal cooking and a studied whiskey program with a warm, wood-lined atmosphere influenced by mountain lodges and log cabins.",
+    caseStudyImages: [
+      "/images/case-studies/butcher-and-the-rye-1.png",
+      "/images/case-studies/butcher-and-the-rye-2.png",
+      "/images/case-studies/butcher-and-the-rye-3.png",
+    ],
     shortDescription:
       "A Pittsburgh restaurant website that carries the venue's rustic, moody identity into its menus, reservations, and content.",
     description:
-      "A website for Butcher and the Rye that carries the restaurant's visual identity online, publishes menus, supports reservations, and gives staff control over content.",
+      "A restaurant website that carries the venue's visual identity into its menus, reservation flow, drinks program, editorial content, and staff-managed updates.",
     problem:
       "Butcher and the Rye needed a website that presented the restaurant's atmosphere, ranked in local search, and gave guests a direct path to reserve a table.",
     solution:
@@ -378,10 +443,17 @@ export const projects: Project[] = [
     id: "hargarten",
     name: "Hargarten",
     image: "/images/portfolio-hargarten.png",
+    overview:
+      "Hargarten is a Luxembourg real estate agency combining property services with specialist real estate legal support. It serves high-net-worth individuals seeking luxury residential property across Luxembourg.",
+    caseStudyImages: [
+      "/images/case-studies/hargarten-1.png",
+      "/images/case-studies/hargarten-2.png",
+      "/images/case-studies/hargarten-3.png",
+    ],
     shortDescription:
       "A real estate brand, property website, listing CMS, and inquiry workflow built from the ground up.",
     description:
-      "A brand and property website for a luxury real estate firm, supported by a listing CMS and inquiry-management workflow.",
+      "A luxury property website with an integrated listing CMS, legal-service information, and an inquiry workflow for prospective buyers and sellers.",
     problem:
       "Hargarten had no established brand or website and needed a way to publish property listings and manage client inquiries without developer support.",
     solution:
@@ -417,10 +489,17 @@ export const projects: Project[] = [
     id: "refenti",
     name: "Refenti",
     image: "/images/portfolio-refenti.jpg",
+    overview:
+      "Refenti is an Addis Ababa real estate operator and developer focused on high-rise residential and mixed-use projects. It serves high-net-worth buyers and development partners through premium locations, distinctive architecture, large structural spans, and post-tensioned construction.",
+    caseStudyImages: [
+      "/images/case-studies/refenti-sample.jpg",
+      "/images/case-studies/refenti-sample.jpg",
+      "/images/case-studies/refenti-sample.jpg",
+    ],
     shortDescription:
       "A real estate development website for presenting projects, publishing updates, and receiving investor and buyer inquiries.",
     description:
-      "A website for an Addis Ababa real estate developer that presents developments, publishes news and events, and routes investor and buyer inquiries to the team.",
+      "A development-focused website that presents Refenti's properties, publishes news and events, and routes buyer, investor, and partner inquiries to the team.",
     problem:
       "A premier real estate developer in Addis Ababa had no digital presence, making it impossible to establish the premium positioning needed to compete for high-end clients and development partners.",
     solution:

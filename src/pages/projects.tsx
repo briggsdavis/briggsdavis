@@ -1,10 +1,11 @@
 import { ArrowRight, ArrowDown } from "lucide-react"
 import { useCallback, useEffect, useRef, useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import Footer from "@/components/footer"
 import Navbar from "@/components/navbar"
 import { Button } from "@/components/ui/button"
 import { projects } from "@/data/projects"
+import { openProjectWithMorph } from "@/lib/project-transition"
 
 const Projects = () => {
   const listRef = useRef<HTMLDivElement>(null)
@@ -12,6 +13,7 @@ const Projects = () => {
   const imageRefs = useRef<(HTMLImageElement | null)[]>([])
   const [scales, setScales] = useState<number[]>(projects.map(() => 1))
   const rafRef = useRef<number>(0)
+  const navigate = useNavigate()
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -31,7 +33,7 @@ const Projects = () => {
         // 1 at viewport center, easing toward 0 at maxDistance
         const raw = 1 - Math.min(distance / maxDistance, 1)
         const progress = raw * raw // quadratic ease for a snappier center focus
-        // Scale from 1.0 (edges) to 1.15 (centered) — 15% bigger at peak
+        // Scale from 1.0 at the edges to 1.15 at the center.
         return 1 + progress * 0.15
       })
       setScales(newScales)
@@ -68,6 +70,17 @@ const Projects = () => {
 
   const scrollToWork = () => {
     listRef.current?.scrollIntoView({ behavior: "smooth" })
+  }
+
+  const openProject = (
+    event: React.MouseEvent<HTMLAnchorElement>,
+    projectId: string,
+    index: number,
+  ) => {
+    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey)
+      return
+    event.preventDefault()
+    openProjectWithMorph({ navigate, projectId, source: imageRefs.current[index] })
   }
 
   return (
@@ -120,7 +133,7 @@ const Projects = () => {
       </section>
 
       {/* ── Project list ── */}
-      <div ref={listRef} className="mx-auto max-w-6xl px-6 pb-32 pt-8">
+      <div ref={listRef} className="mx-auto max-w-6xl px-6 pt-8 pb-32">
         <div className="flex flex-col gap-16">
           {projects.map((project, i) => (
             <div
@@ -147,7 +160,7 @@ const Projects = () => {
                     ))}
                   </div>
 
-                  <h2 className="text-3xl font-semibold leading-tight text-foreground md:text-4xl">
+                  <h2 className="text-3xl leading-tight font-semibold text-foreground md:text-4xl">
                     {project.name}
                   </h2>
 
@@ -155,7 +168,10 @@ const Projects = () => {
                     {project.shortDescription ?? project.description}
                   </p>
 
-                  <Link to={`/project/${project.id}`}>
+                  <Link
+                    to={`/project/${project.id}`}
+                    onClick={(event) => openProject(event, project.id, i)}
+                  >
                     <Button variant="nav" size="lg" className="glass glint group w-fit">
                       <span>View Details</span>
                       <ArrowRight className="ml-2 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
@@ -166,7 +182,8 @@ const Projects = () => {
                 {/* Right: image */}
                 <Link
                   to={`/project/${project.id}`}
-                  className="block overflow-hidden rounded-2xl transition-transform duration-150 ease-out will-change-transform"
+                  onClick={(event) => openProject(event, project.id, i)}
+                  className="block overflow-hidden transition-transform duration-150 ease-out will-change-transform"
                   style={{ transform: `scale(${scales[i] ?? 1})` }}
                 >
                   <img

@@ -230,7 +230,7 @@ const contexts = [
 // Vertical gap between expertise items, in px. Must match the `mt-[...]` class
 // on each item below; the scroll math reads it to size the hold/ease/buffer.
 const ITEM_GAP = 224
-// Scroll distance (px) where neither neighbouring panel is open — the buffer.
+// Scroll distance (px) where neither neighbouring panel is open.
 const DEAD_ZONE = 70
 // Fraction of the open window spent fully open (hold) before the ease begins.
 // Higher = stays fully expanded longer before it starts closing.
@@ -260,7 +260,7 @@ const ServicesPage = () => {
   // Scroll-linked reveal: each service opens in proportion to how close its
   // header is to the vertical center of the viewport. A dead zone keeps a panel
   // fully closed until its header is well inside the center band, so the current
-  // panel finishes collapsing before the next begins to open — one clear focus.
+  // panel finishes collapsing before the next begins to open, keeping one clear focus.
   // The rendered value is eased toward the scroll target each frame so both the
   // open and the close glide rather than snap.
   useEffect(() => {
@@ -520,7 +520,7 @@ const ServicesPage = () => {
                           ))}
                         </div>
                       </div>
-                      {/* Visual — half the dropdown width */}
+                      {/* Visual occupies half the dropdown width. */}
                       <div className="hidden h-64 md:block">
                         <ServiceVisual visualKey={service.visualKey} isActive={progress > 0.05} />
                       </div>

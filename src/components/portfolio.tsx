@@ -1,7 +1,8 @@
 import { ArrowRight } from "lucide-react"
 import { useEffect, useRef, useState, useCallback } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { projects } from "@/data/projects"
+import { openProjectWithMorph } from "@/lib/project-transition"
 import { Button } from "./ui/button"
 
 const featuredIds = [
@@ -24,7 +25,9 @@ const Portfolio = () => {
   const sectionRef = useRef<HTMLElement>(null)
   const [isVisible, setIsVisible] = useState(false)
   const itemRefs = useRef<(HTMLDivElement | null)[]>([])
+  const imageRefs = useRef<(HTMLImageElement | null)[]>([])
   const [scales, setScales] = useState<number[]>(featuredProjects.map(() => 0.85))
+  const navigate = useNavigate()
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -74,6 +77,17 @@ const Portfolio = () => {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [handleScroll])
 
+  const openProject = (
+    event: React.MouseEvent<HTMLAnchorElement>,
+    projectId: string,
+    index: number,
+  ) => {
+    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey)
+      return
+    event.preventDefault()
+    openProjectWithMorph({ navigate, projectId, source: imageRefs.current[index] })
+  }
+
   return (
     <section id="portfolio" ref={sectionRef} className="px-6 pt-16 pb-32">
       <div className="mx-auto max-w-5xl">
@@ -114,15 +128,22 @@ const Portfolio = () => {
               key={item.id}
               className={`opacity-0 ${featuredDelayClasses[index]} ${isVisible ? "animate-fade-in-up" : ""}`}
             >
-              <Link to={`/project/${item.id}`} className="block">
+              <Link
+                to={`/project/${item.id}`}
+                className="block"
+                onClick={(event) => openProject(event, item.id, index)}
+              >
                 <div
                   ref={(el) => {
                     itemRefs.current[index] = el
                   }}
-                  className="group relative cursor-pointer overflow-hidden rounded-2xl transition-transform duration-150 ease-out will-change-transform"
+                  className="group relative cursor-pointer overflow-hidden transition-transform duration-150 ease-out will-change-transform"
                   style={{ transform: `scale(${scales[index]})` }}
                 >
                   <img
+                    ref={(el) => {
+                      imageRefs.current[index] = el
+                    }}
                     src={item.image}
                     alt={item.name}
                     className="aspect-[16/9] w-full object-cover object-top"

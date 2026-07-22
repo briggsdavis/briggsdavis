@@ -3,9 +3,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 import Layout from "@/components/layout"
 import SmoothScroll from "@/components/smooth-scroll"
 import Index from "./pages/index"
+import ProjectDetail from "./pages/project-detail"
 
 const NotFound = lazy(() => import("./pages/not-found"))
-const ProjectDetail = lazy(() => import("./pages/project-detail"))
 const Projects = lazy(() => import("./pages/projects"))
 const ServicesPage = lazy(() => import("./pages/services-page"))
 const ProcessPage = lazy(() => import("./pages/process-page"))

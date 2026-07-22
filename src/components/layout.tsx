@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react"
 import { Outlet, useLocation } from "react-router-dom"
 import { scrollToTop } from "@/lib/lenis-store"
+import { isProjectMorphNavigation } from "@/lib/project-transition"
 
 // Duration of the wipe in ms; slower = more dramatic
 const DURATION = 1100
@@ -20,6 +21,14 @@ const Layout = () => {
     if (!overlay) return
 
     cancelAnimationFrame(rafRef.current)
+
+    if (isProjectMorphNavigation()) {
+      overlay.style.backdropFilter = "none"
+      overlay.style.webkitBackdropFilter = "none"
+      overlay.style.maskImage = ""
+      overlay.style.webkitMaskImage = ""
+      return
+    }
 
     // Reset: restore full blur with no mask (entire viewport blurred)
     overlay.style.backdropFilter = "blur(14px)"
@@ -64,7 +73,11 @@ const Layout = () => {
         never overwrites animation progress mid-frame.
         z-[45] keeps the overlay below the Navbar (z-50); Navbar stays sharp.
       */}
-      <div ref={overlayRef} className="pointer-events-none fixed inset-0 z-[45]" />
+      <div
+        ref={overlayRef}
+        data-route-transition-overlay
+        className="pointer-events-none fixed inset-0 z-[45]"
+      />
       <Outlet />
     </>
   )
