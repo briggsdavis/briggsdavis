@@ -1,6 +1,7 @@
 import { ArrowRight } from "lucide-react"
 import { useEffect, useState } from "react"
 import { Link, useLocation } from "react-router-dom"
+import { NavLogoBackground } from "@/components/nav-logo-background"
 import { Button } from "@/components/ui/button"
 
 const navItems = [
@@ -99,7 +100,9 @@ const Navbar = () => {
             menuOpen ? "translate-x-0" : "-translate-x-full"
           }`}
         >
-          <div className="flex h-full items-center px-8 pt-16 sm:px-14 lg:px-[8vw]">
+          <NavLogoBackground active={menuOpen} />
+          <div className="absolute inset-0 bg-black/78" aria-hidden="true" />
+          <div className="relative z-10 flex h-full items-center px-8 pt-16 sm:px-14 lg:px-[8vw]">
             <div className="menu-links flex flex-col items-start gap-3 md:gap-4">
               {navItems.map((item) => {
                 const active = location.pathname === item.href

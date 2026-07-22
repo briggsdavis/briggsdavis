@@ -192,7 +192,7 @@ const Projects = () => {
                     }}
                     src={project.image}
                     alt={project.name}
-                    className="aspect-[16/10] w-full object-cover object-top transition-transform duration-500 hover:scale-105"
+                    className="w-full transition-transform duration-500 hover:scale-105"
                   />
                 </Link>
               </div>

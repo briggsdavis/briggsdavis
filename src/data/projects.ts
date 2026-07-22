@@ -8,7 +8,7 @@ export interface Project {
   name: string
   image: string
   overview: string
-  caseStudyImages: [string, string, string]
+  caseStudyImages: [string, string]
   description: string
   shortDescription?: string
   problem?: string
@@ -24,14 +24,10 @@ export const projects: Project[] = [
   {
     id: "social-satisfaction",
     name: "Social Satisfaction",
-    image: "/images/Screenshot 2026-07-05 at 13.25.02.jpg",
+    image: "/images/socialsatisfaction1.jpg",
     overview:
       "Social Satisfaction is a digital creative marketing agency based in Pittsburgh, Pennsylvania. The agency provides creative direction, branding, social media, motion graphics, and campaign work for brands and creative teams.",
-    caseStudyImages: [
-      "/images/case-studies/social-satisfaction-1.png",
-      "/images/case-studies/social-satisfaction-2.png",
-      "/images/case-studies/social-satisfaction-3.png",
-    ],
+    caseStudyImages: ["/images/socialsatisfaction2.jpg", "/images/socialsatisfaction3.jpg"],
     shortDescription:
       "A digital creative marketing agency whose old site failed to reflect the caliber of their work, so we built a visually dashing platform worthy of their expertise.",
     description:
@@ -71,14 +67,10 @@ export const projects: Project[] = [
   {
     id: "oderum",
     name: "Oderum",
-    image: "/images/portfolio-oderum.png",
+    image: "/images/oderum1.jpg",
     overview:
       "Oderum is a Briggs Davis concept for fragrance enthusiasts. It brings fragrance notes, sillage, projection, performance, and other comparison details into one visually focused experience, supported by AI recommendations.",
-    caseStudyImages: [
-      "/images/case-studies/oderum-1.png",
-      "/images/case-studies/oderum-2.png",
-      "/images/case-studies/oderum-3.png",
-    ],
+    caseStudyImages: ["/images/oderum2.jpg", "/images/oderum3.jpg"],
     description:
       "A minimalist fragrance discovery interface for exploring detailed scent profiles, comparing performance attributes, and receiving AI-assisted recommendations.",
     problem:
@@ -116,13 +108,12 @@ export const projects: Project[] = [
   {
     id: "hormone-vitality-coaching",
     name: "Hormone Vitality Coaching",
-    image: "/images/portfolio-2.jpg",
+    image: "/images/hormonevitalitycoaching1.jpg",
     overview:
       "Hormone Vitality Coaching is a hybrid health coaching practice operating between Ethiopia and Belgium. It supports women, particularly through post-menopause, with general health and hormonal wellness services delivered remotely and in person.",
     caseStudyImages: [
-      "/images/case-studies/hormone-vitality-coaching-1.png",
-      "/images/case-studies/hormone-vitality-coaching-2.png",
-      "/images/case-studies/hormone-vitality-coaching-3.png",
+      "/images/hormonevitalitycoaching2.jpg",
+      "/images/hormonevitalitycoaching3.jpg",
     ],
     shortDescription:
       "A specialist health coach with no digital presence, so we built a branded platform that showcases her expertise and drives client bookings.",
@@ -163,14 +154,10 @@ export const projects: Project[] = [
   {
     id: "ease-engineering",
     name: "EASE Engineering",
-    image: "/images/portfolio-3.jpg",
+    image: "/images/ease1.jpg",
     overview:
       "EASE Engineering is an Addis Ababa-based structural engineering and construction firm operating in Ethiopia and Djibouti. It provides post-tensioning, engineering, execution, and construction for high-rise buildings, complex residential projects, and specialist subcontracting packages.",
-    caseStudyImages: [
-      "/images/case-studies/ease-engineering-1.png",
-      "/images/case-studies/ease-engineering-2.png",
-      "/images/case-studies/ease-engineering-3.png",
-    ],
+    caseStudyImages: ["/images/ease2.jpg", "/images/ease3.jpg"],
     description:
       "A corporate website that organizes EASE's engineering services, project history, regional operations, and technical capabilities for prospective clients and partners.",
     problem:
@@ -208,14 +195,10 @@ export const projects: Project[] = [
   {
     id: "anne-silver",
     name: "Anne Silver",
-    image: "/images/portfolio-annesilver.png",
+    image: "/images/annesilver1.jpg",
     overview:
       "Anne Silver is an Addis Ababa-based jewelry business creating silver and gold pieces for women and men, including designs with gemstones. It primarily serves individual customers while also selling through selected retail channels and markets.",
-    caseStudyImages: [
-      "/images/case-studies/anne-silver-1.png",
-      "/images/case-studies/anne-silver-2.png",
-      "/images/case-studies/anne-silver-3.png",
-    ],
+    caseStudyImages: ["/images/annesilver2.jpg", "/images/annesilver3.jpg"],
     description:
       "A product showcase with collection pages, detailed jewelry information, and a CMS for managing the products and content displayed online.",
     problem:
@@ -253,14 +236,10 @@ export const projects: Project[] = [
   {
     id: "nordic-seafood",
     name: "Nordic Seafood",
-    image: "/images/portfolio-5.jpg",
+    image: "/images/nordicseafood1.jpg",
     overview:
       "Nordic Seafood operates between Norway and Ethiopia, working with two Norwegian salmon and seafood partners to import seafood directly into Ethiopia. Through its website, the company supplies individuals, restaurants, and hotels, with delivery integrated into the ordering process.",
-    caseStudyImages: [
-      "/images/nordic-sourcing-sample.jpg",
-      "/images/nordic-logistics-sample.jpg",
-      "/images/nordic-hospitality-sample.jpg",
-    ],
+    caseStudyImages: ["/images/nordicseafood2.jpg", "/images/nordicseafood3.jpg"],
     shortDescription:
       "A Norwegian salmon supplier targeting East African buyers, for whom we built a direct-to-consumer platform with real-time shipment tracking.",
     description:
@@ -300,14 +279,10 @@ export const projects: Project[] = [
   {
     id: "africa-growth-axis",
     name: "Africa Growth Axis",
-    image: "/images/portfolio-aga.png",
+    image: "/images/aga1.jpg",
     overview:
       "Africa Growth Axis is an African market-entry advisory firm based in Addis Ababa, Ethiopia. It supports companies and investors with market entry, institutional engagement, strategic structuring, partnerships, and execution across African markets.",
-    caseStudyImages: [
-      "/images/case-studies/africa-growth-axis-1.png",
-      "/images/case-studies/africa-growth-axis-2.png",
-      "/images/case-studies/africa-growth-axis-3.png",
-    ],
+    caseStudyImages: ["/images/aga2.jpg", "/images/aga3.jpg"],
     shortDescription:
       "An African market entry advisory firm with no web presence, so we built a platform that explains its services and supports new inquiries.",
     description:
@@ -347,14 +322,10 @@ export const projects: Project[] = [
   {
     id: "brac-stone-house",
     name: "Brac Stone House",
-    image: "/brac.png",
+    image: "/images/bracstonehouse1.jpg",
     overview:
       "Brac Stone House is a property more than 100 years old on the island of Brac, Croatia. It sits inland within an ethno heritage village, combining a protected historic setting with elevated views and renovation potential.",
-    caseStudyImages: [
-      "/images/case-studies/brac-stone-house-1.png",
-      "/images/case-studies/brac-stone-house-2.png",
-      "/images/case-studies/brac-stone-house-3.png",
-    ],
+    caseStudyImages: ["/images/bracstonehouse2.jpg", "/images/bracstonehouse3.jpg"],
     description:
       "A single-property website combining video, sound, renovation concepts, specifications, and location information to present the house in context.",
     problem:
@@ -391,14 +362,10 @@ export const projects: Project[] = [
   {
     id: "butcher-and-the-rye",
     name: "Butcher and the Rye",
-    image: "/butcher.png",
+    image: "/images/butcherandtherye1.jpg",
     overview:
       "Butcher and the Rye is a Pittsburgh restaurant within the Richard DeShantz Restaurant Group. It pairs high-quality seasonal cooking and a studied whiskey program with a warm, wood-lined atmosphere influenced by mountain lodges and log cabins.",
-    caseStudyImages: [
-      "/images/case-studies/butcher-and-the-rye-1.png",
-      "/images/case-studies/butcher-and-the-rye-2.png",
-      "/images/case-studies/butcher-and-the-rye-3.png",
-    ],
+    caseStudyImages: ["/images/butcherandtherye2.jpg", "/images/buctherandtherye3.jpg"],
     shortDescription:
       "A Pittsburgh restaurant website that carries the venue's rustic, moody identity into its menus, reservations, and content.",
     description:
@@ -442,14 +409,10 @@ export const projects: Project[] = [
   {
     id: "hargarten",
     name: "Hargarten",
-    image: "/images/portfolio-hargarten.png",
+    image: "/images/hargarten1.jpg",
     overview:
       "Hargarten is a Luxembourg real estate agency combining property services with specialist real estate legal support. It serves high-net-worth individuals seeking luxury residential property across Luxembourg.",
-    caseStudyImages: [
-      "/images/case-studies/hargarten-1.png",
-      "/images/case-studies/hargarten-2.png",
-      "/images/case-studies/hargarten-3.png",
-    ],
+    caseStudyImages: ["/images/hargarten2.jpg", "/images/hargarten3.jpg"],
     shortDescription:
       "A real estate brand, property website, listing CMS, and inquiry workflow built from the ground up.",
     description:
@@ -492,7 +455,6 @@ export const projects: Project[] = [
     overview:
       "Refenti is an Addis Ababa real estate operator and developer focused on high-rise residential and mixed-use projects. It serves high-net-worth buyers and development partners through premium locations, distinctive architecture, large structural spans, and post-tensioned construction.",
     caseStudyImages: [
-      "/images/case-studies/refenti-sample.jpg",
       "/images/case-studies/refenti-sample.jpg",
       "/images/case-studies/refenti-sample.jpg",
     ],

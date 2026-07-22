@@ -85,13 +85,13 @@ const ExpandingImage = ({
 
   return (
     <div
-      className={`aspect-[16/10] overflow-hidden ${className}`}
+      className={`overflow-hidden ${className}`}
       style={{ width: `${width}%`, willChange: "width" }}
     >
       <img
         src={src}
         alt={alt}
-        className="h-full w-full object-cover"
+        className="w-full"
         style={{
           clipPath: `inset(${(1 - reveal) * 100}% 0 0 0)`,
           willChange: "clip-path",
@@ -106,10 +106,10 @@ const FullWidthScrollImage = ({ src, alt }: { src: string; alt: string }) => {
 
   return (
     <>
-      <section ref={ref} className="relative hidden aspect-[16/10] lg:block">
+      <section ref={ref} className="relative hidden lg:block">
         <ExpandingImage src={src} alt={alt} progress={progress} />
       </section>
-      <img src={src} alt={alt} className="aspect-[16/10] w-full object-cover lg:hidden" />
+      <img src={src} alt={alt} className="w-full lg:hidden" />
     </>
   )
 }
@@ -131,7 +131,7 @@ const StickyStory = ({ project }: { project: Project }) => {
         <div className="relative">
           <div className="sticky top-[12vh]">
             <ExpandingImage
-              src={project.caseStudyImages[1]}
+              src={project.caseStudyImages[0]}
               alt={`${project.name} website detail`}
               progress={progress}
             />
@@ -156,9 +156,9 @@ const StickyStory = ({ project }: { project: Project }) => {
 
       <section className="space-y-12 lg:hidden">
         <img
-          src={project.caseStudyImages[1]}
+          src={project.caseStudyImages[0]}
           alt={`${project.name} website detail`}
-          className="aspect-[16/10] w-full object-cover"
+          className="w-full"
         />
         <div className="space-y-10">
           {story.map((item) => (
@@ -201,15 +201,15 @@ const FeatureSection = ({ project }: { project: Project }) => {
         <FeatureList project={project} />
         <div className="relative hidden lg:block">
           <ExpandingImage
-            src={project.caseStudyImages[2]}
+            src={project.caseStudyImages[1]}
             alt={`${project.name} website feature`}
             progress={progress}
           />
         </div>
         <img
-          src={project.caseStudyImages[2]}
+          src={project.caseStudyImages[1]}
           alt={`${project.name} website feature`}
-          className="aspect-[16/10] w-full object-cover lg:hidden"
+          className="w-full lg:hidden"
         />
       </div>
     </section>
@@ -236,7 +236,7 @@ export const ProjectCaseStudy = ({
           src={project.image}
           alt={project.name}
           data-project-morph-target={project.id}
-          className="aspect-[16/10] w-full object-cover object-top"
+          className="w-full"
         />
       </div>
 

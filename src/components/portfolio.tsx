@@ -146,7 +146,7 @@ const Portfolio = () => {
                     }}
                     src={item.image}
                     alt={item.name}
-                    className="aspect-[16/9] w-full object-cover object-top"
+                    className="w-full"
                   />
                   {/* Overlay */}
                   <div className="absolute inset-0 flex flex-col items-center justify-center bg-background/0 p-8 text-center opacity-0 transition-all duration-500 group-hover:bg-background/80 group-hover:opacity-100">
