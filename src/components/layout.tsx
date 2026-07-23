@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react"
 import { Outlet, useLocation } from "react-router-dom"
 import { scrollToTop } from "@/lib/lenis-store"
 import { isProjectMorphNavigation } from "@/lib/project-transition"
+import { NavLogoBackground } from "@/components/nav-logo-background"
 
 // Duration of the wipe in ms; slower = more dramatic
 const DURATION = 1100
@@ -68,6 +69,11 @@ const Layout = () => {
 
   return (
     <>
+      <div className="site-background" aria-hidden="true">
+        <NavLogoBackground mode="site" />
+        <div className="site-background-overlay" />
+      </div>
+
       {/*
         All styles managed imperatively via the ref so React reconciliation
         never overwrites animation progress mid-frame.
@@ -78,7 +84,9 @@ const Layout = () => {
         data-route-transition-overlay
         className="pointer-events-none fixed inset-0 z-[45]"
       />
-      <Outlet />
+      <div className="site-content">
+        <Outlet />
+      </div>
     </>
   )
 }

@@ -154,7 +154,7 @@ const OurPromise = () => {
   }, [init, updateWheel])
 
   return (
-    <section ref={sectionRef} id="promise" className="relative h-[121vh] w-full bg-background">
+    <section ref={sectionRef} id="promise" className="relative h-[121vh] w-full">
       {/* Sticky content container */}
       <div className="sticky top-0 left-0 flex h-screen w-full items-center">
         <div className="mx-auto w-full max-w-6xl px-6">
@@ -162,7 +162,7 @@ const OurPromise = () => {
             {/* Left side - Text content */}
             <div className="space-y-6">
               <span
-                className={`mb-4 block text-xs font-medium tracking-[0.3em] text-muted-foreground uppercase opacity-0 delay-100 ${
+                className={`font-eyebrow mb-4 block text-xs font-medium tracking-[0.3em] text-muted-foreground uppercase opacity-0 delay-100 ${
                   isVisible ? "animate-fade-in-up" : ""
                 }`}
               >

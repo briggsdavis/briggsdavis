@@ -339,7 +339,7 @@ const ServicesPage = () => {
   }, [])
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen">
       <Navbar />
 
       {/* ── Dynamic Intro Section ── */}
@@ -347,7 +347,7 @@ const ServicesPage = () => {
         <div className="mx-auto max-w-6xl">
           {/* Overline */}
           <span
-            className={`mb-16 block text-xs font-medium tracking-[0.3em] text-muted-foreground uppercase opacity-0 ${introVisible ? "animate-fade-in-up" : ""}`}
+            className={`font-eyebrow mb-16 block text-xs font-medium tracking-[0.3em] text-muted-foreground uppercase opacity-0 ${introVisible ? "animate-fade-in-up" : ""}`}
           >
             What We Build
           </span>
@@ -357,7 +357,7 @@ const ServicesPage = () => {
             <div
               className={`opacity-0 [animation-delay:80ms] ${introVisible ? "animate-fade-in-up" : ""}`}
             >
-              <p className="text-[clamp(2.8rem,8vw,6.5rem)] leading-[0.95] font-semibold tracking-tight text-foreground">
+              <p className="font-display text-[clamp(2.8rem,8vw,6.5rem)] leading-[0.95] font-semibold tracking-tight text-foreground">
                 Unique solutions
               </p>
             </div>
@@ -403,7 +403,7 @@ const ServicesPage = () => {
             <div
               className={`opacity-0 [animation-delay:480ms] ${introVisible ? "animate-fade-in-up" : ""}`}
             >
-              <p className="mb-5 text-xs tracking-[0.22em] text-muted-foreground uppercase">
+              <p className="font-eyebrow mb-5 text-xs tracking-[0.22em] text-muted-foreground uppercase">
                 What You Get
               </p>
               <div className="divide-y divide-border/50">
@@ -443,7 +443,7 @@ const ServicesPage = () => {
       <section className="px-6 py-24">
         <div className="mx-auto max-w-4xl">
           <Reveal className="mb-12">
-            <span className="mb-4 block text-xs font-medium tracking-[0.3em] text-muted-foreground uppercase">
+            <span className="font-eyebrow mb-4 block text-xs font-medium tracking-[0.3em] text-muted-foreground uppercase">
               Capabilities
             </span>
             <h2 className="text-3xl font-semibold text-foreground md:text-4xl">

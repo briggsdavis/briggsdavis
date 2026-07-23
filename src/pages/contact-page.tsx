@@ -43,7 +43,7 @@ const ContactPage = () => {
   }, [])
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen text-foreground">
       <Navbar />
 
       {/* Hero */}
@@ -97,7 +97,7 @@ const ContactPage = () => {
 
               {/* Credentials Card */}
               <div className="glass rounded-2xl p-6">
-                <h3 className="mb-4 text-xs font-medium tracking-[0.3em] text-muted-foreground uppercase">
+                <h3 className="font-eyebrow mb-4 text-xs font-medium tracking-[0.3em] text-muted-foreground uppercase">
                   Background
                 </h3>
                 <ul className="space-y-3">

@@ -112,7 +112,7 @@ const Navbar = () => {
                     to={item.href}
                     tabIndex={menuOpen ? 0 : -1}
                     aria-current={active ? "page" : undefined}
-                    className={`menu-link text-[2.125rem] leading-[1.05] font-medium text-white md:text-[2.625rem] lg:text-[3.15rem] ${
+                    className={`menu-link font-display text-[2.125rem] leading-[1.05] font-medium text-white md:text-[2.625rem] lg:text-[3.15rem] ${
                       active ? "is-active" : ""
                     }`}
                   >

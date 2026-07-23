@@ -116,7 +116,7 @@ const Services = () => {
         {/* Section Header */}
         <div className="mb-16">
           <span
-            className={`mb-4 block text-xs font-medium tracking-[0.3em] text-muted-foreground uppercase opacity-0 delay-100 ${
+            className={`font-eyebrow mb-4 block text-xs font-medium tracking-[0.3em] text-muted-foreground uppercase opacity-0 delay-100 ${
               isVisible ? "animate-fade-in-up" : ""
             }`}
           >

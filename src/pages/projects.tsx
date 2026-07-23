@@ -84,12 +84,12 @@ const Projects = () => {
   }
 
   return (
-    <div className="bg-background">
+    <div>
       <Navbar />
 
       {/* ── Hero ── */}
       <section className="relative flex min-h-screen flex-col items-center justify-center px-6 text-center">
-        <span className="mb-8 animate-fade-in-up text-xs font-medium tracking-[0.3em] text-muted-foreground uppercase opacity-0 delay-100">
+        <span className="font-eyebrow mb-8 animate-fade-in-up text-xs font-medium tracking-[0.3em] text-muted-foreground uppercase opacity-0 delay-100">
           Case Studies
         </span>
 

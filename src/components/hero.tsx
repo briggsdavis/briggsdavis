@@ -33,7 +33,7 @@ const Hero = () => {
         className="absolute top-[-15%] z-0 h-[130%] w-full will-change-transform"
         style={{
           transform: `translateY(${scrollY * 0.35}px)`,
-          opacity: videoVisible ? 1 : 0,
+          opacity: videoVisible ? 0.35 : 0,
           transition: "opacity 1.2s ease",
         }}
       >
@@ -53,7 +53,7 @@ const Hero = () => {
       <div
         className={`relative z-10 mb-8 opacity-0 delay-100 ${isVisible ? "animate-fade-in-up" : ""}`}
       >
-        <span className="inline-block rounded-full border border-border px-6 py-2 text-xs font-medium tracking-[0.3em] text-muted-foreground uppercase">
+        <span className="font-eyebrow inline-block rounded-full border border-border px-6 py-2 text-xs font-medium tracking-[0.3em] text-muted-foreground uppercase">
           Digital Architecture
         </span>
       </div>

@@ -60,7 +60,7 @@ const ProcessStep = ({ step, index, isLast, nextStepId }: ProcessStepProps) => {
       className="relative flex min-h-screen flex-col"
     >
       {/* Background Video/Image */}
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0 opacity-35">
         {step.video ? (
           <video
             autoPlay
@@ -87,7 +87,7 @@ const ProcessStep = ({ step, index, isLast, nextStepId }: ProcessStepProps) => {
           {index === 0 && (
             <div className="mb-24">
               <span
-                className={`mb-4 block text-xs font-medium tracking-[0.3em] text-muted-foreground uppercase opacity-0 delay-100 ${
+                className={`font-eyebrow mb-4 block text-xs font-medium tracking-[0.3em] text-muted-foreground uppercase opacity-0 delay-100 ${
                   isVisible ? "animate-fade-in-up" : ""
                 }`}
               >

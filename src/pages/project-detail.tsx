@@ -15,7 +15,7 @@ const ProjectDetail = () => {
 
   if (!project) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-background">
+      <div className="flex min-h-screen items-center justify-center">
         <div className="text-center">
           <h1 className="mb-4 text-3xl font-semibold text-foreground">Project not found</h1>
           <Button variant="outline" asChild>

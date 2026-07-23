@@ -11,7 +11,7 @@ const BOOKING_URL = "https://calendly.com/ntedvs/website"
 const clamp = (value: number) => Math.min(1, Math.max(0, value))
 
 const SectionLabel = ({ children }: { children: React.ReactNode }) => (
-  <span className="mb-4 block text-xs font-medium tracking-[0.3em] text-muted-foreground uppercase">
+  <span className="font-eyebrow mb-4 block text-xs font-medium tracking-[0.3em] text-muted-foreground uppercase">
     {children}
   </span>
 )
@@ -317,7 +317,7 @@ export const ProjectCaseStudy = ({
   project: Project
   isMorphTarget: boolean
 }) => (
-  <div className="min-h-screen bg-background">
+  <div className="min-h-screen">
     <Navbar />
 
     <main className="mx-auto max-w-5xl px-6 pt-32 pb-24">
