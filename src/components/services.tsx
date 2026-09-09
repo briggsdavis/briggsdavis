@@ -39,7 +39,7 @@ const Services = () => {
           </div>
         </Reveal>
 
-        <Reveal className="flex h-168 flex-col overflow-hidden border-y border-border/60 bg-white/25 md:h-136 md:flex-row">
+        <Reveal className="flex h-152 flex-col overflow-hidden border-y border-border/60 bg-white/25 md:h-120 md:flex-row">
           {(Object.keys(serviceOptions) as ServiceChoice[]).map((key, index) => {
             const service = serviceOptions[key]
             const active = activeService === key

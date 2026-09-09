@@ -94,11 +94,6 @@ const Portfolio = () => {
           >
             Selected Work
           </h2>
-          <div
-            className={`mb-6 h-0.5 w-12 bg-muted-foreground opacity-0 [animation-delay:300ms] ${
-              isVisible ? "animate-fade-in-up" : ""
-            }`}
-          />
           <p
             className={`max-w-md text-muted-foreground opacity-0 [animation-delay:400ms] ${
               isVisible ? "animate-fade-in-up" : ""

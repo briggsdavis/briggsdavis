@@ -1,16 +1,15 @@
 import { useRef, useEffect, useState, useCallback } from "react"
 
 const words = [
-  "Scalable",
-  "Creative",
-  "Dynamic",
-  "Reliable",
-  "Intuitive",
-  "Seamless",
-  "Adaptive",
-  "Strategic",
-  "Polished",
-  "Efficient",
+  "Responsive Interfaces",
+  "Payment Integrations",
+  "User Authentication",
+  "Content Management",
+  "API Development",
+  "Admin Dashboards",
+  "Technical SEO",
+  "Performance Tuning",
+  "Ongoing Support",
 ]
 
 interface WordElement {
@@ -120,7 +119,7 @@ const OurPromise = () => {
         font-weight: 600;
         text-transform: uppercase;
         white-space: nowrap;
-        backface-visibility: visible;
+        backface-visibility: hidden;
         transition: color 0.3s ease, filter 0.3s ease;
         text-align: center;
         will-change: transform, opacity;
@@ -153,7 +152,7 @@ const OurPromise = () => {
   }, [init, updateWheel])
 
   return (
-    <section ref={sectionRef} id="promise" className="relative h-[121vh] w-full">
+    <section ref={sectionRef} id="promise" className="relative h-[200vh] w-full">
       {/* Sticky content container */}
       <div className="sticky top-0 left-0 flex h-screen w-full items-center">
         <div className="mx-auto w-full max-w-6xl px-6">
@@ -165,21 +164,16 @@ const OurPromise = () => {
                   isVisible ? "animate-fade-in-up" : ""
                 }`}
               >
-                A Website Built Around Your Business.
+                The Features Your Business Needs.
               </h2>
-              <div
-                className={`mb-6 h-0.5 w-12 bg-muted-foreground opacity-0 [animation-delay:300ms] ${
-                  isVisible ? "animate-fade-in-up" : ""
-                }`}
-              />
               <p
                 className={`max-w-md text-muted-foreground opacity-0 [animation-delay:400ms] ${
                   isVisible ? "animate-fade-in-up" : ""
                 }`}
               >
-                We combine business strategy, design, and development to build websites that explain
-                what you do, support customer acquisition, and reduce the work required to manage
-                content.
+                We design and build websites with the features you need, from simple content updates
+                and secure payments to custom tools that make everyday tasks easier for you and your
+                customers.
               </p>
             </div>
 
