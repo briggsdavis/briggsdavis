@@ -31,21 +31,21 @@ const ServicesPage = () => {
           to={routes.webDevelopment}
           onMouseEnter={() => setActiveChoice("web")}
           onFocus={() => setActiveChoice("web")}
-          className={`group relative flex min-h-0 flex-1 items-center overflow-hidden border-b border-border/60 px-7 pt-24 transition-[flex,background-color] duration-700 ease-[cubic-bezier(0.76,0,0.24,1)] focus-visible:z-10 focus-visible:outline-2 focus-visible:outline-offset-[-2px] md:border-r md:border-b-0 md:px-[6vw] ${
+          className={`group relative flex min-h-0 flex-1 items-center overflow-hidden border-b border-border/60 px-7 pt-24 transition-[flex,background-color] duration-700 ease-[cubic-bezier(0.76,0,0.24,1)] focus-visible:z-10 focus-visible:outline-2 focus-visible:-outline-offset-2 md:border-r md:border-b-0 md:px-[6vw] ${
             webActive ? "bg-white/65 md:flex-[1.08]" : appActive ? "md:flex-[0.92]" : "bg-white/30"
           }`}
         >
-          <span className="pointer-events-none absolute right-4 bottom-[-0.18em] font-display text-[clamp(9rem,22vw,22rem)] leading-none text-foreground/[0.025] select-none md:right-8">
+          <span className="pointer-events-none absolute right-4 bottom-[-0.18em] font-display text-9xl text-foreground/2.5 select-none md:right-8">
             01
           </span>
           <div className="relative z-10 w-full max-w-xl">
             <div className="mb-4 flex items-center justify-between md:mb-8">
-              <span className="font-mono text-[10px] text-muted-foreground/60">01</span>
-              <span className="font-eyebrow text-[9px] tracking-[0.24em] text-muted-foreground uppercase">
+              <span className="font-mono text-xs text-muted-foreground/60">01</span>
+              <span className="font-eyebrow text-xs tracking-widest text-muted-foreground uppercase">
                 Browser based
               </span>
             </div>
-            <h1 className="font-display text-[clamp(2.5rem,5vw,4.8rem)] leading-[0.94] font-semibold tracking-[-0.04em] text-foreground">
+            <h1 className="font-display text-4xl font-semibold tracking-tighter text-foreground lg:text-5xl xl:text-6xl 2xl:text-7xl">
               Web
               <span className="block text-muted-foreground italic">Development</span>
             </h1>
@@ -60,7 +60,7 @@ const ServicesPage = () => {
                 ))}
               </div>
             </div>
-            <span className="mt-5 inline-flex items-center gap-2 text-[10px] font-medium tracking-[0.2em] text-foreground uppercase md:mt-8">
+            <span className="mt-5 inline-flex items-center gap-2 text-xs font-medium tracking-widest text-foreground uppercase md:mt-8">
               Explore Web
               <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
             </span>
@@ -71,21 +71,21 @@ const ServicesPage = () => {
           to={routes.appDevelopment}
           onMouseEnter={() => setActiveChoice("app")}
           onFocus={() => setActiveChoice("app")}
-          className={`group relative flex min-h-0 flex-1 items-center overflow-hidden px-7 transition-[flex,background-color] duration-700 ease-[cubic-bezier(0.76,0,0.24,1)] focus-visible:z-10 focus-visible:outline-2 focus-visible:outline-offset-[-2px] md:px-[6vw] md:pt-24 ${
+          className={`group relative flex min-h-0 flex-1 items-center overflow-hidden px-7 transition-[flex,background-color] duration-700 ease-[cubic-bezier(0.76,0,0.24,1)] focus-visible:z-10 focus-visible:outline-2 focus-visible:-outline-offset-2 md:px-[6vw] md:pt-24 ${
             appActive ? "bg-white/65 md:flex-[1.08]" : webActive ? "md:flex-[0.92]" : "bg-white/30"
           }`}
         >
-          <span className="pointer-events-none absolute right-4 bottom-[-0.18em] font-display text-[clamp(9rem,22vw,22rem)] leading-none text-foreground/[0.025] select-none md:right-8">
+          <span className="pointer-events-none absolute right-4 bottom-[-0.18em] font-display text-9xl text-foreground/2.5 select-none md:right-8">
             02
           </span>
           <div className="relative z-10 w-full max-w-xl">
             <div className="mb-4 flex items-center justify-between md:mb-8">
-              <span className="font-mono text-[10px] text-muted-foreground/60">02</span>
-              <span className="font-eyebrow text-[9px] tracking-[0.24em] text-muted-foreground uppercase">
+              <span className="font-mono text-xs text-muted-foreground/60">02</span>
+              <span className="font-eyebrow text-xs tracking-widest text-muted-foreground uppercase">
                 Native mobile
               </span>
             </div>
-            <h2 className="font-display text-[clamp(2.5rem,5vw,4.8rem)] leading-[0.94] font-semibold tracking-[-0.04em] text-foreground">
+            <h2 className="font-display text-4xl font-semibold tracking-tighter text-foreground lg:text-5xl xl:text-6xl 2xl:text-7xl">
               App
               <span className="block text-muted-foreground italic">Development</span>
             </h2>
@@ -100,7 +100,7 @@ const ServicesPage = () => {
                 ))}
               </div>
             </div>
-            <span className="mt-5 inline-flex items-center gap-2 text-[10px] font-medium tracking-[0.2em] text-foreground uppercase md:mt-8">
+            <span className="mt-5 inline-flex items-center gap-2 text-xs font-medium tracking-widest text-foreground uppercase md:mt-8">
               Explore Apps
               <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
             </span>

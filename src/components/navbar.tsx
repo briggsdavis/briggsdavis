@@ -13,11 +13,14 @@ const menuLineClass =
 
 const Navbar = () => {
   const playHeroIntro = useHeroIntro()
-  const [menuOpen, setMenuOpen] = useState(false)
+  const [menuPath, setMenuPath] = useState<string | null>(null)
   const [scrollProgress, setScrollProgress] = useState(0)
   const menuButtonRef = useRef<HTMLButtonElement>(null)
   const menuPanelRef = useRef<HTMLDivElement>(null)
   const location = useLocation()
+  const menuOpen = menuPath === location.pathname
+
+  if (menuPath !== null && !menuOpen) setMenuPath(null)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -45,7 +48,7 @@ const Navbar = () => {
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
-        setMenuOpen(false)
+        setMenuPath(null)
         menuButtonRef.current?.focus()
         return
       }
@@ -75,26 +78,22 @@ const Navbar = () => {
   }, [menuOpen])
 
   const closeMenu = () => {
-    setMenuOpen(false)
+    setMenuPath(null)
   }
 
-  useEffect(() => {
-    setMenuOpen(false)
-  }, [location.pathname])
-
-  const toggleMenu = () => setMenuOpen((isOpen) => !isOpen)
+  const toggleMenu = () => setMenuPath(menuOpen ? null : location.pathname)
 
   return (
     <>
       <div
         data-site-navigation
-        className={`fixed top-0 left-0 z-[100] h-px bg-foreground/30 transition-none ${
+        className={`fixed top-0 left-0 z-100 h-px bg-foreground/30 transition-none ${
           playHeroIntro ? `${heroIntroClass} [animation-delay:1150ms]` : ""
         }`}
         style={{ width: `${scrollProgress * 100}%` }}
       />
 
-      <nav data-site-navigation className="pointer-events-none fixed inset-x-0 top-0 z-[90] h-24">
+      <nav data-site-navigation className="pointer-events-none fixed inset-x-0 top-0 z-90 h-24">
         <button
           ref={menuButtonRef}
           type="button"
@@ -109,15 +108,15 @@ const Navbar = () => {
           <span
             className={`${menuLineClass} ${
               menuOpen
-                ? "top-[21px] w-5.5 -translate-x-1/2 rotate-45"
-                : "top-[17px] w-5.5 -translate-x-1/2 group-hover/menu:w-3.5 group-hover/menu:-translate-x-[22%]"
+                ? "top-5.25 w-5.5 -translate-x-1/2 rotate-45"
+                : "top-4.25 w-5.5 -translate-x-1/2 group-hover/menu:w-3.5 group-hover/menu:-translate-x-[22%]"
             }`}
           />
           <span
             className={`${menuLineClass} ${
               menuOpen
-                ? "top-[21px] w-5.5 -translate-x-1/2 -rotate-45"
-                : "top-[25px] w-3.5 -translate-x-[78%] group-hover/menu:w-5.5 group-hover/menu:-translate-x-1/2"
+                ? "top-5.25 w-5.5 -translate-x-1/2 -rotate-45"
+                : "top-6.25 w-3.5 -translate-x-[78%] group-hover/menu:w-5.5 group-hover/menu:-translate-x-1/2"
             }`}
           />
         </button>
@@ -152,7 +151,7 @@ const Navbar = () => {
         ref={menuPanelRef}
         data-site-navigation
         aria-hidden={!menuOpen}
-        className={`fixed inset-0 z-[80] transition-transform duration-700 ease-[cubic-bezier(0.76,0,0.24,1)] will-change-transform ${
+        className={`fixed inset-0 z-80 transition-transform duration-700 ease-[cubic-bezier(0.76,0,0.24,1)] will-change-transform ${
           menuOpen ? "pointer-events-auto translate-x-0" : "pointer-events-none -translate-x-full"
         }`}
       >
@@ -169,7 +168,7 @@ const Navbar = () => {
                     to={item.href}
                     tabIndex={menuOpen ? 0 : -1}
                     aria-current={active ? "page" : undefined}
-                    className={`origin-left -translate-x-6.5 scale-100 font-display text-[2.125rem] leading-[1.05] font-medium text-black opacity-0 [transition:opacity_125ms_ease,color_0ms,translate_125ms_cubic-bezier(0.76,0,0.24,1),scale_145ms_cubic-bezier(0.76,0,0.24,1)] group-hover/menu-links:opacity-20 hover:translate-x-2.5 hover:scale-[1.045] hover:text-black hover:opacity-100 group-hover/menu-links:hover:opacity-100 focus-visible:translate-x-2.5 focus-visible:scale-[1.045] focus-visible:text-black focus-visible:opacity-100 group-hover/menu-links:focus-visible:opacity-100 motion-reduce:translate-x-0 motion-reduce:scale-100 motion-reduce:opacity-100 motion-reduce:transition-none md:text-[2.625rem] lg:text-[3.15rem] ${
+                    className={`origin-left -translate-x-6.5 scale-100 font-display text-4xl font-medium text-black opacity-0 [transition:opacity_125ms_ease,color_0ms,translate_125ms_cubic-bezier(0.76,0,0.24,1),scale_145ms_cubic-bezier(0.76,0,0.24,1)] group-hover/menu-links:opacity-20 hover:translate-x-2.5 hover:scale-[1.045] hover:text-black hover:opacity-100 group-hover/menu-links:hover:opacity-100 focus-visible:translate-x-2.5 focus-visible:scale-[1.045] focus-visible:text-black focus-visible:opacity-100 group-hover/menu-links:focus-visible:opacity-100 motion-reduce:translate-x-0 motion-reduce:scale-100 motion-reduce:opacity-100 motion-reduce:transition-none md:text-5xl ${
                       menuOpen
                         ? active
                           ? "translate-x-0 opacity-100"

@@ -40,10 +40,7 @@ const CapabilityStaircase = ({ items }: { items: readonly string[] }) => {
   }, [items])
 
   return (
-    <div
-      ref={hostRef}
-      className={`capability-staircase relative h-[46rem] overflow-hidden md:h-[52rem] ${visible ? "is-visible" : ""}`}
-    >
+    <div ref={hostRef} className="relative h-184 overflow-hidden md:h-208">
       <svg
         aria-hidden="true"
         className="absolute inset-0 h-full w-full"
@@ -51,7 +48,7 @@ const CapabilityStaircase = ({ items }: { items: readonly string[] }) => {
         preserveAspectRatio="none"
       >
         <polyline
-          className="capability-staircase__line"
+          className={`text-foreground/55 [stroke-dasharray:1] [stroke-dashoffset:1] motion-reduce:[stroke-dashoffset:0] ${visible ? "motion-safe:animate-staircase-draw" : ""}`}
           points={geometry.points}
           pathLength="1"
           fill="none"
@@ -64,7 +61,7 @@ const CapabilityStaircase = ({ items }: { items: readonly string[] }) => {
       {geometry.labels.map(({ item, x, y }, index) => (
         <div
           key={item}
-          className="capability-staircase__label absolute flex items-end gap-2 pb-2"
+          className={`absolute flex translate-y-[10px] items-end gap-2 pb-2 opacity-0 motion-reduce:translate-y-0 motion-reduce:opacity-100 ${visible ? "motion-safe:animate-staircase-label-in" : ""}`}
           style={{
             left: `${x + geometry.run * 0.1}%`,
             top: `${Math.max(0, y - 7.5)}%`,
@@ -72,12 +69,10 @@ const CapabilityStaircase = ({ items }: { items: readonly string[] }) => {
             animationDelay: `${180 + index * 145}ms`,
           }}
         >
-          <span className="font-mono text-[9px] text-muted-foreground/45 tabular-nums">
+          <span className="font-mono text-xs text-muted-foreground/45 tabular-nums">
             {String(index + 1).padStart(2, "0")}
           </span>
-          <span className="text-[11px] leading-tight font-medium text-foreground md:text-xs">
-            {item}
-          </span>
+          <span className="text-xs font-medium text-foreground">{item}</span>
         </div>
       ))}
     </div>

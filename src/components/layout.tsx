@@ -23,9 +23,9 @@ const Layout = () => {
     document.getElementById("main-content")?.focus({ preventScroll: true })
   }, [location.key])
 
-  useEffect(() => {
-    if (location.pathname !== routes.home) setPlayHeroIntro(false)
-  }, [location.pathname])
+  if (playHeroIntro && location.pathname !== routes.home) {
+    setPlayHeroIntro(false)
+  }
 
   useEffect(() => {
     window.sessionStorage.setItem(HERO_INTRO_SESSION_KEY, "true")
@@ -36,7 +36,7 @@ const Layout = () => {
       <RouteMetadata />
       <a
         href="#main-content"
-        className="fixed top-4 left-4 z-[200] -translate-y-20 rounded-full bg-black px-5 py-3 text-xs font-medium tracking-widest text-white uppercase transition-transform focus:translate-y-0"
+        className="fixed top-4 left-4 z-200 -translate-y-20 rounded-full bg-black px-5 py-3 text-xs font-medium tracking-widest text-white uppercase transition-transform focus:translate-y-0"
       >
         Skip to content
       </a>

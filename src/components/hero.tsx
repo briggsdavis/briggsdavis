@@ -1,5 +1,4 @@
 import { ArrowRight } from "lucide-react"
-import { useEffect, useState } from "react"
 import { useHeroIntro } from "@/lib/hero-intro"
 
 const heroIntroClass =
@@ -14,11 +13,6 @@ const scrollToPortfolio = () => {
 
 const Hero = () => {
   const playIntro = useHeroIntro()
-  const [isVisible, setIsVisible] = useState(false)
-
-  useEffect(() => {
-    setIsVisible(true)
-  }, [])
 
   return (
     <section className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 pt-24">
@@ -27,10 +21,10 @@ const Hero = () => {
         className={`relative z-10 mb-8 opacity-0 ${
           playIntro
             ? `${heroIntroClass} [animation-delay:1430ms]`
-            : `[animation-delay:100ms] ${isVisible ? "animate-fade-in-up" : ""}`
+            : "animate-fade-in-up [animation-delay:100ms]"
         }`}
       >
-        <span className="inline-block rounded-full border border-border px-6 py-2 font-eyebrow text-xs font-medium tracking-[0.3em] text-muted-foreground uppercase">
+        <span className="inline-block rounded-full border border-border px-6 py-2 font-eyebrow text-xs font-medium tracking-widest text-muted-foreground uppercase">
           Digital Architecture
         </span>
       </div>
@@ -38,9 +32,7 @@ const Hero = () => {
       {/* Headline */}
       <h1
         className={`relative z-10 mb-6 text-center ${
-          playIntro
-            ? ""
-            : `opacity-0 [animation-delay:200ms] ${isVisible ? "animate-fade-in-up" : ""}`
+          playIntro ? "" : "animate-fade-in-up opacity-0 [animation-delay:200ms]"
         }`}
       >
         <span
@@ -64,7 +56,7 @@ const Hero = () => {
         className={`relative z-10 mx-auto mb-12 max-w-xl text-center text-lg text-muted-foreground opacity-0 md:text-xl ${
           playIntro
             ? `${heroIntroClass} [animation-delay:1670ms]`
-            : `[animation-delay:300ms] ${isVisible ? "animate-fade-in-up" : ""}`
+            : "animate-fade-in-up [animation-delay:300ms]"
         }`}
       >
         Custom websites that clarify your offer, support your operations, and make it easier for
@@ -76,7 +68,7 @@ const Hero = () => {
         className={`relative z-10 flex flex-col items-center gap-4 opacity-0 sm:flex-row ${
           playIntro
             ? `${heroIntroClass} [animation-delay:1750ms]`
-            : `[animation-delay:400ms] ${isVisible ? "animate-fade-in-up" : ""}`
+            : "animate-fade-in-up [animation-delay:400ms]"
         }`}
       >
         <a

@@ -30,6 +30,8 @@ export const NavigationRipplePanel = ({ active }: NavigationRipplePanelProps) =>
         perturbance: 0.052,
       })
     } catch {
+      // WebGL support is determined against the mounted canvas.
+      // oxlint-disable-next-line react/set-state-in-effect
       setSupported(false)
     }
 
@@ -68,9 +70,7 @@ export const NavigationRipplePanel = ({ active }: NavigationRipplePanelProps) =>
       aria-hidden="true"
       data-ripple-supported={supported}
       className={`absolute inset-0 block origin-center opacity-100 will-change-[filter,scale] [transition:filter_700ms_ease,scale_700ms_cubic-bezier(0.76,0,0.24,1)] motion-reduce:scale-100 motion-reduce:opacity-100 motion-reduce:blur-none motion-reduce:brightness-100 motion-reduce:transition-none ${
-        active
-          ? "scale-100 blur-none brightness-100"
-          : "scale-[1.055] blur-[20px] brightness-[0.76]"
+        active ? "scale-100 blur-none brightness-100" : "scale-[1.055] blur-[20px] brightness-76"
       }`}
     >
       <canvas

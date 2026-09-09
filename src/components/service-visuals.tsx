@@ -7,14 +7,11 @@ const toRad = (d: number) => (d * Math.PI) / 180
 export const MobileVisual = memo(({ isActive }: { isActive: boolean }) => (
   <div className="flex h-full items-center justify-center">
     {/* iPhone shell */}
-    <div
-      className="relative overflow-hidden rounded-[22px] border border-black/20 bg-white/30"
-      style={{ width: 104, height: 202 }}
-    >
+    <div className="relative h-50.5 w-26 overflow-hidden rounded-[22px] border border-black/20 bg-white/30">
       {/* Notch */}
       <div className="absolute top-0 left-1/2 z-10 h-4 w-14 -translate-x-1/2 rounded-b-2xl bg-white/60" />
       {/* Scrolling site content */}
-      <div className="absolute inset-0 overflow-hidden" style={{ top: 14 }}>
+      <div className="absolute inset-x-0 top-3.5 bottom-0 overflow-hidden">
         <div
           style={{
             animation: isActive ? "svc-phone-scroll 4.5s ease-in-out infinite" : "none",
@@ -60,11 +57,10 @@ export const SEOVisual = memo(({ isActive }: { isActive: boolean }) => {
   const [rank, setRank] = useState(7)
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
+  if (!isActive && rank !== 7) setRank(7)
+
   useEffect(() => {
-    if (!isActive) {
-      setRank(7)
-      return
-    }
+    if (!isActive) return
     let r = 7
     const tick = () => {
       r -= 1
@@ -91,12 +87,9 @@ export const SEOVisual = memo(({ isActive }: { isActive: boolean }) => {
 
   return (
     <div className="flex h-full flex-col items-center justify-center gap-3">
-      <p className="font-mono text-[9px] tracking-[0.3em] text-black/30 uppercase">
-        Search Position
-      </p>
+      <p className="font-mono text-xs tracking-widest text-black/30 uppercase">Search Position</p>
       <p
-        className="text-6xl font-semibold tabular-nums transition-all duration-300"
-        style={{ color: rank === 1 ? "rgba(0,0,0,0.9)" : "rgba(0,0,0,0.4)" }}
+        className={`text-6xl font-semibold tabular-nums transition-all duration-300 ${rank === 1 ? "text-black/90" : "text-black/40"}`}
       >
         #{rank}
       </p>
@@ -106,17 +99,17 @@ export const SEOVisual = memo(({ isActive }: { isActive: boolean }) => {
           style={{ width: `${pct}%` }}
         />
       </div>
-      <p className="font-mono text-[8px] text-black/20">yourbrand.com</p>
+      <p className="font-mono text-xs text-black/20">yourbrand.com</p>
     </div>
   )
 })
 
 // ─── 03 Rapid Development ─────────────────────────────────────────────────
 const CODE_LINES = [
-  { text: "$ git commit -m 'final polish'", color: "rgba(0,0,0,0.55)" },
-  { text: "$ npm run build", color: "rgba(0,0,0,0.55)" },
-  { text: "> compiled in 0.8s ✓", color: "rgba(0,0,0,0.4)" },
-  { text: "$ deploy --prod", color: "rgba(0,0,0,0.55)" },
+  { text: "$ git commit -m 'final polish'", className: "text-black/55" },
+  { text: "$ npm run build", className: "text-black/55" },
+  { text: "> compiled in 0.8s ✓", className: "text-black/40" },
+  { text: "$ deploy --prod", className: "text-black/55" },
   { text: "✓ Live at yourbrand.com", color: "rgba(134,239,172,0.8)" },
 ]
 
@@ -124,11 +117,10 @@ export const RapidDevVisual = memo(({ isActive }: { isActive: boolean }) => {
   const [visible, setVisible] = useState(0)
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
+  if (!isActive && visible !== 0) setVisible(0)
+
   useEffect(() => {
-    if (!isActive) {
-      setVisible(0)
-      return
-    }
+    if (!isActive) return
     const show = (i: number) => {
       setVisible(i + 1)
       if (i < CODE_LINES.length - 1) {
@@ -161,11 +153,8 @@ export const RapidDevVisual = memo(({ isActive }: { isActive: boolean }) => {
           {CODE_LINES.map((line, i) => (
             <p
               key={line.text}
-              className="text-xs transition-opacity duration-300"
-              style={{
-                opacity: i < visible ? 1 : 0,
-                color: line.color,
-              }}
+              className={`text-xs transition-opacity duration-300 ${line.className ?? ""} ${i < visible ? "opacity-100" : "opacity-0"}`}
+              style={{ color: line.color }}
             >
               {line.text}
             </p>
@@ -184,20 +173,23 @@ export const CMSVisual = memo(({ isActive }: { isActive: boolean }) => {
   const [typing, setTyping] = useState(false)
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
 
+  if (!isActive && (idx !== 0 || typing)) {
+    setIdx(0)
+    setTyping(false)
+  }
+
   useEffect(() => {
-    if (!isActive) {
-      setIdx(0)
-      setTyping(false)
-      return
-    }
+    if (!isActive) return
+    let transitionTimer: ReturnType<typeof setTimeout>
     timerRef.current = setInterval(() => {
       setTyping(true)
-      setTimeout(() => {
+      transitionTimer = setTimeout(() => {
         setIdx((i) => (i + 1) % CMS_TITLES.length)
         setTyping(false)
       }, 380)
     }, 2000)
     return () => {
+      clearTimeout(transitionTimer)
       if (timerRef.current) clearInterval(timerRef.current)
     }
   }, [isActive])
@@ -211,17 +203,17 @@ export const CMSVisual = memo(({ isActive }: { isActive: boolean }) => {
         {/* Toolbar */}
         <div className="flex items-center gap-2 border-b border-black/10 px-3 py-2">
           <div className="h-1.5 w-1.5 rounded-full bg-black/25" />
-          <span className="font-mono text-[8px] tracking-widest text-black/25 uppercase">
+          <span className="font-mono text-xs tracking-widest text-black/25 uppercase">
             Content Editor
           </span>
-          <div className="ml-auto flex h-4 w-8 items-center justify-center rounded-sm border border-black/15 font-mono text-[8px] text-black/30">
+          <div className="ml-auto flex h-4 w-8 items-center justify-center rounded-sm border border-black/15 font-mono text-xs text-black/30">
             Edit
           </div>
         </div>
         {/* Body */}
         <div className="space-y-2 p-3">
           <div
-            className={`border-b pb-1 text-[11px] font-semibold text-black transition-opacity duration-200 ${
+            className={`border-b pb-1 text-xs font-semibold text-black transition-opacity duration-200 ${
               typing ? "border-black/40 opacity-40" : "border-transparent"
             }`}
           >
@@ -234,12 +226,12 @@ export const CMSVisual = memo(({ isActive }: { isActive: boolean }) => {
             )}
           </div>
           <div className="space-y-1">
-            {[100, 80, 70].map((w) => (
-              <div key={w} className="h-1.5 rounded bg-black/8" style={{ width: `${w}%` }} />
+            {["w-full", "w-4/5", "w-7/10"].map((width) => (
+              <div key={width} className={`h-1.5 rounded bg-black/8 ${width}`} />
             ))}
           </div>
           <div className="mt-1 flex h-10 items-center justify-center rounded bg-black/5">
-            <span className="font-mono text-[8px] text-black/15">[ image ]</span>
+            <span className="font-mono text-xs text-black/15">[ image ]</span>
           </div>
         </div>
       </div>
@@ -259,7 +251,7 @@ export const MaintenanceVisual = memo(({ isActive }: { isActive: boolean }) => (
           className="h-1.5 w-1.5 rounded-full bg-green-400"
           style={{ animation: isActive ? "svc-pulse-dot 2s ease-in-out infinite" : "none" }}
         />
-        <span className="font-mono text-[8px] tracking-widest text-black/30 uppercase">
+        <span className="font-mono text-xs tracking-widest text-black/30 uppercase">
           Uptime 100%
         </span>
       </div>
@@ -314,20 +306,23 @@ export const LanguageVisual = memo(({ isActive }: { isActive: boolean }) => {
   const [show, setShow] = useState(true)
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
 
+  if (!isActive && (idx !== 0 || !show)) {
+    setIdx(0)
+    setShow(true)
+  }
+
   useEffect(() => {
-    if (!isActive) {
-      setIdx(0)
-      setShow(true)
-      return
-    }
+    if (!isActive) return
+    let transitionTimer: ReturnType<typeof setTimeout>
     timerRef.current = setInterval(() => {
       setShow(false)
-      setTimeout(() => {
+      transitionTimer = setTimeout(() => {
         setIdx((i) => (i + 1) % LANGS.length)
         setShow(true)
       }, 340)
     }, 1900)
     return () => {
+      clearTimeout(transitionTimer)
       if (timerRef.current) clearInterval(timerRef.current)
     }
   }, [isActive])
@@ -336,14 +331,12 @@ export const LanguageVisual = memo(({ isActive }: { isActive: boolean }) => {
     <div className="flex h-full items-center justify-center">
       <div className="text-center">
         <p
-          className="text-5xl font-light text-black transition-all duration-300"
-          style={{ opacity: show ? 1 : 0, transform: show ? "translateY(0)" : "translateY(7px)" }}
+          className={`text-5xl font-light text-black transition-all duration-300 ${show ? "translate-y-0 opacity-100" : "translate-y-1.75 opacity-0"}`}
         >
           {LANGS[idx].word}
         </p>
         <p
-          className="mt-2 font-mono text-[9px] tracking-[0.35em] text-black/30 uppercase transition-opacity duration-300"
-          style={{ opacity: show ? 1 : 0 }}
+          className={`mt-2 font-mono text-xs tracking-widest text-black/30 uppercase transition-opacity duration-300 ${show ? "opacity-100" : "opacity-0"}`}
         >
           {LANGS[idx].code}
         </p>
@@ -357,11 +350,8 @@ export const PaymentsVisual = memo(({ isActive }: { isActive: boolean }) => (
   <div className="flex h-full flex-col items-center justify-center gap-3">
     {/* Card */}
     <div
-      className="relative rounded-xl border border-black/20 bg-gradient-to-br from-black/12 to-black/4 px-4 py-3"
+      className="relative h-27 w-44.5 rounded-xl border border-black/20 bg-gradient-to-br from-black/12 to-black/4 px-4 py-3 transform-3d"
       style={{
-        width: 178,
-        height: 108,
-        transformStyle: "preserve-3d",
         animation: isActive ? "svc-card-flip 5.5s ease-in-out infinite" : "none",
       }}
     >
@@ -384,7 +374,7 @@ export const PaymentsVisual = memo(({ isActive }: { isActive: boolean }) => (
       <div className="flex h-3.5 w-3.5 items-center justify-center rounded-full border border-green-400/50">
         <div className="h-1.5 w-1.5 rounded-full bg-green-400/70" />
       </div>
-      <span className="font-mono text-[9px] text-black/45">Payment Confirmed</span>
+      <span className="font-mono text-xs text-black/45">Payment Confirmed</span>
     </div>
   </div>
 ))
@@ -393,10 +383,8 @@ export const PaymentsVisual = memo(({ isActive }: { isActive: boolean }) => (
 export const UniqueVisual = memo(({ isActive }: { isActive: boolean }) => (
   <div className="flex h-full items-center justify-center">
     <div
-      className="border border-black/25 bg-black/5"
+      className="size-23 border border-black/25 bg-black/5"
       style={{
-        width: 92,
-        height: 92,
         boxShadow: isActive ? "0 0 28px rgba(0,0,0,0.08)" : "none",
         animation: isActive ? "svc-morph 7s ease-in-out infinite" : "none",
         transition: "box-shadow 0.6s ease",
@@ -410,13 +398,11 @@ export const PerformanceVisual = memo(({ isActive }: { isActive: boolean }) => {
   const [score, setScore] = useState(0)
   const handleRef = useRef<ReturnType<typeof setInterval> | null>(null)
 
+  if (!isActive && score !== 0) setScore(0)
+
   useEffect(() => {
-    if (!isActive) {
-      setScore(0)
-      return
-    }
+    if (!isActive) return
     let s = 0
-    setScore(0)
     const run = () => {
       handleRef.current = setInterval(() => {
         s += 1
@@ -486,9 +472,7 @@ export const PerformanceVisual = memo(({ isActive }: { isActive: boolean }) => {
           >
             {score}
           </span>
-          <span className="font-mono text-[8px] tracking-widest text-black/25 uppercase">
-            Score
-          </span>
+          <span className="font-mono text-xs tracking-widest text-black/25 uppercase">Score</span>
         </div>
       </div>
     </div>
@@ -506,11 +490,10 @@ export const ClientInputVisual = memo(({ isActive }: { isActive: boolean }) => {
   const [count, setCount] = useState(0)
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
+  if (!isActive && count !== 0) setCount(0)
+
   useEffect(() => {
-    if (!isActive) {
-      setCount(0)
-      return
-    }
+    if (!isActive) return
     const show = (i: number) => {
       setCount(i + 1)
       if (i < CHAT.length - 1) {
@@ -534,11 +517,9 @@ export const ClientInputVisual = memo(({ isActive }: { isActive: boolean }) => {
         {CHAT.map((msg, i) => (
           <div
             key={msg.text}
-            className={`flex ${msg.side === "right" ? "justify-end" : "justify-start"}`}
+            className={`flex ${msg.side === "right" ? "justify-end" : "justify-start"} ${i < count ? "translate-y-0 opacity-100" : "translate-y-1.5 opacity-0"}`}
             style={{
-              opacity: i < count ? 1 : 0,
-              transform: i < count ? "translateY(0)" : "translateY(6px)",
-              transition: "opacity 0.35s ease, transform 0.35s ease",
+              transition: "opacity 0.35s ease, translate 0.35s ease",
               transitionDelay: `${i * 30}ms`,
             }}
           >
@@ -583,11 +564,10 @@ export const GEOVisual = memo(({ isActive }: { isActive: boolean }) => {
   const [activeEdge, setActiveEdge] = useState(-1)
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null)
 
+  if (!isActive && activeEdge !== -1) setActiveEdge(-1)
+
   useEffect(() => {
-    if (!isActive) {
-      setActiveEdge(-1)
-      return
-    }
+    if (!isActive) return
     timerRef.current = setInterval(() => {
       setActiveEdge((e) => (e + 1) % GEO_EDGES.length)
     }, 380)
@@ -644,7 +624,7 @@ export const GEOVisual = memo(({ isActive }: { isActive: boolean }) => {
                 textAnchor="middle"
                 fill="black"
                 fillOpacity="0.35"
-                fontSize="7.5"
+                className="text-xs"
                 fontFamily="monospace"
               >
                 {node.label}
@@ -688,10 +668,8 @@ export const GlobeVisual = memo(({ isActive }: { isActive: boolean }) => {
   return (
     <div className="flex h-full items-center justify-center">
       <div
-        style={{
-          transform: isActive ? "scale(1.07)" : "scale(1)",
-          transition: "transform 0.9s ease",
-        }}
+        className={isActive ? "scale-107" : "scale-100"}
+        style={{ transition: "scale 0.9s ease" }}
       >
         <svg width="188" height="188" viewBox="0 0 160 160">
           {/* Globe outline */}
@@ -753,7 +731,7 @@ export const GlobeVisual = memo(({ isActive }: { isActive: boolean }) => {
                 textAnchor="middle"
                 fill="black"
                 fillOpacity="0.3"
-                fontSize="7"
+                className="text-xs"
                 fontFamily="monospace"
               >
                 {dot.label}
@@ -787,13 +765,12 @@ export const CybersecurityVisual = memo(({ isActive }: { isActive: boolean }) =>
     <div className="w-52 rounded-lg border border-black/15 bg-white/30 p-5">
       <div className="mb-5 flex items-center gap-3">
         <div
-          className="flex h-12 w-12 items-center justify-center rounded-full border border-black/20 bg-black/5 transition-transform duration-500"
-          style={{ transform: isActive ? "scale(1)" : "scale(0.85)" }}
+          className={`flex h-12 w-12 items-center justify-center rounded-full border border-black/20 bg-black/5 transition-transform duration-500 ${isActive ? "scale-100" : "scale-85"}`}
         >
           <ShieldCheck className="h-6 w-6 text-black/75" />
         </div>
         <div>
-          <p className="font-mono text-[8px] tracking-[0.25em] text-black/30 uppercase">Status</p>
+          <p className="font-mono text-xs tracking-widest text-black/30 uppercase">Status</p>
           <p className="mt-1 text-sm font-medium text-black/70">Protected</p>
         </div>
       </div>
@@ -803,10 +780,10 @@ export const CybersecurityVisual = memo(({ isActive }: { isActive: boolean }) =>
             key={label}
             className="flex items-center justify-between border-t border-black/10 pt-2.5"
           >
-            <span className="font-mono text-[8px] tracking-[0.2em] text-black/30">{label}</span>
+            <span className="font-mono text-xs tracking-widest text-black/30">{label}</span>
             <span
-              className="h-1.5 w-1.5 rounded-full bg-green-300/70 transition-opacity duration-500"
-              style={{ opacity: isActive ? 1 : 0.25, transitionDelay: `${index * 100}ms` }}
+              className={`h-1.5 w-1.5 rounded-full bg-green-300/70 transition-opacity duration-500 ${isActive ? "opacity-100" : "opacity-25"}`}
+              style={{ transitionDelay: `${index * 100}ms` }}
             />
           </div>
         ))}
@@ -818,8 +795,7 @@ export const CybersecurityVisual = memo(({ isActive }: { isActive: boolean }) =>
 export const VisualDesignVisual = memo(({ isActive }: { isActive: boolean }) => (
   <div className="flex h-full items-center justify-center">
     <div
-      className="w-56 overflow-hidden rounded-lg border border-black/15 bg-white/30 transition-transform duration-500"
-      style={{ transform: isActive ? "translateY(0)" : "translateY(8px)" }}
+      className={`w-56 overflow-hidden rounded-lg border border-black/15 bg-white/30 transition-transform duration-500 ${isActive ? "translate-y-0" : "translate-y-2"}`}
     >
       <div className="flex items-center gap-1.5 border-b border-black/10 px-3 py-2">
         <span className="h-1.5 w-1.5 rounded-full bg-black/25" />

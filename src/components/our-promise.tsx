@@ -115,11 +115,10 @@ const OurPromise = () => {
       `
 
       const wordEl = document.createElement("div")
+      wordEl.className = "text-base tracking-widest md:text-xl lg:text-2xl xl:text-3xl"
       wordEl.style.cssText = `
-        font-size: clamp(1rem, 2.5vw, 1.75rem);
         font-weight: 600;
         text-transform: uppercase;
-        letter-spacing: 0.2em;
         white-space: nowrap;
         backface-visibility: visible;
         transition: color 0.3s ease, filter 0.3s ease;
@@ -162,7 +161,7 @@ const OurPromise = () => {
             {/* Left side - Text content */}
             <div className="space-y-6">
               <span
-                className={`mb-4 block font-eyebrow text-xs font-medium tracking-[0.3em] text-muted-foreground uppercase opacity-0 [animation-delay:100ms] ${
+                className={`mb-4 block font-eyebrow text-xs font-medium tracking-widest text-muted-foreground uppercase opacity-0 [animation-delay:100ms] ${
                   isVisible ? "animate-fade-in-up" : ""
                 }`}
               >

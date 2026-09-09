@@ -8,7 +8,7 @@ import { bookingUrl } from "@/data/site"
 const clamp = (value: number) => Math.min(1, Math.max(0, value))
 
 const SectionLabel = ({ children }: { children: React.ReactNode }) => (
-  <span className="mb-4 block font-eyebrow text-xs font-medium tracking-[0.3em] text-muted-foreground uppercase">
+  <span className="mb-4 block font-eyebrow text-xs font-medium tracking-widest text-muted-foreground uppercase">
     {children}
   </span>
 )
@@ -225,7 +225,7 @@ const StickyStory = ({ project }: { project: Project }) => {
             >
               <div className="py-10">
                 <SectionLabel>{item.label}</SectionLabel>
-                <p className="text-sm leading-relaxed text-foreground/80">{item.copy}</p>
+                <p className="text-sm text-foreground/80">{item.copy}</p>
               </div>
             </article>
           ))}
@@ -244,7 +244,7 @@ const StickyStory = ({ project }: { project: Project }) => {
           {story.map((item) => (
             <article key={item.label} className="border-t border-border/40 pt-8">
               <SectionLabel>{item.label}</SectionLabel>
-              <p className="text-sm leading-relaxed text-foreground/80">{item.copy}</p>
+              <p className="text-sm text-foreground/80">{item.copy}</p>
             </article>
           ))}
         </div>
@@ -263,9 +263,7 @@ const FeatureList = ({ project }: { project: Project }) => (
             <span>{feature.title}</span>
             <Plus className="h-4 w-4 shrink-0 transition-transform duration-300 group-open:rotate-45" />
           </summary>
-          <p className="max-w-xl pb-5 text-sm leading-relaxed text-muted-foreground">
-            {feature.detail}
-          </p>
+          <p className="max-w-xl pb-5 text-sm text-muted-foreground">{feature.detail}</p>
         </details>
       ))}
     </div>
@@ -347,9 +345,7 @@ export const ProjectCaseStudy = ({
           <h1 className="mb-6 text-4xl font-semibold text-foreground md:text-5xl">
             {project.name}
           </h1>
-          <p className="max-w-2xl text-lg leading-relaxed text-muted-foreground">
-            {project.overview}
-          </p>
+          <p className="max-w-2xl text-lg text-muted-foreground">{project.overview}</p>
         </div>
 
         <div className="shrink-0 md:pt-2">
@@ -372,9 +368,7 @@ export const ProjectCaseStudy = ({
 
       <Reveal className="mx-auto mb-24 max-w-3xl border-t border-border/40 pt-16 lg:mb-40">
         <SectionLabel>The Website</SectionLabel>
-        <p className="text-xl leading-relaxed text-foreground/85 md:text-2xl">
-          {project.description}
-        </p>
+        <p className="text-xl text-foreground/85 md:text-2xl">{project.description}</p>
       </Reveal>
 
       <StickyStory project={project} />

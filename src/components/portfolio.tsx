@@ -88,7 +88,7 @@ const Portfolio = () => {
         {/* Section Header */}
         <div className="mb-16 max-w-5xl">
           <span
-            className={`mb-4 block font-eyebrow text-xs font-medium tracking-[0.3em] text-muted-foreground uppercase opacity-0 [animation-delay:100ms] ${
+            className={`mb-4 block font-eyebrow text-xs font-medium tracking-widest text-muted-foreground uppercase opacity-0 [animation-delay:100ms] ${
               isVisible ? "animate-fade-in-up" : ""
             }`}
           >
@@ -159,14 +159,14 @@ const Portfolio = () => {
                       index % 2 === 0 ? "lg:right-0" : "lg:left-0"
                     }`}
                   >
-                    <h3 className="mb-3 text-2xl leading-tight font-semibold text-foreground lg:text-3xl">
+                    <h3 className="mb-3 text-2xl font-semibold text-foreground lg:text-3xl">
                       {item.name}
                     </h3>
-                    <p className="mb-6 text-sm leading-relaxed text-muted-foreground">
+                    <p className="mb-6 text-sm text-muted-foreground">
                       {item.shortDescription ?? item.description}
                     </p>
 
-                    <div className="mb-7 flex items-center justify-between border-t border-border/70 pt-4 font-eyebrow text-[10px] tracking-[0.2em] text-muted-foreground uppercase">
+                    <div className="mb-7 flex items-center justify-between border-t border-border/70 pt-4 font-eyebrow text-xs tracking-widest text-muted-foreground uppercase">
                       <span>Year</span>
                       <span className="text-foreground">{item.year}</span>
                     </div>
