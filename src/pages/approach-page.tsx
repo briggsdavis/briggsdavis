@@ -12,7 +12,7 @@ const ApproachPage = () => (
           turning the early questions into something people can use.
         </p>
       </header>
-      <div className="mt-16 md:mt-24">
+      <div className="mt-8 md:mt-12">
         <Signal />
       </div>
     </div>
