@@ -62,12 +62,12 @@ const Navbar = () => {
             >
               Services
             </Link>
-            <a
-              href="/#promise"
+            <Link
+              to={routes.approach}
               className="absolute left-full ml-2 py-3 transition-opacity hover:opacity-60 focus-visible:outline-2 focus-visible:outline-offset-4 sm:ml-6 md:ml-8"
             >
-              Approaches
-            </a>
+              Approach
+            </Link>
           </div>
         </div>
 

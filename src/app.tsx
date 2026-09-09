@@ -9,6 +9,7 @@ import ProjectDetail from "./pages/project-detail"
 const NotFound = lazy(() => import("./pages/not-found"))
 const Projects = lazy(() => import("./pages/projects"))
 const ServicesPage = lazy(() => import("./pages/services-page"))
+const ApproachPage = lazy(() => import("./pages/approach-page"))
 const WebDevelopmentPage = lazy(() => import("./pages/web-development-page"))
 const AppDevelopmentPage = lazy(() => import("./pages/app-development-page"))
 const ContactPage = lazy(() => import("./pages/contact-page"))
@@ -21,6 +22,7 @@ const App = () => (
           <Route element={<Layout />}>
             <Route path={routes.home} element={<Index />} />
             <Route path={routes.services} element={<ServicesPage />} />
+            <Route path={routes.approach} element={<ApproachPage />} />
             <Route path={routes.webDevelopment} element={<WebDevelopmentPage />} />
             <Route path={routes.appDevelopment} element={<AppDevelopmentPage />} />
             <Route path={routes.projects} element={<Projects />} />

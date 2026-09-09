@@ -9,6 +9,10 @@ const defaultDescription =
 
 const routeMetadata: Record<string, { title: string; description: string }> = {
   "/": { title: siteName, description: defaultDescription },
+  "/approach": {
+    title: `Approach • ${siteName}`,
+    description: defaultDescription,
+  },
   "/services": {
     title: `Services • ${siteName}`,
     description:

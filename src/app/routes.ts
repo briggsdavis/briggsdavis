@@ -1,6 +1,7 @@
 export const routes = {
   home: "/",
   services: "/services",
+  approach: "/approach",
   webDevelopment: "/services/web-development",
   appDevelopment: "/services/app-development",
   projects: "/work",
