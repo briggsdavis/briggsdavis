@@ -1,12 +1,24 @@
+import { useQuery } from "convex/react"
 import { Link, useParams } from "react-router-dom"
 import { routes } from "@/app/routes"
+import LiveProjectCaseStudy from "@/components/live-project-case-study"
 import { ProjectCaseStudy } from "@/components/project-case-study"
 import { getProject } from "@/data/projects"
 import { getMorphProjectId } from "@/lib/project-transition"
+import { api } from "../../convex/_generated/api"
 
 const ProjectDetail = () => {
   const { id } = useParams<{ id: string }>()
   const project = getProject(id)
+  const liveProject = useQuery(api.projects.single, { slug: id ?? "" })
+
+  if (liveProject) return <LiveProjectCaseStudy project={liveProject} />
+  if (liveProject === undefined && !project)
+    return (
+      <output className="flex min-h-svh items-center justify-center text-sm text-muted-foreground">
+        Loading project…
+      </output>
+    )
 
   if (!project) {
     return (

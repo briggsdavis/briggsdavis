@@ -1,6 +1,8 @@
+import { useQuery } from "convex/react"
 import { useEffect } from "react"
 import { matchPath, useLocation } from "react-router-dom"
 import { getProject } from "@/data/projects"
+import { api } from "../../convex/_generated/api"
 
 const siteName = "Briggs Davis"
 const siteUrl = "https://briggsdavis.com"
@@ -36,6 +38,14 @@ const routeMetadata: Record<string, { title: string; description: string }> = {
     title: `Contact • ${siteName}`,
     description: "Start a conversation with Briggs Davis about your next digital product.",
   },
+  "/login": {
+    title: `Log in • ${siteName}`,
+    description: "Team access to Briggs Davis.",
+  },
+  "/signup": {
+    title: `Create account • ${siteName}`,
+    description: "Create your Briggs Davis team account.",
+  },
 }
 
 const setMetaContent = (selector: string, content: string) => {
@@ -44,19 +54,23 @@ const setMetaContent = (selector: string, content: string) => {
 
 export const RouteMetadata = () => {
   const location = useLocation()
+  const slug = matchPath("/work/:id", location.pathname)?.params.id
+  const liveProject = useQuery(api.projects.single, slug ? { slug } : "skip")
 
   useEffect(() => {
     const id = matchPath("/work/:id", location.pathname)?.params.id
     const project = getProject(id)
-    const metadata = project
-      ? {
-          title: `${project.name} • ${siteName}`,
-          description: project.shortDescription ?? project.description,
-        }
-      : (routeMetadata[location.pathname] ?? {
-          title: `Page Not Found • ${siteName}`,
-          description: "The page you are looking for is not available.",
-        })
+    const metadata = liveProject
+      ? { title: `${liveProject.title} • ${siteName}`, description: liveProject.summary }
+      : project
+        ? {
+            title: `${project.name} • ${siteName}`,
+            description: project.shortDescription ?? project.description,
+          }
+        : (routeMetadata[location.pathname] ?? {
+            title: `Page Not Found • ${siteName}`,
+            description: "The page you are looking for is not available.",
+          })
     const canonicalUrl = `${siteUrl}${location.pathname}`
 
     document.title = metadata.title
@@ -70,7 +84,7 @@ export const RouteMetadata = () => {
     setMetaContent('meta[name="twitter:title"]', metadata.title)
     setMetaContent('meta[name="twitter:description"]', metadata.description)
     setMetaContent('meta[name="twitter:url"]', canonicalUrl)
-  }, [location.pathname])
+  }, [location.pathname, liveProject])
 
   return null
 }

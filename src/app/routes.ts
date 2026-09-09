@@ -7,6 +7,12 @@ export const routes = {
   projects: "/work",
   project: (id: string) => `/work/${id}`,
   contact: "/contact",
+  login: "/login",
+  signup: "/signup",
+  admin: "/admin",
+  adminInquiries: "/admin/inquiries",
+  adminNewProject: "/admin/projects/new",
+  adminEditProject: (slug: string) => `/admin/projects/${slug}/edit`,
 } as const
 
 export const primaryNavigation = [
