@@ -5,8 +5,8 @@ import { getProject } from "@/data/projects"
 import { getMorphProjectId } from "@/lib/project-transition"
 
 const ProjectDetail = () => {
-  const { projectId } = useParams<{ projectId: string }>()
-  const project = getProject(projectId)
+  const { id } = useParams<{ id: string }>()
+  const project = getProject(id)
 
   if (!project) {
     return (

@@ -160,13 +160,6 @@ const OurPromise = () => {
           <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
             {/* Left side - Text content */}
             <div className="space-y-6">
-              <span
-                className={`mb-4 block font-eyebrow text-xs font-medium tracking-widest text-muted-foreground uppercase opacity-0 [animation-delay:100ms] ${
-                  isVisible ? "animate-fade-in-up" : ""
-                }`}
-              >
-                Our Promise
-              </span>
               <h2
                 className={`mb-6 text-4xl font-semibold text-foreground opacity-0 [animation-delay:200ms] md:text-5xl ${
                   isVisible ? "animate-fade-in-up" : ""

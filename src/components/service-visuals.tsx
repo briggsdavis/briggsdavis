@@ -625,7 +625,6 @@ export const GEOVisual = memo(({ isActive }: { isActive: boolean }) => {
                 fill="black"
                 fillOpacity="0.35"
                 className="text-xs"
-                fontFamily="monospace"
               >
                 {node.label}
               </text>
@@ -732,7 +731,6 @@ export const GlobeVisual = memo(({ isActive }: { isActive: boolean }) => {
                 fill="black"
                 fillOpacity="0.3"
                 className="text-xs"
-                fontFamily="monospace"
               >
                 {dot.label}
               </text>

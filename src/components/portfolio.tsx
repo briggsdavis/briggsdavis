@@ -87,13 +87,6 @@ const Portfolio = () => {
       <div className="mx-auto max-w-7xl">
         {/* Section Header */}
         <div className="mb-16 max-w-5xl">
-          <span
-            className={`mb-4 block font-eyebrow text-xs font-medium tracking-widest text-muted-foreground uppercase opacity-0 [animation-delay:100ms] ${
-              isVisible ? "animate-fade-in-up" : ""
-            }`}
-          >
-            Case Studies
-          </span>
           <h2
             className={`mb-6 text-4xl font-semibold text-foreground opacity-0 [animation-delay:200ms] md:text-5xl ${
               isVisible ? "animate-fade-in-up" : ""

@@ -1,6 +1,6 @@
 import { useEffect } from "react"
-import { useLocation } from "react-router-dom"
-import { projects } from "@/data/projects"
+import { matchPath, useLocation } from "react-router-dom"
+import { getProject } from "@/data/projects"
 
 const siteName = "Briggs Davis"
 const siteUrl = "https://briggsdavis.com"
@@ -10,26 +10,26 @@ const defaultDescription =
 const routeMetadata: Record<string, { title: string; description: string }> = {
   "/": { title: siteName, description: defaultDescription },
   "/services": {
-    title: `Services | ${siteName}`,
+    title: `Services • ${siteName}`,
     description:
       "Web development and native mobile app development, designed around the business behind the product.",
   },
   "/services/web-development": {
-    title: `Web Development | ${siteName}`,
+    title: `Web Development • ${siteName}`,
     description:
       "Websites, web applications, content systems, and business tools designed to work for the business.",
   },
   "/services/app-development": {
-    title: `App Development | ${siteName}`,
+    title: `App Development • ${siteName}`,
     description:
       "Native iOS and Android products, connected services, and companion web experiences.",
   },
-  "/projects": {
-    title: `Portfolio | ${siteName}`,
+  "/work": {
+    title: `Work • ${siteName}`,
     description: "Selected digital products, platforms, and websites built by Briggs Davis.",
   },
   "/contact": {
-    title: `Contact | ${siteName}`,
+    title: `Contact • ${siteName}`,
     description: "Start a conversation with Briggs Davis about your next digital product.",
   },
 }
@@ -42,15 +42,15 @@ export const RouteMetadata = () => {
   const location = useLocation()
 
   useEffect(() => {
-    const projectId = location.pathname.match(/^\/project\/([^/]+)$/)?.[1]
-    const project = projectId ? projects.find((item) => item.id === projectId) : undefined
+    const id = matchPath("/work/:id", location.pathname)?.params.id
+    const project = getProject(id)
     const metadata = project
       ? {
-          title: `${project.name} | ${siteName}`,
+          title: `${project.name} • ${siteName}`,
           description: project.shortDescription ?? project.description,
         }
       : (routeMetadata[location.pathname] ?? {
-          title: `Page Not Found | ${siteName}`,
+          title: `Page Not Found • ${siteName}`,
           description: "The page you are looking for is not available.",
         })
     const canonicalUrl = `${siteUrl}${location.pathname}`

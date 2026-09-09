@@ -1,33 +1,26 @@
-import { ArrowRight } from "lucide-react"
 import { useState } from "react"
 import { Link } from "react-router-dom"
 import { routes } from "@/app/routes"
 import { Reveal } from "@/components/reveal"
-import { ServiceVisual } from "@/components/service-visuals"
+// import { ServiceVisual } from "@/components/service-visuals"
 
 type ServiceChoice = "web" | "app"
 
 const serviceOptions = {
   web: {
-    number: "01",
-    eyebrow: "Browser based",
     title: "Web Development",
     description:
       "Marketing sites, web applications, booking systems, content platforms, and digital tools built around the business.",
-    capabilities: ["Websites", "Web apps", "CMS", "Business systems"],
     href: routes.webDevelopment,
-    cta: "Discover Web Development",
+    cta: "Discover web development",
     visualKey: "cms" as const,
   },
   app: {
-    number: "02",
-    eyebrow: "Native mobile",
     title: "App Development",
     description:
       "Native iOS and Android products, connected backends, and companion web experiences delivered as one coherent system.",
-    capabilities: ["iOS", "Android", "Backends", "Companion web apps"],
     href: routes.appDevelopment,
-    cta: "Discover App Development",
+    cta: "Discover app development",
     visualKey: "mobile" as const,
   },
 }
@@ -40,20 +33,10 @@ const Services = () => {
       <div className="mx-auto max-w-6xl">
         <Reveal className="mb-10 flex flex-col justify-between gap-5 md:flex-row md:items-end">
           <div>
-            <p className="mb-3 font-eyebrow text-xs font-medium tracking-widest text-muted-foreground uppercase">
-              Services
-            </p>
             <h2 className="max-w-xl font-display text-2xl font-semibold text-foreground md:text-3xl">
               Two ways to build the right digital product.
             </h2>
           </div>
-          <Link
-            to={routes.services}
-            className="group inline-flex shrink-0 items-center gap-2 text-xs font-medium tracking-widest text-foreground uppercase"
-          >
-            Compare Services
-            <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
-          </Link>
         </Reveal>
 
         <Reveal className="flex h-168 flex-col overflow-hidden border-y border-border/60 bg-white/25 md:h-136 md:flex-row">
@@ -65,53 +48,45 @@ const Services = () => {
                 key={key}
                 onMouseEnter={() => setActiveService(key)}
                 onFocusCapture={() => setActiveService(key)}
-                className={`group relative min-h-0 overflow-hidden transition-[flex,background-color] duration-700 ease-[cubic-bezier(0.76,0,0.24,1)] ${
+                className={`group relative min-h-0 min-w-0 overflow-hidden transition-[flex-grow,background-color] duration-800 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none ${
                   active ? "flex-[1.45] bg-white/70" : "flex-[0.55] bg-transparent"
                 } ${index === 0 ? "border-b border-border/60 md:border-r md:border-b-0" : ""}`}
               >
-                <button
-                  type="button"
-                  onClick={() => setActiveService(key)}
-                  aria-expanded={active}
-                  className="relative z-10 flex w-full items-center justify-between gap-6 px-6 pt-7 text-left md:px-8 md:pt-8"
-                >
-                  <span className="font-mono text-xs text-muted-foreground/50">
-                    {service.number}
-                  </span>
-                  <span className="font-eyebrow text-xs tracking-widest text-muted-foreground uppercase">
-                    {service.eyebrow}
-                  </span>
-                </button>
-
-                <div className="relative z-10 flex h-[calc(100%-3.75rem)] flex-col justify-end p-6 md:p-8">
+                <div className="relative z-10 flex h-full flex-col justify-end p-6 select-text md:p-8">
                   <h3 className="max-w-sm font-display text-3xl font-semibold text-foreground md:text-4xl">
-                    {service.title}
+                    <button
+                      type="button"
+                      onClick={() => setActiveService(key)}
+                      aria-expanded={active}
+                      className="text-left select-text focus-visible:outline-2 focus-visible:outline-offset-4"
+                    >
+                      {service.title.split(" ")[0]}
+                      <br />
+                      Development
+                    </button>
                   </h3>
                   <div
-                    className={`overflow-hidden transition-[max-height,opacity,margin] duration-500 ${
-                      active ? "mt-6 max-h-56 opacity-100" : "max-h-0 opacity-0"
+                    inert={!active}
+                    aria-hidden={!active}
+                    className={`grid [transition:grid-template-rows_800ms_cubic-bezier(0.22,1,0.36,1),opacity_400ms_ease] motion-reduce:transition-none ${
+                      active ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
                     }`}
                   >
-                    <p className="mb-5 max-w-md text-sm text-muted-foreground">
-                      {service.description}
-                    </p>
-                    <div className="mb-7 flex flex-wrap gap-x-4 gap-y-2">
-                      {service.capabilities.map((capability) => (
-                        <span key={capability} className="text-xs text-muted-foreground">
-                          {capability}
-                        </span>
-                      ))}
+                    <div className="min-h-0 overflow-hidden">
+                      <p className="mt-6 mb-5 max-w-md text-sm text-muted-foreground">
+                        {service.description}
+                      </p>
+                      <Link
+                        to={service.href}
+                        className="inline-flex border-b border-foreground/40 pb-0.5 text-xs font-medium text-foreground"
+                      >
+                        {service.cta}
+                      </Link>
                     </div>
-                    <Link
-                      to={service.href}
-                      className="group/link inline-flex items-center gap-2 border-b border-foreground/40 pb-2 text-xs font-medium tracking-widest text-foreground uppercase"
-                    >
-                      {service.cta}
-                      <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover/link:translate-x-1" />
-                    </Link>
                   </div>
                 </div>
 
+                {/*
                 <div
                   aria-hidden="true"
                   className={`pointer-events-none absolute top-[18%] right-[4%] hidden h-64 w-[44%] transition-[opacity,transform] duration-700 md:block ${
@@ -120,6 +95,7 @@ const Services = () => {
                 >
                   <ServiceVisual visualKey={service.visualKey} isActive={active} />
                 </div>
+                */}
               </div>
             )
           })}

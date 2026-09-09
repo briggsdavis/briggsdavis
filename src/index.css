@@ -1,5 +1,10 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400..700;1,400..700&family=Saira:wght@300..700&display=swap");
 @import "tailwindcss";
+
+@layer components {
+  .button {
+    @apply inline-flex items-center rounded-full border bg-white px-4 py-2 transition-all hover:bg-gray-200 hover:px-4.5 hover:py-2.5;
+  }
+}
 
 :root {
   --background: 0 0% 100%;
@@ -28,9 +33,10 @@
   --color-muted-foreground: hsl(var(--muted-foreground));
 
   --color-card: hsl(var(--card));
-  --font-sans: "Saira", sans-serif;
-  --font-display: "Lora", serif;
-  --font-eyebrow: "Inter", sans-serif;
+  --font-sans: "DM Sans Variable", sans-serif;
+  --font-display: var(--font-sans);
+  --font-eyebrow: var(--font-sans);
+  --font-mono: var(--font-sans);
 
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);

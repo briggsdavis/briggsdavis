@@ -330,7 +330,7 @@ const ServiceDetailPage = ({ config }: { config: ServiceDetailConfig }) => {
               <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
             </a>
             <Link
-              to="/projects"
+              to="/work"
               className="inline-flex h-12 items-center justify-center rounded-full border border-border/60 bg-white/60 px-8 text-xs font-medium tracking-widest text-foreground uppercase transition-colors hover:bg-white"
             >
               View Our Work

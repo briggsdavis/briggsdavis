@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { Outlet, useLocation } from "react-router-dom"
 import { RouteMetadata } from "@/app/metadata"
 import { routes } from "@/app/routes"
-import { NavLogoBackground } from "@/components/nav-logo-background"
+// import { NavLogoBackground } from "@/components/nav-logo-background"
 import Navbar from "@/components/navbar"
 import { HeroIntroProvider } from "@/lib/hero-intro"
 import { scrollToTop } from "@/lib/lenis-store"
@@ -44,7 +44,7 @@ const Layout = () => {
         className="site-background pointer-events-none fixed inset-0 z-0 overflow-hidden bg-background"
         aria-hidden="true"
       >
-        <NavLogoBackground mode="site" introActive={playHeroIntro} />
+        {/* <NavLogoBackground mode="site" introActive={playHeroIntro} /> */}
         <div
           className={`absolute inset-0 bg-white/78 ${
             playHeroIntro

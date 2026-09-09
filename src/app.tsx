@@ -24,7 +24,7 @@ const App = () => (
             <Route path={routes.webDevelopment} element={<WebDevelopmentPage />} />
             <Route path={routes.appDevelopment} element={<AppDevelopmentPage />} />
             <Route path={routes.projects} element={<Projects />} />
-            <Route path="/project/:projectId" element={<ProjectDetail />} />
+            <Route path="/work/:id" element={<ProjectDetail />} />
             <Route path={routes.contact} element={<ContactPage />} />
             <Route path="*" element={<NotFound />} />
           </Route>
