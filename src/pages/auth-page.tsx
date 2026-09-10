@@ -3,7 +3,7 @@ import { useConvexAuth } from "convex/react"
 import { ConvexError } from "convex/values"
 import { Eye, EyeOff } from "lucide-react"
 import { useState, type FormEvent } from "react"
-import { Link, Navigate } from "react-router-dom"
+import { Link, Navigate } from "react-router"
 import { routes } from "@/app/routes"
 
 const inputClass =

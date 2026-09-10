@@ -1,19 +1,14 @@
 import { useQuery } from "convex/react"
-import { Link, useParams } from "react-router-dom"
+import { Link, useParams } from "react-router"
 import { routes } from "@/app/routes"
 import LiveProjectCaseStudy from "@/components/live-project-case-study"
-import { ProjectCaseStudy } from "@/components/project-case-study"
-import { getProject } from "@/data/projects"
-import { getMorphProjectId } from "@/lib/project-transition"
 import { api } from "../../convex/_generated/api"
 
-const ProjectDetail = () => {
+const WorkDetail = () => {
   const { id } = useParams<{ id: string }>()
-  const project = getProject(id)
-  const liveProject = useQuery(api.projects.single, { slug: id ?? "" })
+  const project = useQuery(api.projects.single, id ? { slug: id } : "skip")
 
-  if (liveProject) return <LiveProjectCaseStudy project={liveProject} />
-  if (liveProject === undefined && !project)
+  if (project === undefined && id)
     return (
       <output className="flex min-h-svh items-center justify-center text-sm text-muted-foreground">
         Loading project…
@@ -26,17 +21,17 @@ const ProjectDetail = () => {
         <div className="text-center">
           <h1 className="mb-4 text-3xl font-semibold text-foreground">Project not found</h1>
           <Link
-            to={routes.projects}
+            to={routes.work}
             className="inline-flex h-10 items-center justify-center rounded-full border border-border px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-secondary focus-visible:outline-2 focus-visible:outline-offset-2"
           >
-            Back to Portfolio
+            Back to Work
           </Link>
         </div>
       </div>
     )
   }
 
-  return <ProjectCaseStudy project={project} isMorphTarget={getMorphProjectId() === project.id} />
+  return <LiveProjectCaseStudy project={project} />
 }
 
-export default ProjectDetail
+export default WorkDetail

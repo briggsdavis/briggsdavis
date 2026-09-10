@@ -2,7 +2,7 @@ import { useAuthActions } from "@convex-dev/auth/react"
 import { useConvexAuth } from "convex/react"
 import { ArrowUpRight } from "lucide-react"
 import { useEffect, useState } from "react"
-import { Link, Navigate, NavLink, Outlet, useLocation } from "react-router-dom"
+import { Link, Navigate, NavLink, Outlet, useLocation } from "react-router"
 import { routes } from "@/app/routes"
 
 const navigation = [
@@ -18,7 +18,6 @@ export default function AdminLayout() {
   const [error, setError] = useState("")
 
   useEffect(() => {
-    window.scrollTo(0, 0)
     document.getElementById("admin-content")?.focus({ preventScroll: true })
   }, [pathname, isAuthenticated])
 

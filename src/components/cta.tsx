@@ -1,4 +1,3 @@
-import { ArrowRight } from "lucide-react"
 import { useEffect, useRef, useState } from "react"
 
 const CTA = () => {
@@ -45,7 +44,7 @@ const CTA = () => {
                 isVisible ? "animate-fade-in-up" : ""
               }`}
             >
-              Let&apos;s build a digital product that earns its place in your business—on the web,
+              Let&apos;s build a digital product that earns its place in your business, on the web,
               in your customers&apos; hands, or across both.
             </p>
             <div
@@ -55,10 +54,9 @@ const CTA = () => {
                 href="https://calendly.com/ntedvs/website"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex h-12 items-center justify-center gap-2 rounded-full bg-black px-10 text-sm font-medium tracking-widest text-white uppercase transition-colors hover:bg-black/90 focus-visible:outline-2 focus-visible:outline-offset-2"
+                className="button"
               >
-                Contact Us
-                <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                Contact us
               </a>
             </div>
           </div>

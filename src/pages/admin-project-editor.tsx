@@ -1,5 +1,5 @@
 import { useQuery } from "convex/react"
-import { Link, useParams } from "react-router-dom"
+import { Link, useParams } from "react-router"
 import { routes } from "@/app/routes"
 import ProjectForm from "@/components/project-form"
 import { api } from "../../convex/_generated/api"

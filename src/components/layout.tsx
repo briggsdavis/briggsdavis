@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react"
-import { Outlet, useLocation } from "react-router-dom"
+import { Outlet, useLocation } from "react-router"
 import { RouteMetadata } from "@/app/metadata"
 import { routes } from "@/app/routes"
 // import { NavLogoBackground } from "@/components/nav-logo-background"
 import Navbar from "@/components/navbar"
 import { HeroIntroProvider } from "@/lib/hero-intro"
-import { scrollToTop } from "@/lib/lenis-store"
 
 const HERO_INTRO_SESSION_KEY = "briggs-davis-hero-intro-seen"
 
@@ -19,7 +18,6 @@ const Layout = () => {
   )
 
   useEffect(() => {
-    scrollToTop()
     document.getElementById("main-content")?.focus({ preventScroll: true })
   }, [location.key])
 

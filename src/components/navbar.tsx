@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, NavLink } from "react-router"
 import { routes } from "@/app/routes"
 import { useHeroIntro } from "@/lib/hero-intro"
 
 const heroIntroClass =
   "animate-hero-intro opacity-0 will-change-[opacity,filter,translate] motion-reduce:animate-none motion-reduce:opacity-100 motion-reduce:blur-none motion-reduce:translate-y-0"
+
+const getNavLinkClass = ({ isActive }: { isActive: boolean }) =>
+  "py-3 after:absolute after:right-0 after:bottom-2.5 after:left-0 after:h-px after:origin-left after:scale-x-0 after:bg-current after:transition-transform after:duration-300 after:ease-[cubic-bezier(0.76,0,0.24,1)] hover:after:scale-x-100 focus-visible:after:scale-x-100 focus-visible:outline-2 focus-visible:outline-offset-4 motion-reduce:after:transition-none " +
+  (isActive && "after:scale-x-100")
 
 const Navbar = () => {
   const playHeroIntro = useHeroIntro()
@@ -50,31 +54,35 @@ const Navbar = () => {
               playHeroIntro ? `${heroIntroClass} [animation-delay:1290ms]` : ""
             }`}
           >
-            <Link
-              to={routes.projects}
-              className="absolute right-full mr-2 py-3 transition-opacity hover:opacity-60 focus-visible:outline-2 focus-visible:outline-offset-4 sm:mr-6 md:mr-8"
+            <NavLink
+              to={routes.work}
+              className={({ isActive }) =>
+                `absolute right-full mr-2 sm:mr-6 md:mr-8 ${getNavLinkClass({ isActive })}`
+              }
             >
               Work
-            </Link>
-            <Link
+            </NavLink>
+            <NavLink
               to={routes.services}
-              className="py-3 transition-opacity hover:opacity-60 focus-visible:outline-2 focus-visible:outline-offset-4"
+              className={({ isActive }) => `relative ${getNavLinkClass({ isActive })}`}
             >
               Services
-            </Link>
-            <Link
+            </NavLink>
+            <NavLink
               to={routes.approach}
-              className="absolute left-full ml-2 py-3 transition-opacity hover:opacity-60 focus-visible:outline-2 focus-visible:outline-offset-4 sm:ml-6 md:ml-8"
+              className={({ isActive }) =>
+                `absolute left-full ml-2 sm:ml-6 md:ml-8 ${getNavLinkClass({ isActive })}`
+              }
             >
               Approach
-            </Link>
+            </NavLink>
           </div>
         </div>
 
         <div className="absolute top-4 right-2 flex h-14 w-20 items-center justify-center sm:right-4 sm:w-28 md:top-6 md:right-6">
           <Link
             to={routes.contact}
-            className="button pointer-events-auto shrink-0 max-sm:px-2 max-sm:text-xs max-sm:hover:px-2.5"
+            className="button pointer-events-auto shrink-0 max-sm:px-2 max-sm:text-xs"
           >
             Contact
           </Link>

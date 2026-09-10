@@ -21,7 +21,8 @@ export default function AdminInquiries() {
         <p className="mt-4 text-muted-foreground">The next conversation.</p>
       </div>
 
-      <div aria-label="Inquiry status" role="group" className="mb-8 flex gap-2">
+      <fieldset className="mb-8 flex gap-2">
+        <legend className="sr-only">Inquiry status</legend>
         {[false, true].map((value) => (
           <button
             key={String(value)}
@@ -33,16 +34,16 @@ export default function AdminInquiries() {
             {value ? "Archived" : "Inbox"}
           </button>
         ))}
-      </div>
+      </fieldset>
 
       {status === "LoadingFirstPage" ? (
         <output className="block border-t border-border/40 py-12 text-sm text-muted-foreground">
           Loading inquiries…
         </output>
       ) : results.length === 0 ? (
-        <p role="status" className="border-t border-border/40 py-12 text-sm text-muted-foreground">
+        <output className="block border-t border-border/40 py-12 text-sm text-muted-foreground">
           {archived ? "Nothing archived." : "All quiet. New inquiries will appear here."}
-        </p>
+        </output>
       ) : (
         <ul className="divide-y divide-border/40 border-y border-border/40">
           {results.map((inquiry) => (

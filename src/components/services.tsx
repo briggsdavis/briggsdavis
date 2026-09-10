@@ -1,8 +1,7 @@
 import { useState } from "react"
-import { Link } from "react-router-dom"
+import { Link } from "react-router"
 import { routes } from "@/app/routes"
 import { Reveal } from "@/components/reveal"
-// import { ServiceVisual } from "@/components/service-visuals"
 
 type ServiceChoice = "web" | "app"
 
@@ -13,7 +12,6 @@ const serviceOptions = {
       "Marketing sites, web applications, booking systems, content platforms, and digital tools built around the business.",
     href: routes.webDevelopment,
     cta: "Discover web development",
-    visualKey: "cms" as const,
   },
   app: {
     title: "App Development",
@@ -21,7 +19,6 @@ const serviceOptions = {
       "Native iOS and Android products, connected backends, and companion web experiences delivered as one coherent system.",
     href: routes.appDevelopment,
     cta: "Discover app development",
-    visualKey: "mobile" as const,
   },
 }
 
@@ -39,7 +36,7 @@ const Services = () => {
           </div>
         </Reveal>
 
-        <Reveal className="flex h-152 flex-col overflow-hidden border-y border-border/60 bg-white/25 md:h-120 md:flex-row">
+        <Reveal className="flex h-152 flex-col overflow-hidden border-y border-border/60 bg-white/25 [overflow-anchor:none] md:h-120 md:flex-row">
           {(Object.keys(serviceOptions) as ServiceChoice[]).map((key, index) => {
             const service = serviceOptions[key]
             const active = activeService === key
@@ -78,24 +75,13 @@ const Services = () => {
                       </p>
                       <Link
                         to={service.href}
-                        className="inline-flex border-b border-foreground/40 pb-0.5 text-xs font-medium text-foreground"
+                        className="text-sm font-medium text-foreground underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-4"
                       >
                         {service.cta}
                       </Link>
                     </div>
                   </div>
                 </div>
-
-                {/*
-                <div
-                  aria-hidden="true"
-                  className={`pointer-events-none absolute top-[18%] right-[4%] hidden h-64 w-[44%] transition-[opacity,transform] duration-700 md:block ${
-                    active ? "translate-x-0 opacity-45" : "translate-x-8 opacity-0"
-                  }`}
-                >
-                  <ServiceVisual visualKey={service.visualKey} isActive={active} />
-                </div>
-                */}
               </div>
             )
           })}

@@ -2,7 +2,18 @@
 
 @layer components {
   .button {
-    @apply inline-flex items-center rounded-full border bg-white px-4 py-2 transition-all hover:bg-gray-200 hover:px-4.5 hover:py-2.5;
+    @apply relative isolate inline-flex items-center rounded-full border border-transparent px-4 py-2;
+  }
+
+  .button::before {
+    content: "";
+    @apply pointer-events-none absolute -inset-px -z-10 rounded-[inherit] border bg-white transition-all;
+  }
+
+  @media (hover: hover) {
+    .button:hover::before {
+      @apply scale-105 bg-gray-100;
+    }
   }
 }
 
@@ -124,6 +135,10 @@
   html,
   body {
     overflow-x: clip;
+  }
+
+  html {
+    overflow-y: scroll;
   }
 
   body {

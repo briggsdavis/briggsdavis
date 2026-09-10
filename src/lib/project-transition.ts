@@ -1,9 +1,7 @@
 import { flushSync } from "react-dom"
-import type { NavigateFunction } from "react-router-dom"
+import type { NavigateFunction } from "react-router"
 import { routes } from "@/app/routes"
-import { scrollToTop } from "@/lib/lenis-store"
 
-let activeProjectId: string | null = null
 let morphNavigationActive = false
 
 const MORPH_DURATION = 900
@@ -118,12 +116,10 @@ const createRouteSnapshot = (source: HTMLImageElement) => {
 
 const finishMorph = (overlay: HTMLImageElement) => {
   overlay.remove()
-  activeProjectId = null
   morphNavigationActive = false
   document.documentElement.classList.remove("project-morph-active")
 }
 
-export const getMorphProjectId = () => activeProjectId
 export const isProjectMorphNavigation = () => morphNavigationActive
 
 export const openProjectWithMorph = async ({
@@ -157,7 +153,6 @@ export const openProjectWithMorph = async ({
     height: `${sourceRect.height}px`,
   })
 
-  activeProjectId = projectId
   morphNavigationActive = true
   document.documentElement.classList.add("project-morph-active")
   document.body.appendChild(overlay)
@@ -179,7 +174,6 @@ export const openProjectWithMorph = async ({
   }
 
   flushSync(() => navigate(destination))
-  scrollToTop()
   const target = await waitForTarget(projectId)
 
   if (!target) {

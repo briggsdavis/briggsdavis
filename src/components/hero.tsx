@@ -1,11 +1,11 @@
-import DottedBackground from "./matrix"
+import Matrix from "./matrix"
 
 const matrixColors = ["#e4eddd", "#657560", "#254a38"]
 
 const Hero = () => (
   <section className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 pt-24">
     <div aria-hidden="true" className="absolute inset-x-0 top-0 h-[75svh] bg-background">
-      <DottedBackground
+      <Matrix
         className="mask-b-from-80"
         back="transparent"
         colors={matrixColors}

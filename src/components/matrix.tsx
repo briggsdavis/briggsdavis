@@ -383,7 +383,7 @@ function buildPaletteUniforms(colorList: string[]) {
   return { rgb, alpha }
 }
 
-interface DottedBackgroundProps {
+interface MatrixProps {
   className?: string
   frequency?: number
   speed?: number
@@ -400,7 +400,7 @@ interface DottedBackgroundProps {
   fontSizePx?: number
 }
 
-export default function DottedBackground({
+export default function Matrix({
   className = "",
   frequency = 1,
   speed = 6,
@@ -415,7 +415,7 @@ export default function DottedBackground({
   fontFamily = "monospace",
   fontWeight = 400,
   fontSizePx = 42,
-}: DottedBackgroundProps) {
+}: MatrixProps) {
   const useGlyphAtlasFlag = useGlyphAtlas === true
   const paletteColors = Array.isArray(colors) && colors.length > 0 ? colors : DEFAULT_COLORS
   const effPaletteCount = Math.min(MAX_COLORS, Math.max(1, paletteColors.length))

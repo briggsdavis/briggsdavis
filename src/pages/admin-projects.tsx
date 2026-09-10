@@ -1,5 +1,5 @@
 import { usePaginatedQuery } from "convex/react"
-import { Link, useLocation } from "react-router-dom"
+import { Link, useLocation } from "react-router"
 import { routes } from "@/app/routes"
 import { api } from "../../convex/_generated/api"
 import DeleteProject from "../components/delete-project"
@@ -31,9 +31,7 @@ export default function AdminProjects() {
       </div>
 
       {notice ? (
-        <p role="status" className="mb-6 text-sm text-muted-foreground">
-          {notice}
-        </p>
+        <output className="mb-6 block text-sm text-muted-foreground">{notice}</output>
       ) : null}
 
       {status === "LoadingFirstPage" ? (

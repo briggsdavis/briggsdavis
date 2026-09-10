@@ -4,7 +4,7 @@ export const routes = {
   approach: "/approach",
   webDevelopment: "/services/web-development",
   appDevelopment: "/services/app-development",
-  projects: "/work",
+  work: "/work",
   project: (id: string) => `/work/${id}`,
   contact: "/contact",
   login: "/login",
@@ -18,6 +18,6 @@ export const routes = {
 export const primaryNavigation = [
   { label: "Home", href: routes.home },
   { label: "Services", href: routes.services },
-  { label: "Work", href: routes.projects },
+  { label: "Work", href: routes.work },
   { label: "Contact", href: routes.contact },
 ] as const

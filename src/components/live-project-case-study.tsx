@@ -1,5 +1,4 @@
 import type { FunctionReturnType } from "convex/server"
-import { ExternalLink } from "lucide-react"
 import Footer from "@/components/footer"
 import type { api } from "../../convex/_generated/api"
 
@@ -17,13 +16,8 @@ export default function LiveProjectCaseStudy({
             <p className="mt-6 text-lg text-muted-foreground">{project.summary}</p>
           </div>
           {project.url ? (
-            <a
-              href={project.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex min-h-11 items-center gap-3 rounded-full border border-border/40 px-6 text-sm transition-colors hover:bg-card"
-            >
-              Visit website <ExternalLink aria-hidden="true" className="size-4" />
+            <a href={project.url} target="_blank" rel="noopener noreferrer" className="button">
+              Visit website
             </a>
           ) : null}
         </div>
