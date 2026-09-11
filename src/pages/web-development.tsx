@@ -5,7 +5,7 @@ import Footer from "@/components/footer"
 
 const WebDevelopmentPage = () => (
   <div className="min-h-screen">
-    <header className="mx-auto grid min-h-[88svh] max-w-7xl content-between gap-16 px-6 pt-40 pb-16 md:grid-cols-12 md:pt-48 md:pb-20">
+    <header className="site-frame grid min-h-[88svh] content-between gap-16 pt-40 pb-16 md:grid-cols-12 md:pt-48 md:pb-20">
       <h1 className="col-span-10 text-[clamp(4rem,9vw,8.5rem)] leading-[0.86] font-semibold tracking-[-0.07em] text-foreground">
         The web should feel immediate.
       </h1>
@@ -30,7 +30,7 @@ const WebDevelopmentPage = () => (
       </p>
     </section>
 
-    <section className="mx-auto max-w-7xl px-6 py-28 md:py-40">
+    <section className="site-frame py-28 md:py-40">
       <div className="grid gap-14 md:grid-cols-12">
         <h2 className="col-span-4 text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
           What we build.
@@ -69,8 +69,8 @@ const WebDevelopmentPage = () => (
       </div>
     </section>
 
-    <section className="border-y border-border/60 px-6 py-24 md:py-36">
-      <div className="mx-auto max-w-7xl">
+    <section className="border-y border-border/60 py-24 md:py-36">
+      <div className="site-frame">
         <p className="max-w-5xl text-[clamp(2.75rem,6vw,6.5rem)] leading-[0.98] font-semibold tracking-[-0.055em] text-foreground">
           Fast is a feature. Clarity is infrastructure.
         </p>

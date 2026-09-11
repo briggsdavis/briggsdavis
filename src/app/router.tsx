@@ -2,6 +2,7 @@ import type { ComponentType } from "react"
 import { createBrowserRouter, Outlet, ScrollRestoration } from "react-router"
 import { routes } from "@/app/routes"
 import Layout from "@/components/layout"
+import PageTransition from "@/components/page-transition"
 import SmoothScroll from "@/components/smooth-scroll"
 import Home from "@/pages/home"
 import WorkDetail from "@/pages/work-detail"
@@ -18,6 +19,7 @@ const lazyAuth = (flow: "signIn" | "signUp") => async () => {
 const RouterRoot = () => (
   <SmoothScroll>
     <Outlet />
+    <PageTransition />
     <ScrollRestoration />
   </SmoothScroll>
 )

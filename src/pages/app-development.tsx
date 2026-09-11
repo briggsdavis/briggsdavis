@@ -5,7 +5,7 @@ import Footer from "@/components/footer"
 
 const AppDevelopmentPage = () => (
   <div className="min-h-screen">
-    <header className="mx-auto grid min-h-[92svh] max-w-7xl items-center gap-16 px-6 pt-36 pb-20 md:grid-cols-12 md:pt-40">
+    <header className="site-frame grid min-h-[92svh] items-center gap-16 pt-36 pb-20 md:grid-cols-12 md:pt-40">
       <div className="md:col-span-7">
         <h1 className="text-[clamp(4rem,8vw,8rem)] leading-[0.88] font-semibold tracking-[-0.07em] text-foreground">
           A place on the home screen is earned.
@@ -42,8 +42,8 @@ const AppDevelopmentPage = () => (
       </div>
     </header>
 
-    <section className="border-y border-border/60 px-6 py-28 md:py-40">
-      <div className="mx-auto max-w-7xl">
+    <section className="border-y border-border/60 py-28 md:py-40">
+      <div className="site-frame">
         <h2 className="max-w-5xl text-[clamp(3rem,6vw,6.5rem)] leading-[0.96] font-semibold tracking-[-0.06em] text-foreground">
           One product. Every layer.
         </h2>
@@ -77,8 +77,8 @@ const AppDevelopmentPage = () => (
       </div>
     </section>
 
-    <section className="px-6 py-28 md:py-40">
-      <div className="mx-auto grid max-w-7xl gap-12 md:grid-cols-12">
+    <section className="py-28 md:py-40">
+      <div className="site-frame grid gap-12 md:grid-cols-12">
         <h2 className="col-span-6 text-4xl leading-tight font-semibold tracking-tight text-foreground md:text-6xl">
           Small screen. High standard.
         </h2>

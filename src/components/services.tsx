@@ -1,94 +1,39 @@
-import { useState } from "react"
 import { Link } from "react-router"
 import { routes } from "@/app/routes"
 import { Reveal } from "@/components/reveal"
 
-type ServiceChoice = "web" | "app"
-
-const serviceOptions = {
-  web: {
+const services = [
+  {
     title: "Web Development",
-    description:
-      "Marketing sites, web applications, booking systems, content platforms, and digital tools built around the business.",
     href: routes.webDevelopment,
-    cta: "Discover web development",
+    detail: "Sites, platforms, commerce, booking, and digital tools.",
   },
-  app: {
+  {
     title: "App Development",
-    description:
-      "Native iOS and Android products, connected backends, and companion web experiences delivered as one coherent system.",
     href: routes.appDevelopment,
-    cta: "Discover app development",
+    detail: "Mobile products, connected systems, and companion experiences.",
   },
-}
+]
 
-const Services = () => {
-  const [activeService, setActiveService] = useState<ServiceChoice>("web")
-
-  return (
-    <section id="services" className="px-6 py-28">
-      <div className="mx-auto max-w-6xl">
-        <Reveal className="mb-10 flex flex-col justify-between gap-5 md:flex-row md:items-end">
-          <div>
-            <h2 className="max-w-xl font-display text-2xl font-semibold text-foreground md:text-3xl">
-              Two ways to build the right digital product.
-            </h2>
-          </div>
-        </Reveal>
-
-        <Reveal className="flex h-152 flex-col overflow-hidden border-y border-border/60 bg-white/25 [overflow-anchor:none] md:h-120 md:flex-row">
-          {(Object.keys(serviceOptions) as ServiceChoice[]).map((key, index) => {
-            const service = serviceOptions[key]
-            const active = activeService === key
-            return (
-              <div
-                key={key}
-                onMouseEnter={() => setActiveService(key)}
-                onFocusCapture={() => setActiveService(key)}
-                className={`group relative min-h-0 min-w-0 overflow-hidden transition-[flex-grow,background-color] duration-800 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none ${
-                  active ? "flex-[1.45] bg-white/70" : "flex-[0.55] bg-transparent"
-                } ${index === 0 ? "border-b border-border/60 md:border-r md:border-b-0" : ""}`}
-              >
-                <div className="relative z-10 flex h-full flex-col justify-end p-6 select-text md:p-8">
-                  <h3 className="max-w-sm font-display text-3xl font-semibold text-foreground md:text-4xl">
-                    <button
-                      type="button"
-                      onClick={() => setActiveService(key)}
-                      aria-expanded={active}
-                      className="text-left select-text focus-visible:outline-2 focus-visible:outline-offset-4"
-                    >
-                      {service.title.split(" ")[0]}
-                      <br />
-                      Development
-                    </button>
-                  </h3>
-                  <div
-                    inert={!active}
-                    aria-hidden={!active}
-                    className={`grid [transition:grid-template-rows_800ms_cubic-bezier(0.22,1,0.36,1),opacity_400ms_ease] motion-reduce:transition-none ${
-                      active ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
-                    }`}
-                  >
-                    <div className="min-h-0 overflow-hidden">
-                      <p className="mt-6 mb-5 max-w-md text-sm text-muted-foreground">
-                        {service.description}
-                      </p>
-                      <Link
-                        to={service.href}
-                        className="text-sm font-medium text-foreground underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-4"
-                      >
-                        {service.cta}
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )
-          })}
-        </Reveal>
-      </div>
-    </section>
-  )
-}
+const Services = () => (
+  <section id="services" className="py-28">
+    <Reveal className="site-frame border-t border-border/50">
+      {services.map((service) => (
+        <Link
+          key={service.title}
+          to={service.href}
+          className="group grid min-h-44 items-end gap-6 border-b border-border/50 py-7 focus-visible:outline-2 focus-visible:outline-offset-4 md:grid-cols-12 md:py-9"
+        >
+          <h2 className="text-[clamp(2.75rem,6vw,6rem)] leading-none font-semibold tracking-[-0.055em] text-foreground transition-transform duration-400 ease-out group-hover:translate-x-2 group-focus-visible:translate-x-2 motion-reduce:transition-none md:col-span-8">
+            {service.title}
+          </h2>
+          <p className="translate-y-4 text-base leading-relaxed text-muted-foreground opacity-0 transition-[transform,opacity] duration-400 ease-out group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100 motion-reduce:transition-none md:col-span-4">
+            {service.detail}
+          </p>
+        </Link>
+      ))}
+    </Reveal>
+  </section>
+)
 
 export default Services

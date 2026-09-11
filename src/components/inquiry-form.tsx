@@ -6,7 +6,7 @@ import { api } from "../../convex/_generated/api"
 import type { Doc } from "../../convex/_generated/dataModel"
 
 const inputClass =
-  "w-full rounded-xl border border-border/60 bg-card/40 px-4 py-3.5 text-base outline-none transition-colors focus:border-foreground focus:bg-white"
+  "w-full rounded-none border-0 border-b border-foreground/35 bg-transparent px-0 py-3 text-base outline-none transition-colors focus:border-foreground"
 const inquiryTypes = [
   "A new website",
   "A website redesign",
@@ -39,6 +39,8 @@ export default function InquiryForm() {
         idea: String(data.get("idea")),
       })
       form.reset()
+      const idea = form.elements.namedItem("idea")
+      if (idea instanceof HTMLTextAreaElement) idea.style.height = "auto"
       setSent(true)
     } catch (cause) {
       setError(
@@ -53,9 +55,9 @@ export default function InquiryForm() {
 
   return (
     <form onSubmit={submit} aria-label="Project inquiry" aria-busy={pending}>
-      <fieldset disabled={pending} className="grid gap-6 disabled:opacity-60">
-        <div className="grid gap-6 sm:grid-cols-2">
-          <label className="grid gap-2.5 text-sm font-medium">
+      <fieldset disabled={pending} className="grid gap-10 disabled:opacity-60">
+        <div className="grid gap-10 sm:grid-cols-2">
+          <label className="grid gap-1 text-sm font-medium">
             Name
             <input
               name="name"
@@ -65,7 +67,7 @@ export default function InquiryForm() {
               className={inputClass}
             />
           </label>
-          <label className="grid gap-2.5 text-sm font-medium">
+          <label className="grid gap-1 text-sm font-medium">
             Email
             <input
               name="email"
@@ -77,28 +79,32 @@ export default function InquiryForm() {
             />
           </label>
         </div>
-        <label className="grid gap-2.5 text-sm font-medium">
+        <label className="grid gap-1 text-sm font-medium">
           What are we making?
           <span className="relative">
-            <select name="type" className={`${inputClass} appearance-none pr-12`}>
+            <select name="type" className={`${inputClass} appearance-none pr-10`}>
               {inquiryTypes.map((type) => (
                 <option key={type}>{type}</option>
               ))}
             </select>
             <ChevronDown
               aria-hidden="true"
-              className="pointer-events-none absolute top-1/2 right-4 size-4 -translate-y-1/2 text-muted-foreground"
+              className="pointer-events-none absolute top-1/2 right-0 size-4 -translate-y-1/2 text-muted-foreground"
             />
           </span>
         </label>
-        <label className="grid gap-2.5 text-sm font-medium">
+        <label className="grid gap-1 text-sm font-medium">
           Your idea
           <textarea
             name="idea"
-            rows={5}
+            rows={1}
             maxLength={10000}
             required
-            className={`${inputClass} resize-none`}
+            onInput={(event) => {
+              event.currentTarget.style.height = "auto"
+              event.currentTarget.style.height = `${event.currentTarget.scrollHeight}px`
+            }}
+            className={`${inputClass} min-h-12 resize-none overflow-hidden leading-relaxed`}
           />
         </label>
         <button

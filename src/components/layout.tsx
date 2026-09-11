@@ -6,7 +6,7 @@ import { routes } from "@/app/routes"
 import Navbar from "@/components/navbar"
 import { HeroIntroProvider } from "@/lib/hero-intro"
 
-const HERO_INTRO_SESSION_KEY = "briggs-davis-hero-intro-seen"
+const HERO_INTRO_SESSION_KEY = "briggs-davis-hero-intro-v4-seen"
 
 const Layout = () => {
   const location = useLocation()
