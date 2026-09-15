@@ -49,9 +49,7 @@ const Navbar = () => {
         </Link>
 
         <div className="absolute top-6 left-1/2 -translate-x-1/2 md:top-8">
-          <div
-            className="pointer-events-auto relative flex h-10 items-center text-xs font-medium tracking-wide sm:text-sm"
-          >
+          <div className="pointer-events-auto relative flex h-10 items-center text-xs font-medium tracking-wide sm:text-sm">
             <NavLink
               to={routes.work}
               className={({ isActive }) =>

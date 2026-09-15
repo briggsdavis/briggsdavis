@@ -1,5 +1,5 @@
-import { flushSync } from "react-dom"
 import { useEffect, useRef } from "react"
+import { flushSync } from "react-dom"
 import { useNavigate } from "react-router"
 
 const TRANSITION_DURATION = 720
@@ -89,7 +89,12 @@ const PageTransition = () => {
 
       const target = event.target
       const anchor = target instanceof Element ? target.closest<HTMLAnchorElement>("a[href]") : null
-      if (!anchor || anchor.target || anchor.download || anchor.dataset.noPageTransition !== undefined)
+      if (
+        !anchor ||
+        anchor.target ||
+        anchor.download ||
+        anchor.dataset.noPageTransition !== undefined
+      )
         return
 
       const destination = new URL(anchor.href, window.location.href)

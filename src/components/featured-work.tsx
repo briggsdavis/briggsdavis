@@ -1,9 +1,9 @@
 import { useRef } from "react"
 import { Link, useNavigate } from "react-router"
 import { routes } from "@/app/routes"
+import { Reveal } from "@/components/reveal"
 import { featuredProjectIds, projects } from "@/data/projects"
 import { openProjectWithMorph } from "@/lib/project-transition"
-import { Reveal } from "@/components/reveal"
 
 const featured = featuredProjectIds
   .map((id) => projects.find((project) => project.id === id))
@@ -28,9 +28,7 @@ const FeaturedWork = () => {
     <section id="featured-work" className="pt-16 pb-32">
       <div className="site-frame">
         <Reveal className="mb-16 max-w-5xl">
-          <h2 className="mb-6 text-4xl font-semibold text-foreground md:text-5xl">
-            Selected Work
-          </h2>
+          <h2 className="mb-6 text-4xl font-semibold text-foreground md:text-5xl">Selected Work</h2>
           <p className="max-w-md text-muted-foreground">
             Real businesses that used a stronger online presence to elevate their brand and grow.
           </p>
@@ -45,7 +43,7 @@ const FeaturedWork = () => {
                   data-no-page-transition
                   onClick={(event) => openProject(event, project.id, index)}
                   aria-label={`View ${project.name}`}
-                  className={`relative z-1 aspect-video overflow-hidden bg-background transition-transform duration-900 ease-[cubic-bezier(0.76,0,0.24,1)] focus-visible:outline-2 focus-visible:outline-offset-[-4px] motion-reduce:transition-none lg:col-span-2 lg:row-start-1 lg:group-hover:translate-x-0 lg:group-focus-within:translate-x-0 ${
+                  className={`relative z-1 aspect-video overflow-hidden bg-background transition-transform duration-900 ease-[cubic-bezier(0.76,0,0.24,1)] focus-visible:outline-2 focus-visible:outline-offset-[-4px] motion-reduce:transition-none lg:col-span-2 lg:row-start-1 lg:group-focus-within:translate-x-0 lg:group-hover:translate-x-0 ${
                     index % 2 === 0
                       ? "lg:col-start-1 lg:translate-x-1/2"
                       : "lg:col-start-2 lg:-translate-x-1/2"

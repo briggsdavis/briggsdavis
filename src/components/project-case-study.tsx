@@ -18,7 +18,7 @@ const FeatureList = ({ project }: { project: Project }) => {
   }
 
   return (
-    <div className="lg:sticky lg:top-1/2 lg:self-start lg:-translate-y-1/2">
+    <div className="lg:sticky lg:top-1/2 lg:-translate-y-1/2 lg:self-start">
       <p className="mb-5 text-sm font-medium tracking-wide text-muted-foreground uppercase">
         Features
       </p>
@@ -135,13 +135,17 @@ export const ProjectCaseStudy = ({ project }: { project: Project }) => {
                 {project.problem ? (
                   <div>
                     <h2 className="mb-3 text-sm font-medium text-foreground">Problem</h2>
-                    <p className="text-sm leading-relaxed text-muted-foreground">{project.problem}</p>
+                    <p className="text-sm leading-relaxed text-muted-foreground">
+                      {project.problem}
+                    </p>
                   </div>
                 ) : null}
                 {project.solution ? (
                   <div>
                     <h2 className="mb-3 text-sm font-medium text-foreground">Solution</h2>
-                    <p className="text-sm leading-relaxed text-muted-foreground">{project.solution}</p>
+                    <p className="text-sm leading-relaxed text-muted-foreground">
+                      {project.solution}
+                    </p>
                   </div>
                 ) : null}
                 {project.businessValue ? (

@@ -1,5 +1,5 @@
-import Matrix from "./matrix"
 import { useHeroIntro } from "@/lib/hero-intro"
+import Matrix from "./matrix"
 
 const matrixColors = ["#e4eddd", "#657560", "#254a38"]
 

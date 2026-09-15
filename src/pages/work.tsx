@@ -72,7 +72,7 @@ const Work = () => {
                   data-no-page-transition
                   onClick={(event) => openProject(event, project.id, index)}
                   aria-label={`View ${project.name}`}
-                  className={`relative z-1 aspect-[16/9] overflow-hidden bg-card transition-transform duration-900 ease-[cubic-bezier(0.76,0,0.24,1)] focus-visible:outline-2 focus-visible:outline-offset-[-4px] motion-reduce:transition-none md:col-span-2 md:row-start-1 md:group-hover:translate-x-0 md:group-focus-within:translate-x-0 ${
+                  className={`relative z-1 aspect-[16/9] overflow-hidden bg-card transition-transform duration-900 ease-[cubic-bezier(0.76,0,0.24,1)] focus-visible:outline-2 focus-visible:outline-offset-[-4px] motion-reduce:transition-none md:col-span-2 md:row-start-1 md:group-focus-within:translate-x-0 md:group-hover:translate-x-0 ${
                     imageFirst
                       ? "md:col-start-1 md:translate-x-1/2"
                       : "md:col-start-2 md:-translate-x-1/2"

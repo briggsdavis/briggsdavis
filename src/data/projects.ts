@@ -21,11 +21,7 @@ export interface Project {
   year: number
 }
 
-export const featuredProjectIds = [
-  "social-satisfaction",
-  "hargarten",
-  "refenti",
-] as const
+export const featuredProjectIds = ["social-satisfaction", "hargarten", "refenti"] as const
 
 const projectCatalog: Project[] = [
   {
