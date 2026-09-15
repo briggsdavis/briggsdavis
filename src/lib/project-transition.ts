@@ -10,6 +10,18 @@ const PAGE_FADE_DURATION = 850
 const canMorph = () =>
   window.innerWidth >= 1024 && !window.matchMedia("(prefers-reduced-motion: reduce)").matches
 
+const resetScrollToTop = () => {
+  window.scrollTo(0, 0)
+  document.documentElement.scrollTop = 0
+  document.body.scrollTop = 0
+}
+
+const settleRouteAtTop = async () => {
+  resetScrollToTop()
+  await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()))
+  resetScrollToTop()
+}
+
 const settleHoveredSource = async (source: HTMLImageElement) => {
   const scale = window.getComputedStyle(source).scale
   if (scale === "none" || scale === "1") return
@@ -134,7 +146,8 @@ export const openProjectWithMorph = async ({
   const destination = routes.project(projectId)
 
   if (!source || !canMorph()) {
-    navigate(destination)
+    flushSync(() => navigate(destination))
+    await settleRouteAtTop()
     return
   }
 
@@ -174,6 +187,7 @@ export const openProjectWithMorph = async ({
   }
 
   flushSync(() => navigate(destination))
+  await settleRouteAtTop()
   const target = await waitForTarget(projectId)
 
   if (!target) {
@@ -181,6 +195,7 @@ export const openProjectWithMorph = async ({
     return
   }
 
+  await settleRouteAtTop()
   const targetRect = target.getBoundingClientRect()
   const animation = overlay.animate(
     [

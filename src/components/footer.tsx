@@ -41,7 +41,7 @@ const Footer = () => {
             data-text-title
             className="max-w-md text-2xl leading-tight font-semibold tracking-tight text-foreground md:col-span-4 md:col-start-9 md:text-4xl"
           >
-            Apps and websites built to earn.
+            Digital products built for your business
           </p>
         </div>
 

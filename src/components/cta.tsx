@@ -6,11 +6,13 @@ import ReactiveField from "@/components/reactive-field"
 const CTA = () => {
   const sectionRef = useRef<HTMLElement>(null)
   const [isVisible, setIsVisible] = useState(false)
+  const [isActive, setIsActive] = useState(false)
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
+          setIsActive(entry.isIntersecting)
           if (entry.isIntersecting) {
             setIsVisible(true)
           }
@@ -57,7 +59,7 @@ const CTA = () => {
             isVisible ? "scale-100 opacity-100 blur-0" : "scale-105 opacity-0 blur-xl"
           }`}
         >
-          <ReactiveField mode="cta" active={isVisible} />
+          <ReactiveField mode="cta" active={isActive} />
         </div>
       </div>
     </section>

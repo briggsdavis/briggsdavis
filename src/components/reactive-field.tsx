@@ -22,11 +22,12 @@ const ReactiveField = ({ mode, active = true }: ReactiveFieldProps) => {
     let height = 1
     let elapsed = 0
     let previous: number | null = null
+    let lastDraw = 0
     let frame = 0
 
     const resize = () => {
       const bounds = surface.getBoundingClientRect()
-      const ratio = Math.min(window.devicePixelRatio || 1, 2)
+      const ratio = Math.min(window.devicePixelRatio || 1, 1.35)
       width = Math.max(bounds.width, 1)
       height = Math.max(bounds.height, 1)
       canvas.width = Math.round(width * ratio)
@@ -55,11 +56,11 @@ const ReactiveField = ({ mode, active = true }: ReactiveFieldProps) => {
       const cy = height * (0.5 + (pointer.y - 0.5) * 0.035 * pointer.pull)
       const size = Math.min(width, height)
 
-      for (let ring = 0; ring < 18; ring += 1) {
-        const radius = size * (0.13 + ring * 0.015)
+      for (let ring = 0; ring < 12; ring += 1) {
+        const radius = size * (0.13 + ring * 0.023)
         context.beginPath()
-        for (let point = 0; point <= 120; point += 1) {
-          const angle = (point / 120) * Math.PI * 2
+        for (let point = 0; point <= 72; point += 1) {
+          const angle = (point / 72) * Math.PI * 2
           const pulse = Math.sin(angle * 3 + elapsed * 0.45 + ring * 0.22) * size * 0.018
           const pinch = Math.cos(angle * 2 - elapsed * 0.22) * size * 0.035
           const x = cx + Math.cos(angle) * (radius + pulse) + Math.sin(angle) * pinch
@@ -67,7 +68,7 @@ const ReactiveField = ({ mode, active = true }: ReactiveFieldProps) => {
           if (point === 0) context.moveTo(x, y)
           else context.lineTo(x, y)
         }
-        context.globalAlpha = 0.12 + ring * 0.025
+        context.globalAlpha = 0.16 + ring * 0.036
         context.stroke()
       }
 
@@ -123,13 +124,17 @@ const ReactiveField = ({ mode, active = true }: ReactiveFieldProps) => {
       pointer.x += (pointer.tx - pointer.x) * ease
       pointer.y += (pointer.ty - pointer.y) * ease
       pointer.pull += (pointer.targetPull - pointer.pull) * ease
-      draw()
+      if (time - lastDraw >= 32) {
+        draw()
+        lastDraw = time
+      }
       frame = requestAnimationFrame(animate)
     }
 
     const sync = () => {
       cancelAnimationFrame(frame)
       previous = null
+      lastDraw = 0
       resize()
       draw()
       if (active && !reducedMotion.matches && !document.hidden) frame = requestAnimationFrame(animate)

@@ -145,7 +145,7 @@ const OurPromise = () => {
                     key={word}
                     className="absolute flex w-full items-center justify-center transform-3d"
                   >
-                    <div className="text-center font-workbench text-xl font-normal tracking-wide whitespace-nowrap text-foreground uppercase transition-[color,filter] duration-300 ease-[ease] will-change-[transform,opacity] backface-hidden md:text-2xl lg:text-3xl xl:text-4xl">
+                    <div className="text-center font-sans text-xl font-medium tracking-wide whitespace-nowrap text-foreground uppercase transition-[color,filter] duration-300 ease-[ease] will-change-[transform,opacity] backface-hidden md:text-2xl lg:text-3xl xl:text-4xl">
                       {word}
                     </div>
                   </div>
