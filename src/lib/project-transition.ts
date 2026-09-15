@@ -1,6 +1,7 @@
 import { flushSync } from "react-dom"
 import type { NavigateFunction } from "react-router"
 import { routes } from "@/app/routes"
+import { resetScrollToTop } from "@/lib/scroll-position"
 
 let morphNavigationActive = false
 
@@ -9,12 +10,6 @@ const PAGE_FADE_DURATION = 850
 
 const canMorph = () =>
   window.innerWidth >= 1024 && !window.matchMedia("(prefers-reduced-motion: reduce)").matches
-
-const resetScrollToTop = () => {
-  window.scrollTo(0, 0)
-  document.documentElement.scrollTop = 0
-  document.body.scrollTop = 0
-}
 
 const settleRouteAtTop = async () => {
   resetScrollToTop()

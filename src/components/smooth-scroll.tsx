@@ -1,5 +1,6 @@
 import Lenis from "lenis"
 import { useEffect } from "react"
+import { RESET_SCROLL_TO_TOP_EVENT } from "@/lib/scroll-position"
 
 const SmoothScroll = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
@@ -17,10 +18,16 @@ const SmoothScroll = ({ children }: { children: React.ReactNode }) => {
       lenis.raf(time)
       rafId = requestAnimationFrame(raf)
     }
+    const resetScrollToTop = () => {
+      lenis.scrollTo(0, { immediate: true, force: true })
+    }
+
+    document.addEventListener(RESET_SCROLL_TO_TOP_EVENT, resetScrollToTop)
     rafId = requestAnimationFrame(raf)
 
     return () => {
       cancelAnimationFrame(rafId)
+      document.removeEventListener(RESET_SCROLL_TO_TOP_EVENT, resetScrollToTop)
       lenis.destroy()
     }
   }, [])
