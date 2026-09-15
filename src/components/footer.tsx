@@ -23,11 +23,11 @@ const Footer = () => {
     <footer
       ref={footerRef}
       id="contact"
-      className="relative z-0 flex min-h-[82svh] items-stretch bg-background pt-44 pb-4 shadow-[0_-72px_110px_rgba(0,0,0,0.1)] before:pointer-events-none before:absolute before:inset-x-0 before:-top-36 before:h-36 before:bg-gradient-to-b before:from-transparent before:to-black/[0.025] md:min-h-[78svh] md:pt-52 md:pb-7"
+      className="relative z-0 flex min-h-[82svh] items-stretch bg-background pt-44 shadow-[0_-72px_110px_rgba(0,0,0,0.1)] before:pointer-events-none before:absolute before:inset-x-0 before:-top-36 before:h-36 before:bg-gradient-to-b before:from-transparent before:to-black/[0.025] md:min-h-[78svh] md:pt-52"
     >
       <div aria-hidden="true" className="footer-shadow-breathe pointer-events-none absolute inset-x-0 bottom-0 h-[58%]" />
 
-      <div className="site-frame relative z-10 flex flex-1 flex-col">
+      <div className="site-frame relative z-10 flex min-h-0 flex-1 flex-col self-stretch">
         <div className="grid items-end gap-8 md:grid-cols-12">
           <p className="text-lg text-foreground md:col-span-3 md:col-start-6 md:text-2xl">
             <a
@@ -45,12 +45,10 @@ const Footer = () => {
           </p>
         </div>
 
-        <div className="min-h-24 flex-1" aria-hidden="true" />
-
         <div
           data-no-text-reveal
           data-visible={visible ? "" : undefined}
-          className="w-full shrink-0 translate-y-full overflow-hidden text-foreground opacity-0 transition-[opacity,transform] duration-1000 ease-[cubic-bezier(0.22,1,0.36,1)] data-[visible]:translate-y-0 data-[visible]:opacity-100 motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none"
+          className="mt-auto w-full shrink-0 translate-y-full overflow-hidden pt-24 text-foreground opacity-0 transition-[opacity,transform] duration-1000 ease-[cubic-bezier(0.22,1,0.36,1)] data-[visible]:translate-y-0 data-[visible]:opacity-100 motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none"
         >
           <svg
             viewBox="0 0 1200 190"

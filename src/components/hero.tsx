@@ -11,7 +11,7 @@ const Hero = () => {
       <div className="site-frame">
         <div
           aria-hidden="true"
-          className="relative h-[clamp(20rem,56svh,36rem)] overflow-hidden bg-background"
+          className="relative h-[clamp(20rem,56svh,36rem)] overflow-hidden bg-background md:h-[calc(100svh-16rem)] md:min-h-[32rem] md:max-h-[60rem]"
         >
           <div
             className={`hero-pattern absolute inset-0 ${playHeroIntro ? "hero-pattern-intro" : ""}`}
@@ -29,7 +29,7 @@ const Hero = () => {
         </div>
 
         <p
-          className={`max-w-md pt-5 text-left text-xl leading-snug font-bold tracking-wide text-foreground uppercase md:text-2xl ${
+          className={`max-w-md pt-7 text-left text-xl leading-snug font-bold tracking-wide text-foreground uppercase md:text-2xl ${
             playHeroIntro ? "hero-copy-intro" : ""
           }`}
         >
