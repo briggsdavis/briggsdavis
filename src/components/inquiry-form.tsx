@@ -1,12 +1,14 @@
 import { useMutation } from "convex/react"
 import { ConvexError } from "convex/values"
 import { ChevronDown } from "lucide-react"
-import { useState, type FormEvent } from "react"
+import { useEffect, useRef, useState, type FormEvent } from "react"
 import { api } from "../../convex/_generated/api"
 import type { Doc } from "../../convex/_generated/dataModel"
 
 const inputClass =
   "w-full rounded-none border-0 border-b border-foreground/35 bg-transparent px-0 py-3 text-base outline-none transition-colors focus:border-foreground"
+const formRiseClass =
+  "translate-y-8 opacity-0 blur-[2px] transition-[opacity,transform,filter] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] data-[visible]:translate-y-0 data-[visible]:opacity-100 data-[visible]:blur-none motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:blur-none motion-reduce:transition-none"
 const inquiryTypes = [
   "A new website",
   "A website redesign",
@@ -15,10 +17,38 @@ const inquiryTypes = [
 ] as const satisfies readonly Doc<"inquiries">["type"][]
 
 export default function InquiryForm() {
+  const formRef = useRef<HTMLFormElement | null>(null)
   const create = useMutation(api.inquiries.create)
   const [pending, setPending] = useState(false)
   const [sent, setSent] = useState(false)
   const [error, setError] = useState("")
+  const [inView, setInView] = useState(false)
+  const [transitionFinished, setTransitionFinished] = useState(
+    () => !document.documentElement.classList.contains("page-transition-active"),
+  )
+  const entryVisible = inView && transitionFinished
+
+  useEffect(() => {
+    const form = formRef.current
+    if (!form) return
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return
+        setInView(true)
+        observer.disconnect()
+      },
+      { threshold: 0.08 },
+    )
+    observer.observe(form)
+    return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
+    if (transitionFinished) return
+    const finish = () => setTransitionFinished(true)
+    document.addEventListener("page-transition-complete", finish, { once: true })
+    return () => document.removeEventListener("page-transition-complete", finish)
+  }, [transitionFinished])
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -54,10 +84,13 @@ export default function InquiryForm() {
   }
 
   return (
-    <form onSubmit={submit} aria-label="Project inquiry" aria-busy={pending}>
+    <form ref={formRef} onSubmit={submit} aria-label="Project inquiry" aria-busy={pending}>
       <fieldset disabled={pending} className="grid gap-10 disabled:opacity-60">
         <div className="grid gap-10 sm:grid-cols-2">
-          <label className="grid gap-1 text-sm font-medium">
+          <label
+            data-visible={entryVisible ? "" : undefined}
+            className={`${formRiseClass} grid gap-1 text-sm font-medium [transition-delay:0ms]`}
+          >
             Name
             <input
               name="name"
@@ -67,7 +100,10 @@ export default function InquiryForm() {
               className={inputClass}
             />
           </label>
-          <label className="grid gap-1 text-sm font-medium">
+          <label
+            data-visible={entryVisible ? "" : undefined}
+            className={`${formRiseClass} grid gap-1 text-sm font-medium [transition-delay:90ms]`}
+          >
             Email
             <input
               name="email"
@@ -79,7 +115,10 @@ export default function InquiryForm() {
             />
           </label>
         </div>
-        <label className="grid gap-1 text-sm font-medium">
+        <label
+          data-visible={entryVisible ? "" : undefined}
+          className={`${formRiseClass} grid gap-1 text-sm font-medium [transition-delay:180ms]`}
+        >
           What are we making?
           <span className="relative">
             <select name="type" className={`${inputClass} appearance-none pr-10`}>
@@ -93,7 +132,10 @@ export default function InquiryForm() {
             />
           </span>
         </label>
-        <label className="grid gap-1 text-sm font-medium">
+        <label
+          data-visible={entryVisible ? "" : undefined}
+          className={`${formRiseClass} grid gap-1 text-sm font-medium [transition-delay:270ms]`}
+        >
           Your idea
           <textarea
             name="idea"
@@ -109,7 +151,8 @@ export default function InquiryForm() {
         </label>
         <button
           type="submit"
-          className="min-h-12 justify-self-start rounded-full bg-black px-8 text-sm font-medium text-white transition-colors hover:bg-black/80 focus-visible:outline-2 focus-visible:outline-offset-4 disabled:cursor-wait"
+          data-visible={entryVisible ? "" : undefined}
+          className={`${formRiseClass} min-h-12 justify-self-start rounded-full bg-black px-8 text-sm font-medium text-white [transition-delay:360ms] hover:bg-black/80 focus-visible:outline-2 focus-visible:outline-offset-4 disabled:cursor-wait`}
         >
           {pending ? "Sending…" : "Send inquiry"}
         </button>

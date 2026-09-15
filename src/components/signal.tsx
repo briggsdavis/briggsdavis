@@ -115,7 +115,7 @@ const Signal = () => {
   return (
     <div
       aria-hidden="true"
-      className="relative h-[450px] w-full touch-pan-y overflow-hidden rounded-xl mask-x-from-120 sm:h-[600px]"
+      className="relative h-[min(36svh,22rem)] min-h-72 w-full touch-pan-y overflow-hidden rounded-xl mask-x-from-120 sm:h-[min(46svh,34rem)] sm:min-h-80"
     >
       <svg
         ref={svgRef}

@@ -45,7 +45,8 @@ const AppDevelopmentPage = () => (
     <section className="border-y border-border/60 py-28 md:py-40">
       <div className="site-frame">
         <h2 className="max-w-5xl text-[clamp(3rem,6vw,6.5rem)] leading-[0.96] font-semibold tracking-[-0.06em] text-foreground">
-          One product. Every layer.
+          <span className="block">One product.</span>
+          <span className="block">Every layer.</span>
         </h2>
 
         <div className="mt-20 grid border-t border-border/60 sm:grid-cols-2 lg:grid-cols-4">

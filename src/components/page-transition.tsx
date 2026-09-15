@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react"
 import { flushSync } from "react-dom"
 import { useNavigate } from "react-router"
 
-const TRANSITION_DURATION = 720
+const TRANSITION_DURATION = 1500
 
 const freezeSnapshotState = (sourceRoot: HTMLElement, cloneRoot: HTMLElement) => {
   const sourceElements = [sourceRoot, ...sourceRoot.querySelectorAll<HTMLElement>("*")]
@@ -54,7 +54,7 @@ const createRouteSnapshot = () => {
     .forEach((element) => element.removeAttribute("data-project-morph-target"))
 
   layer.className =
-    "pointer-events-none fixed inset-0 z-[300] overflow-hidden bg-background will-change-[clip-path,filter,transform]"
+    "pointer-events-none fixed inset-0 z-[300] overflow-hidden bg-background will-change-[opacity,filter]"
   layer.setAttribute("aria-hidden", "true")
   layer.dataset.routeTransitionOverlay = ""
   content.className = "absolute top-0 left-0 w-full"
@@ -121,28 +121,19 @@ const PageTransition = () => {
       }
 
       active.current = true
+      document.documentElement.classList.add("page-transition-active")
       document.documentElement.classList.add("page-blur-enter")
       flushSync(() => navigate(href))
       window.scrollTo(0, 0)
 
       const animation = snapshot.animate(
         [
-          { clipPath: "inset(0 0 0 0)", filter: "blur(0px)", transform: "translateX(0)" },
-          {
-            clipPath: "inset(0 24% 0 0)",
-            filter: "blur(9px)",
-            transform: "translateX(-1%)",
-            offset: 0.42,
-          },
-          {
-            clipPath: "inset(0 100% 0 0)",
-            filter: "blur(22px)",
-            transform: "translateX(-4%)",
-          },
+          { opacity: 1, filter: "blur(0px)" },
+          { opacity: 0, filter: "blur(20px)" },
         ],
         {
           duration: TRANSITION_DURATION,
-          easing: "cubic-bezier(0.76, 0, 0.24, 1)",
+          easing: "cubic-bezier(0.45, 0, 0.55, 1)",
           fill: "forwards",
         },
       )
@@ -153,6 +144,8 @@ const PageTransition = () => {
           snapshot.remove()
           active.current = false
           document.documentElement.classList.remove("page-blur-enter")
+          document.documentElement.classList.remove("page-transition-active")
+          document.dispatchEvent(new Event("page-transition-complete"))
         })
     }
 

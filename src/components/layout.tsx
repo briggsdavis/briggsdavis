@@ -4,6 +4,7 @@ import { RouteMetadata } from "@/app/metadata"
 import { routes } from "@/app/routes"
 // import { NavLogoBackground } from "@/components/nav-logo-background"
 import Navbar from "@/components/navbar"
+import TextReveals from "@/components/text-reveals"
 import { HeroIntroProvider } from "@/lib/hero-intro"
 
 const HERO_INTRO_SESSION_KEY = "briggs-davis-hero-intro-v4-seen"
@@ -56,6 +57,7 @@ const Layout = () => {
       <main id="main-content" tabIndex={-1} className="site-content relative z-1 outline-none">
         <Outlet />
       </main>
+      <TextReveals key={location.key} />
     </HeroIntroProvider>
   )
 }

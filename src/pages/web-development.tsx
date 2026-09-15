@@ -71,7 +71,10 @@ const WebDevelopmentPage = () => (
 
     <section className="border-y border-border/60 py-24 md:py-36">
       <div className="site-frame">
-        <p className="max-w-5xl text-[clamp(2.75rem,6vw,6.5rem)] leading-[0.98] font-semibold tracking-[-0.055em] text-foreground">
+        <p
+          data-text-title
+          className="max-w-5xl text-[clamp(2.75rem,6vw,6.5rem)] leading-[0.98] font-semibold tracking-[-0.055em] text-foreground"
+        >
           Fast is a feature. Clarity is infrastructure.
         </p>
         <p className="mt-8 max-w-md leading-relaxed text-muted-foreground md:ml-auto">

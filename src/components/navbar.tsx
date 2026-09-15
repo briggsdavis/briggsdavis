@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { Link, NavLink } from "react-router"
 import { routes } from "@/app/routes"
 import { useHeroIntro } from "@/lib/hero-intro"
@@ -13,22 +13,49 @@ const getNavLinkClass = ({ isActive }: { isActive: boolean }) =>
 const Navbar = () => {
   const playHeroIntro = useHeroIntro()
   const [scrollProgress, setScrollProgress] = useState(0)
+  const [navigationHidden, setNavigationHidden] = useState(false)
+  const lastScrollPosition = useRef(0)
 
   useEffect(() => {
+    let frame = 0
+
     const handleScroll = () => {
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight
-      setScrollProgress(docHeight > 0 ? window.scrollY / docHeight : 0)
+      if (frame) return
+      frame = requestAnimationFrame(() => {
+        frame = 0
+        const currentPosition = Math.max(window.scrollY, 0)
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight
+        setScrollProgress(docHeight > 0 ? currentPosition / docHeight : 0)
+
+        if (currentPosition < 32) {
+          setNavigationHidden(false)
+          lastScrollPosition.current = currentPosition
+          return
+        }
+
+        const distance = currentPosition - lastScrollPosition.current
+        if (Math.abs(distance) >= 8) {
+          setNavigationHidden(distance > 0)
+          lastScrollPosition.current = currentPosition
+        }
+      })
     }
+    lastScrollPosition.current = Math.max(window.scrollY, 0)
     handleScroll()
     window.addEventListener("scroll", handleScroll, { passive: true })
-    return () => window.removeEventListener("scroll", handleScroll)
+    return () => {
+      cancelAnimationFrame(frame)
+      window.removeEventListener("scroll", handleScroll)
+    }
   }, [])
 
   return (
     <>
       <div
         data-site-navigation
-        className={`fixed top-0 left-0 z-100 h-0.5 bg-foreground/30 transition-none ${
+        className={`fixed top-0 left-0 z-100 h-px bg-foreground/30 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:duration-0 ${
+          navigationHidden ? "-translate-y-1" : "translate-y-0"
+        } ${
           playHeroIntro ? `${introClass} [animation-delay:2300ms]` : ""
         }`}
         style={{ width: `${scrollProgress * 100}%` }}
@@ -36,14 +63,14 @@ const Navbar = () => {
 
       <nav
         data-site-navigation
-        className={`pointer-events-none fixed inset-x-0 top-0 z-90 h-24 border-b bg-background transition-colors duration-300 motion-reduce:transition-none ${
-          scrollProgress > 0 ? "border-border/50" : "border-transparent"
+        className={`pointer-events-none fixed inset-x-0 top-0 z-90 h-20 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:duration-0 ${
+          navigationHidden ? "-translate-y-full" : "translate-y-0"
         }`}
       >
         <Link
           to={routes.home}
           aria-label="Briggs Davis home"
-          className={`group/logo pointer-events-auto absolute top-8 left-[calc(var(--site-gutter)-0.225rem)] [perspective:500px] ${
+          className={`group/logo pointer-events-auto absolute top-6 left-[calc(var(--site-gutter)-0.225rem)] [perspective:500px] ${
             playHeroIntro ? `${introClass} [animation-delay:2300ms]` : ""
           }`}
         >
@@ -54,7 +81,7 @@ const Navbar = () => {
           />
         </Link>
 
-        <div className="absolute top-7 left-1/2 -translate-x-1/2">
+        <div className="absolute top-5 left-1/2 -translate-x-1/2">
           <div className="pointer-events-auto relative flex h-10 items-center text-xs font-medium tracking-wide sm:text-sm">
             <NavLink
               to={routes.work}
@@ -89,7 +116,7 @@ const Navbar = () => {
           </div>
         </div>
 
-        <div className="absolute top-5 right-[var(--site-gutter)] flex h-14 items-center">
+        <div className="absolute top-3 right-[var(--site-gutter)] flex h-14 items-center">
           <Link
             to={routes.contact}
             className={`button pointer-events-auto shrink-0 max-sm:px-2 max-sm:text-xs ${
