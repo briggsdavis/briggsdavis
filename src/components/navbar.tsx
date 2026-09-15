@@ -33,11 +33,14 @@ const Navbar = () => {
         style={{ width: `${scrollProgress * 100}%` }}
       />
 
-      <nav data-site-navigation className="pointer-events-none fixed inset-x-0 top-0 z-90 h-24">
+      <nav
+        data-site-navigation
+        className="pointer-events-none fixed inset-x-0 top-0 z-90 h-24 border-b border-border/50 bg-background"
+      >
         <Link
           to={routes.home}
           aria-label="Briggs Davis home"
-          className={`group/logo pointer-events-auto absolute top-7 left-[calc(var(--site-gutter)-0.225rem)] [perspective:500px] md:top-9 ${
+          className={`group/logo pointer-events-auto absolute top-8 left-[calc(var(--site-gutter)-0.225rem)] [perspective:500px] ${
             playHeroIntro ? `${introClass} [animation-delay:2300ms]` : ""
           }`}
         >
@@ -48,7 +51,7 @@ const Navbar = () => {
           />
         </Link>
 
-        <div className="absolute top-6 left-1/2 -translate-x-1/2 md:top-8">
+        <div className="absolute top-7 left-1/2 -translate-x-1/2">
           <div className="pointer-events-auto relative flex h-10 items-center text-xs font-medium tracking-wide sm:text-sm">
             <NavLink
               to={routes.work}
@@ -83,7 +86,7 @@ const Navbar = () => {
           </div>
         </div>
 
-        <div className="absolute top-4 right-[var(--site-gutter)] flex h-14 items-center md:top-6">
+        <div className="absolute top-5 right-[var(--site-gutter)] flex h-14 items-center">
           <Link
             to={routes.contact}
             className={`button pointer-events-auto shrink-0 max-sm:px-2 max-sm:text-xs ${

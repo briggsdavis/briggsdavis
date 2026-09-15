@@ -19,6 +19,7 @@ export default defineSchema({
   projects: defineTable({
     slug: v.string(),
     title: v.string(),
+    category: v.string(),
     summary: v.string(),
     featured: v.boolean(),
     cover: v.id("_storage"),

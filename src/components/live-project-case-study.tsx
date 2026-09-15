@@ -12,6 +12,9 @@ export default function LiveProjectCaseStudy({
       <article className="mx-auto max-w-5xl px-6 pt-32 pb-24">
         <div className="mb-12 flex flex-wrap items-start justify-between gap-8 md:mb-16">
           <div className="max-w-2xl">
+            {project.category ? (
+              <p className="mb-5 text-sm text-muted-foreground">{project.category}</p>
+            ) : null}
             <h1 className="text-4xl font-semibold tracking-tight md:text-5xl">{project.title}</h1>
             <p className="mt-6 text-lg text-muted-foreground">{project.summary}</p>
           </div>

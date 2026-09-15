@@ -1,14 +1,20 @@
+import { usePaginatedQuery } from "convex/react"
 import { useRef } from "react"
 import { Link, useNavigate } from "react-router"
 import { routes } from "@/app/routes"
 import CTA from "@/components/cta"
 import Footer from "@/components/footer"
-import { projects } from "@/data/projects"
 import { openProjectWithMorph } from "@/lib/project-transition"
+import { api } from "../../convex/_generated/api"
 
 const Work = () => {
   const imageRefs = useRef<(HTMLImageElement | null)[]>([])
   const navigate = useNavigate()
+  const {
+    results: projects,
+    status,
+    loadMore,
+  } = usePaginatedQuery(api.projects.all, {}, { initialNumItems: 50 })
 
   const openProject = (
     event: React.MouseEvent<HTMLAnchorElement>,
@@ -37,7 +43,7 @@ const Work = () => {
           const imageFirst = index % 2 === 1
           return (
             <article
-              key={project.id}
+              key={project.slug}
               className="group overflow-hidden border-b border-border/40 py-12 md:py-20"
             >
               <div className="site-frame grid md:grid-cols-3 md:items-center">
@@ -48,19 +54,19 @@ const Work = () => {
                       : "items-end text-right md:col-start-1"
                   }`}
                 >
-                  <p className="mb-3 text-sm text-muted-foreground">
-                    {project.year} · {project.tags.slice(0, 2).join(" / ")}
-                  </p>
+                  {project.category ? (
+                    <p className="mb-3 text-sm text-muted-foreground">{project.category}</p>
+                  ) : null}
                   <h2 className="text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
-                    {project.name}
+                    {project.title}
                   </h2>
                   <p className="mt-5 max-w-sm leading-relaxed text-muted-foreground">
-                    {project.shortDescription ?? project.description}
+                    {project.summary}
                   </p>
                   <Link
-                    to={routes.project(project.id)}
+                    to={routes.project(project.slug)}
                     data-no-page-transition
-                    onClick={(event) => openProject(event, project.id, index)}
+                    onClick={(event) => openProject(event, project.slug, index)}
                     className="button mt-8"
                   >
                     View project
@@ -68,32 +74,52 @@ const Work = () => {
                 </div>
 
                 <Link
-                  to={routes.project(project.id)}
+                  to={routes.project(project.slug)}
                   data-no-page-transition
-                  onClick={(event) => openProject(event, project.id, index)}
-                  aria-label={`View ${project.name}`}
+                  onClick={(event) => openProject(event, project.slug, index)}
+                  aria-label={`View ${project.title}`}
                   className={`relative z-1 aspect-[16/9] overflow-hidden bg-card transition-transform duration-900 ease-[cubic-bezier(0.76,0,0.24,1)] focus-visible:outline-2 focus-visible:outline-offset-[-4px] motion-reduce:transition-none md:col-span-2 md:row-start-1 md:group-focus-within:translate-x-0 md:group-hover:translate-x-0 ${
                     imageFirst
                       ? "md:col-start-1 md:translate-x-1/2"
                       : "md:col-start-2 md:-translate-x-1/2"
                   }`}
                 >
-                  <img
-                    ref={(element) => {
-                      imageRefs.current[index] = element
-                    }}
-                    src={project.image}
-                    alt={project.name}
-                    loading={index === 0 ? "eager" : "lazy"}
-                    fetchPriority={index === 0 ? "high" : "auto"}
-                    decoding="async"
-                    className="h-full w-full object-cover object-top"
-                  />
+                  {project.coverUrl ? (
+                    <img
+                      ref={(element) => {
+                        imageRefs.current[index] = element
+                      }}
+                      src={project.coverUrl}
+                      alt={project.title}
+                      loading={index === 0 ? "eager" : "lazy"}
+                      fetchPriority={index === 0 ? "high" : "auto"}
+                      decoding="async"
+                      className="h-full w-full object-cover object-top"
+                    />
+                  ) : null}
                 </Link>
               </div>
             </article>
           )
         })}
+        {status === "LoadingFirstPage" ? (
+          <p className="site-frame py-20 text-muted-foreground">Loading projects…</p>
+        ) : null}
+        {status === "Exhausted" && projects.length === 0 ? (
+          <p className="site-frame py-20 text-muted-foreground">No projects yet.</p>
+        ) : null}
+        {status === "CanLoadMore" || status === "LoadingMore" ? (
+          <div className="site-frame flex justify-center py-12">
+            <button
+              type="button"
+              className="button"
+              disabled={status === "LoadingMore"}
+              onClick={() => loadMore(50)}
+            >
+              {status === "LoadingMore" ? "Loading…" : "Load more"}
+            </button>
+          </div>
+        ) : null}
       </section>
 
       <CTA />

@@ -82,6 +82,7 @@ export default function ProjectForm({
 
       const fields = {
         title: String(data.get("title")),
+        category: String(data.get("category")),
         summary: String(data.get("summary")),
         content: String(data.get("content")),
         url: String(data.get("url")) || undefined,
@@ -137,6 +138,17 @@ export default function ProjectForm({
                 name="title"
                 defaultValue={project?.title}
                 maxLength={120}
+                required
+              />
+            </label>
+
+            <label className="grid gap-2 text-sm sm:col-span-2">
+              Category
+              <input
+                className={inputClass}
+                name="category"
+                defaultValue={project?.category}
+                maxLength={80}
                 required
               />
             </label>

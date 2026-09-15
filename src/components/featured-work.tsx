@@ -1,17 +1,15 @@
+import { useQuery } from "convex/react"
 import { useRef } from "react"
 import { Link, useNavigate } from "react-router"
 import { routes } from "@/app/routes"
 import { Reveal } from "@/components/reveal"
-import { featuredProjectIds, projects } from "@/data/projects"
 import { openProjectWithMorph } from "@/lib/project-transition"
-
-const featured = featuredProjectIds
-  .map((id) => projects.find((project) => project.id === id))
-  .filter((project) => project !== undefined)
+import { api } from "../../convex/_generated/api"
 
 const FeaturedWork = () => {
   const imageRefs = useRef<(HTMLImageElement | null)[]>([])
   const navigate = useNavigate()
+  const featured = useQuery(api.projects.featured)
 
   const openProject = (
     event: React.MouseEvent<HTMLAnchorElement>,
@@ -34,59 +32,67 @@ const FeaturedWork = () => {
           </p>
         </Reveal>
 
-        <div className="flex flex-col gap-8">
-          {featured.map((project, index) => (
-            <Reveal key={project.id}>
-              <article className="group overflow-hidden lg:grid lg:grid-cols-3 lg:items-center">
-                <Link
-                  to={routes.project(project.id)}
-                  data-no-page-transition
-                  onClick={(event) => openProject(event, project.id, index)}
-                  aria-label={`View ${project.name}`}
-                  className={`relative z-1 aspect-video overflow-hidden bg-background transition-transform duration-900 ease-[cubic-bezier(0.76,0,0.24,1)] focus-visible:outline-2 focus-visible:outline-offset-[-4px] motion-reduce:transition-none lg:col-span-2 lg:row-start-1 lg:group-focus-within:translate-x-0 lg:group-hover:translate-x-0 ${
-                    index % 2 === 0
-                      ? "lg:col-start-1 lg:translate-x-1/2"
-                      : "lg:col-start-2 lg:-translate-x-1/2"
-                  }`}
-                >
-                  <img
-                    ref={(element) => {
-                      imageRefs.current[index] = element
-                    }}
-                    src={project.image}
-                    alt={project.name}
-                    loading="lazy"
-                    decoding="async"
-                    className="h-full w-full object-cover object-top"
-                  />
-                </Link>
-
-                <div
-                  className={`flex flex-col justify-center p-7 lg:row-start-1 ${
-                    index % 2 === 0
-                      ? "items-start lg:col-start-3"
-                      : "items-end text-right lg:col-start-1"
-                  }`}
-                >
-                  <p className="mb-3 text-sm text-muted-foreground">{project.year}</p>
-                  <h3 className="mb-3 text-2xl font-semibold text-foreground lg:text-3xl">
-                    {project.name}
-                  </h3>
-                  <p className="mb-6 text-sm text-muted-foreground">
-                    {project.shortDescription ?? project.description}
-                  </p>
+        <div className="flex flex-col gap-8" aria-busy={featured === undefined}>
+          {featured === undefined ? (
+            <p className="text-muted-foreground">Loading projects…</p>
+          ) : featured.length === 0 ? (
+            <p className="text-muted-foreground">No featured projects yet.</p>
+          ) : (
+            featured.map((project, index) => (
+              <Reveal key={project.slug}>
+                <article className="group overflow-hidden lg:grid lg:grid-cols-3 lg:items-center">
                   <Link
-                    to={routes.project(project.id)}
+                    to={routes.project(project.slug)}
                     data-no-page-transition
-                    onClick={(event) => openProject(event, project.id, index)}
-                    className="text-sm font-medium text-foreground underline underline-offset-4"
+                    onClick={(event) => openProject(event, project.slug, index)}
+                    aria-label={`View ${project.title}`}
+                    className={`relative z-1 aspect-video overflow-hidden bg-background transition-transform duration-900 ease-[cubic-bezier(0.76,0,0.24,1)] focus-visible:outline-2 focus-visible:outline-offset-[-4px] motion-reduce:transition-none lg:col-span-2 lg:row-start-1 lg:group-focus-within:translate-x-0 lg:group-hover:translate-x-0 ${
+                      index % 2 === 0
+                        ? "lg:col-start-1 lg:translate-x-1/2"
+                        : "lg:col-start-2 lg:-translate-x-1/2"
+                    }`}
                   >
-                    Project details
+                    {project.coverUrl ? (
+                      <img
+                        ref={(element) => {
+                          imageRefs.current[index] = element
+                        }}
+                        src={project.coverUrl}
+                        alt={project.title}
+                        loading="lazy"
+                        decoding="async"
+                        className="h-full w-full object-cover object-top"
+                      />
+                    ) : null}
                   </Link>
-                </div>
-              </article>
-            </Reveal>
-          ))}
+
+                  <div
+                    className={`flex flex-col justify-center p-7 lg:row-start-1 ${
+                      index % 2 === 0
+                        ? "items-start lg:col-start-3"
+                        : "items-end text-right lg:col-start-1"
+                    }`}
+                  >
+                    {project.category ? (
+                      <p className="mb-3 text-sm text-muted-foreground">{project.category}</p>
+                    ) : null}
+                    <h3 className="mb-3 text-2xl font-semibold text-foreground lg:text-3xl">
+                      {project.title}
+                    </h3>
+                    <p className="mb-6 text-sm text-muted-foreground">{project.summary}</p>
+                    <Link
+                      to={routes.project(project.slug)}
+                      data-no-page-transition
+                      onClick={(event) => openProject(event, project.slug, index)}
+                      className="text-sm font-medium text-foreground underline underline-offset-4"
+                    >
+                      Project details
+                    </Link>
+                  </div>
+                </article>
+              </Reveal>
+            ))
+          )}
         </div>
 
         <div className="mt-16 flex justify-center">

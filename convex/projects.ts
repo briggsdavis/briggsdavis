@@ -60,11 +60,14 @@ type ProjectInput = Omit<Doc<"projects">, "_id" | "_creationTime" | "slug">
 
 async function validateProject(ctx: MutationCtx, args: ProjectInput) {
   const title = args.title.trim()
+  const category = args.category.trim()
   const summary = args.summary.trim()
   const content = args.content.trim()
   const url = args.url?.trim() || undefined
 
   if (!title || title.length > 120) throw new ConvexError("Enter a title under 120 characters.")
+  if (!category || category.length > 80)
+    throw new ConvexError("Enter a category under 80 characters.")
   if (!summary || summary.length > 500)
     throw new ConvexError("Enter a summary under 500 characters.")
   if (!content || content.length > 50000)
@@ -95,7 +98,7 @@ async function validateProject(ctx: MutationCtx, args: ProjectInput) {
     }),
   )
 
-  return { ...args, title, summary, content, url }
+  return { ...args, title, category, summary, content, url }
 }
 
 export const create = mutation({
@@ -162,12 +165,15 @@ async function withImages(ctx: QueryCtx, item: Doc<"projects">) {
   return { ...item, coverUrl, galleryUrls }
 }
 
-const projectCard = project.pick("slug", "title", "summary").extend({
+const projectCard = project.pick("slug", "title", "category", "summary").extend({
   coverUrl: v.union(v.string(), v.null()),
 })
 
-async function withCover(ctx: QueryCtx, { slug, title, summary, cover }: Doc<"projects">) {
-  return { slug, title, summary, coverUrl: await ctx.storage.getUrl(cover) }
+async function withCover(
+  ctx: QueryCtx,
+  { slug, title, category, summary, cover }: Doc<"projects">,
+) {
+  return { slug, title, category, summary, coverUrl: await ctx.storage.getUrl(cover) }
 }
 
 export const all = query({

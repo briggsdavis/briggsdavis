@@ -1,13 +1,14 @@
+import { useQuery } from "convex/react"
 import { Link, useParams } from "react-router"
 import { routes } from "@/app/routes"
-import { ProjectCaseStudy } from "@/components/project-case-study"
-import { getProject } from "@/data/projects"
+import LiveProjectCaseStudy from "@/components/live-project-case-study"
+import { api } from "../../convex/_generated/api"
 
 const WorkDetail = () => {
   const { id } = useParams<{ id: string }>()
-  const project = getProject(id)
+  const project = useQuery(api.projects.single, id ? { slug: id } : "skip")
 
-  if (!project) {
+  if (!id || project === null) {
     return (
       <div className="flex min-h-screen items-center justify-center">
         <div className="text-center">
@@ -20,7 +21,15 @@ const WorkDetail = () => {
     )
   }
 
-  return <ProjectCaseStudy project={project} />
+  if (project === undefined) {
+    return (
+      <div className="flex min-h-screen items-center justify-center text-muted-foreground">
+        Loading project…
+      </div>
+    )
+  }
+
+  return <LiveProjectCaseStudy project={project} />
 }
 
 export default WorkDetail
