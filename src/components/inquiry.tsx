@@ -51,10 +51,7 @@ export default function Inquiry({ inquiry }: { inquiry: Doc<"inquiries"> }) {
       </summary>
 
       <div className="pt-6">
-        <a
-          href={`mailto:${inquiry.email}`}
-          className="text-sm wrap-anywhere underline underline-offset-4"
-        >
+        <a href={`mailto:${inquiry.email}`} className="text-sm wrap-anywhere">
           {inquiry.email}
         </a>
         <p className="mt-5 max-w-3xl leading-relaxed wrap-anywhere whitespace-pre-wrap">

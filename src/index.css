@@ -57,6 +57,7 @@
   --font-display: var(--font-sans);
   --font-eyebrow: var(--font-sans);
   --font-mono: var(--font-sans);
+  --font-workbench: "Workbench Variable", sans-serif;
 
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);

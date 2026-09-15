@@ -118,7 +118,7 @@ export default function AuthPage({ flow }: { flow: "signIn" | "signUp" }) {
               {signup ? "Already have an account? " : "New to the team? "}
               <Link
                 to={signup ? routes.login : routes.signup}
-                className="font-medium text-foreground underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-4"
+                className="font-medium text-foreground focus-visible:outline-2 focus-visible:outline-offset-4"
               >
                 {signup ? "Log in" : "Create account"}
               </Link>

@@ -94,7 +94,7 @@ export default function AdminLayout() {
               type="button"
               onClick={logout}
               disabled={pending}
-              className="min-h-11 font-medium underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 disabled:opacity-50"
+              className="min-h-11 font-medium focus-visible:outline-2 focus-visible:outline-offset-4 disabled:opacity-50"
             >
               {pending ? "Logging out…" : "Log out"}
             </button>

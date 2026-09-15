@@ -15,7 +15,7 @@ export default function AdminProjectEditor() {
     return (
       <div>
         <h1 className="text-4xl font-semibold tracking-tight">Project not found.</h1>
-        <Link to={routes.admin} className="mt-6 inline-block text-sm underline underline-offset-4">
+        <Link to={routes.admin} className="mt-6 inline-block text-sm">
           Back to projects
         </Link>
       </div>

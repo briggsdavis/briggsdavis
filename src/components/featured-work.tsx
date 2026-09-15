@@ -84,7 +84,7 @@ const FeaturedWork = () => {
                       to={routes.project(project.slug)}
                       data-no-page-transition
                       onClick={(event) => openProject(event, project.slug, index)}
-                      className="text-sm font-medium text-foreground underline underline-offset-4"
+                      className="text-sm font-medium text-foreground"
                     >
                       Project details
                     </Link>

@@ -119,7 +119,7 @@ export default function ProjectForm({
       {pending ? (
         <span className="text-sm text-muted-foreground">Projects</span>
       ) : (
-        <Link className="text-sm underline-offset-4 hover:underline" to={routes.admin}>
+        <Link className="text-sm" to={routes.admin}>
           Projects
         </Link>
       )}
@@ -227,7 +227,7 @@ export default function ProjectForm({
                           onClick={() =>
                             setExistingGallery((ids) => ids.filter((value) => value !== id))
                           }
-                          className="text-xs underline underline-offset-4"
+                          className="text-xs"
                         >
                           Remove
                         </button>
@@ -275,7 +275,7 @@ export default function ProjectForm({
             </button>
 
             {!pending ? (
-              <Link className="text-sm underline-offset-4 hover:underline" to={routes.admin}>
+              <Link className="text-sm" to={routes.admin}>
                 Cancel
               </Link>
             ) : null}

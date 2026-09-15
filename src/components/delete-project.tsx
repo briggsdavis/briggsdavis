@@ -34,7 +34,7 @@ export default function DeleteProject({ id, title }: { id: Id<"projects">; title
         onClick={deleteProject}
         disabled={pending}
         aria-label={`Delete ${title}`}
-        className="text-sm text-red-800 underline-offset-4 hover:underline disabled:opacity-60"
+        className="text-sm text-red-800 disabled:opacity-60"
       >
         {pending ? "Deleting…" : "Delete"}
       </button>

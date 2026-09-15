@@ -57,17 +57,12 @@ export default function AdminProjects() {
 
               <div className="min-w-0 flex-1 basis-40">
                 <h2 className="truncate text-xl font-medium tracking-tight sm:text-2xl">
-                  <Link
-                    to={routes.adminEditProject(project.slug)}
-                    className="underline-offset-4 hover:underline"
-                  >
-                    {project.title}
-                  </Link>
+                  <Link to={routes.adminEditProject(project.slug)}>{project.title}</Link>
                 </h2>
 
                 <Link
                   to={routes.project(project.slug)}
-                  className="mt-1 block truncate text-sm text-muted-foreground hover:underline"
+                  className="mt-1 block truncate text-sm text-muted-foreground"
                 >
                   /work/{project.slug}
                 </Link>

@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState } from "react"
+import { Link } from "react-router"
+import { routes } from "@/app/routes"
 
 const CTA = () => {
   const sectionRef = useRef<HTMLElement>(null)
@@ -50,14 +52,9 @@ const CTA = () => {
             <div
               className={`opacity-0 [animation-delay:300ms] ${isVisible ? "animate-fade-in-up" : ""}`}
             >
-              <a
-                href="https://calendly.com/ntedvs/website"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="button"
-              >
+              <Link to={routes.contact} className="button">
                 Contact us
-              </a>
+              </Link>
             </div>
           </div>
         </div>

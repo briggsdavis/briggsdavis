@@ -19,6 +19,7 @@ const Navbar = () => {
       const docHeight = document.documentElement.scrollHeight - window.innerHeight
       setScrollProgress(docHeight > 0 ? window.scrollY / docHeight : 0)
     }
+    handleScroll()
     window.addEventListener("scroll", handleScroll, { passive: true })
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
@@ -27,7 +28,7 @@ const Navbar = () => {
     <>
       <div
         data-site-navigation
-        className={`fixed top-0 left-0 z-100 h-px bg-foreground/30 transition-none ${
+        className={`fixed top-0 left-0 z-100 h-0.5 bg-foreground/30 transition-none ${
           playHeroIntro ? `${introClass} [animation-delay:2300ms]` : ""
         }`}
         style={{ width: `${scrollProgress * 100}%` }}
@@ -35,7 +36,9 @@ const Navbar = () => {
 
       <nav
         data-site-navigation
-        className="pointer-events-none fixed inset-x-0 top-0 z-90 h-24 border-b border-border/50 bg-background"
+        className={`pointer-events-none fixed inset-x-0 top-0 z-90 h-24 border-b bg-background transition-colors duration-300 motion-reduce:transition-none ${
+          scrollProgress > 0 ? "border-border/50" : "border-transparent"
+        }`}
       >
         <Link
           to={routes.home}

@@ -18,6 +18,13 @@ interface WordElement {
   baseAngle: number
 }
 
+const getRadius = () => {
+  if (window.innerWidth <= 640) return 100
+  if (window.innerWidth <= 768) return 130
+  if (window.innerWidth <= 1024) return 150
+  return 180
+}
+
 const OurPromise = () => {
   const sectionRef = useRef<HTMLElement>(null)
   const wheelRef = useRef<HTMLDivElement>(null)
@@ -41,14 +48,6 @@ const OurPromise = () => {
     return () => observer.disconnect()
   }, [])
 
-  const getRadius = useCallback(() => {
-    if (typeof window === "undefined") return 180
-    if (window.innerWidth <= 640) return 100
-    if (window.innerWidth <= 768) return 130
-    if (window.innerWidth <= 1024) return 150
-    return 180
-  }, [])
-
   const updateWheel = useCallback(() => {
     const section = sectionRef.current
     if (!section) return
@@ -60,7 +59,7 @@ const OurPromise = () => {
     let progress = -rect.top / (sectionHeight - window.innerHeight)
     progress = Math.max(0, Math.min(1, progress))
 
-    // One full rotation (2 * PI)
+    // One full rotation over the section scroll distance.
     const globalRotation = progress * Math.PI * 2
 
     wordElementsRef.current.forEach((item) => {
@@ -90,74 +89,33 @@ const OurPromise = () => {
         item.wordEl.style.zIndex = "10"
       }
     })
-  }, [getRadius])
+  }, [])
 
-  const init = useCallback(() => {
+  useEffect(() => {
     const wheel = wheelRef.current
     if (!wheel) return
 
-    wheel.innerHTML = ""
-    wordElementsRef.current = []
-
-    words.forEach((word, index) => {
-      const angle = (index / words.length) * 2 * Math.PI
-      const container = document.createElement("div")
-      container.style.cssText = `
-        position: absolute;
-        transform-style: preserve-3d;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        height: auto;
-        pointer-events: none;
-      `
-
-      const wordEl = document.createElement("div")
-      wordEl.className = "text-base tracking-widest md:text-xl lg:text-2xl xl:text-3xl"
-      wordEl.style.cssText = `
-        font-weight: 600;
-        text-transform: uppercase;
-        white-space: nowrap;
-        backface-visibility: hidden;
-        transition: color 0.3s ease, filter 0.3s ease;
-        text-align: center;
-        will-change: transform, opacity;
-        color: hsl(var(--foreground));
-        font-family: inherit;
-      `
-      wordEl.textContent = word
-
-      container.appendChild(wordEl)
-      wheel.appendChild(container)
-      wordElementsRef.current.push({ container, wordEl, baseAngle: angle })
-    })
-
+    wordElementsRef.current = Array.from(wheel.children, (container, index) => ({
+      container: container as HTMLDivElement,
+      wordEl: container.firstElementChild as HTMLDivElement,
+      baseAngle: (index / words.length) * 2 * Math.PI,
+    }))
     updateWheel()
-  }, [updateWheel])
 
-  useEffect(() => {
-    init()
-
-    const handleScroll = () => updateWheel()
-    const handleResize = () => init()
-
-    window.addEventListener("scroll", handleScroll, { passive: true })
-    window.addEventListener("resize", handleResize)
+    window.addEventListener("scroll", updateWheel, { passive: true })
+    window.addEventListener("resize", updateWheel)
 
     return () => {
-      window.removeEventListener("scroll", handleScroll)
-      window.removeEventListener("resize", handleResize)
+      window.removeEventListener("scroll", updateWheel)
+      window.removeEventListener("resize", updateWheel)
     }
-  }, [init, updateWheel])
+  }, [updateWheel])
 
   return (
-    <section ref={sectionRef} id="promise" className="relative h-[200vh] w-full">
-      {/* Sticky content container */}
+    <section ref={sectionRef} id="promise" className="relative h-[300vh] w-full">
       <div className="sticky top-0 left-0 flex h-screen w-full items-center">
         <div className="mx-auto w-full max-w-6xl px-6">
           <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
-            {/* Left side - Text content */}
             <div className="space-y-6">
               <h2
                 className={`mb-6 text-4xl font-semibold text-foreground opacity-0 [animation-delay:200ms] md:text-5xl ${
@@ -177,16 +135,26 @@ const OurPromise = () => {
               </p>
             </div>
 
-            {/* Right side - Word Wheel */}
             <div
-              className={`relative flex h-[50vh] items-center justify-center opacity-0 [animation-delay:500ms] [perspective:2000px] lg:h-[60vh] ${
+              className={`relative flex h-[50vh] items-center justify-center opacity-0 [animation-delay:500ms] perspective-[2000px] lg:h-[60vh] ${
                 isVisible ? "animate-fade-in-up" : ""
               }`}
             >
               <div
                 ref={wheelRef}
-                className="relative flex h-full w-full items-center justify-center will-change-transform [transform-style:preserve-3d]"
-              />
+                className="pointer-events-none relative flex h-full w-full items-center justify-center will-change-transform transform-3d"
+              >
+                {words.map((word) => (
+                  <div
+                    key={word}
+                    className="absolute flex w-full items-center justify-center transform-3d"
+                  >
+                    <div className="text-center font-workbench text-xl font-normal tracking-wide whitespace-nowrap text-foreground uppercase transition-[color,filter] duration-300 ease-[ease] will-change-[transform,opacity] backface-hidden md:text-2xl lg:text-3xl xl:text-4xl">
+                      {word}
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>

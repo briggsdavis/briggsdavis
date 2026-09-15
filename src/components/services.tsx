@@ -27,7 +27,7 @@ const Services = () => (
           <h2 className="text-[clamp(2.75rem,6vw,6rem)] leading-none font-semibold tracking-[-0.055em] text-foreground transition-transform duration-400 ease-out group-hover:translate-x-2 group-focus-visible:translate-x-2 motion-reduce:transition-none md:col-span-8">
             {service.title}
           </h2>
-          <p className="translate-y-4 text-base leading-relaxed text-muted-foreground opacity-0 transition-[transform,opacity] duration-400 ease-out group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100 motion-reduce:transition-none md:col-span-4">
+          <p className="translate-y-4 text-base leading-relaxed text-muted-foreground opacity-0 transition-[translate,opacity] duration-400 ease-out group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100 motion-reduce:transition-none md:col-span-4">
             {service.detail}
           </p>
         </Link>

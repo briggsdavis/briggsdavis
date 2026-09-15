@@ -89,7 +89,7 @@ const AppDevelopmentPage = () => (
           </p>
           <Link
             to={routes.webDevelopment}
-            className="mt-8 inline-block text-sm font-medium text-foreground underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-4"
+            className="mt-8 inline-block text-sm font-medium text-foreground focus-visible:outline-2 focus-visible:outline-offset-4"
           >
             Looking for web development?
           </Link>
