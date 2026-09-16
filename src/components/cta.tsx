@@ -56,7 +56,7 @@ const CTA = () => {
         <div
           aria-hidden="true"
           className={`relative min-h-80 transition-[opacity,filter,transform] duration-1000 md:col-span-5 md:min-h-full ${
-            isVisible ? "scale-100 opacity-100 blur-0" : "scale-105 opacity-0 blur-xl"
+            isVisible ? "blur-0 scale-100 opacity-100" : "scale-105 opacity-0 blur-xl"
           }`}
         >
           <ReactiveField mode="cta" active={isActive} />

@@ -76,7 +76,8 @@ const ReactiveField = ({ mode, active = true }: ReactiveFieldProps) => {
         const angle = elapsed * (0.08 + dot * 0.006) + dot * 0.9
         const radius = size * (0.25 + (dot % 3) * 0.065)
         const x = cx + Math.cos(angle) * radius + (pointer.x - 0.5) * size * 0.05 * pointer.pull
-        const y = cy + Math.sin(angle) * radius * 0.65 + (pointer.y - 0.5) * size * 0.035 * pointer.pull
+        const y =
+          cy + Math.sin(angle) * radius * 0.65 + (pointer.y - 0.5) * size * 0.035 * pointer.pull
         context.globalAlpha = 0.25 + dot * 0.055
         context.beginPath()
         context.arc(x, y, 2 + (dot % 3) * 1.25, 0, Math.PI * 2)
@@ -93,7 +94,8 @@ const ReactiveField = ({ mode, active = true }: ReactiveFieldProps) => {
           const baseY = height * (0.15 + (line / (lines - 1)) * 0.7)
           const dx = progress * width - pointer.x * width
           const influence = Math.exp(-(dx * dx) / (width * width * 0.045)) * pointer.pull
-          const wave = Math.sin(progress * Math.PI * 3 + line * 0.24 + elapsed * 0.18) * height * 0.018
+          const wave =
+            Math.sin(progress * Math.PI * 3 + line * 0.24 + elapsed * 0.18) * height * 0.018
           const lift = (pointer.y * height - baseY) * influence * 0.11
           const x = progress * width
           const y = baseY + wave + lift
@@ -137,7 +139,8 @@ const ReactiveField = ({ mode, active = true }: ReactiveFieldProps) => {
       lastDraw = 0
       resize()
       draw()
-      if (active && !reducedMotion.matches && !document.hidden) frame = requestAnimationFrame(animate)
+      if (active && !reducedMotion.matches && !document.hidden)
+        frame = requestAnimationFrame(animate)
     }
 
     const resizeObserver = new ResizeObserver(sync)

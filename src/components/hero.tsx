@@ -1,5 +1,7 @@
+import { lazy, Suspense } from "react"
 import { useHeroIntro } from "@/lib/hero-intro"
-import Matrix from "./matrix"
+
+const Matrix = lazy(() => import("./matrix"))
 
 const matrixColors = ["#e4eddd", "#657560", "#254a38"]
 
@@ -11,30 +13,32 @@ const Hero = () => {
       <div className="site-frame">
         <div
           aria-hidden="true"
-          className="relative h-[clamp(20rem,56svh,36rem)] overflow-hidden bg-background md:h-[calc(100svh-16rem)] md:min-h-[32rem] md:max-h-[60rem]"
+          className="relative h-[clamp(20rem,56svh,36rem)] overflow-hidden bg-background md:h-[calc(100svh-16rem)] md:max-h-[60rem] md:min-h-[32rem]"
         >
           <div
             className={`hero-pattern absolute inset-0 ${playHeroIntro ? "hero-pattern-intro" : ""}`}
           >
-            <Matrix
-              back="transparent"
-              colors={matrixColors}
-              frequency={2.8}
-              speed={2.2}
-              cellSize={15}
-              gamma={4.5}
-              paletteBias={-1.8}
-            />
+            <Suspense fallback={null}>
+              <Matrix
+                back="transparent"
+                colors={matrixColors}
+                frequency={2.8}
+                speed={2.2}
+                cellSize={15}
+                gamma={4.5}
+                paletteBias={-1.8}
+              />
+            </Suspense>
           </div>
         </div>
 
         <p
-          className={`max-w-md pt-7 text-left text-xl leading-snug font-bold tracking-wide text-foreground uppercase md:text-2xl ${
+          className={`max-w-2xl pt-7 text-left text-xl leading-snug font-bold tracking-wide text-foreground uppercase md:text-2xl ${
             playHeroIntro ? "hero-copy-intro" : ""
           }`}
         >
-          We design and build websites, web applications, and mobile products that turn big ideas
-          into useful digital experiences.
+          We’re a small team building websites, apps, and custom software. Work directly with us,
+          from the first conversation to launch.
         </p>
       </div>
     </section>

@@ -14,7 +14,8 @@ const wrapWords = (element: HTMLElement) => {
 
   while (walker.nextNode()) {
     const node = walker.currentNode as Text
-    if (node.textContent?.trim() && !node.parentElement?.closest(SKIP_SELECTOR)) textNodes.push(node)
+    if (node.textContent?.trim() && !node.parentElement?.closest(SKIP_SELECTOR))
+      textNodes.push(node)
   }
 
   if (!textNodes.length) return
@@ -83,13 +84,15 @@ const TextReveals = () => {
       const root = document.querySelector<HTMLElement>(".site-content")
       if (!root) return
 
-      root.querySelectorAll<HTMLElement>(`${TITLE_SELECTOR}, ${BODY_SELECTOR}`).forEach((element) => {
-        if (element.closest("nav, [data-no-text-reveal]") || observed.has(element)) return
-        wrapWords(element)
-        if (element.dataset.textRevealReady === undefined) return
-        observed.add(element)
-        observer.observe(element)
-      })
+      root
+        .querySelectorAll<HTMLElement>(`${TITLE_SELECTOR}, ${BODY_SELECTOR}`)
+        .forEach((element) => {
+          if (element.closest("nav, [data-no-text-reveal]") || observed.has(element)) return
+          wrapWords(element)
+          if (element.dataset.textRevealReady === undefined) return
+          observed.add(element)
+          observer.observe(element)
+        })
     }
 
     const onTransitionComplete = () => {

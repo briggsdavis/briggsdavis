@@ -1,7 +1,6 @@
 import { useEffect, useRef } from "react"
 import { flushSync } from "react-dom"
 import { useNavigate } from "react-router"
-import { resetScrollToTop } from "@/lib/scroll-position"
 
 const TRANSITION_DURATION = 1500
 
@@ -125,7 +124,6 @@ const PageTransition = () => {
       document.documentElement.classList.add("page-transition-active")
       document.documentElement.classList.add("page-blur-enter")
       flushSync(() => navigate(href))
-      resetScrollToTop()
 
       const animation = snapshot.animate(
         [

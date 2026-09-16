@@ -98,7 +98,10 @@ const PhaseVisual = ({ variant, color, active }: PhaseVisualProps) => {
           const influence = Math.exp(-(dx * dx + dy * dy) / (Math.min(width, height) ** 2 * 0.1))
           const drift = Math.sin(elapsed * 0.55 + row * 0.8 + column * 0.45) * 2
           context.save()
-          context.translate(x + dx * influence * pointer.strength * 0.12, y + dy * influence * pointer.strength * 0.12)
+          context.translate(
+            x + dx * influence * pointer.strength * 0.12,
+            y + dy * influence * pointer.strength * 0.12,
+          )
           context.rotate(influence * pointer.strength * 0.16 + drift * 0.005)
           context.globalAlpha = 0.12 + ((row + column) % 4) * 0.11
           context.strokeRect(

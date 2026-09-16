@@ -4,8 +4,6 @@ import { routes } from "@/app/routes"
 import Layout from "@/components/layout"
 import PageTransition from "@/components/page-transition"
 import SmoothScroll from "@/components/smooth-scroll"
-import Home from "@/pages/home"
-import WorkDetail from "@/pages/work-detail"
 
 const lazyComponent = (load: () => Promise<{ default: ComponentType }>) => async () => ({
   Component: (await load()).default,
@@ -17,11 +15,12 @@ const lazyAuth = (flow: "signIn" | "signUp") => async () => {
 }
 
 const RouterRoot = () => (
-  <SmoothScroll>
+  <>
     <Outlet />
     <PageTransition />
+    <SmoothScroll />
     <ScrollRestoration />
-  </SmoothScroll>
+  </>
 )
 
 export const router = createBrowserRouter([
@@ -50,7 +49,7 @@ export const router = createBrowserRouter([
       {
         Component: Layout,
         children: [
-          { index: true, Component: Home },
+          { index: true, lazy: lazyComponent(() => import("@/pages/home")) },
           { path: routes.services, lazy: lazyComponent(() => import("@/pages/services")) },
           { path: routes.approach, lazy: lazyComponent(() => import("@/pages/approach")) },
           {
@@ -62,7 +61,10 @@ export const router = createBrowserRouter([
             lazy: lazyComponent(() => import("@/pages/app-development")),
           },
           { path: routes.work, lazy: lazyComponent(() => import("@/pages/work")) },
-          { path: routes.project(":id"), Component: WorkDetail },
+          {
+            path: routes.project(":id"),
+            lazy: lazyComponent(() => import("@/pages/work-detail")),
+          },
           { path: routes.contact, lazy: lazyComponent(() => import("@/pages/contact")) },
           { path: routes.login, lazy: lazyAuth("signIn") },
           { path: routes.signup, lazy: lazyAuth("signUp") },

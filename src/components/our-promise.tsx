@@ -117,14 +117,10 @@ const OurPromise = () => {
         <div className="mx-auto w-full max-w-6xl px-6">
           <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
             <div className="space-y-6">
-              <h2
-                className="mb-6 text-4xl font-semibold text-foreground md:text-5xl"
-              >
+              <h2 className="mb-6 text-4xl font-semibold text-foreground md:text-5xl">
                 The Features Your Business Needs.
               </h2>
-              <p
-                className="max-w-md text-muted-foreground"
-              >
+              <p className="max-w-md text-muted-foreground">
                 We design and build websites with the features you need, from simple content updates
                 and secure payments to custom tools that make everyday tasks easier for you and your
                 customers.

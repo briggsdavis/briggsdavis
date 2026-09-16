@@ -40,12 +40,6 @@
     width: calc(100% - (var(--site-gutter) * 2));
     margin-inline: auto;
   }
-
-  .footer-shadow-breathe {
-    background: linear-gradient(to top, rgb(0 0 0 / 0.045), rgb(0 0 0 / 0.012) 42%, transparent 100%);
-    transform-origin: bottom;
-    animation: footer-shadow-breathe 7s ease-in-out infinite alternate;
-  }
 }
 
 @theme inline {
@@ -135,24 +129,6 @@
       filter: blur(0);
       translate: 0 0;
     }
-  }
-
-  @keyframes footer-shadow-breathe {
-    from {
-      opacity: 0.42;
-      transform: scaleY(0.88);
-    }
-    to {
-      opacity: 0.72;
-      transform: scaleY(1.04);
-    }
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .footer-shadow-breathe {
-    animation: none;
-    opacity: 0.55;
   }
 }
 

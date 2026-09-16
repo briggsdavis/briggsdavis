@@ -5,7 +5,8 @@ import { createRoot } from "react-dom/client"
 import App from "./app.tsx"
 import { convex } from "./convex"
 import "@fontsource-variable/dm-sans/wght.css"
-import "@fontsource-variable/workbench"
+import "lenis/dist/lenis.css"
+// import "@fontsource-variable/workbench"
 import "./index.css"
 
 createRoot(document.getElementById("root")!).render(

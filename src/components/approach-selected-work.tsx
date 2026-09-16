@@ -34,12 +34,15 @@ const ProjectCard = ({ project }: { project: FeaturedProject }) => {
     return () => observer.disconnect()
   }, [visible])
 
-  const openProject = useCallback((event: MouseEvent<HTMLAnchorElement>) => {
-    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey)
-      return
-    event.preventDefault()
-    openProjectWithMorph({ navigate, projectId: project.slug, source: imageRef.current })
-  }, [navigate, project.slug])
+  const openProject = useCallback(
+    (event: MouseEvent<HTMLAnchorElement>) => {
+      if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey)
+        return
+      event.preventDefault()
+      openProjectWithMorph({ navigate, projectId: project.slug, source: imageRef.current })
+    },
+    [navigate, project.slug],
+  )
 
   return (
     <article>
@@ -53,7 +56,7 @@ const ProjectCard = ({ project }: { project: FeaturedProject }) => {
         <div
           ref={revealRef}
           className={`aspect-[4/3] overflow-hidden bg-card transition-[opacity,filter,transform] duration-1000 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none ${
-            visible ? "scale-100 opacity-100 blur-0" : "scale-[1.02] opacity-0 blur-xl"
+            visible ? "blur-0 scale-100 opacity-100" : "scale-[1.02] opacity-0 blur-xl"
           }`}
         >
           {project.coverUrl ? (
@@ -87,7 +90,10 @@ const ApproachSelectedWork = () => {
   const projects = featured?.slice(0, 3) ?? []
 
   return (
-    <section className="border-t border-border/50 py-24 md:py-32" aria-labelledby="approach-work-title">
+    <section
+      className="border-t border-border/50 py-24 md:py-32"
+      aria-labelledby="approach-work-title"
+    >
       <div className="site-frame">
         <div className="mb-12 flex items-end justify-between gap-6 md:mb-16">
           <h2
@@ -101,10 +107,7 @@ const ApproachSelectedWork = () => {
           </Link>
         </div>
 
-        <div
-          className="grid gap-x-6 gap-y-12 md:grid-cols-3"
-          aria-busy={featured === undefined}
-        >
+        <div className="grid gap-x-6 gap-y-12 md:grid-cols-3" aria-busy={featured === undefined}>
           {featured === undefined ? (
             <p className="text-muted-foreground">Loading projects…</p>
           ) : projects.length === 0 ? (

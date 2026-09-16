@@ -32,7 +32,7 @@ const ServicesPage = () => (
           <p className="mb-5 max-w-sm translate-y-5 text-base leading-relaxed text-muted-foreground opacity-0 transition-[translate,opacity] duration-400 ease-out group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100 motion-reduce:transition-none">
             {service.detail}
           </p>
-          <h1 className="relative w-fit pb-3 text-[clamp(3rem,7vw,7.25rem)] leading-[0.88] font-semibold tracking-[-0.065em] text-foreground transition-transform duration-400 ease-out after:absolute after:right-0 after:bottom-0 after:left-0 after:h-px after:origin-left after:scale-x-0 after:bg-black after:transition-transform after:duration-500 after:ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:-translate-y-1 group-hover:after:scale-x-100 group-focus-visible:-translate-y-1 group-focus-visible:after:scale-x-100 motion-reduce:transition-none motion-reduce:after:transition-none">
+          <h1 className="relative w-fit pb-3 text-[clamp(3rem,7vw,7.25rem)] leading-[0.88] font-semibold tracking-[-0.065em] text-foreground transition-transform duration-400 ease-out group-hover:-translate-y-1 group-focus-visible:-translate-y-1 after:absolute after:right-0 after:bottom-0 after:left-0 after:h-px after:origin-left after:scale-x-0 after:bg-black after:transition-transform after:duration-500 after:ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:after:scale-x-100 group-focus-visible:after:scale-x-100 motion-reduce:transition-none motion-reduce:after:transition-none">
             {service.label.split(" ")[0]}
             <br />
             Development

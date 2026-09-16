@@ -1,7 +1,5 @@
-import { flushSync } from "react-dom"
 import type { NavigateFunction } from "react-router"
 import { routes } from "@/app/routes"
-import { resetScrollToTop } from "@/lib/scroll-position"
 
 let morphNavigationActive = false
 
@@ -10,12 +8,6 @@ const PAGE_FADE_DURATION = 850
 
 const canMorph = () =>
   window.innerWidth >= 1024 && !window.matchMedia("(prefers-reduced-motion: reduce)").matches
-
-const settleRouteAtTop = async () => {
-  resetScrollToTop()
-  await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()))
-  resetScrollToTop()
-}
 
 const settleHoveredSource = async (source: HTMLImageElement) => {
   const scale = window.getComputedStyle(source).scale
@@ -141,8 +133,7 @@ export const openProjectWithMorph = async ({
   const destination = routes.project(projectId)
 
   if (!source || !canMorph()) {
-    flushSync(() => navigate(destination))
-    await settleRouteAtTop()
+    await navigate(destination)
     return
   }
 
@@ -181,8 +172,7 @@ export const openProjectWithMorph = async ({
     void fade.finished.finally(() => routeSnapshot.remove())
   }
 
-  flushSync(() => navigate(destination))
-  await settleRouteAtTop()
+  await navigate(destination)
   const target = await waitForTarget(projectId)
 
   if (!target) {
@@ -190,7 +180,6 @@ export const openProjectWithMorph = async ({
     return
   }
 
-  await settleRouteAtTop()
   const targetRect = target.getBoundingClientRect()
   const animation = overlay.animate(
     [

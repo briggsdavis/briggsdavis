@@ -1,4 +1,5 @@
 import { useQuery } from "convex/react"
+import { ArrowUpRight } from "lucide-react"
 import { useRef } from "react"
 import { Link, useNavigate } from "react-router"
 import { routes } from "@/app/routes"
@@ -73,21 +74,23 @@ const FeaturedWork = () => {
                         : "items-end text-right lg:col-start-1"
                     }`}
                   >
+                    <h3 className="mb-3 text-2xl font-semibold text-foreground lg:text-3xl">
+                      <Link
+                        to={routes.project(project.slug)}
+                        data-no-page-transition
+                        onClick={(event) => openProject(event, project.slug, index)}
+                        className="inline-flex items-baseline gap-2 focus-visible:outline-2 focus-visible:outline-offset-4"
+                      >
+                        <span className="relative inline-block after:absolute after:right-0 after:bottom-0 after:left-0 after:h-px after:origin-left after:scale-x-0 after:bg-current after:transition-transform after:duration-300 after:ease-[cubic-bezier(0.76,0,0.24,1)] hover:after:scale-x-100 motion-reduce:after:transition-none">
+                          {project.title}
+                        </span>
+                        <ArrowUpRight aria-hidden="true" className="size-5 shrink-0" />
+                      </Link>
+                    </h3>
                     {project.category ? (
                       <p className="mb-3 text-sm text-muted-foreground">{project.category}</p>
                     ) : null}
-                    <h3 className="mb-3 text-2xl font-semibold text-foreground lg:text-3xl">
-                      {project.title}
-                    </h3>
-                    <p className="mb-6 text-sm text-muted-foreground">{project.summary}</p>
-                    <Link
-                      to={routes.project(project.slug)}
-                      data-no-page-transition
-                      onClick={(event) => openProject(event, project.slug, index)}
-                      className="text-sm font-medium text-foreground"
-                    >
-                      Project details
-                    </Link>
+                    <p className="text-sm text-muted-foreground">{project.summary}</p>
                   </div>
                 </article>
               </Reveal>

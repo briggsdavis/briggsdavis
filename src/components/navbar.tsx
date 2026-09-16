@@ -55,9 +55,7 @@ const Navbar = () => {
         data-site-navigation
         className={`fixed top-0 left-0 z-100 h-px bg-foreground/30 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:duration-0 ${
           navigationHidden ? "-translate-y-1" : "translate-y-0"
-        } ${
-          playHeroIntro ? `${introClass} [animation-delay:2300ms]` : ""
-        }`}
+        } ${playHeroIntro ? `${introClass} [animation-delay:2300ms]` : ""}`}
         style={{ width: `${scrollProgress * 100}%` }}
       />
 

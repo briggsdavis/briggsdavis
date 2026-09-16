@@ -161,7 +161,7 @@ const ApproachPage = () => {
                     aria-hidden="true"
                     className={`absolute inset-0 overflow-hidden transition-[opacity,filter,transform] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none ${
                       active
-                        ? "pointer-events-auto scale-100 opacity-100 blur-0"
+                        ? "blur-0 pointer-events-auto scale-100 opacity-100"
                         : "pointer-events-none scale-[1.025] opacity-0 blur-xl"
                     }`}
                   >
