@@ -28,12 +28,12 @@ const Work = () => {
   }
 
   return (
-    <div className="min-h-screen">
+    <div className="work-page min-h-screen">
       <header className="site-frame grid gap-10 pt-40 pb-20 md:grid-cols-12 md:items-end md:pt-48 md:pb-28">
         <h1 className="col-span-8 text-[clamp(3.5rem,8vw,7.5rem)] leading-[0.9] font-semibold tracking-[-0.065em] text-foreground">
           Work, in practice.
         </h1>
-        <p className="col-span-4 max-w-sm text-lg leading-relaxed text-muted-foreground md:pb-1">
+        <p className="col-span-4 max-w-sm text-justify text-lg leading-relaxed text-muted-foreground md:pb-1">
           Websites and digital products shaped around the businesses that use them.
         </p>
       </header>

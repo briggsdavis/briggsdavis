@@ -60,7 +60,9 @@ const wrapWords = (element: HTMLElement) => {
 const TextReveals = () => {
   useLayoutEffect(() => {
     let frame = 0
-    let transitionFinished = !document.documentElement.classList.contains("page-transition-active")
+    let transitionFinished =
+      !document.documentElement.classList.contains("page-transition-active") &&
+      !document.documentElement.classList.contains("project-morph-active")
     const observed = new Set<Element>()
     const pending = new Set<HTMLElement>()
 

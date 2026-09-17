@@ -4,7 +4,7 @@ import { routes } from "@/app/routes"
 let morphNavigationActive = false
 
 const MORPH_DURATION = 900
-const PAGE_FADE_DURATION = 850
+const PAGE_FADE_DURATION = 600
 
 const canMorph = () =>
   window.innerWidth >= 1024 && !window.matchMedia("(prefers-reduced-motion: reduce)").matches
@@ -55,68 +55,20 @@ const waitForTarget = (projectId: string) => {
   })
 }
 
-const freezeSnapshotState = (sourceRoot: HTMLElement, cloneRoot: HTMLElement) => {
-  const sourceElements = [sourceRoot, ...sourceRoot.querySelectorAll<HTMLElement>("*")]
-  const cloneElements = [cloneRoot, ...cloneRoot.querySelectorAll<HTMLElement>("*")]
-  const preservedProperties = [
-    "opacity",
-    "transform",
-    "filter",
-    "visibility",
-    "background-color",
-    "color",
-    "border-color",
-    "box-shadow",
-  ]
-
-  sourceElements.forEach((element, index) => {
-    const clone = cloneElements[index]
-    if (!clone) return
-
-    const computed = window.getComputedStyle(element)
-    clone.style.setProperty("animation", "none", "important")
-    clone.style.setProperty("transition", "none", "important")
-
-    preservedProperties.forEach((property) => {
-      clone.style.setProperty(property, computed.getPropertyValue(property))
-    })
-  })
-}
-
-const createRouteSnapshot = (source: HTMLImageElement) => {
-  const root = document.querySelector<HTMLElement>("#root")
-  if (!root) return null
-
-  const layer = document.createElement("div")
-  const content = root.cloneNode(true) as HTMLElement
-  freezeSnapshotState(root, content)
-  content.removeAttribute("id")
-  layer.className =
-    "pointer-events-none fixed inset-0 z-70 overflow-hidden bg-background will-change-[opacity]"
-  content.className = "absolute top-0 left-0 w-full"
-  content.style.transform = `translateY(-${window.scrollY}px)`
-
-  content
-    .querySelectorAll("[data-site-navigation], [data-route-transition-overlay]")
-    .forEach((el) => {
-      el.remove()
-    })
-
-  const sourcePath = source.getAttribute("src")
-  content.querySelectorAll<HTMLImageElement>("img").forEach((image) => {
-    if (image.getAttribute("src") === sourcePath) image.style.opacity = "0"
-  })
-
-  layer.appendChild(content)
-  document.body.appendChild(layer)
-  void layer.offsetWidth
-  return layer
-}
-
 const finishMorph = (overlay: HTMLImageElement) => {
+  document.documentElement.classList.remove("project-morph-active")
   overlay.remove()
   morphNavigationActive = false
-  document.documentElement.classList.remove("project-morph-active")
+  document.dispatchEvent(new Event("page-transition-complete"))
+
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return
+
+  document.querySelectorAll<HTMLElement>("[data-project-morph-reveal]").forEach((element) => {
+    element.animate([{ opacity: 0 }, { opacity: 1 }], {
+      duration: PAGE_FADE_DURATION,
+      easing: "cubic-bezier(0.4, 0, 0.2, 1)",
+    })
+  })
 }
 
 export const isProjectMorphNavigation = () => morphNavigationActive
@@ -130,6 +82,8 @@ export const openProjectWithMorph = async ({
   projectId: string
   source: HTMLImageElement | null
 }) => {
+  if (morphNavigationActive) return
+
   const destination = routes.project(projectId)
 
   if (!source || !canMorph()) {
@@ -140,7 +94,6 @@ export const openProjectWithMorph = async ({
   await settleHoveredSource(source)
 
   const sourceRect = source.getBoundingClientRect()
-  const routeSnapshot = createRouteSnapshot(source)
   const overlay = source.cloneNode(false) as HTMLImageElement
   overlay.alt = ""
   overlay.className =
@@ -156,54 +109,37 @@ export const openProjectWithMorph = async ({
   document.documentElement.classList.add("project-morph-active")
   document.body.appendChild(overlay)
 
-  if (routeSnapshot) {
-    const fade = routeSnapshot.animate(
+  try {
+    await navigate(destination)
+    const target = await waitForTarget(projectId)
+
+    if (!target) {
+      return
+    }
+
+    const targetRect = target.getBoundingClientRect()
+    const animation = overlay.animate(
       [
-        { opacity: 1, offset: 0 },
-        { opacity: 0.92, offset: 0.18 },
-        { opacity: 0, offset: 1 },
+        {
+          top: `${sourceRect.top}px`,
+          left: `${sourceRect.left}px`,
+          width: `${sourceRect.width}px`,
+          height: `${sourceRect.height}px`,
+        },
+        {
+          top: `${targetRect.top}px`,
+          left: `${targetRect.left}px`,
+          width: `${targetRect.width}px`,
+          height: `${targetRect.height}px`,
+        },
       ],
       {
-        duration: PAGE_FADE_DURATION,
-        easing: "cubic-bezier(0.4, 0, 0.2, 1)",
+        duration: MORPH_DURATION,
+        easing: "cubic-bezier(0.76, 0, 0.24, 1)",
         fill: "forwards",
       },
     )
-    void fade.finished.finally(() => routeSnapshot.remove())
-  }
 
-  await navigate(destination)
-  const target = await waitForTarget(projectId)
-
-  if (!target) {
-    finishMorph(overlay)
-    return
-  }
-
-  const targetRect = target.getBoundingClientRect()
-  const animation = overlay.animate(
-    [
-      {
-        top: `${sourceRect.top}px`,
-        left: `${sourceRect.left}px`,
-        width: `${sourceRect.width}px`,
-        height: `${sourceRect.height}px`,
-      },
-      {
-        top: `${targetRect.top}px`,
-        left: `${targetRect.left}px`,
-        width: `${targetRect.width}px`,
-        height: `${targetRect.height}px`,
-      },
-    ],
-    {
-      duration: MORPH_DURATION,
-      easing: "cubic-bezier(0.76, 0, 0.24, 1)",
-      fill: "forwards",
-    },
-  )
-
-  try {
     await animation.finished
   } finally {
     finishMorph(overlay)

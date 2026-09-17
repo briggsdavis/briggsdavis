@@ -1,5 +1,7 @@
 import type { FunctionReturnType } from "convex/server"
 import Footer from "@/components/footer"
+import ProjectFeatures from "@/components/project-features"
+import { getProjectFeatures } from "@/lib/project-features"
 import type { api } from "../../convex/_generated/api"
 
 export default function LiveProjectCaseStudy({
@@ -8,9 +10,12 @@ export default function LiveProjectCaseStudy({
   project: NonNullable<FunctionReturnType<typeof api.projects.single>>
 }) {
   return (
-    <>
-      <article className="mx-auto max-w-5xl px-6 pt-32 pb-24">
-        <div className="mb-12 flex flex-wrap items-start justify-between gap-8 md:mb-16">
+    <div className="project-page">
+      <article className="project-content-frame pt-32">
+        <div
+          data-project-morph-reveal
+          className="mb-12 flex flex-wrap items-start justify-between gap-8 md:mb-16"
+        >
           <div className="max-w-2xl">
             {project.category ? (
               <p className="mb-5 text-sm text-muted-foreground">{project.category}</p>
@@ -25,35 +30,35 @@ export default function LiveProjectCaseStudy({
           ) : null}
         </div>
 
-        {project.coverUrl ? (
-          <img
-            src={project.coverUrl}
-            alt={project.title}
-            data-project-morph-target={project.slug}
-            className="w-full"
-          />
-        ) : null}
+        <div>
+          {project.coverUrl ? (
+            <img
+              src={project.coverUrl}
+              alt={project.title}
+              data-project-morph-target={project.slug}
+              className="w-full"
+            />
+          ) : null}
 
-        <div className="mx-auto my-20 max-w-2xl text-lg leading-relaxed wrap-anywhere whitespace-pre-wrap">
-          {project.content}
-        </div>
-
-        <div className="grid items-start gap-6 sm:grid-cols-2 md:gap-8">
-          {project.galleryUrls.map((url, index) =>
-            url ? (
-              <img
-                key={`${project.gallery[index]}-${index}`}
-                src={url}
-                alt={`${project.title}, detail ${index + 1}`}
-                loading="lazy"
-                decoding="async"
-                className="w-full"
-              />
-            ) : null,
-          )}
+          <div
+            data-project-morph-reveal
+            className="my-20 text-justify text-lg leading-relaxed wrap-anywhere whitespace-pre-wrap"
+          >
+            {project.content}
+          </div>
         </div>
       </article>
-      <Footer />
-    </>
+      <ProjectFeatures
+        key={project.slug}
+        title={project.title}
+        features={getProjectFeatures(project.slug, project.content)}
+        images={project.galleryUrls.flatMap((url, index) =>
+          url ? [{ id: project.gallery[index], url }] : [],
+        )}
+      />
+      <div data-project-morph-reveal>
+        <Footer />
+      </div>
+    </div>
   )
 }
